@@ -20,10 +20,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MainObj.h">
+    <ClInclude Include="Classes.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="CoorXY.h">
+    <ClInclude Include="Methods.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

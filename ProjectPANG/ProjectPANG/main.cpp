@@ -1,18 +1,39 @@
 
-#include "MainObj.h"
+#include "Classes.h"
+#include "Methods.h"
+#include <exception>
 #include <stdio.h>
+#include "SDL.h"
 
 
 int main(int argc, char* argv[])
 {
-	CoorXY<float>* coorXY = new CoorXY<float>(0, 0);
-	MainObj<float>* mainObj = new MainObj<float>(3.0, 4.0);
+	SDL_Init(SDL_INIT_VIDEO);
 
-	//float const f = mainObj->getPos().DistanceTo(*coorXY);
-	//printf("%.f", f);
+	// game code eventually goes here
 
-	printf("%.00f", mainObj->getPos().DistanceTo(*coorXY));
+	//SDL_Quit();
 
+
+
+	/*
+	try {
+		SDL sdl(SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS);
+
+
+
+
+	}
+	
+	catch (const InitError& err) {
+			std::cerr
+				<< "Error while initializing SDL:  "
+				<< err.what() << std::endl;
+		}
+
+		*/
+	getchar();
+	getchar();
 	getchar();
 	return 0;
 }
