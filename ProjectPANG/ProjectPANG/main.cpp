@@ -3,16 +3,19 @@
 #include "Methods.h"
 #include <exception>
 #include <stdio.h>
+#include <iostream>
 #include "SDL.h"
 
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-	SDL_Init(SDL_INIT_VIDEO);
+	if (SDL_Init(SDL_INIT_VIDEO) != 0){
+		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
+	}
 
 	// game code eventually goes here
 
-	//SDL_Quit();
+	SDL_Quit();
 
 
 
@@ -32,9 +35,6 @@ int main(int argc, char* argv[])
 		}
 
 		*/
-	getchar();
-	getchar();
-	getchar();
 	return 0;
 }
 
