@@ -2,15 +2,18 @@
 #include "Classes.h"
 #include "Methods.h"
 #include <exception>
-#include <stdio.h>
 #include <iostream>
 #include "SDL.h"
 
 
 int main(int argc, char *argv[])
 {
-	if (SDL_Init(SDL_INIT_VIDEO) != 0){
+	getchar();
+
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) == -1)
+	{
 		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
+		return -1;
 	}
 
 	// game code eventually goes here
