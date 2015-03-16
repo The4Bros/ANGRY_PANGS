@@ -3,7 +3,6 @@
 #include "Methods.h"
 #include <exception>
 #include <iostream>
-#include "SDL.h"
 
 
 int main(int argc, char *argv[])
