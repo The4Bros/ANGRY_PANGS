@@ -12,6 +12,24 @@
 #include "SDL.h"
 
 
+/*
+SDL_Surface picture = IMG_Load("picture.png");
+SDL_SetColorKey(picture, SDL_SRCCOLORKEY, SDL_MapRGB(picture->format, 0, 0, 255));
+
+SDL_Window* window = SDL_CreateWindow("name", x, y, w, h, SDL_WINDOW_SHOWN);
+SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDER_ACCELERATED);
+SDL_Texture* image = IMG_LoadTexture(renderer, "image.png");
+
+SDL_Rect rect; rect.x=20; rect.y=30; rect.w=600; rect.h=400;
+
+
+
+SDL_RenderCopy(renderer, image, const SDL_Rect *srcrect, rect);
+
+
+
+*/
+
 
 #define LOG(txt) OutputDebugString(txt)
 
