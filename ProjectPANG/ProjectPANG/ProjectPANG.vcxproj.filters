@@ -26,7 +26,13 @@
     <ClInclude Include="Methods.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Application.h">
+    <ClInclude Include="Modules.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="DoubleNodedStack.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

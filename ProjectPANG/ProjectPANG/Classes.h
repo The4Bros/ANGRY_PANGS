@@ -86,7 +86,7 @@ protected:
 
 	bool loadImages()
 	{
-		buffer[0] = IMG_Load("player1_1.png");
+		buffer[0] = IMG_LoadTexture(renderer, "player1_1.png");
 		buffer[1] = IMG_Load("player1_2.png");
 		buffer[2] = IMG_Load("player1_3.png");
 		buffer[3] = IMG_Load("player1_4.png");
@@ -174,7 +174,7 @@ public:
 		FILE *fichero = fopen("LevelArrangment.txt", "r");
 		if (fichero == NULL){ perror("Ha habido un error al abrir el archivo."); }
 		else{
-			char line[2820];
+			char line[2820]; //set max number of characters/line
 			for (int i = 0; i<100; i++){
 				if (fgets(line, 2820, fichero) != NULL){
 					parser(line);

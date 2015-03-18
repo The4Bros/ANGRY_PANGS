@@ -1,7 +1,9 @@
 
+#include "Globals.h"
+
 #include "Classes.h"
 #include "Methods.h"
-#include "Application.h"
+
 #include <exception>
 #include <stdio.h>
 #include <Windows.h>
@@ -10,33 +12,12 @@
 #include "SDL.h"
 
 
+
 #define LOG(txt) OutputDebugString(txt)
-
-enum main_states
-{
-	MAIN_CREATION,
-	MAIN_START,
-	MAIN_UPDATE,
-	MAIN_FINISH,
-	MAIN_EXIT,
-	MAIN_ERROR
-};
-
-enum update_status
-{
-	UPDATE_CONTINUE,
-	UPDATE_STOP,
-	UPDATE_ERROR
-};
-
-
-
 
 
 int main(int argc, char *argv[])
 {
-	getchar();
-
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) == -1)
 	{
 
