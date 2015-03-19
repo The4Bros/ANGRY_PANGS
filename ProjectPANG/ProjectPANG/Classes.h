@@ -1,7 +1,34 @@
 #pragma once
 
 #include <string.h>
-#include <stdio.h>
+
+
+class MainObj
+{
+protected:
+
+	int x, y, w, h;
+
+	MainObj()
+	{
+		int x = 0;
+		int y = 0;
+	}
+	MainObj(int const x, int const y, int const w, int const h)
+	{
+		this->x = x;
+		this->y = y;
+		this->w = w;
+		this->h = h;
+	}
+
+	~MainObj()
+	{
+	}
+
+};
+
+
 
 class Brick
 {
@@ -37,7 +64,7 @@ class MainCharacter : public MainObj
 {
 protected:
 
-	int weapon;
+	int w, h, weapon;
 	double score;
 
 	SDL_Surface *buffer[18];
@@ -80,6 +107,8 @@ protected:
 
 
 };
+
+/*
 class Player1 : public MainCharacter
 {
 protected:
@@ -150,13 +179,14 @@ public:
 
 };
 
+*/
 
 
 class LevelArrangment
 {
 private:
 	int numOfBalls;
-	brick
+	//brick
 };
 
 class Level
@@ -177,7 +207,7 @@ public:
 			char line[2820]; //set max number of characters/line
 			for (int i = 0; i<100; i++){
 				if (fgets(line, 2820, fichero) != NULL){
-					parser(line);
+					//parser(line);
 				}
 			}
 			fclose(fichero);
@@ -194,30 +224,7 @@ public:
 
 };
 
-class MainObj
-{
-protected:
 
-	int x, y, w, h;
-
-	MainObj()
-	{
-		int x = 0;
-		int y = 0;
-	}
-	MainObj(int const x, int const y, int const w, int const h)
-	{
-		this->x = x;
-		this->y = y;
-		this->w = w;
-		this->h = h;
-	}
-
-	~MainObj()
-	{
-	}
-
-};
 
 
 
