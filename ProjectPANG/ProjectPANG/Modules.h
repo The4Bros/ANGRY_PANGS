@@ -9,8 +9,11 @@
 #include "SDL_mixer/include/SDL_mixer.h"
 #pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
 
+
+
 class Module
 {
+	/*
 protected:
 	//App Module:
 	DoubleNodedStack<Module*>* modules_Stack;
@@ -59,7 +62,7 @@ protected:
 	//Persistent Data Module:
 
 
-
+	*/
 
 
 
@@ -86,37 +89,49 @@ public:
 };
 
 
-
-
-
-
 class ApplicationModule : public Module{
-/*private:
+private:
 	DoubleNodedStack<Module*>* modules_Stack;
-	DoubleNode<Module*>* item;*/
+	DoubleNode<Module*>* item;
 
 public:
+	//Window Module:
+	WindowModule* windowModule;
+	SDL_Event* mainEvent;
+	SDL_Window* window;
+	Uint32 windowFlags;
+
+	//Renderer Module:
+	RenderModule* renderModule;
+	SDL_Renderer* renderer;
+	Uint32 rendererFlags;
+
+	//Input Module:
+	InputModule* inputModule = new InputModule(this);
+	const Uint8 *key;
 
 	bool Init()
 	{
-		DoubleNodedStack<Module*>* modules_Stack = new DoubleNodedStack<Module*>();
-		DoubleNode<Module*>* item;
-
+		modules_Stack = new DoubleNodedStack<Module*>();
+		
+		
+		inputModule = new InputModule(this);
+		renderModule = new RenderModule(this);
+		windowModule = new WindowModule(this);
 		/*
 		modules_Stack.push(new PersistentDataModule);
 		modules_Stack.push(new NetworkModule);
 		modules_Stack.push(new SceneModule);
 		*/
 
-		modules_Stack->push(new ConfigurationModule(this));
-		modules_Stack->push(new TextureManagerModule(this));
-		modules_Stack->push(new FontManagerModule(this));
-		modules_Stack->push(new AudioModule(this));
-		modules_Stack->push(new EntityManagerModule(this));
-		modules_Stack->push(new InputModule(this));
-		modules_Stack->push(new RenderModule(this));
-		modules_Stack->push(new WindowModule(this));
-
+		//modules_Stack->push(new ConfigurationModule(this));
+		//modules_Stack->push(new TextureManagerModule(this));
+		//modules_Stack->push(new FontManagerModule(this));
+		//modules_Stack->push(new AudioModule(this));
+		//modules_Stack->push(new EntityManagerModule(this));
+		modules_Stack->push(inputModule);
+		modules_Stack->push(renderModule);
+		modules_Stack->push(windowModule);
 
 		item = modules_Stack->start();
 		while (item)
@@ -151,19 +166,23 @@ public:
 
 
 class WindowModule : public Module{
+private:
+	ApplicationModule* app;
 public:
-	
-
+	WindowModule(ApplicationModule* const app)
+	{
+		this->app = app;
+	}
 	bool Init()
 	{
-		windowFlags = SDL_WINDOW_SHOWN;
-		window = SDL_CreateWindow("PANG", 80, 80, 600, 400, windowFlags);
+		app->windowFlags = SDL_WINDOW_SHOWN;
+		app->window = SDL_CreateWindow("PANG", 80, 80, 600, 400, app->windowFlags);
 		SDL_Event* MAIN_EVENT = new SDL_Event();
 	}
 	int Update()
 	{
-		SDL_PollEvent(mainEvent);
-		if (mainEvent->type == SDL_QUIT){ return MAIN_FINISH; }
+		SDL_PollEvent(app->mainEvent);
+		if (app->mainEvent->type == SDL_QUIT){ return MAIN_FINISH; }
 
 		//manage window size and properties HowTo:
 		/*
@@ -183,17 +202,24 @@ public:
 	}
 	bool CleanUp()
 	{
-		delete[] mainEvent;
-		delete &windowFlags;
-		SDL_DestroyWindow(window);
+		delete[] app->mainEvent;
+		delete &app->windowFlags;
+		SDL_DestroyWindow(app->window);
 	}
 };
 
 class RenderModule : public Module{
+private:
+	ApplicationModule* app;
+
 public:
+	RenderModule(ApplicationModule* const app)
+	{
+		this->app = app;
+	}
 	bool Init()
 	{
-		SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, rendererFlags);
+		SDL_Renderer* renderer = SDL_CreateRenderer(app->window, -1, app->rendererFlags);
 	}
 	int Update()
 	{
@@ -201,31 +227,43 @@ public:
 	}
 	bool CleanUp()
 	{
-		SDL_DestroyRenderer(renderer);
+		delete &app->rendererFlags;
+		SDL_DestroyRenderer(app->renderer);
 		return true;
 	}
 };
 
 class InputModule : public Module{
+private:
+	ApplicationModule* app;
+
 public:
+
+	InputModule(ApplicationModule* const app)
+	{
+		this->app = app;
+	}
 	bool Init()
 	{
-		const Uint8 *key = SDL_GetKeyboardState(NULL);
+		app->key = SDL_GetKeyboardState(NULL);
 	}
 	int Update()
 	{
-		key = SDL_GetKeyboardState(NULL);
-		if (key[SDLK_LEFT]){ LOG("\n LEFT pressed"); }
-		if (key[SDLK_RIGHT]){ LOG("\n RIGHT pressed"); }
-		if (key[SDLK_UP]){ LOG("\n UP pressed"); }
-		if (key[SDLK_DOWN]){ LOG("\n DOWN pressed"); }
-		if (key[SDLK_SPACE]){ LOG("\n SPACE pressed"); }
+		app->key = SDL_GetKeyboardState(NULL);
+		if (app->key[SDLK_LEFT]){ LOG("\n LEFT pressed"); }
+		if (app->key[SDLK_RIGHT]){ LOG("\n RIGHT pressed"); }
+		if (app->key[SDLK_UP]){ LOG("\n UP pressed"); }
+		if (app->key[SDLK_DOWN]){ LOG("\n DOWN pressed"); }
+		if (app->key[SDLK_SPACE]){ LOG("\n SPACE pressed"); }
 	}
 	bool CleanUp()
 	{
-		delete key;
+		delete app->key;
 	}
 };
+
+
+
 
 class EntityManagerModule : public Module{
 public:
@@ -236,37 +274,18 @@ public:
 	int Update(){ return 2; }
 	bool CleanUp(){ return true; }
 }; //(player, enemies)
-
-
-
-
-
 class AudioModule : public Module{
 public:
 	bool Init(){ return true; }
 	int Update(){ return 2; }
 	bool CleanUp(){ return true; }
 };
-
-
-
-
-
 class ConfigurationModule : public Module{
 public:
 	bool Init(){ return true; }
 	int Update(){ return 2; }
 	bool CleanUp(){ return true; }
 };
-
-
-
-
-
-
-
-
-
 class TextureManagerModule : public Module{
 public:
 	bool Init(){ return true; }
@@ -279,7 +298,6 @@ public:
 	int Update(){ return 2; }
 	bool CleanUp(){ return true; }
 };
-
 class PersistentDataModule : public Module{
 public:
 	bool Init(){ return true; }
