@@ -1,7 +1,7 @@
 
 #include <stdio.h>
 
-template <class DoubleNodeDataTYPE> class DoubleNode
+template <class DoubleNodeDataTYPE>class DoubleNode
 {
 private:
 	DoubleNodeDataTYPE data;
@@ -44,7 +44,7 @@ public:
 		return previous;
 	}
 
-	void const setNext(Node* const next)
+	void const setNext(DoubleNode* const next)
 	{
 		this->next = next;
 	}
@@ -58,11 +58,11 @@ public:
 template <class DoubleNodedStackTYPE> class DoubleNodedStack
 {
 private:
-	DoubleNode* init;
-	DoubleNode* last;
+	DoubleNode<DoubleNodedStackTYPE*>* init;
+	DoubleNode<DoubleNodedStackTYPE*>* last;
 public:
 	DoubleNodedStack(){}
-	DoubleNodedStack(DoubleNode* const node)
+	DoubleNodedStack(DoubleNode<DoubleNodedStackTYPE*>* const node)
 	{
 		init = node;
 		last = node;
@@ -72,12 +72,11 @@ public:
 	{
 		if (data != NULL){ push(new DoubleNode(data)); }
 	}
-	void const push(DoubleNode* const node)
+	void const push(DoubleNode<DoubleNodedStackTYPE*>* const node)
 	{
 		if (init == NULL) // empty stack
 		{
-			init = node;
-			last = node;
+			last = init = node;
 			return;
 		}
 		DoubleNode<DoubleNodedStackTYPE*>* tmp = init;
@@ -87,10 +86,38 @@ public:
 		delete[] tmp;
 	}
 
-	DoubleNode& start(){ return init; }
-	DoubleNode& getLast(){ return last; }
+	bool pop()
+	{
+		if (init == NULL)
+		{
+			return false;
+		}
+		init = init->getNext();
+		delete[] init->getPrevious->getThis();
+		return true;
+	}
 
-	~DoubleNodedStack{}
+	bool deleteContents()
+	{
+		if (init == NULL)
+		{
+			return false;
+		}
+		while (init != last)
+		{
+			init = init->getNext();
+			delete[] init->getPrevious->getThis();
+		}
+		delete[] init;
+		delete[] last->getThis();
+		delete[] last;
+		return true;
+	}
+
+	DoubleNode<DoubleNodedStackTYPE>* start(){ return init; }
+	DoubleNode<DoubleNodedStackTYPE>* getLast(){ return last; }
+
+
 };
 
 
