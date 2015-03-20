@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Archivos de código fuente\Modules">
+      <UniqueIdentifier>{6a6ad4f4-79dd-458b-8d6b-bd937b9cd65e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Modules">
+      <UniqueIdentifier>{8af847fa-dda2-4fbd-9263-f123a1e3d66f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

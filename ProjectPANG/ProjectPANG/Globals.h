@@ -16,7 +16,6 @@ enum main_states
 {
 	MAIN_EXIT,
 	MAIN_UPDATE,
-	MAIN_SDL_ERROR,
 	MAIN_ERROR,
 	MAIN_START,
 	MAIN_FINISH,
@@ -27,7 +26,6 @@ enum update_status
 {
 	UPDATE_CONTINUE,
 	UPDATE_PAUSE, //PollEvent != SDL_QUIT
-
 	UPDATE_STOP,
 	UPDATE_ERROR
 };

@@ -1,11 +1,17 @@
 
+/*
+PANG VIDEOGAME TRIBUTE
+
+AUTHORS:
+	SEBASTIAN DELGADO
+	JORDI MARTINEZ
+	AUSIAS DALMAU
+	RUBEN SARDON
+*/
+
 #include "Modules.h"
-
-#include "Classes.h"
-#include "Methods.h"
-
-
-
+/*#include "Classes.h"
+#include "Methods.h"*/
 
 /*
 SDL_Surface picture = IMG_Load("picture.png");
@@ -21,89 +27,39 @@ SDL_RenderCopy(renderer, image, const SDL_Rect *srcrect, rect);
 
 */
 
-
 int main(int argc, char *argv[])
 {
 	ApplicationModule* app;
 	//int MAIN_RETURN = EXIT_FAILURE;
 	main_states state = MAIN_CREATION;
 
-
-
 	while (state != MAIN_EXIT)
 	{
 		switch (state)
 		{
-
 		case MAIN_UPDATE:            //------------------UPDATE-----------------
-
-			// update function return int
-			// how do we manange update returned value?
-
-			if (!app->Update())
-			{
-				state = MAIN_ERROR;
-			}
-			else
-			{
-				state = MAIN_UPDATE;
-			}
+			state = app->AppUpdate();
 			break;
-
-
-
-			state = MAIN_EXIT;
-			break;
-
-
-
-		case MAIN_SDL_ERROR:            //------------------SDL_ERROR-----------------
+		
+		case MAIN_ERROR:            //------------------ERROR-----------------
 			LOG("\nApplication exit with error: "); LOG(SDL_GetError());
 			state = MAIN_EXIT;
 			break;
-
-
-		case MAIN_ERROR:            //------------------ERROR-----------------
-			LOG("\nApplication exit with non-SDL error");
-			state = MAIN_EXIT;
-			break;
-
-
-
+		
 		case MAIN_START:            //------------------START-----------------
-
-			
-			if (!app->Init())
-			{
-				state = MAIN_ERROR;
-			}
-			else
-			{
-				state = MAIN_UPDATE;
-			}
+			state = app->Init();
 			break;
-
-
-
+		
 		case MAIN_FINISH:            //------------------FINISH-----------------
 			LOG("\nFinishing Application:\n");
-			if (!app->CleanUp())
-			{
-				state = MAIN_ERROR;
-			}
-			else
-			{
-				state = MAIN_EXIT;
-			}
+			if (!app->CleanUp()){ state = MAIN_ERROR; }
+			else{ state = MAIN_EXIT; }
 			delete[] app;
 			SDL_Quit();
 			break;
-
-
-
+		
 		case MAIN_CREATION:          //------------------CREATION-----------------
 			LOG("\nCreating Application:\n");
-
 			//Uint32 flags for init:
 			/*
 			SDL_INIT_TIMER - timer subsystem
@@ -116,26 +72,14 @@ int main(int argc, char *argv[])
 			SDL_INIT_EVERYTHING - all of the above subsystems
 			SDL_INIT_NOPARACHUTE - compatibility; this flag is ignored
 			*/
-
-			if (SDL_Init(SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS) == -1)
-			{
-				state = MAIN_SDL_ERROR;
-			}
+			if (SDL_Init(SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS) == -1){ state = MAIN_ERROR; }
 			else
 			{
 				ApplicationModule* app = new ApplicationModule;
 				state = MAIN_START;
 			}
-			break;
-		
-
 		}
 	}
-
-
-
-
-
 	return 0;
 }
 	

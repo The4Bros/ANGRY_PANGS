@@ -9,6 +9,21 @@
 #include "SDL_mixer/include/SDL_mixer.h"
 #pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
 
+class WindowModule;
+class RenderModule;
+class InputModule;
+class EntityManagerModule; //(player, enemies)
+class AudioModule;
+class ConfigurationModule;
+class TextureManagerModule;
+class FontManagerModule;
+class PersistentDataModule;
+class NetworkModule;
+class SceneModule; //map
+
+
+
+
 
 
 class Module
@@ -67,9 +82,10 @@ protected:
 
 
 public:
-	virtual bool Init(){ return true; }
-	virtual int Update(){ return 0; }
-	virtual bool CleanUp(){ return true; }
+	Module(){}
+	virtual main_states Init(){ return MAIN_UPDATE; }
+	virtual update_status Update(){ return UPDATE_CONTINUE; }
+	virtual main_states CleanUp(){ return MAIN_EXIT; }
 
 	/*
 	modules:
@@ -89,7 +105,7 @@ public:
 };
 
 
-class ApplicationModule : public Module{
+class ApplicationModule{
 private:
 	DoubleNodedStack<Module*>* modules_Stack;
 	DoubleNode<Module*>* item;
@@ -97,23 +113,12 @@ private:
 public:
 	//Window Module:
 	WindowModule* windowModule;
-	SDL_Event* mainEvent;
-	SDL_Window* window;
-	Uint32 windowFlags;
-
-	//Renderer Module:
 	RenderModule* renderModule;
-	SDL_Renderer* renderer;
-	Uint32 rendererFlags;
+	InputModule* inputModule;
 
-	//Input Module:
-	InputModule* inputModule = new InputModule(this);
-	const Uint8 *key;
-
-	bool Init()
+	main_states Init()
 	{
 		modules_Stack = new DoubleNodedStack<Module*>();
-		
 		
 		inputModule = new InputModule(this);
 		renderModule = new RenderModule(this);
@@ -134,21 +139,37 @@ public:
 		modules_Stack->push(windowModule);
 
 		item = modules_Stack->start();
+
+		main_states returnValue;
 		while (item)
 		{
-			if (!item->getData()->Init()){ return false; }
+			returnValue = item->getData()->Init();
 			item = item->getNext();
 		}
 		return true;
 	}
-	int Update()
+	main_states AppUpdate()
 	{
 		item = modules_Stack->start();
+		update_status returnValue;
 		while (item)
 		{
-			if (!item->getData()->Update()){ return false; }
-			item = item->getNext();
+			returnValue = item->getData()->Update();
+			switch (returnValue)
+			{
+			case UPDATE_CONTINUE:
+				item = item->getNext();
+				break;
+			case UPDATE_PAUSE:
+				//pause managed
+			case UPDATE_STOP:
+				return MAIN_FINISH;
+
+			case UPDATE_ERROR:
+				return MAIN_ERROR;
+			}
 		}
+		return MAIN_UPDATE;
 	}
 	bool CleanUp()
 	{
@@ -168,21 +189,30 @@ public:
 class WindowModule : public Module{
 private:
 	ApplicationModule* app;
+	Uint32 windowFlags;
+	SDL_Event* mainEvent;
+
 public:
+
+	SDL_Window* window;
+
 	WindowModule(ApplicationModule* const app)
 	{
 		this->app = app;
 	}
-	bool Init()
+	main_states Init()
 	{
-		app->windowFlags = SDL_WINDOW_SHOWN;
-		app->window = SDL_CreateWindow("PANG", 80, 80, 600, 400, app->windowFlags);
+		windowFlags = SDL_WINDOW_SHOWN;
+		window = SDL_CreateWindow("PANG", 80, 80, 600, 400, windowFlags);
+		if (window == NULL){ return MAIN_ERROR; }
 		SDL_Event* MAIN_EVENT = new SDL_Event();
+		if (MAIN_EVENT == NULL){ return MAIN_ERROR; }
+		return MAIN_UPDATE;
 	}
-	int Update()
+	update_status Update()
 	{
-		SDL_PollEvent(app->mainEvent);
-		if (app->mainEvent->type == SDL_QUIT){ return MAIN_FINISH; }
+		SDL_PollEvent(mainEvent);
+		if (mainEvent->type == SDL_QUIT){ return UPDATE_STOP; }
 
 		//manage window size and properties HowTo:
 		/*
@@ -198,37 +228,41 @@ public:
 		}
 		*/
 
-		return MAIN_UPDATE;
+		return UPDATE_CONTINUE;
 	}
-	bool CleanUp()
+	main_states CleanUp()
 	{
-		delete[] app->mainEvent;
-		delete &app->windowFlags;
-		SDL_DestroyWindow(app->window);
+		delete[] mainEvent;
+		delete &windowFlags;
+		SDL_DestroyWindow(window);
 	}
 };
 
 class RenderModule : public Module{
 private:
 	ApplicationModule* app;
+	Uint32 rendererFlags;
 
 public:
+
+	SDL_Renderer* renderer;
+
 	RenderModule(ApplicationModule* const app)
 	{
 		this->app = app;
 	}
 	bool Init()
 	{
-		SDL_Renderer* renderer = SDL_CreateRenderer(app->window, -1, app->rendererFlags);
+		SDL_Renderer* renderer = SDL_CreateRenderer(app->windowModule->window, -1, rendererFlags);
 	}
-	int Update()
+	update_status Update()
 	{
-
+		return UPDATE_CONTINUE;
 	}
 	bool CleanUp()
 	{
-		delete &app->rendererFlags;
-		SDL_DestroyRenderer(app->renderer);
+		delete &rendererFlags;
+		SDL_DestroyRenderer(app->renderModule->renderer);
 		return true;
 	}
 };
@@ -236,6 +270,9 @@ public:
 class InputModule : public Module{
 private:
 	ApplicationModule* app;
+
+protected:
+	const Uint8 *key;
 
 public:
 
@@ -245,20 +282,29 @@ public:
 	}
 	bool Init()
 	{
-		app->key = SDL_GetKeyboardState(NULL);
+		return true;
 	}
-	int Update()
+	update_status Update()
 	{
-		app->key = SDL_GetKeyboardState(NULL);
-		if (app->key[SDLK_LEFT]){ LOG("\n LEFT pressed"); }
-		if (app->key[SDLK_RIGHT]){ LOG("\n RIGHT pressed"); }
-		if (app->key[SDLK_UP]){ LOG("\n UP pressed"); }
-		if (app->key[SDLK_DOWN]){ LOG("\n DOWN pressed"); }
-		if (app->key[SDLK_SPACE]){ LOG("\n SPACE pressed"); }
+		key = SDL_GetKeyboardState(NULL);
+
+		if (key[SDLK_ESCAPE]){ return UPDATE_STOP; }
+
+
+
+
+		if (app->inputModule->key[SDLK_LEFT]){ LOG("\n LEFT pressed"); }
+		if (app->inputModule->key[SDLK_RIGHT]){ LOG("\n RIGHT pressed"); }
+		if (app->inputModule->key[SDLK_UP]){ LOG("\n UP pressed"); }
+		if (app->inputModule->key[SDLK_DOWN]){ LOG("\n DOWN pressed"); }
+		if (app->inputModule->key[SDLK_SPACE]){ LOG("\n SPACE pressed"); }
+
+		return UPDATE_CONTINUE;
+
 	}
 	bool CleanUp()
 	{
-		delete app->key;
+		delete key;
 	}
 };
 
@@ -271,49 +317,49 @@ public:
 	{
 		//load players and enemies
 	}
-	int Update(){ return 2; }
+	update_status Update(){ return UPDATE_CONTINUE; }
 	bool CleanUp(){ return true; }
 }; //(player, enemies)
 class AudioModule : public Module{
 public:
 	bool Init(){ return true; }
-	int Update(){ return 2; }
+	update_status Update(){ return UPDATE_CONTINUE; }
 	bool CleanUp(){ return true; }
 };
 class ConfigurationModule : public Module{
 public:
 	bool Init(){ return true; }
-	int Update(){ return 2; }
+	update_status Update(){ return UPDATE_CONTINUE; }
 	bool CleanUp(){ return true; }
 };
 class TextureManagerModule : public Module{
 public:
 	bool Init(){ return true; }
-	int Update(){ return 2; }
+	update_status Update(){ return UPDATE_CONTINUE; }
 	bool CleanUp(){ return true; }
 };
 class FontManagerModule : public Module{
 public:
 	bool Init(){ return true; }
-	int Update(){ return 2; }
+	update_status Update(){ return UPDATE_CONTINUE; }
 	bool CleanUp(){ return true; }
 };
 class PersistentDataModule : public Module{
 public:
 	bool Init(){ return true; }
-	int Update(){ return 2; }
+	update_status Update(){ return UPDATE_CONTINUE; }
 	bool CleanUp(){ return true; }
 };
 class NetworkModule : public Module{
 public:
 	bool Init(){ return true; }
-	int Update(){ return 2; }
+	update_status Update(){ return UPDATE_CONTINUE; }
 	bool CleanUp(){ return true; }
 };
 class SceneModule : public Module{
 public:
 	bool Init(){ return true; }
-	int Update(){ return 2; }
+	update_status Update(){ return UPDATE_CONTINUE; }
 	bool CleanUp(){ return true; }
 }; //map
 
