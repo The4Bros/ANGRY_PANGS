@@ -7,7 +7,8 @@
 
 class ModuleTextures : public Module{
 public:
-
+	
+	SDL_Texture* background_sprite;
 	SDL_Texture* character_sprite;
 
 	ModuleTextures(Application* app);

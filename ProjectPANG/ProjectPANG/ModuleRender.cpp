@@ -29,7 +29,7 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()
 {
-	SDL_RenderCopy(renderer, app->texturesModule->character_sprite, NULL, &app->entityManagerModule->character_rect);
+	SDL_RenderCopy(renderer, app->texturesModule->background_sprite, app->entityManagerModule->background_const_rect, &app->entityManagerModule->background_rect);
 	return UPDATE_CONTINUE;
 }
 

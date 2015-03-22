@@ -5,11 +5,16 @@
 
 ModuleTextures::ModuleTextures(Application* app) : Module(app)
 {
+	background_sprite = NULL;
 	character_sprite = NULL;
 }
 bool ModuleTextures::Init()
 {
-	character_sprite = IMG_LoadTexture(app->renderModule->renderer, SPRITE_Character_FILE);
+	background_sprite = IMG_LoadTexture(app->renderModule->renderer, "backgrounds.png");
+	if (background_sprite == NULL){ return false; }
+
+	character_sprite = IMG_LoadTexture(app->renderModule->renderer, "Character.png");
+	if (character_sprite == NULL){ return false; }
 	return true;
 }
 update_status ModuleTextures::PreUpdate(){ return UPDATE_CONTINUE; }
