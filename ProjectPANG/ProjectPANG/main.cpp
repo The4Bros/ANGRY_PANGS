@@ -50,20 +50,6 @@ int main(int argc, char *argv[])
 		switch (state)
 		{
 		case MAIN_UPDATE:            //------------------UPDATE-----------------
-			update_state = app->PreUpdate();
-			switch (update_state)
-			{
-			case UPDATE_CONTINUE:
-				break;
-			case UPDATE_PAUSE:
-				break;
-			case UPDATE_ERROR:
-				state = MAIN_ERROR;
-				break;
-			case UPDATE_STOP:
-				state = MAIN_FINISH;
-			}
-			break;
 			update_state = app->Update();
 			switch (update_state)
 			{
@@ -76,20 +62,7 @@ int main(int argc, char *argv[])
 				break;
 			case UPDATE_STOP:
 				state = MAIN_FINISH;
-			}
-			break;
-			update_state = app->PostUpdate();
-			switch (update_state)
-			{
-			case UPDATE_CONTINUE:
 				break;
-			case UPDATE_PAUSE:
-				break;
-			case UPDATE_ERROR:
-				state = MAIN_ERROR;
-				break;
-			case UPDATE_STOP:
-				state = MAIN_FINISH;
 			}
 			break;
 		

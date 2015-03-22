@@ -7,12 +7,18 @@
 
 class ModuleEntityManager : public Module{
 public:
+
+	SDL_Rect character_rect;
+	const SDL_Rect* character_const_rect;
+
 	ModuleEntityManager(Application* app);
 	bool Init();
 	update_status PreUpdate();
 	update_status Update();
 	update_status PostUpdate();
 	bool CleanUp();
+	bool colision(int x1, int y1, int w1, int h1, int x2, int y2, int w2, int h2);
+	bool colisionHarpoonBall(int x1, int y1, int r, int x2, int y2, int w2);
 };
 
 #endif

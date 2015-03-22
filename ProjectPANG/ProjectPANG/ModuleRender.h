@@ -9,10 +9,6 @@
 class Application;
 
 class ModuleRender : public Module{
-private:
-	Application* app;
-	Uint32 rendererFlags;
-
 public:
 
 	SDL_Renderer* renderer;

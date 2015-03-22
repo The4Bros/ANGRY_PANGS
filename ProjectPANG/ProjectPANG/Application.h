@@ -3,6 +3,7 @@
 #include "Globals.h"
 #include "Queue.h"
 
+#include "Module.h"
 #include "ModuleWindow.h"
 #include "ModuleRender.h"
 #include "ModuleInput.h"
@@ -33,9 +34,8 @@ public:
 	Application();
 	~Application();
 	bool Init();
-	update_status PreUpdate();
 	update_status Update();
-	update_status PostUpdate();
 	bool CleanUp();
+	void AddModule(Module* mod);
 
 };

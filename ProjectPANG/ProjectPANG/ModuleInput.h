@@ -6,11 +6,10 @@
 #define __ModuleInput_H__
 
 class ModuleInput : public Module{
-private:
-	Application* app;
 
 public:
 
+	SDL_Event* mainEvent;
 	const Uint8 *key;
 
 	ModuleInput(Application* app);

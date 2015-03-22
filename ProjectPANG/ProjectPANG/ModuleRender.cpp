@@ -7,41 +7,40 @@
 ModuleRender::ModuleRender(Application* app) : Module(app)
 {
 	renderer = NULL;
-	rendererFlags = 0;
 }
 
 bool ModuleRender::Init()
 {
-	if (VSYNC)
-	{
-		rendererFlags |= SDL_RENDERER_PRESENTVSYNC;
-	}
+	Uint32 rendererFlags = NULL;
+	if (ACCELERATED){ rendererFlags |= SDL_RENDERER_ACCELERATED; }
+	if (VSYNC){ rendererFlags |= SDL_RENDERER_PRESENTVSYNC; }
+
 	renderer = SDL_CreateRenderer(app->windowModule->window, -1, rendererFlags);
-	if (renderer == NULL)
-	{
-		return false;
-	}
+	if (renderer == NULL){ return false; }
+
 	return true;
 }
 
 update_status ModuleRender::PreUpdate()
 {
+	SDL_RenderClear(renderer);
 	return UPDATE_CONTINUE;
 }
 
 update_status ModuleRender::Update()
 {
+	SDL_RenderCopy(renderer, app->texturesModule->character_sprite, NULL, &app->entityManagerModule->character_rect);
 	return UPDATE_CONTINUE;
 }
 
 update_status ModuleRender::PostUpdate()
 {
+	SDL_RenderPresent(renderer);
 	return UPDATE_CONTINUE;
 }
 
 bool ModuleRender::CleanUp()
 {
-	delete &rendererFlags;
 	if (renderer != NULL)
 	{
 		SDL_DestroyRenderer(app->renderModule->renderer);

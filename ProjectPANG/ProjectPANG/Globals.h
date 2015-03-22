@@ -27,11 +27,28 @@ enum current_weapon
 	WEAPON_SHOTGUN
 };
 
+
+enum power_Up
+{
+	POWERUP_TIME_STOP,
+	POWERUP_TIME_SLOW,
+	POWERUP_FOOD,
+	POWERUP_SHIELD,
+	POWERUP_LIFE,
+	POWERUP_DYNAMITE,
+	POWERUP_DOUBLE_HARPOON,
+	POWERUP_GRAPPLE,
+	POWERUP_SHOTGUN
+};
+
 // Configuration -----------
 
+#define ACCELERATED true
+#define VSYNC true
+
+#define SHOWN true
 #define FULLSCREEN false
 #define RESIZABLE false
-#define VSYNC true
 #define WINDOW_TITLE "PANG"
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480

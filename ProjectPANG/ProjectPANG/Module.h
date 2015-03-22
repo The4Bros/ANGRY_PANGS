@@ -10,6 +10,7 @@ class Module
 {
 public:
 	Application* app;
+
 	Module(Application* parent) : app(parent){}
 	virtual bool Init(){ return true; }
 	virtual update_status PreUpdate(){ return UPDATE_CONTINUE; }

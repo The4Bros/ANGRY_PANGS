@@ -1,5 +1,6 @@
 
-#pragma once
+#ifndef __Queue_H__
+#define __Queue_H__
 
 template <class DoubleNodeDataTYPE>struct DoubleNode
 {
@@ -19,50 +20,51 @@ template <class DoubleNodeDataTYPE>struct DoubleNode
 template <class QueueTYPE> class DoubleNodedQueue
 {
 private:
+
 	DoubleNode<QueueTYPE>* init;
 	DoubleNode<QueueTYPE>* last;
+
 public:
+
 	inline DoubleNodedQueue()
 	{
 		init = last = NULL;
 	}
-	void const push(const QueueTYPE& data)
+
+	~DoubleNodedQueue()
+	{
+		clear();
+	}
+
+	void push(const QueueTYPE& data)
 	{
 		DoubleNode<QueueTYPE>* node;
 		node = new DoubleNode<QueueTYPE>(data);
 		if (init == NULL)
 		{
 			last = init = node;
-			return;
 		}
-		last->next = node;
-		last->next->previous = last;
-		last = last->next;
+		else
+		{
+			node->previous = last;
+			last->next = node;
+			last = last->next;
+		}
 	}
 
 	void clear()
 	{
-		while (init->next != NULL)
+		while (init != NULL)
 		{
+			delete init->data;
 			init = init->next;
-			delete init->previous;
 		}
-		delete init;
-		init = last = NULL;
+		last = NULL;
 	}
 
-	DoubleNode<QueueTYPE>* start(){ return init; }
+	DoubleNode<QueueTYPE>* getStart(){ return init; }
+
 	DoubleNode<QueueTYPE>* getLast(){ return last; }
 };
 
-
-
-
-
-
-
-
-
-
-
-
+#endif

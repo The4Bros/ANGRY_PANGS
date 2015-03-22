@@ -7,6 +7,9 @@
 
 class ModuleTextures : public Module{
 public:
+
+	SDL_Texture* character_sprite;
+
 	ModuleTextures(Application* app);
 	bool Init();
 	update_status PreUpdate();

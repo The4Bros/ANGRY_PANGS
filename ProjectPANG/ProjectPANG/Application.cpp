@@ -14,19 +14,19 @@ Application::Application()
 	audioModule = new ModuleAudio(this);
 	fontManagerModule = new ModuleFontManager(this);
 
-	modules_Stack.push(windowModule);
-	modules_Stack.push(renderModule);
-	modules_Stack.push(inputModule);
-	modules_Stack.push(texturesModule);
-	modules_Stack.push(sceneModule);
-	modules_Stack.push(entityManagerModule);
-	modules_Stack.push(audioModule);
-	modules_Stack.push(fontManagerModule);
+	AddModule(windowModule);
+	AddModule(renderModule);
+	AddModule(inputModule);
+	AddModule(texturesModule);
+	AddModule(sceneModule);
+	AddModule(entityManagerModule);
+	AddModule(audioModule);
+	AddModule(fontManagerModule);
 }
 
 bool Application::Init()
 {
-	item = modules_Stack.start();
+	item = modules_Stack.getStart();
 	while (item)
 	{
 		if (!item->data->Init()){ return false; }
@@ -37,19 +37,12 @@ bool Application::Init()
 
 Application::~Application()
 {
-	delete[] windowModule;
-	delete[] renderModule;
-	delete[] inputModule;
-	delete[] texturesModule;
-	delete[] sceneModule;
-	delete[] entityManagerModule;
-	delete[] audioModule;
-	delete[] fontManagerModule;
+	modules_Stack.clear();
 }
 
-update_status Application::PreUpdate()
+update_status Application::Update()
 {
-	item = modules_Stack.start();
+	item = modules_Stack.getStart(); // ------------PreUpdate------------
 	while (item != NULL)
 	{
 		returnValue = item->data->PreUpdate();
@@ -67,12 +60,8 @@ update_status Application::PreUpdate()
 			return returnValue;
 		}
 	}
-	return returnValue;
-}
 
-update_status Application::Update()
-{
-	item = modules_Stack.start();
+	item = modules_Stack.getStart(); // ------------Update------------
 	while (item != NULL)
 	{
 		returnValue = item->data->Update();
@@ -90,12 +79,8 @@ update_status Application::Update()
 			return returnValue;
 		}
 	}
-	return returnValue;
-}
 
-update_status Application::PostUpdate()
-{
-	item = modules_Stack.start();
+	item = modules_Stack.getStart(); // ------------PostUpdate------------
 	while (item != NULL)
 	{
 		returnValue = item->data->PostUpdate();
@@ -126,4 +111,9 @@ bool Application::CleanUp()
 	}
 	modules_Stack.clear();
 	return true;
+}
+
+void Application::AddModule(Module* mod)
+{
+	modules_Stack.push(mod);
 }

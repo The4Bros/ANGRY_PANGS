@@ -8,11 +8,6 @@
 class Application;
 
 class ModuleWindow : public Module{
-private:
-	Application* app;
-	Uint32 windowFlags;
-	SDL_Event* mainEvent;
-
 public:
 
 	SDL_Window* window;
