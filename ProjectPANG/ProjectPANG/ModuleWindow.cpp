@@ -1,6 +1,7 @@
 
 #include "Globals.h"
 #include "Module.h"
+#include "Application.h"
 #include "ModuleWindow.h"
 
 ModuleWindow::ModuleWindow(Application* app) : Module(app)

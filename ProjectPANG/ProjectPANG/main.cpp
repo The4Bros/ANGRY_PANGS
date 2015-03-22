@@ -41,7 +41,7 @@ enum main_states
 int main(int argc, char *argv[])
 {
 	Application* app = NULL;
-	int main_return = EXIT_FAILURE;
+	int main_return = EXIT_SUCCESS;
 	main_states state = MAIN_CREATION;
 	update_status update_state = UPDATE_CONTINUE;
 

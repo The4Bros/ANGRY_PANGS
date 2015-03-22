@@ -1,6 +1,7 @@
 
-#include "Module.h"
 #include "Globals.h"
+#include "Module.h"
+#include "Application.h"
 #include "ModuleRender.h"
 
 ModuleRender::ModuleRender(Application* app) : Module(app)

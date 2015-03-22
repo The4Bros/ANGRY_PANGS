@@ -7,6 +7,9 @@
 
 class ModuleScene : public Module{
 public:
+
+	//timer
+
 	ModuleScene(Application* app);
 	bool Init();
 	update_status PreUpdate();
