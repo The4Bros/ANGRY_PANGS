@@ -116,22 +116,6 @@ protected:
 	bool loadImages()
 	{
 		buffer[0] = IMG_LoadTexture(renderer, "player1_1.png");
-		buffer[1] = IMG_Load("player1_2.png");
-		buffer[2] = IMG_Load("player1_3.png");
-		buffer[3] = IMG_Load("player1_4.png");
-		buffer[5] = IMG_Load("player1_5.png");
-		buffer[6] = IMG_Load("player1_6.png");
-		buffer[7] = IMG_Load("player1_7.png");
-		buffer[8] = IMG_Load("player1_8.png");
-		buffer[9] = IMG_Load("player1_9.png");
-		buffer[10] = IMG_Load("player1_10.png");
-		buffer[11] = IMG_Load("player1_11.png");
-		buffer[12] = IMG_Load("player1_12.png");
-		buffer[13] = IMG_Load("player1_13.png");
-		buffer[14] = IMG_Load("player1_14.png");
-		buffer[15] = IMG_Load("player1_15.png");
-		buffer[16] = IMG_Load("player1_16.png");
-		buffer[17] = IMG_Load("player1_17.png");
 
 		for (int i = 0; i < 18; i++)
 		{
