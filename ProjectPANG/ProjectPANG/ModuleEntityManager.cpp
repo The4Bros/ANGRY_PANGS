@@ -2,14 +2,17 @@
 
 ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 {
-	character_rect = {50, 50, 200, 200};
-	character_const_rect = NULL;
+	character_rect = { 250, 250, 45, 45 };
+	background_rect = { 1, 1, 598, 300 };
 }
 bool ModuleEntityManager::Init()
 {
-	background_rect = { 1, 1, 598, 300 };
+	
 	background_const_source_rect = { 8, 8, 384, 208 };
 	background_const_rect = new SDL_Rect(background_const_source_rect);
+
+	character_const_source_rect = { 10, 2, 32, 32 };
+	character_const_rect = new SDL_Rect(character_const_source_rect);
 	
 	return true;
 }

@@ -11,7 +11,9 @@ public:
 	SDL_Rect background_rect;
 	SDL_Rect background_const_source_rect;
 	const SDL_Rect* background_const_rect;
+
 	SDL_Rect character_rect;
+	SDL_Rect character_const_source_rect;
 	const SDL_Rect* character_const_rect;
 
 	ModuleEntityManager(Application* app);
