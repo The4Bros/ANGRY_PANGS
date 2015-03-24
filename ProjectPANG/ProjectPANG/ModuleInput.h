@@ -10,7 +10,7 @@ class ModuleInput : public Module{
 public:
 
 	SDL_Event* mainEvent;
-	const Uint8 *key;
+	const Uint8* key;
 
 	ModuleInput(Application* app);
 	bool Init();

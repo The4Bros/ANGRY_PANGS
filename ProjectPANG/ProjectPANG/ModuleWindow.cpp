@@ -16,7 +16,7 @@ bool ModuleWindow::Init()
 	if (FULLSCREEN){ windowFlags |= SDL_WINDOW_FULLSCREEN; }
 	if (RESIZABLE){ windowFlags |= SDL_WINDOW_RESIZABLE; }
 
-	window = SDL_CreateWindow(WINDOW_TITLE, 80, 80, 600, 400, windowFlags);
+	window = SDL_CreateWindow(WINDOW_TITLE, 80, 80, SCREEN_WIDTH, SCREEN_HEIGHT, windowFlags);
 	if (window == NULL){ return false; }
 
 	return true;

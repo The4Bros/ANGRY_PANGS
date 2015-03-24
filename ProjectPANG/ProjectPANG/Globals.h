@@ -50,10 +50,15 @@ enum power_Up
 #define FULLSCREEN false
 #define RESIZABLE false
 #define WINDOW_TITLE "PANG"
-#define SCREEN_WIDTH 640
+#define SCREEN_WIDTH 768
 #define SCREEN_HEIGHT 480
 
+#define BACKGROUND_HEIGHT 414
+
 #define FPS 60
+
+#define FONT_FILE "font/ARCAC___.TTF"
+#define FONT_SIZE 16
 
 #define SPRITE_Character_FILE "..\ProjectPANG\GameResources\images\Character.png"
 

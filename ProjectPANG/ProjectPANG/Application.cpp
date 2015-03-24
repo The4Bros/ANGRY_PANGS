@@ -52,8 +52,8 @@ update_status Application::Update()
 			item = item->next;
 			break;
 		case UPDATE_PAUSE:
+			// check for un-pause or close window -> window updates + input updates
 			break;
-			//pause managed
 		case UPDATE_ERROR:
 			return returnValue;
 		case UPDATE_STOP:

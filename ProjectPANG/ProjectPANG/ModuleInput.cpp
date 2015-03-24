@@ -20,9 +20,16 @@ bool ModuleInput::Init()
 
 update_status ModuleInput::PreUpdate()
 {
+	//SDL_PumpEvents();
+
 	SDL_PollEvent(mainEvent);
 	
 	key = SDL_GetKeyboardState(NULL);
+
+	if (key[SDLK_ESCAPE])
+	{
+		return UPDATE_STOP;
+	}
 
 	return UPDATE_CONTINUE;
 }
