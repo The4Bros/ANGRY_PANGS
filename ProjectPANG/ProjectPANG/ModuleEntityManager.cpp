@@ -15,7 +15,7 @@ bool ModuleEntityManager::Init()
 	character_const_rect = new SDL_Rect(character_const_source_rect);
 	
 
-
+	//https:// umbrello.kde.org/
 
 
 
@@ -26,7 +26,7 @@ update_status ModuleEntityManager::PreUpdate(){ return UPDATE_CONTINUE; }
 update_status ModuleEntityManager::Update()
 {
 	
-	if (app->inputModule->key[SDLK_SPACE] && character_rect.x > 1)
+	if (&app->inputModule->key[SDLK_SPACE] && character_rect.x > 1)
 	{
 		character_rect.x -= 1;
 	}
