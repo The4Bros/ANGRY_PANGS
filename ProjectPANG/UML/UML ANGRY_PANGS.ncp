@@ -1,0 +1,46 @@
+<Project>
+  <Name>Sin titulo</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Sin titulo</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>Application</Name>
+        <Access>Public</Access>
+        <Location left="63" top="52" />
+        <Size width="206" height="349" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private DoubleNodedQueue module_queue</Member>
+        <Member type="Field">private DoubleNode item</Member>
+        <Member type="Field">private update_status returnValue</Member>
+        <Member type="Field">public ModuleWindow windowModule</Member>
+        <Member type="Field">public ModuleRender renderModule</Member>
+        <Member type="Field">public ModuleInput inputModule</Member>
+        <Member type="Field">public Moduletextures texturesModule</Member>
+        <Member type="Field">public ModuleEntityManager entityManagerModule</Member>
+        <Member type="Field">public ModuleScene sceneModule</Member>
+        <Member type="Field">public ModuleAudio audioModule</Member>
+        <Member type="Field">public ModuleFontManager fontManagerModule</Member>
+        <Member type="Constructor">public Application()</Member>
+        <Member type="Destructor">~Application()</Member>
+        <Member type="Method">public bool Init()</Member>
+        <Member type="Method">public update_status Update()</Member>
+        <Member type="Method">public bool CleanUp()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Structure">
+        <Name>DoubleNode</Name>
+        <Access>Public</Access>
+        <Location left="407" top="92" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public DoubleNodeDataTYPE data</Member>
+        <Member type="Field">public DoubleNode next</Member>
+        <Member type="Field">public DoubleNode previous</Member>
+        <Member type="Method">public void DoubleNode(DoubleNodeDataTYPE item)</Member>
+        <Member type="Method">private void DoubleNode()</Member>
+      </Entity>
+    </Entities>
+    <Relationships />
+  </ProjectItem>
+</Project>
