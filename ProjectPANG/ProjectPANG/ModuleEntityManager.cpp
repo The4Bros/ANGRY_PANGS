@@ -2,7 +2,7 @@
 
 ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 {
-	character_rect = { 250, 250, 45, 45 };
+	character_rect = { 250, 336, 64, 64 };
 	background_rect = { 0, 0, SCREEN_WIDTH, BACKGROUND_HEIGHT };
 }
 bool ModuleEntityManager::Init()
@@ -26,14 +26,26 @@ update_status ModuleEntityManager::PreUpdate(){ return UPDATE_CONTINUE; }
 update_status ModuleEntityManager::Update()
 {
 	
-	if (&app->inputModule->key[SDLK_SPACE] && character_rect.x > 1)
+	if (app->inputModule->key[SDL_SCANCODE_LEFT] == 1 && character_rect.x > 18)
 	{
-		character_rect.x -= 1;
+		character_rect.x -= 5;
 	}
-	//if (&app->inputModule->key[SDL_SCANCODE_RIGHT]){ character_rect.x += 1; }
-	//if (&app->inputModule->key[SDLK_UP]){ character_rect.y -= 1; }
-	//if (&app->inputModule->key[SDLK_DOWN]){ character_rect.y += 1; }
-	//if (key[SDLK_SPACE]){ pass }
+	if (app->inputModule->key[SDL_SCANCODE_RIGHT] == 1 && character_rect.x < SCREEN_WIDTH - 82)
+	{
+		character_rect.x += 5;
+	}
+	if (app->inputModule->key[SDL_SCANCODE_UP] == 1 && character_rect.y > 18)
+	{
+		character_rect.y -= 4;
+	}
+	if (app->inputModule->key[SDL_SCANCODE_DOWN] == 1 && character_rect.y < SCREEN_HEIGHT - 146)
+	{
+		character_rect.y += 4;
+	}
+	if (app->inputModule->key[SDL_SCANCODE_SPACE] == 1)
+	{
+		
+	}
 
 	
 	return UPDATE_CONTINUE;

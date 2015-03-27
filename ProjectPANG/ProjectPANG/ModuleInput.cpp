@@ -26,7 +26,7 @@ update_status ModuleInput::PreUpdate()
 	
 	key = SDL_GetKeyboardState(NULL);
 
-	if (key[SDLK_ESCAPE])
+	if (key[SDL_SCANCODE_ESCAPE])
 	{
 		return UPDATE_STOP;
 	}
