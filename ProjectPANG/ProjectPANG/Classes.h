@@ -5,9 +5,9 @@
 
 class MainObj
 {
-protected:
+public:
 
-	int x, y, w, h;
+	SDL_Rect rect;
 
 	MainObj()
 	{

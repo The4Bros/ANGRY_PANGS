@@ -22,6 +22,7 @@ public:
 	update_status Update();
 	update_status PostUpdate();
 	bool CleanUp();
+
 	bool colision(int x1, int y1, int w1, int h1, int x2, int y2, int w2, int h2);
 	bool colisionHarpoonBall(int x1, int y1, int r, int x2, int y2, int w2);
 };

@@ -86,13 +86,16 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="Classes.h" />
+    <ClInclude Include="ModulePlayer.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Player1.h" />
+    <ClInclude Include="Player2.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="ModuleAudio.h" />
     <ClInclude Include="ModuleEntityManager.h" />
     <ClInclude Include="ModuleFontManager.h" />
     <ClInclude Include="ModuleInput.h" />
-    <ClInclude Include="Methods.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="ModuleRender.h" />
     <ClInclude Include="ModuleScene.h" />
