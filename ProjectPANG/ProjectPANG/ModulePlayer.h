@@ -2,6 +2,7 @@
 #include "Globals.h"
 #include "Classes.h"
 #include "Application.h"
+#include "Player1.h"
 
 #ifndef __ModulePlayer_H__
 #define __ModulePlayer_H__

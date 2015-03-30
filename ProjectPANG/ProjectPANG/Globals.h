@@ -27,7 +27,6 @@ enum current_weapon
 	WEAPON_SHOTGUN
 };
 
-
 enum power_Up
 {
 	POWERUP_TIME_STOP,

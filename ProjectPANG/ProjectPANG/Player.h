@@ -17,9 +17,6 @@ public:
 
 	void LeftTrigger();
 	void RightTrigger();
-
-
-
 	void UpTrigger();
 	void DownTrigger();
 

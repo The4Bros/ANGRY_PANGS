@@ -8,10 +8,10 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 bool ModuleEntityManager::Init()
 {
 
-	background_const_source_rect = { 8, 8, 384, 208 };
+	background_const_source_rect = { 0, 0, 384, 208 };
 	background_const_rect = new SDL_Rect(background_const_source_rect);
 
-	character_const_source_rect = { 10, 2, 32, 32 };
+	character_const_source_rect = { 32, 0, 32, 32 };
 	character_const_rect = new SDL_Rect(character_const_source_rect);
 	
 
@@ -26,6 +26,15 @@ update_status ModuleEntityManager::PreUpdate(){ return UPDATE_CONTINUE; }
 update_status ModuleEntityManager::Update()
 {
 	
+	if (app->inputModule->key[SDL_SCANCODE_G] == 1)
+	{
+		background_const_source_rect = { background_const_source_rect.x + 384 , 0, 384, 208 };
+		background_const_rect = new SDL_Rect(background_const_source_rect);
+		SDL_Delay(200);
+	}
+
+
+
 	if (app->inputModule->key[SDL_SCANCODE_LEFT] == 1 && character_rect.x > 18)
 	{
 		character_rect.x -= 5;

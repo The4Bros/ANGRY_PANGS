@@ -10,6 +10,8 @@ class Application;
 class ModuleWindow : public Module{
 public:
 
+	int scale;
+
 	SDL_Window* window;
 
 	ModuleWindow(Application* app);

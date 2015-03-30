@@ -14,10 +14,10 @@ ModuleTextures::ModuleTextures(Application* app) : Module(app)
 }
 bool ModuleTextures::Init()
 {
-	background_sprite = IMG_LoadTexture(app->renderModule->renderer, "images/backgrounds.png");
-	if (background_sprite == NULL){ return false; }
+	background_sprite = IMG_LoadTexture(app->renderModule->renderer, "images/Edited/Backgrounds.png");
+	if (background_sprite == NULL){ LOG("______________________________________________________"); return false; }
 
-	character_sprite = IMG_LoadTexture(app->renderModule->renderer, "images/characters.png");
+	character_sprite = IMG_LoadTexture(app->renderModule->renderer, "images/Edited/Players.png");
 	if (character_sprite == NULL){ return false; }
 
 	enemy_sprite = IMG_LoadTexture(app->renderModule->renderer, "images/enemies.png");

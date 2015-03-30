@@ -26,7 +26,7 @@ Application::Application()
 
 bool Application::Init()
 {
-	item = modules_Stack.getStart();
+	item = modules_Queue.getStart();
 	while (item)
 	{
 		if (!item->data->Init()){ return false; }
@@ -37,12 +37,12 @@ bool Application::Init()
 
 Application::~Application()
 {
-	modules_Stack.clear();
+	modules_Queue.clear();
 }
 
 update_status Application::Update()
 {
-	item = modules_Stack.getStart(); // ------------PreUpdate------------
+	item = modules_Queue.getStart(); // ------------PreUpdate------------
 	while (item != NULL)
 	{
 		returnValue = item->data->PreUpdate();
@@ -61,7 +61,7 @@ update_status Application::Update()
 		}
 	}
 
-	item = modules_Stack.getStart(); // ------------Update------------
+	item = modules_Queue.getStart(); // ------------Update------------
 	while (item != NULL)
 	{
 		returnValue = item->data->Update();
@@ -80,7 +80,7 @@ update_status Application::Update()
 		}
 	}
 
-	item = modules_Stack.getStart(); // ------------PostUpdate------------
+	item = modules_Queue.getStart(); // ------------PostUpdate------------
 	while (item != NULL)
 	{
 		returnValue = item->data->PostUpdate();
@@ -103,17 +103,17 @@ update_status Application::Update()
 
 bool Application::CleanUp()
 {
-	item = modules_Stack.getLast();
+	item = modules_Queue.getLast();
 	while (item)
 	{
 		if (!item->data->CleanUp()){ return false; }
 		item = item->previous;
 	}
-	modules_Stack.clear();
+	modules_Queue.clear();
 	return true;
 }
 
 void Application::AddModule(Module* mod)
 {
-	modules_Stack.push(mod);
+	modules_Queue.push(mod);
 }

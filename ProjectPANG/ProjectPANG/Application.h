@@ -17,7 +17,7 @@
 
 class Application{
 private:
-	DoubleNodedQueue<Module*> modules_Stack;
+	DoubleNodedQueue<Module*> modules_Queue;
 	DoubleNode<Module*>* item;
 	update_status returnValue;
 

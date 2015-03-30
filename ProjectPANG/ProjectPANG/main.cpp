@@ -50,13 +50,14 @@ int main(int argc, char *argv[])
 		switch (state)
 		{
 		case MAIN_UPDATE:            //------------------UPDATE-----------------
+			LOG("\nUPDATING:");
 			update_state = app->Update();
 			switch (update_state)
 			{
 			case UPDATE_CONTINUE:
 				break;
 			case UPDATE_PAUSE:
-				break;
+				break; // manage pause
 			case UPDATE_ERROR:
 				state = MAIN_ERROR;
 				break;

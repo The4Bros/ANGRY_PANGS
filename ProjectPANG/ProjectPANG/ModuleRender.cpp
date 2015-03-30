@@ -45,6 +45,7 @@ bool ModuleRender::CleanUp()
 	if (renderer != NULL)
 	{
 		SDL_DestroyRenderer(app->renderModule->renderer);
+		return true;
 	}
-	return true;
+	return false;
 }

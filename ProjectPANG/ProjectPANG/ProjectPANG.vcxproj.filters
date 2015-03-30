@@ -25,17 +25,17 @@
     <Filter Include="Archivos de código fuente\Pending">
       <UniqueIdentifier>{0141ae18-d5a6-483f-92db-5535075cd724}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de encabezado\Entities">
-      <UniqueIdentifier>{e168fb25-8906-4864-8d6a-1c106b33ead3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de código fuente\Entities">
-      <UniqueIdentifier>{e7f27bad-a614-448d-9e53-919e39359bd3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Archivos de encabezado\TDA%27s">
       <UniqueIdentifier>{6cba01f9-f8ed-4fce-9d25-1c7a5288d18c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de encabezado\Entities\Player">
+    <Filter Include="Archivos de encabezado\Pending\Entities">
+      <UniqueIdentifier>{e168fb25-8906-4864-8d6a-1c106b33ead3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Pending\Entities\Player">
       <UniqueIdentifier>{a43143e5-f035-4174-bc81-0f09af5ec7a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\Pending\Entities">
+      <UniqueIdentifier>{e7f27bad-a614-448d-9e53-919e39359bd3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -70,7 +70,7 @@
       <Filter>Archivos de código fuente\Pending</Filter>
     </ClCompile>
     <ClCompile Include="ModuleEntityManager.cpp">
-      <Filter>Archivos de código fuente\Entities</Filter>
+      <Filter>Archivos de código fuente\Pending\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -108,25 +108,25 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="ModuleEntityManager.h">
-      <Filter>Archivos de encabezado\Entities</Filter>
+      <Filter>Archivos de encabezado\Pending\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Classes.h">
-      <Filter>Archivos de encabezado\Entities</Filter>
+      <Filter>Archivos de encabezado\Pending\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Queue.h">
       <Filter>Archivos de encabezado\TDA%27s</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Archivos de encabezado\Entities\Player</Filter>
+      <Filter>Archivos de encabezado\Pending\Entities\Player</Filter>
     </ClInclude>
     <ClInclude Include="Player1.h">
-      <Filter>Archivos de encabezado\Entities\Player</Filter>
+      <Filter>Archivos de encabezado\Pending\Entities\Player</Filter>
     </ClInclude>
     <ClInclude Include="Player2.h">
-      <Filter>Archivos de encabezado\Entities\Player</Filter>
+      <Filter>Archivos de encabezado\Pending\Entities\Player</Filter>
     </ClInclude>
     <ClInclude Include="ModulePlayer.h">
-      <Filter>Archivos de encabezado\Entities\Player</Filter>
+      <Filter>Archivos de encabezado\Pending\Entities\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

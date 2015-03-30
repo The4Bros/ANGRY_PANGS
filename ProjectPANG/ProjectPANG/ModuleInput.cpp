@@ -26,11 +26,6 @@ update_status ModuleInput::PreUpdate()
 	
 	key = SDL_GetKeyboardState(NULL);
 
-	if (key[SDL_SCANCODE_ESCAPE])
-	{
-		return UPDATE_STOP;
-	}
-
 	return UPDATE_CONTINUE;
 }
 
@@ -38,7 +33,10 @@ update_status ModuleInput::Update()
 {
 	if (mainEvent->type == SDL_QUIT){ return UPDATE_STOP; }
 
-	if (key[SDLK_ESCAPE]){ return UPDATE_STOP; }
+	if (key[SDL_SCANCODE_ESCAPE])
+	{
+		return UPDATE_STOP;
+	}
 
 	return UPDATE_CONTINUE;
 }
