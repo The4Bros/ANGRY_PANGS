@@ -6,15 +6,17 @@ ModuleFontManager::ModuleFontManager(Application* app) : Module(app)
 }
 bool ModuleFontManager ::Init()
 {
-	if (!TTF_WasInit() && TTF_Init() == -1)
+	if (!TTF_WasInit())
 	{
-		LOG("\nTTF_Init error: %s", TTF_GetError());
-		return false;
+		if (TTF_Init() == -1)
+			{
+				return false;
+			}
 	}
 
 	TTF_Font* font;
 
-	font = TTF_OpenFont(FONT_FILE, FONT_SIZE);
+	font = TTF_OpenFont("font/ARCAC___.TTF", 12);
 
 
 

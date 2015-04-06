@@ -85,7 +85,6 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Application.h" />
-    <ClInclude Include="Classes.h" />
     <ClInclude Include="ModulePlayer.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Player1.h" />

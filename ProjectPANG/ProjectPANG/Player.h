@@ -2,12 +2,25 @@
 
 #include "Globals.h"
 
+enum Direction
+{
+	LEFT,
+	RIGHT,
+	DOWN,
+	UP
+};
+
 class Player
 {
 public:
 	SDL_Rect character_rect;
 	SDL_Rect character_const_source_rect;
 	const SDL_Rect* character_const_rect;
+
+	unsigned int score, lives;
+	Direction direction;
+	bool alive;
+
 
 	Player()
 	{

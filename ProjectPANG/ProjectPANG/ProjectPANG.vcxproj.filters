@@ -31,9 +31,6 @@
     <Filter Include="Archivos de encabezado\Pending\Entities">
       <UniqueIdentifier>{e168fb25-8906-4864-8d6a-1c106b33ead3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de encabezado\Pending\Entities\Player">
-      <UniqueIdentifier>{a43143e5-f035-4174-bc81-0f09af5ec7a8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Archivos de código fuente\Pending\Entities">
       <UniqueIdentifier>{e7f27bad-a614-448d-9e53-919e39359bd3}</UniqueIdentifier>
     </Filter>
@@ -80,9 +77,6 @@
     <ClInclude Include="ModuleInput.h">
       <Filter>Archivos de encabezado\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleTextures.h">
-      <Filter>Archivos de encabezado\Pending</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleRender.h">
       <Filter>Archivos de encabezado\Modules</Filter>
     </ClInclude>
@@ -98,34 +92,34 @@
     <ClInclude Include="ModuleFontManager.h">
       <Filter>Archivos de encabezado\Pending</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleScene.h">
-      <Filter>Archivos de encabezado\Pending</Filter>
-    </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="ModuleEntityManager.h">
       <Filter>Archivos de encabezado\Pending\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Classes.h">
-      <Filter>Archivos de encabezado\Pending\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Queue.h">
       <Filter>Archivos de encabezado\TDA%27s</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Archivos de encabezado\Pending\Entities\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Player1.h">
-      <Filter>Archivos de encabezado\Pending\Entities\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Player2.h">
-      <Filter>Archivos de encabezado\Pending\Entities\Player</Filter>
+    <ClInclude Include="Application.h">
+      <Filter>Archivos de encabezado\Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModulePlayer.h">
-      <Filter>Archivos de encabezado\Pending\Entities\Player</Filter>
+      <Filter>Archivos de encabezado\Pending\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Application.h">
+    <ClInclude Include="Player.h">
+      <Filter>Archivos de encabezado\Pending\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Player1.h">
+      <Filter>Archivos de encabezado\Pending\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Player2.h">
+      <Filter>Archivos de encabezado\Pending\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleScene.h">
+      <Filter>Archivos de encabezado\Pending\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleTextures.h">
       <Filter>Archivos de encabezado\Modules</Filter>
     </ClInclude>
   </ItemGroup>
