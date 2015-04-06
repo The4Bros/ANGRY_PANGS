@@ -19,14 +19,6 @@ enum update_status
 	UPDATE_ERROR
 };
 
-enum current_weapon
-{
-	WEAPON_DOUBLE_HARPOON,
-	WEAPON_HARPOON,
-	WEAPON_GRAPPLE,
-	WEAPON_SHOTGUN
-};
-
 enum power_Up
 {
 	POWERUP_TIME_STOP,
@@ -43,7 +35,13 @@ enum power_Up
 // Configuration -----------
 
 #define ACCELERATED true
-#define VSYNC true // manually controlled FPS
+#define VSYNC true // false if manually controlled frame rate
+
+/*
+#define FPS 60
+#define TICKS_PER_FRAME 1000 / FPS
+*/
+
 
 #define SHOWN true
 #define FULLSCREEN false
@@ -51,6 +49,3 @@ enum power_Up
 #define WINDOW_TITLE "PANG"
 #define SCREEN_WIDTH 384
 #define SCREEN_HEIGHT 240
-
-#define FPS 60
-#define TICKS_PER_FRAME 1000 / FPS

@@ -15,15 +15,24 @@ enum PlayerState
 	SHOOT
 };
 
+enum Weapon
+{
+	WEAPON_DOUBLE_HARPOON,
+	WEAPON_HARPOON,
+	WEAPON_GRAPPLE,
+	WEAPON_SHOTGUN
+};
+
 class Player
 {
 public:
 	Application* app;
-	SDL_Rect character_rect;
-	SDL_Rect character_const_source_rect;
-	const SDL_Rect* character_const_rect;
+	SDL_Rect rect;
+	SDL_Rect source_rect;
+	const SDL_Rect* const_rect;
 
-	Harpoon* harpoon;
+	Harpoon* harpoon[2];
+	Weapon current_weapon;
 
 	unsigned int score, lives, update_counter;
 	PlayerState state;
@@ -38,5 +47,9 @@ public:
 	void DownTrigger();
 	void Shoot();
 	void Still();
+
+	void Update();
+	void setPos(unsigned int x, unsigned int y);
+
 };
 #endif

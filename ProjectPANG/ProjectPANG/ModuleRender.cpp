@@ -30,7 +30,21 @@ update_status ModuleRender::PreUpdate()
 update_status ModuleRender::Update()
 {
 	SDL_RenderCopy(renderer, app->texturesModule->background_sprite, app->sceneModule->background_const_rect, &app->sceneModule->background_rect);
-	SDL_RenderCopy(renderer, app->texturesModule->players_sprite, app->playerModule->player1->character_const_rect, &app->playerModule->player1->character_rect);
+
+	SDL_RenderCopy(renderer, app->texturesModule->players_sprite, app->playerModule->player1->const_rect, &app->playerModule->player1->rect);
+	//if (app->playerModule->player1->harpoon[0]->alive){ SDL_RenderCopy(renderer, app->texturesModule->harpoons_sprite, app->playerModule->player1->harpoon[0]->const_rect, &app->playerModule->player1->harpoon[0]->rect); }
+	//if (app->playerModule->player1->harpoon[1]->alive){ SDL_RenderCopy(renderer, app->texturesModule->harpoons_sprite, app->playerModule->player1->harpoon[1]->const_rect, &app->playerModule->player1->harpoon[0]->rect); }
+
+	if (app->playerModule->player2 != NULL)
+	{
+		SDL_RenderCopy(renderer, app->texturesModule->players_sprite, app->playerModule->player2->const_rect, &app->playerModule->player2->rect);
+		//if (app->playerModule->player2->harpoon[0]->alive){ SDL_RenderCopy(renderer, app->texturesModule->harpoons_sprite, app->playerModule->player2->harpoon[0]->const_rect, &app->playerModule->player2->harpoon[0]->rect); }
+		//if (app->playerModule->player2->harpoon[1]->alive){ SDL_RenderCopy(renderer, app->texturesModule->harpoons_sprite, app->playerModule->player2->harpoon[1]->const_rect, &app->playerModule->player2->harpoon[0]->rect); }
+	}
+
+	
+
+
 	return UPDATE_CONTINUE;
 }
 

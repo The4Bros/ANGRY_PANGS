@@ -8,8 +8,6 @@
 class ModuleEntityManager : public Module{
 public:
 
-
-
 	ModuleEntityManager(Application* app);
 	bool Init();
 	update_status PreUpdate();

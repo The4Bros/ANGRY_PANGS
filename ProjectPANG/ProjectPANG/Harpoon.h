@@ -18,5 +18,10 @@ public:
 	Harpoon(Application* app);
 	~Harpoon(){}
 
+	void Shoot_Harpoon(SDL_Rect player_rect);
+	void Shoot_Grapple(SDL_Rect player_rect);
+
+	void Update();
+
 };
 #endif
