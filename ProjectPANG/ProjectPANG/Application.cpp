@@ -14,14 +14,15 @@ Application::Application()
 	audioModule = new ModuleAudio(this);
 	fontManagerModule = new ModuleFontManager(this);
 
-	AddModule(windowModule);
-	AddModule(renderModule);
-	AddModule(inputModule);
-	AddModule(texturesModule);
-	AddModule(sceneModule);
-	AddModule(entityManagerModule);
-	AddModule(audioModule);
-	AddModule(fontManagerModule);
+	modules_Queue.push(windowModule);
+	modules_Queue.push(renderModule);
+	modules_Queue.push(inputModule);
+	modules_Queue.push(texturesModule);
+	modules_Queue.push(sceneModule);
+	modules_Queue.push(entityManagerModule);
+	modules_Queue.push(audioModule);
+	modules_Queue.push(fontManagerModule);
+
 }
 
 bool Application::Init()
@@ -42,6 +43,9 @@ Application::~Application()
 
 update_status Application::Update()
 {
+
+	// start timer
+
 	item = modules_Queue.getStart(); // ------------PreUpdate------------
 	while (item != NULL)
 	{
@@ -98,6 +102,9 @@ update_status Application::Update()
 			return returnValue;
 		}
 	}
+
+	// SDL_Delay(ms/frame - timer);
+
 	return returnValue;
 }
 

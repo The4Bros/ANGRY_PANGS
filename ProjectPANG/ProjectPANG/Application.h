@@ -1,5 +1,7 @@
 #pragma once
 
+#include <time.h>
+
 #include "Globals.h"
 #include "Queue.h"
 
@@ -19,6 +21,7 @@ class Application{
 private:
 	DoubleNodedQueue<Module*> modules_Queue;
 	DoubleNode<Module*>* item;
+	Uint32 timer;
 	update_status returnValue;
 
 public:

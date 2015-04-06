@@ -8,6 +8,9 @@
 class ModuleEntityManager : public Module{
 public:
 
+	int update_sprite_character_counter;
+	int character_direction;
+
 	SDL_Rect background_rect;
 	SDL_Rect background_const_source_rect;
 	const SDL_Rect* background_const_rect;

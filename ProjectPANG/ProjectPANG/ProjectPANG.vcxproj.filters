@@ -77,9 +77,6 @@
     <ClInclude Include="Globals.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Application.h">
-      <Filter>Archivos de encabezado\Modules</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleInput.h">
       <Filter>Archivos de encabezado\Modules</Filter>
     </ClInclude>
@@ -127,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="ModulePlayer.h">
       <Filter>Archivos de encabezado\Pending\Entities\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Archivos de encabezado\Modules</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
