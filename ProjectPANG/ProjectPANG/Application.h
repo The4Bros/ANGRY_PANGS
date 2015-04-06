@@ -10,10 +10,12 @@
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
+#include "ModulePlayer.h"
 #include "ModuleEntityManager.h"
 #include "ModuleScene.h"
 #include "ModuleAudio.h"
 #include "ModuleFontManager.h"
+
 
 
 
@@ -29,6 +31,7 @@ public:
 	ModuleRender* renderModule;
 	ModuleInput* inputModule;
 	ModuleTextures* texturesModule;
+	ModulePlayer playerModule;
 	ModuleEntityManager* entityManagerModule;
 	ModuleScene* sceneModule;
 	ModuleAudio* audioModule;

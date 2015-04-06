@@ -10,6 +10,7 @@ Application::Application()
 	inputModule = new ModuleInput(this);
 	texturesModule = new ModuleTextures(this);
 	sceneModule = new ModuleScene(this);
+	playerModule = new ModuleScene(this);
 	entityManagerModule = new ModuleEntityManager(this);
 	audioModule = new ModuleAudio(this);
 	fontManagerModule = new ModuleFontManager(this);
@@ -19,6 +20,7 @@ Application::Application()
 	modules_Queue.push(inputModule);
 	modules_Queue.push(texturesModule);
 	modules_Queue.push(sceneModule);
+	modules_Queue.push(playerModule);
 	modules_Queue.push(entityManagerModule);
 	modules_Queue.push(audioModule);
 	modules_Queue.push(fontManagerModule);

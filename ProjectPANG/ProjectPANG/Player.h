@@ -5,13 +5,14 @@
 class Player
 {
 public:
-	SDL_Rect rect;
-	SDL_Rect source_rect;
+	SDL_Rect character_rect;
+	SDL_Rect character_const_source_rect;
+	const SDL_Rect* character_const_rect;
 
 	Player()
 	{
-		rect = { 0, 0, 32 * SCALE, 32 * SCALE };
-		source_rect = {0, 0, 0, 0};
+		character_rect = { 0, 0, 32, 32 };
+		character_const_source_rect = { 0, 0, 0, 0 };
 	}
 	~Player(){}
 
