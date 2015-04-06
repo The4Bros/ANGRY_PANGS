@@ -43,7 +43,7 @@ enum power_Up
 // Configuration -----------
 
 #define ACCELERATED true
-#define VSYNC true
+#define VSYNC true // manually controlled FPS
 
 #define SHOWN true
 #define FULLSCREEN false
@@ -52,4 +52,5 @@ enum power_Up
 #define SCREEN_WIDTH 384
 #define SCREEN_HEIGHT 240
 
-#define MSPF 60 // miliseconds per frame
+#define FPS 60
+#define TICKS_PER_FRAME 1000 / FPS

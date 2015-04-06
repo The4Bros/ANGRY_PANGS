@@ -1,39 +1,42 @@
-#pragma once
-
 #include "Globals.h"
+#include "Application.h"
+#include "Harpoon.h"
 
-enum Direction
+#ifndef __Player_H__
+#define __Player_H__
+
+enum PlayerState
 {
 	LEFT,
 	RIGHT,
 	DOWN,
-	UP
+	UP,
+	STILL,
+	SHOOT
 };
 
 class Player
 {
 public:
+	Application* app;
 	SDL_Rect character_rect;
 	SDL_Rect character_const_source_rect;
 	const SDL_Rect* character_const_rect;
 
-	unsigned int score, lives;
-	Direction direction;
+	Harpoon* harpoon;
+
+	unsigned int score, lives, update_counter;
+	PlayerState state;
 	bool alive;
 
-
-	Player()
-	{
-		character_rect = { 0, 0, 32, 32 };
-		character_const_source_rect = { 0, 0, 0, 0 };
-	}
+	Player(Application* app, bool player1);
 	~Player(){}
 
 	void LeftTrigger();
 	void RightTrigger();
 	void UpTrigger();
 	void DownTrigger();
-
-	virtual bool Init(){ return true; }
-	virtual bool CleanUp(){ return true; }
+	void Shoot();
+	void Still();
 };
+#endif

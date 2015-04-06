@@ -11,7 +11,7 @@ class ModuleWindow : public Module{
 public:
 
 	SDL_Window* window;
-	unsigned int scale;
+	int scale;
 
 	ModuleWindow(Application* app);
 	bool Init();

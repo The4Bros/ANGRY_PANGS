@@ -1,7 +1,5 @@
 #pragma once
 
-#include <time.h>
-
 #include "Globals.h"
 #include "Queue.h"
 
@@ -31,7 +29,7 @@ public:
 	ModuleRender* renderModule;
 	ModuleInput* inputModule;
 	ModuleTextures* texturesModule;
-	ModulePlayer playerModule;
+	ModulePlayer* playerModule;
 	ModuleEntityManager* entityManagerModule;
 	ModuleScene* sceneModule;
 	ModuleAudio* audioModule;
@@ -42,6 +40,5 @@ public:
 	bool Init();
 	update_status Update();
 	bool CleanUp();
-	void AddModule(Module* mod);
 
 };

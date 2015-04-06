@@ -29,8 +29,8 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()
 {
-	SDL_RenderCopy(renderer, app->texturesModule->background_sprite, app->entityManagerModule->background_const_rect, &app->entityManagerModule->background_rect);
-	SDL_RenderCopy(renderer, app->texturesModule->players_sprite, app->entityManagerModule->character_const_rect, &app->entityManagerModule->character_rect);
+	SDL_RenderCopy(renderer, app->texturesModule->background_sprite, app->sceneModule->background_const_rect, &app->sceneModule->background_rect);
+	SDL_RenderCopy(renderer, app->texturesModule->players_sprite, app->playerModule->player1->character_const_rect, &app->playerModule->player1->character_rect);
 	return UPDATE_CONTINUE;
 }
 

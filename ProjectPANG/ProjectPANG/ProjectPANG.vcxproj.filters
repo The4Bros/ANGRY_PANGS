@@ -57,9 +57,6 @@
     <ClCompile Include="ModuleTextures.cpp">
       <Filter>Archivos de código fuente\Pending</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleScene.cpp">
-      <Filter>Archivos de código fuente\Pending</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleFontManager.cpp">
       <Filter>Archivos de código fuente\Pending</Filter>
     </ClCompile>
@@ -67,6 +64,18 @@
       <Filter>Archivos de código fuente\Pending</Filter>
     </ClCompile>
     <ClCompile Include="ModuleEntityManager.cpp">
+      <Filter>Archivos de código fuente\Pending\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleScene.cpp">
+      <Filter>Archivos de código fuente\Pending\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="ModulePlayer.cpp">
+      <Filter>Archivos de código fuente\Pending\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Archivos de código fuente\Pending\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Harpoon.cpp">
       <Filter>Archivos de código fuente\Pending\Entities</Filter>
     </ClCompile>
   </ItemGroup>
@@ -110,17 +119,14 @@
     <ClInclude Include="Player.h">
       <Filter>Archivos de encabezado\Pending\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Player1.h">
-      <Filter>Archivos de encabezado\Pending\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Player2.h">
-      <Filter>Archivos de encabezado\Pending\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleScene.h">
       <Filter>Archivos de encabezado\Pending\Entities</Filter>
     </ClInclude>
     <ClInclude Include="ModuleTextures.h">
       <Filter>Archivos de encabezado\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Harpoon.h">
+      <Filter>Archivos de encabezado\Pending\Entities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,9 +1,7 @@
 #include "Module.h"
 #include "Globals.h"
-#include "Classes.h"
 #include "Application.h"
-#include "Player1.h"
-#include "Player2.h"
+#include "Player.h"
 
 #ifndef __ModulePlayer_H__
 #define __ModulePlayer_H__
@@ -11,16 +9,15 @@
 class ModulePlayer : public Module{
 public:
 
-	Player1 player1;
-	Player2 player2;
+	Player* player1;
+	Player* player2;
+
+	unsigned int player_speed;
 
 	ModulePlayer(Application* app);
 	bool Init();
 	update_status PreUpdate();
 	update_status Update();
-
-	player1.LeftTrigger();
-
 	update_status PostUpdate();
 	bool CleanUp();
 };

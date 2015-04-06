@@ -8,10 +8,7 @@
 class ModuleEntityManager : public Module{
 public:
 
-	int update_sprite_character_counter;
-	int character_direction;
 
-	
 
 	ModuleEntityManager(Application* app);
 	bool Init();

@@ -35,7 +35,7 @@ bool ModuleWindow::Init()
 	if (RESIZABLE){ windowFlags |= SDL_WINDOW_RESIZABLE; }
 
 	// create window
-	window = SDL_CreateWindow(WINDOW_TITLE, (mode.w - SCREEN_WIDTH) / 2, (mode.h - SCREEN_HEIGHT) / 2, SCREEN_WIDTH * scale, SCREEN_HEIGHT * scale, windowFlags);
+	window = SDL_CreateWindow(WINDOW_TITLE, 80, 80, SCREEN_WIDTH * scale, SCREEN_HEIGHT * scale, windowFlags);
 	if (window == NULL){ return false; }
 
 	return true;

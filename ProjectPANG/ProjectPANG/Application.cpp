@@ -10,7 +10,7 @@ Application::Application()
 	inputModule = new ModuleInput(this);
 	texturesModule = new ModuleTextures(this);
 	sceneModule = new ModuleScene(this);
-	playerModule = new ModuleScene(this);
+	playerModule = new ModulePlayer(this);
 	entityManagerModule = new ModuleEntityManager(this);
 	audioModule = new ModuleAudio(this);
 	fontManagerModule = new ModuleFontManager(this);
@@ -45,9 +45,6 @@ Application::~Application()
 
 update_status Application::Update()
 {
-
-	// start timer
-
 	item = modules_Queue.getStart(); // ------------PreUpdate------------
 	while (item != NULL)
 	{
@@ -104,8 +101,15 @@ update_status Application::Update()
 			return returnValue;
 		}
 	}
-
-	// SDL_Delay(ms/frame - timer);
+	/*
+	//If frame finished early
+	int frameTicks = capTimer.getTicks();
+	if (frameTicks < TICKS_PER_FRAME)
+	{
+		//Wait remaining time
+		SDL_Delay(TICKS_PER_FRAME - frameTicks);
+	}
+	*/
 
 	return returnValue;
 }
@@ -120,9 +124,4 @@ bool Application::CleanUp()
 	}
 	modules_Queue.clear();
 	return true;
-}
-
-void Application::AddModule(Module* mod)
-{
-	modules_Queue.push(mod);
 }
