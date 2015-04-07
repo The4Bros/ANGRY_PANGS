@@ -26,15 +26,13 @@ private:
 
 public:
 
-	inline DoubleNodedQueue()
-	{
-		init = last = NULL;
-	}
+	inline DoubleNodedQueue(){ init = last = NULL; }
 
-	~DoubleNodedQueue()
-	{
-		clear();
-	}
+	~DoubleNodedQueue(){ clear(); }
+
+	DoubleNode<QueueTYPE>* getStart(){ return init; }
+
+	DoubleNode<QueueTYPE>* getLast(){ return last; }
 
 	void push(const QueueTYPE& data)
 	{
@@ -62,9 +60,24 @@ public:
 		last = NULL;
 	}
 
-	DoubleNode<QueueTYPE>* getStart(){ return init; }
+	void ReduceTo(const unsigned int quantity)
+	{
+		DoubleNode<QueueTYPE>* tmp = init;
 
-	DoubleNode<QueueTYPE>* getLast(){ return last; }
+		for (int i = 0; i < quantity; i++){ node = node->next; }
+
+		while (node->data != last)
+		{
+			last = last->previous;
+			delete[] last->next;
+		}
+
+		node->next = last;
+		last->next = NULL;
+
+		delete tmp;
+	}
+
 };
 
 #endif

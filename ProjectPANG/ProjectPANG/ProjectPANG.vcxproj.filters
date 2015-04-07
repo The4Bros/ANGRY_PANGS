@@ -13,120 +13,129 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Archivos de código fuente\Modules">
+    <Filter Include="Archivos de código fuente\Application">
       <UniqueIdentifier>{6a6ad4f4-79dd-458b-8d6b-bd937b9cd65e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de encabezado\Modules">
-      <UniqueIdentifier>{8af847fa-dda2-4fbd-9263-f123a1e3d66f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de encabezado\Pending">
-      <UniqueIdentifier>{8fff08d8-4452-4f58-acf1-7b66b46598ae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de código fuente\Pending">
-      <UniqueIdentifier>{0141ae18-d5a6-483f-92db-5535075cd724}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de encabezado\TDA%27s">
-      <UniqueIdentifier>{6cba01f9-f8ed-4fce-9d25-1c7a5288d18c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de encabezado\Pending\Entities">
-      <UniqueIdentifier>{e168fb25-8906-4864-8d6a-1c106b33ead3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de código fuente\Pending\Entities">
+    <Filter Include="Archivos de código fuente\Application\Game">
       <UniqueIdentifier>{e7f27bad-a614-448d-9e53-919e39359bd3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Application">
+      <UniqueIdentifier>{8af847fa-dda2-4fbd-9263-f123a1e3d66f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Application\Game">
+      <UniqueIdentifier>{e168fb25-8906-4864-8d6a-1c106b33ead3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Other Resources">
+      <UniqueIdentifier>{13cb1101-91e6-4cf0-87db-23fa4ffca2ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Other Resources\TDA%27s">
+      <UniqueIdentifier>{6cba01f9-f8ed-4fce-9d25-1c7a5288d18c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\Application\General Modules">
+      <UniqueIdentifier>{cdc0e45f-10a2-4795-8c1c-a22be8c2cd60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Application\General Modules">
+      <UniqueIdentifier>{e7b7c3f0-6a73-4917-ab85-4270cf891781}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\MAIN">
+      <UniqueIdentifier>{3e946cf2-ec11-4ee0-912c-e013b823f2be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\Other Resources">
+      <UniqueIdentifier>{9c0a3349-30d7-4d3e-b383-ebfaa5745606}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
-    <ClCompile Include="Application.cpp">
-      <Filter>Archivos de código fuente\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="Log.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleInput.cpp">
-      <Filter>Archivos de código fuente\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleRender.cpp">
-      <Filter>Archivos de código fuente\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleWindow.cpp">
-      <Filter>Archivos de código fuente\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleTextures.cpp">
-      <Filter>Archivos de código fuente\Pending</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleFontManager.cpp">
-      <Filter>Archivos de código fuente\Pending</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleAudio.cpp">
-      <Filter>Archivos de código fuente\Pending</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleEntityManager.cpp">
-      <Filter>Archivos de código fuente\Pending\Entities</Filter>
+      <Filter>Archivos de código fuente\Application\Game</Filter>
     </ClCompile>
     <ClCompile Include="ModuleScene.cpp">
-      <Filter>Archivos de código fuente\Pending\Entities</Filter>
+      <Filter>Archivos de código fuente\Application\Game</Filter>
     </ClCompile>
     <ClCompile Include="ModulePlayer.cpp">
-      <Filter>Archivos de código fuente\Pending\Entities</Filter>
+      <Filter>Archivos de código fuente\Application\Game</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Archivos de código fuente\Pending\Entities</Filter>
+      <Filter>Archivos de código fuente\Application\Game</Filter>
     </ClCompile>
     <ClCompile Include="Harpoon.cpp">
-      <Filter>Archivos de código fuente\Pending\Entities</Filter>
+      <Filter>Archivos de código fuente\Application\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleAudio.cpp">
+      <Filter>Archivos de código fuente\Application\General Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleFontManager.cpp">
+      <Filter>Archivos de código fuente\Application\General Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleInput.cpp">
+      <Filter>Archivos de código fuente\Application\General Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleRender.cpp">
+      <Filter>Archivos de código fuente\Application\General Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleTextures.cpp">
+      <Filter>Archivos de código fuente\Application\General Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleWindow.cpp">
+      <Filter>Archivos de código fuente\Application\General Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Archivos de código fuente\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Archivos de código fuente\MAIN</Filter>
+    </ClCompile>
+    <ClCompile Include="Log.cpp">
+      <Filter>Archivos de código fuente\Other Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Globals.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleInput.h">
-      <Filter>Archivos de encabezado\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleRender.h">
-      <Filter>Archivos de encabezado\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleWindow.h">
-      <Filter>Archivos de encabezado\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="Module.h">
-      <Filter>Archivos de encabezado\Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleAudio.h">
-      <Filter>Archivos de encabezado\Pending</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleFontManager.h">
-      <Filter>Archivos de encabezado\Pending</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleEntityManager.h">
-      <Filter>Archivos de encabezado\Pending\Entities</Filter>
+      <Filter>Archivos de encabezado\Application\Game</Filter>
     </ClInclude>
     <ClInclude Include="Queue.h">
-      <Filter>Archivos de encabezado\TDA%27s</Filter>
-    </ClInclude>
-    <ClInclude Include="Application.h">
-      <Filter>Archivos de encabezado\Modules</Filter>
+      <Filter>Archivos de encabezado\Other Resources\TDA%27s</Filter>
     </ClInclude>
     <ClInclude Include="ModulePlayer.h">
-      <Filter>Archivos de encabezado\Pending\Entities</Filter>
+      <Filter>Archivos de encabezado\Application\Game</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Archivos de encabezado\Pending\Entities</Filter>
+      <Filter>Archivos de encabezado\Application\Game</Filter>
     </ClInclude>
     <ClInclude Include="ModuleScene.h">
-      <Filter>Archivos de encabezado\Pending\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleTextures.h">
-      <Filter>Archivos de encabezado\Modules</Filter>
+      <Filter>Archivos de encabezado\Application\Game</Filter>
     </ClInclude>
     <ClInclude Include="Harpoon.h">
-      <Filter>Archivos de encabezado\Pending\Entities</Filter>
+      <Filter>Archivos de encabezado\Application\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Archivos de encabezado\Application\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals.h">
+      <Filter>Archivos de encabezado\Other Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Module.h">
+      <Filter>Archivos de encabezado\Application\General Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleAudio.h">
+      <Filter>Archivos de encabezado\Application\General Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleFontManager.h">
+      <Filter>Archivos de encabezado\Application\General Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleInput.h">
+      <Filter>Archivos de encabezado\Application\General Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleRender.h">
+      <Filter>Archivos de encabezado\Application\General Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleTextures.h">
+      <Filter>Archivos de encabezado\Application\General Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleWindow.h">
+      <Filter>Archivos de encabezado\Application\General Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Archivos de encabezado\Application</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -38,12 +38,13 @@ enum main_states
 	MAIN_CREATION
 };
 
+
 int main(int argc, char *argv[])
 {
 	Application* app = NULL;
 	int main_return = EXIT_SUCCESS;
 	main_states state = MAIN_CREATION;
-	update_status update_state = UPDATE_CONTINUE;
+	update_status update_state = CHANGE_TO_TITLE;
 
 	while (state != MAIN_EXIT)
 	{
@@ -64,7 +65,12 @@ int main(int argc, char *argv[])
 			case UPDATE_STOP:
 				state = MAIN_FINISH;
 				break;
+			default:
+				app->ChangeTo(update_state);
+				update_state = UPDATE_CONTINUE;
+				break;
 			}
+
 			break;
 		
 		case MAIN_ERROR:            //------------------ERROR-----------------

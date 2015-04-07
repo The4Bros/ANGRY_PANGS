@@ -9,9 +9,6 @@ Application::Application()
 	renderModule = new ModuleRender(this);
 	inputModule = new ModuleInput(this);
 	texturesModule = new ModuleTextures(this);
-	sceneModule = new ModuleScene(this);
-	playerModule = new ModulePlayer(this);
-	entityManagerModule = new ModuleEntityManager(this);
 	audioModule = new ModuleAudio(this);
 	fontManagerModule = new ModuleFontManager(this);
 
@@ -19,18 +16,26 @@ Application::Application()
 	modules_Queue.push(renderModule);
 	modules_Queue.push(inputModule);
 	modules_Queue.push(texturesModule);
-	modules_Queue.push(sceneModule);
-	modules_Queue.push(playerModule);
-	modules_Queue.push(entityManagerModule);
 	modules_Queue.push(audioModule);
 	modules_Queue.push(fontManagerModule);
+
+	sceneModule = NULL;
+	playerModule = NULL;
+	entityManagerModule = NULL;
+	titleModule = NULL;
+	tutorialModule = NULL;
+	chooseCityModule = NULL;
+	planeModule = NULL;
+	creditsModule = NULL;
+	highscoreInputModule = NULL;
+	highscoreTableModule = NULL;
 
 }
 
 bool Application::Init()
 {
 	item = modules_Queue.getStart();
-	while (item)
+	while (item != NULL)
 	{
 		if (!item->data->Init()){ return false; }
 		item = item->next;
@@ -117,7 +122,7 @@ update_status Application::Update()
 bool Application::CleanUp()
 {
 	item = modules_Queue.getLast();
-	while (item)
+	while (item != NULL)
 	{
 		if (!item->data->CleanUp()){ return false; }
 		item = item->previous;
@@ -125,3 +130,69 @@ bool Application::CleanUp()
 	modules_Queue.clear();
 	return true;
 }
+
+bool Application::ChangeTo(update_status new_state)
+{
+	// Clear Unnecessary Modules
+	modules_Queue.ReduceTo(6);
+
+	switch (new_state)
+	{
+	case CHANGE_TO_TITLE:
+
+		if (sceneModule != NULL){ sceneModule = new ModuleScene(this); }
+		modules_Queue.push(sceneModule);
+		break;
+
+	case CHANGE_TO_TUTORIAL:
+
+		if (sceneModule != NULL){ sceneModule = new ModuleScene(this); }
+		modules_Queue.push(sceneModule);
+		break;
+
+	case CHANGE_TO_CHOOSE_CITY:
+
+		if (sceneModule != NULL){ sceneModule = new ModuleScene(this); }
+		modules_Queue.push(sceneModule);
+		break;
+
+	case CHANGE_TO_PLAY:
+
+		if (sceneModule != NULL){ sceneModule = new ModuleScene(this); }
+		modules_Queue.push(sceneModule);
+
+		if (sceneModule != NULL){ playerModule = new ModulePlayer(this); }
+		modules_Queue.push(playerModule);
+
+		if (sceneModule != NULL){ entityManagerModule = new ModuleEntityManager(this); }
+		modules_Queue.push(entityManagerModule);
+		break;
+
+	case CHANGE_TO_MAP_PLANE:
+
+		if (sceneModule != NULL){ sceneModule = new ModuleScene(this); }
+		modules_Queue.push(sceneModule);
+		break;
+
+	case CHANGE_TO_CREDITS:
+
+		if (sceneModule != NULL){ sceneModule = new ModuleScene(this); }
+		modules_Queue.push(sceneModule);
+		break;
+
+	case CHANGE_TO_HIGHSCORE_INPUT:
+
+		if (sceneModule != NULL){ sceneModule = new ModuleScene(this); }
+		modules_Queue.push(sceneModule);
+		break;
+
+	case CHANGE_TO_HIGHSCORE_TABLE:
+
+		if (sceneModule != NULL){ sceneModule = new ModuleScene(this); }
+		modules_Queue.push(sceneModule);
+		break;
+	}
+	
+	return true;
+}
+
