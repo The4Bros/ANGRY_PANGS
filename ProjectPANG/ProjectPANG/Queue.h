@@ -36,7 +36,7 @@ public:
 
 	void push(const QueueTYPE& data)
 	{
-		DoubleNode<QueueTYPE>* node;
+		DoubleNode<QueueTYPE>* node = NULL;
 		node = new DoubleNode<QueueTYPE>(data);
 		if (init == NULL)
 		{
@@ -44,9 +44,9 @@ public:
 		}
 		else
 		{
-			node->previous = last;
 			last->next = node;
-			last = last->next;
+			node->previous = last;
+			last = node;
 		}
 	}
 
@@ -60,20 +60,18 @@ public:
 		last = NULL;
 	}
 
-	void ReduceTo(const unsigned int quantity)
+	void ReduceTo(const int quantity)
 	{
 		DoubleNode<QueueTYPE>* tmp = init;
 
-		for (int i = 0; i < quantity; i++){ node = node->next; }
+		for (int i = 1; i < quantity; i++){ tmp = tmp->next; }
 
-		while (node->data != last)
+		while (tmp->next != last)
 		{
 			last = last->previous;
-			delete[] last->next;
 		}
 
-		node->next = last;
-		last->next = NULL;
+		last = tmp->previous->next;
 
 		delete tmp;
 	}

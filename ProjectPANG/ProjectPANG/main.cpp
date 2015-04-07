@@ -44,18 +44,18 @@ int main(int argc, char *argv[])
 	Application* app = NULL;
 	int main_return = EXIT_SUCCESS;
 	main_states state = MAIN_CREATION;
-	update_status update_state = CHANGE_TO_TITLE;
+	update_status update_state;
 
 	while (state != MAIN_EXIT)
 	{
 		switch (state)
 		{
 		case MAIN_UPDATE:            //------------------UPDATE-----------------
-			LOG("\nUPDATING:");
-			update_state = app->Update();
+			//LOG("UPDATING:");
 			switch (update_state)
 			{
 			case UPDATE_CONTINUE:
+				update_state = app->Update();
 				break;
 			case UPDATE_PAUSE:
 				break; // manage pause
@@ -66,6 +66,7 @@ int main(int argc, char *argv[])
 				state = MAIN_FINISH;
 				break;
 			default:
+				//LOG("changing_________________________________________________________________________________________________________________________________________");
 				app->ChangeTo(update_state);
 				update_state = UPDATE_CONTINUE;
 				break;
@@ -74,19 +75,20 @@ int main(int argc, char *argv[])
 			break;
 		
 		case MAIN_ERROR:            //------------------ERROR-----------------
-			LOG("\nApplication exit with error: %s", SDL_GetError());
+			//LOG("Application exit with error: %s", SDL_GetError());
 			main_return = EXIT_FAILURE;
 			state = MAIN_EXIT;
 			break;
 		
 		case MAIN_START:            //------------------START-----------------
-			LOG("\nStarting Application:");
+			//LOG("Starting Application:");
 			if (!app->Init()){ state = MAIN_ERROR; }
 			else { state = MAIN_UPDATE; }
+			update_state = CHANGE_TO_PLAY;
 			break;
 		
 		case MAIN_FINISH:            //------------------FINISH-----------------
-			LOG("\nFinishing Application:");
+			//LOG("Finishing Application:");
 			if (!app->CleanUp()){ state = MAIN_ERROR; }
 			else{ state = MAIN_EXIT; }
 			delete app;
@@ -94,8 +96,8 @@ int main(int argc, char *argv[])
 			break;
 		
 		case MAIN_CREATION:          //------------------CREATION-----------------
-			LOG("\nCreating Application:\n");
-			//Uint32 flags for init:
+			//LOG("Creating Application:\n");
+
 			/*
 			SDL_INIT_TIMER - timer subsystem
 			SDL_INIT_AUDIO - audio subsystem

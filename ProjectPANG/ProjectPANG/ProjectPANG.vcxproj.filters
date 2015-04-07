@@ -43,6 +43,12 @@
     <Filter Include="Archivos de código fuente\Other Resources">
       <UniqueIdentifier>{9c0a3349-30d7-4d3e-b383-ebfaa5745606}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Application\Other Modules">
+      <UniqueIdentifier>{4cbac1af-4e60-4c5f-91b6-22db46c33eaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\Application\Other Modules">
+      <UniqueIdentifier>{e5d9471b-c76f-4097-832a-0b76cafb6b06}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleEntityManager.cpp">
@@ -86,6 +92,24 @@
     </ClCompile>
     <ClCompile Include="Log.cpp">
       <Filter>Archivos de código fuente\Other Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleTitle.cpp">
+      <Filter>Archivos de código fuente\Application\Other Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleChooseCity.cpp">
+      <Filter>Archivos de código fuente\Application\Other Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleCredits.cpp">
+      <Filter>Archivos de código fuente\Application\Other Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleHighscore.cpp">
+      <Filter>Archivos de código fuente\Application\Other Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModulePlane.cpp">
+      <Filter>Archivos de código fuente\Application\Other Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleTutorial.cpp">
+      <Filter>Archivos de código fuente\Application\Other Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +160,24 @@
     </ClInclude>
     <ClInclude Include="Application.h">
       <Filter>Archivos de encabezado\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleTitle.h">
+      <Filter>Archivos de encabezado\Application\Other Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleTutorial.h">
+      <Filter>Archivos de encabezado\Application\Other Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModulePlane.h">
+      <Filter>Archivos de encabezado\Application\Other Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleCredits.h">
+      <Filter>Archivos de encabezado\Application\Other Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleChooseCity.h">
+      <Filter>Archivos de encabezado\Application\Other Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleHighscore.h">
+      <Filter>Archivos de encabezado\Application\Other Modules</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

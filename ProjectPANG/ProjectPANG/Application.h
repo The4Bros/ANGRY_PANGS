@@ -14,15 +14,13 @@
 #include "ModulePlayer.h"
 #include "ModuleEntityManager.h"
 #include "ModuleScene.h"
-/*
-#include "ModuleTitle
-#include "ModuleTutorial"
-#include "ModuleChooseCity"
-#include "ModulePlane"
-#include "ModuleCredits"
-#include "ModuleHighscoreInput"
-#include "ModuleHishscoreTable"
-*/
+#include "ModuleTitle.h"
+#include "ModuleTutorial.h"
+#include "ModuleChooseCity.h"
+#include "ModulePlane.h"
+#include "ModuleCredits.h"
+#include "ModuleHighscore.h"
+
 
 
 
@@ -41,21 +39,16 @@ public:
 	ModuleAudio* audioModule;
 	ModuleFontManager* fontManagerModule;
 
-	// Specific Modules
+	// Other Modules
 	ModulePlayer* playerModule;
 	ModuleEntityManager* entityManagerModule;
 	ModuleScene* sceneModule;
-
-	/*
 	ModuleTitle* titleModule;
 	ModuleTutorial* tutorialModule;
 	ModuleChooseCity* chooseCityModule;
 	ModulePlane* planeModule;
 	ModuleCredits* creditsModule;
-	ModuleHighscoreInput* highscoreInputModule;
-	ModuleHishscoreTable* highscoreTableModule;
-	*/
-
+	ModuleHighscore* highscoreModule;
 
 	Application();
 	~Application();

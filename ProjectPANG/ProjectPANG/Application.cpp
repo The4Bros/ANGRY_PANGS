@@ -27,8 +27,7 @@ Application::Application()
 	chooseCityModule = NULL;
 	planeModule = NULL;
 	creditsModule = NULL;
-	highscoreInputModule = NULL;
-	highscoreTableModule = NULL;
+	highscoreModule = NULL;
 
 }
 
@@ -140,57 +139,88 @@ bool Application::ChangeTo(update_status new_state)
 	{
 	case CHANGE_TO_TITLE:
 
-		if (sceneModule != NULL){ sceneModule = new ModuleScene(this); }
-		modules_Queue.push(sceneModule);
+		if (titleModule == NULL)
+		{
+			titleModule = new ModuleTitle(this);
+			titleModule->Init();
+		}
+		modules_Queue.push(titleModule);
 		break;
 
 	case CHANGE_TO_TUTORIAL:
 
-		if (sceneModule != NULL){ sceneModule = new ModuleScene(this); }
-		modules_Queue.push(sceneModule);
+		if (tutorialModule == NULL)
+		{
+			tutorialModule = new ModuleTutorial(this);
+			tutorialModule->Init();
+		}
+		modules_Queue.push(tutorialModule);
 		break;
 
 	case CHANGE_TO_CHOOSE_CITY:
 
-		if (sceneModule != NULL){ sceneModule = new ModuleScene(this); }
-		modules_Queue.push(sceneModule);
+		if (chooseCityModule == NULL)
+		{
+			chooseCityModule = new ModuleChooseCity(this);
+			chooseCityModule->Init();
+		}
+		modules_Queue.push(chooseCityModule);
 		break;
 
 	case CHANGE_TO_PLAY:
 
-		if (sceneModule != NULL){ sceneModule = new ModuleScene(this); }
+		if (sceneModule == NULL)
+		{
+			sceneModule = new ModuleScene(this);
+			sceneModule->Init();
+		}
 		modules_Queue.push(sceneModule);
 
-		if (sceneModule != NULL){ playerModule = new ModulePlayer(this); }
+		if (playerModule == NULL)
+		{
+			playerModule = new ModulePlayer(this);
+			playerModule->Init();
+		}
 		modules_Queue.push(playerModule);
 
-		if (sceneModule != NULL){ entityManagerModule = new ModuleEntityManager(this); }
+		if (entityManagerModule == NULL)
+		{
+			entityManagerModule = new ModuleEntityManager(this);
+			entityManagerModule->Init();
+		}
 		modules_Queue.push(entityManagerModule);
 		break;
 
 	case CHANGE_TO_MAP_PLANE:
 
-		if (sceneModule != NULL){ sceneModule = new ModuleScene(this); }
-		modules_Queue.push(sceneModule);
+		if (planeModule == NULL)
+		{
+			planeModule = new ModulePlane(this);
+			planeModule->Init();
+		}
+		modules_Queue.push(planeModule);
 		break;
 
 	case CHANGE_TO_CREDITS:
 
-		if (sceneModule != NULL){ sceneModule = new ModuleScene(this); }
-		modules_Queue.push(sceneModule);
+		if (creditsModule == NULL)
+		{
+			creditsModule = new ModuleCredits(this);
+			creditsModule->Init();
+		}
+		modules_Queue.push(creditsModule);
 		break;
 
-	case CHANGE_TO_HIGHSCORE_INPUT:
+	case CHANGE_TO_HIGHSCORE:
 
-		if (sceneModule != NULL){ sceneModule = new ModuleScene(this); }
-		modules_Queue.push(sceneModule);
+		if (highscoreModule == NULL)
+		{
+			highscoreModule = new ModuleHighscore(this);
+			highscoreModule->Init();
+		}
+		modules_Queue.push(highscoreModule);
 		break;
 
-	case CHANGE_TO_HIGHSCORE_TABLE:
-
-		if (sceneModule != NULL){ sceneModule = new ModuleScene(this); }
-		modules_Queue.push(sceneModule);
-		break;
 	}
 	
 	return true;

@@ -11,6 +11,7 @@ bool ModuleEntityManager::Init()
 update_status ModuleEntityManager::PreUpdate(){ return UPDATE_CONTINUE; }
 update_status ModuleEntityManager::Update()
 {
+
 	return UPDATE_CONTINUE;
 }
 update_status ModuleEntityManager::PostUpdate(){ return UPDATE_CONTINUE; }
