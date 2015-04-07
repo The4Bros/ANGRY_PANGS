@@ -12,7 +12,6 @@ enum PlayerState
 	DOWN,
 	UP,
 	STILL,
-	SHOOT
 };
 
 enum Weapon
@@ -34,7 +33,7 @@ public:
 	Harpoon* harpoon[2];
 	Weapon current_weapon;
 
-	unsigned int score, lives, update_counter;
+	unsigned int score, lives, update_counter, shoot_counter;
 	PlayerState state;
 	bool alive;
 

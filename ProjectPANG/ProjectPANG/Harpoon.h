@@ -20,6 +20,7 @@ public:
 
 	void Shoot_Harpoon(SDL_Rect player_rect);
 	void Shoot_Grapple(SDL_Rect player_rect);
+	void Shoot_Shotgun(SDL_Rect player_rect);
 
 	void Update();
 
