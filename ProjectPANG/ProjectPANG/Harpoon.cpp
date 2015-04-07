@@ -18,7 +18,6 @@ Harpoon::Harpoon(Application* app)
 void Harpoon::Shoot_Harpoon(SDL_Rect player_rect)
 {
 	alive = true;
-	rect.x = player_rect.x + 12 * app->windowModule->scale;
 	rect.y = player_rect.y;
 	rect.h = 32 * app->windowModule->scale;
 	source_rect = { 0, 0, 9, 32 };
@@ -28,7 +27,6 @@ void Harpoon::Shoot_Harpoon(SDL_Rect player_rect)
 void Harpoon::Shoot_Grapple(SDL_Rect player_rect)
 {
 	alive = true;
-	rect.x = player_rect.x + 9 * app->windowModule->scale;
 	rect.y = player_rect.y;
 	rect.h = 32 * app->windowModule->scale;
 	source_rect = { 18, 0, 9, 32 };

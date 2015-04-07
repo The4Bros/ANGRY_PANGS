@@ -12,6 +12,8 @@ enum PlayerState
 	DOWN,
 	UP,
 	STILL,
+	SHOOT_LEFT,
+	SHOOT_RIGHT,
 };
 
 enum Weapon
@@ -26,16 +28,17 @@ class Player
 {
 public:
 	Application* app;
+
 	SDL_Rect rect;
-	SDL_Rect source_rect;
-	const SDL_Rect* const_rect;
+	SDL_Rect* source_rect[25];
+	int source_index;
 
 	Harpoon* harpoon[2];
 	Weapon current_weapon;
 
-	unsigned int score, lives, update_counter, shoot_counter;
+	unsigned int score, lives, update_counter, shoot_update_counter;
 	PlayerState state;
-	bool alive;
+	bool alive; // , shoot_key_pressed;
 
 	Player(Application* app, bool player1);
 	~Player(){}

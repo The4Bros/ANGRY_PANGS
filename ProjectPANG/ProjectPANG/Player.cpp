@@ -6,28 +6,44 @@ Player::Player(Application* app, bool player1)
 
 	state = STILL;
 	alive = true;
+	//shoot_key_pressed = false;
 	current_weapon = WEAPON_HARPOON;
+	source_index = 17;
 
 	harpoon[0] = new Harpoon(app);
 	harpoon[1] = new Harpoon(app);
 
 	rect = { 8 * app->windowModule->scale, 168 * app->windowModule->scale, 32 * app->windowModule->scale, 32 * app->windowModule->scale };
 
-	player1 ? source_rect = { 544, 0, 32, 32 } : source_rect = { 544, 32, 32, 32 };
+	if (player1)
+	{
+		for (int i = 0; i < 23; i++)
+		{
+			source_rect[i] = new SDL_Rect({ i * 32, 0, 32, 32 });
+		}
+		source_rect[23] = new SDL_Rect({ 736, 0, 51, 32 });
+		source_rect[24] = new SDL_Rect({ 787, 0, 51, 32 });
+	}
+	else
+	{
+		for (int i = 0; i < 23; i++)
+		{
+			source_rect[i] = new SDL_Rect({ i * 32, 32, 32, 32 });
+		}
+		source_rect[23] = new SDL_Rect({ 736, 32, 51, 32 });
+		source_rect[24] = new SDL_Rect({ 787, 32, 51, 32 });
+	}
 
-	const_rect = new SDL_Rect(source_rect);
 }
 
 void Player::LeftTrigger()
 {
 	if (state == LEFT)
 		{
-			if (update_counter > 4)
+			if (update_counter > 4) // ticks till update
 			{
-				delete[] const_rect;
-				if (source_rect.x < 288){ source_rect.x += 32; }
-				else { source_rect.x = 160; }
-				const_rect = new SDL_Rect(source_rect);
+				if (source_index < 9){ source_index++; }
+				else { source_index = 5; }
 				update_counter = 0;
 			}
 			else { update_counter++; }
@@ -36,14 +52,22 @@ void Player::LeftTrigger()
 			{
 				rect.x -= app->playerModule->player_speed;
 			}
-			
 		}
+
+	else if (state == SHOOT_LEFT || state == SHOOT_RIGHT) // was shooting
+	{
+		if (update_counter > 4)
+		{
+			state = LEFT;
+			source_index = 5;
+			update_counter = 0;
+		}
+		else { update_counter++; }
+	}
 	else // change of direction
 	{
-		delete[] const_rect;
 		state = LEFT;
-		source_rect.x = 160;
-		const_rect = new SDL_Rect(source_rect);
+		source_index = 5;
 		update_counter = 0;
 	}
 }
@@ -52,12 +76,10 @@ void Player::RightTrigger()
 {
 	if (state == RIGHT)
 	{
-		if (update_counter > 4)
+		if (update_counter > 4) // ticks till update
 		{
-			delete[] const_rect;
-			if (source_rect.x < 128){ source_rect.x += 32; }
-			else { source_rect.x = 0; }
-			const_rect = new SDL_Rect(source_rect);
+			if (source_index < 4){ source_index++; }
+			else { source_index = 0; }
 			update_counter = 0;
 		}
 		else { update_counter++; }
@@ -68,12 +90,20 @@ void Player::RightTrigger()
 		}
 
 	}
+	else if (state == SHOOT_LEFT || state == SHOOT_RIGHT) // was shooting
+	{
+		if (update_counter > 4)
+		{
+			state = RIGHT;
+			source_index = 0;
+			update_counter = 0;
+		}
+		else { update_counter++; }
+	}
 	else // change of direction
 	{
-		delete[] const_rect;
 		state = RIGHT;
-		source_rect.x = 0;
-		const_rect = new SDL_Rect(source_rect);
+		source_index = 0;
 		update_counter = 0;
 	}
 }
@@ -91,112 +121,124 @@ void Player::DownTrigger()
 
 void Player::Shoot()
 {
+	//if (shoot_key_pressed){ return; }
+
 	switch (current_weapon)
 	{
 	case WEAPON_DOUBLE_HARPOON:
 		if (!harpoon[1]->alive)
 		{
-			harpoon[1]->Shoot_Harpoon(rect);
-			if (state == RIGHT || source_rect.x == 544)
+			if (state == RIGHT || source_index == 17) // leaning left
 			{
-				source_rect.x += 32;
-				const_rect = new SDL_Rect(source_rect);
+				source_index = 18;
 				update_counter = 0;
-				harpoon[1]->rect.x -= 6;
+				harpoon[1]->rect.x = rect.x - (6 * app->windowModule->scale);
+				state = SHOOT_RIGHT;
 			}
-			else if (state == LEFT || source_rect.x == 608)
+			else if (state == LEFT || source_index == 19) // leaning right
 			{
-				source_rect.x += 32;
-				const_rect = new SDL_Rect(source_rect);
+				source_index = 20;
 				update_counter = 0;
-				harpoon[1]->rect.x += 5;
+				harpoon[1]->rect.x = rect.x + (17 * app->windowModule->scale);
+				state = SHOOT_LEFT;
 			}
 
-			else { harpoon[1]->rect.x += 5; }
+			else { harpoon[1]->rect.x = rect.x + (17 * app->windowModule->scale); } // on stairs
 
 			break;
 		}
+
 	case WEAPON_HARPOON:
 		if (!harpoon[0]->alive)
 		{
 			harpoon[0]->Shoot_Harpoon(rect);
-			if (state == RIGHT || source_rect.x == 544)
+
+			if (state == RIGHT || source_index == 17) // leaning left
 			{
-				source_rect.x += 32;
-				const_rect = new SDL_Rect(source_rect);
+				source_index = 18;
 				update_counter = 0;
-				harpoon[0]->rect.x -= 6;
+				harpoon[0]->rect.x = rect.x + (6 * app->windowModule->scale);
+				state = SHOOT_RIGHT;
 			}
-			else if (state == LEFT || source_rect.x == 608)
+			else if (state == LEFT || source_index == 19) // leaning right
 			{
-				source_rect.x += 32;
-				const_rect = new SDL_Rect(source_rect);
+				source_index = 20;
 				update_counter = 0;
-				harpoon[0]->rect.x += 5;
+				harpoon[0]->rect.x = rect.x + (17 * app->windowModule->scale);
+				state = SHOOT_LEFT;
 			}
 
-			else { harpoon[0]->rect.x += 5; }
+			else { harpoon[0]->rect.x = rect.x + (17 * app->windowModule->scale); } // on stairs
 		}
 		break;
+
 	case WEAPON_GRAPPLE:
 		if (!harpoon[0]->alive)
 		{
-			harpoon[0]->Shoot_Grapple(rect);
-			if (state == RIGHT || source_rect.x == 544){}
-			else if (state == UP || state == DOWN) {}
+			harpoon[0]->Shoot_Harpoon(rect);
+
+			if (state == RIGHT || source_index == 17) // leaning left
+			{
+				source_index = 18;
+				update_counter = 0;
+				harpoon[1]->rect.x = rect.x - (6 * app->windowModule->scale);
+				state = SHOOT_RIGHT;
+			}
+			else if (state == LEFT || source_index == 19) // leaning right
+			{
+				source_index = 20;
+				update_counter = 0;
+				harpoon[0]->rect.x = rect.x + (17 * app->windowModule->scale);
+				state = SHOOT_LEFT;
+			}
+
+			else { harpoon[0]->rect.x = rect.x + (17 * app->windowModule->scale); } // on stairs
 		}
 		break;
+
 	case WEAPON_SHOTGUN:
 		break;
 	}
-
-	if (state == RIGHT || source_rect.x == 544){ source_rect.x = 640; }
-	else if (state == LEFT || source_rect.x == 608){ source_rect.x = 576; }
-
-	update_counter = 0;
-	delete[] const_rect;
-	const_rect = new SDL_Rect(source_rect);
 }
 
 
 void Player::Still()
 {
+	switch (state)
+	{
+	case LEFT:
+	case SHOOT_LEFT:
+		state = STILL;
+		source_index = 19;
+		break;
 
+	case RIGHT:
+	case SHOOT_RIGHT:
+		state = STILL;
+		source_index = 17;
+		break;
+	default:
+		break;
+	}
 }
 
 void Player::Update()
 {
-	if (state != STILL && update_counter > 4)
-	if (state == RIGHT){ source_rect.x = 544; }
-	else{ source_rect.x = 608; }
-
-	state = STILL;
-
-	delete[] const_rect;
-	const_rect = new SDL_Rect(source_rect);
-
-
-
+	// if no floor: make fall
 
 	switch (current_weapon)
 	{
 	case WEAPON_DOUBLE_HARPOON:
-		if (harpoon[1]->alive)
-		{
-			harpoon[1]->Update();
-		}
+		if (harpoon[1]->alive){ harpoon[1]->Update(); }
+
 	case WEAPON_HARPOON:
-		if (harpoon[0]->alive)
-		{
-			harpoon[0]->Update();
-		}
+		if (harpoon[0]->alive){ harpoon[0]->Update(); }
 		break;
+
 	case WEAPON_GRAPPLE:
-		if (harpoon[0]->alive)
-		{
-			harpoon[0]->Update();
-		}
+		if (harpoon[0]->alive){ harpoon[0]->Update(); }
 		break;
+
 	case WEAPON_SHOTGUN:
 		break;
 	}
@@ -205,6 +247,6 @@ void Player::Update()
 
 void Player::setPos(unsigned int x, unsigned int y)
 {
-	rect.x = x;
-	rect.y = y;
+	rect.x = x * app->windowModule->scale;
+	rect.y = y * app->windowModule->scale;
 }
