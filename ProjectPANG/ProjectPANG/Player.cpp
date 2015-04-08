@@ -6,7 +6,7 @@ Player::Player(Application* app, bool player1)
 
 	state = STILL;
 	alive = true;
-	//shoot_key_pressed = false;
+	shoot_key_pressed = false;
 	current_weapon = WEAPON_HARPOON;
 	source_index = 17;
 
@@ -121,7 +121,8 @@ void Player::DownTrigger()
 
 void Player::Shoot()
 {
-	//if (shoot_key_pressed){ return; }
+	if (shoot_key_pressed){ return; }
+	shoot_key_pressed = true;
 
 	switch (current_weapon)
 	{
@@ -132,18 +133,18 @@ void Player::Shoot()
 			{
 				source_index = 18;
 				update_counter = 0;
-				harpoon[1]->rect.x = rect.x - (6 * app->windowModule->scale);
+				harpoon[1]->rect.x = rect.x - (14 * app->windowModule->scale);
 				state = SHOOT_RIGHT;
 			}
 			else if (state == LEFT || source_index == 19) // leaning right
 			{
 				source_index = 20;
 				update_counter = 0;
-				harpoon[1]->rect.x = rect.x + (17 * app->windowModule->scale);
+				harpoon[1]->rect.x = rect.x + (10 * app->windowModule->scale);
 				state = SHOOT_LEFT;
 			}
 
-			else { harpoon[1]->rect.x = rect.x + (17 * app->windowModule->scale); } // on stairs
+			else { harpoon[1]->rect.x = rect.x + (12 * app->windowModule->scale); } // on stairs
 
 			break;
 		}
@@ -157,18 +158,18 @@ void Player::Shoot()
 			{
 				source_index = 18;
 				update_counter = 0;
-				harpoon[0]->rect.x = rect.x + (6 * app->windowModule->scale);
+				harpoon[0]->rect.x = rect.x + (14 * app->windowModule->scale);
 				state = SHOOT_RIGHT;
 			}
 			else if (state == LEFT || source_index == 19) // leaning right
 			{
 				source_index = 20;
 				update_counter = 0;
-				harpoon[0]->rect.x = rect.x + (17 * app->windowModule->scale);
+				harpoon[0]->rect.x = rect.x + (10 * app->windowModule->scale);
 				state = SHOOT_LEFT;
 			}
 
-			else { harpoon[0]->rect.x = rect.x + (17 * app->windowModule->scale); } // on stairs
+			else { harpoon[0]->rect.x = rect.x + (12 * app->windowModule->scale); } // on stairs
 		}
 		break;
 
@@ -181,18 +182,18 @@ void Player::Shoot()
 			{
 				source_index = 18;
 				update_counter = 0;
-				harpoon[1]->rect.x = rect.x - (6 * app->windowModule->scale);
+				harpoon[1]->rect.x = rect.x - (14 * app->windowModule->scale);
 				state = SHOOT_RIGHT;
 			}
 			else if (state == LEFT || source_index == 19) // leaning right
 			{
 				source_index = 20;
 				update_counter = 0;
-				harpoon[0]->rect.x = rect.x + (17 * app->windowModule->scale);
+				harpoon[0]->rect.x = rect.x + (10 * app->windowModule->scale);
 				state = SHOOT_LEFT;
 			}
 
-			else { harpoon[0]->rect.x = rect.x + (17 * app->windowModule->scale); } // on stairs
+			else { harpoon[0]->rect.x = rect.x + (12 * app->windowModule->scale); } // on stairs
 		}
 		break;
 

@@ -38,7 +38,7 @@ public:
 
 	unsigned int score, lives, update_counter, shoot_update_counter;
 	PlayerState state;
-	bool alive; // , shoot_key_pressed;
+	bool alive, shoot_key_pressed;
 
 	Player(Application* app, bool player1);
 	~Player(){}
