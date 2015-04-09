@@ -5,6 +5,28 @@ Application::Application()
 {
 	returnValue = UPDATE_CONTINUE;
 
+	windowModule = NULL;
+	renderModule = NULL;
+	inputModule = NULL;
+	texturesModule = NULL;
+	audioModule = NULL;
+	fontManagerModule = NULL;
+
+	playerModule = NULL;
+	entityManagerModule = NULL;
+	sceneModule = NULL;
+	titleModule = NULL;
+	tutorialModule = NULL;
+	chooseCityModule = NULL;
+	planeModule = NULL;
+	creditsModule = NULL;
+	highscoreModule = NULL;
+
+}
+
+bool Application::Init()
+{
+
 	windowModule = new ModuleWindow(this);
 	renderModule = new ModuleRender(this);
 	inputModule = new ModuleInput(this);
@@ -19,20 +41,7 @@ Application::Application()
 	modules_Queue.push(audioModule);
 	modules_Queue.push(fontManagerModule);
 
-	sceneModule = NULL;
-	playerModule = NULL;
-	entityManagerModule = NULL;
-	titleModule = NULL;
-	tutorialModule = NULL;
-	chooseCityModule = NULL;
-	planeModule = NULL;
-	creditsModule = NULL;
-	highscoreModule = NULL;
 
-}
-
-bool Application::Init()
-{
 	item = modules_Queue.getStart();
 	while (item != NULL)
 	{
@@ -105,15 +114,6 @@ update_status Application::Update()
 			return returnValue;
 		}
 	}
-	/*
-	//If frame finished early
-	int frameTicks = capTimer.getTicks();
-	if (frameTicks < TICKS_PER_FRAME)
-	{
-		//Wait remaining time
-		SDL_Delay(TICKS_PER_FRAME - frameTicks);
-	}
-	*/
 
 	return returnValue;
 }
@@ -142,7 +142,7 @@ bool Application::ChangeTo(update_status new_state)
 		if (titleModule == NULL)
 		{
 			titleModule = new ModuleTitle(this);
-			titleModule->Init();
+			if (titleModule->Init() == false) { return false; }
 		}
 		modules_Queue.push(titleModule);
 		break;
@@ -152,7 +152,7 @@ bool Application::ChangeTo(update_status new_state)
 		if (tutorialModule == NULL)
 		{
 			tutorialModule = new ModuleTutorial(this);
-			tutorialModule->Init();
+			if (tutorialModule->Init() == false) { return false; }
 		}
 		modules_Queue.push(tutorialModule);
 		break;
@@ -162,33 +162,33 @@ bool Application::ChangeTo(update_status new_state)
 		if (chooseCityModule == NULL)
 		{
 			chooseCityModule = new ModuleChooseCity(this);
-			chooseCityModule->Init();
+			if (chooseCityModule->Init() == false) { return false; }
 		}
 		modules_Queue.push(chooseCityModule);
 		break;
 
 	case CHANGE_TO_PLAY:
 
-		if (sceneModule == NULL)
-		{
-			sceneModule = new ModuleScene(this);
-			sceneModule->Init();
-		}
-		modules_Queue.push(sceneModule);
-
 		if (playerModule == NULL)
 		{
 			playerModule = new ModulePlayer(this);
-			playerModule->Init();
+			if (playerModule->Init() == false) { return false; }
 		}
 		modules_Queue.push(playerModule);
 
 		if (entityManagerModule == NULL)
 		{
 			entityManagerModule = new ModuleEntityManager(this);
-			entityManagerModule->Init();
+			if (entityManagerModule->Init() == false) { return false; }
 		}
 		modules_Queue.push(entityManagerModule);
+
+		if (sceneModule == NULL)
+		{
+			sceneModule = new ModuleScene(this);
+			if (sceneModule->Init() == false) { return false; }
+		}
+		modules_Queue.push(sceneModule);
 		break;
 
 	case CHANGE_TO_MAP_PLANE:
@@ -196,7 +196,7 @@ bool Application::ChangeTo(update_status new_state)
 		if (planeModule == NULL)
 		{
 			planeModule = new ModulePlane(this);
-			planeModule->Init();
+			if (planeModule->Init() == false) { return false; }
 		}
 		modules_Queue.push(planeModule);
 		break;
@@ -206,7 +206,7 @@ bool Application::ChangeTo(update_status new_state)
 		if (creditsModule == NULL)
 		{
 			creditsModule = new ModuleCredits(this);
-			creditsModule->Init();
+			if (creditsModule->Init() == false) { return false; }
 		}
 		modules_Queue.push(creditsModule);
 		break;
@@ -216,7 +216,7 @@ bool Application::ChangeTo(update_status new_state)
 		if (highscoreModule == NULL)
 		{
 			highscoreModule = new ModuleHighscore(this);
-			highscoreModule->Init();
+			if (highscoreModule->Init() == false) { return false; }
 		}
 		modules_Queue.push(highscoreModule);
 		break;

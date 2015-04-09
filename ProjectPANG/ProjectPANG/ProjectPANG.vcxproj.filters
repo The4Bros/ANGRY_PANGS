@@ -49,6 +49,12 @@
     <Filter Include="Archivos de código fuente\Application\Other Modules">
       <UniqueIdentifier>{e5d9471b-c76f-4097-832a-0b76cafb6b06}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Application\Game\Modules">
+      <UniqueIdentifier>{96050f57-6272-45db-8fd4-92f3852a0055}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Application\Game\Objects">
+      <UniqueIdentifier>{ac40ea1f-1e80-4fe8-8cf8-76616b23aac9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ModuleEntityManager.cpp">
@@ -111,28 +117,13 @@
     <ClCompile Include="ModuleTutorial.cpp">
       <Filter>Archivos de código fuente\Application\Other Modules</Filter>
     </ClCompile>
+    <ClCompile Include="Time_Count.cpp">
+      <Filter>Archivos de código fuente\Application\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ModuleEntityManager.h">
-      <Filter>Archivos de encabezado\Application\Game</Filter>
-    </ClInclude>
     <ClInclude Include="Queue.h">
       <Filter>Archivos de encabezado\Other Resources\TDA%27s</Filter>
-    </ClInclude>
-    <ClInclude Include="ModulePlayer.h">
-      <Filter>Archivos de encabezado\Application\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Archivos de encabezado\Application\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleScene.h">
-      <Filter>Archivos de encabezado\Application\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Harpoon.h">
-      <Filter>Archivos de encabezado\Application\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Archivos de encabezado\Application\Game</Filter>
     </ClInclude>
     <ClInclude Include="Globals.h">
       <Filter>Archivos de encabezado\Other Resources</Filter>
@@ -178,6 +169,24 @@
     </ClInclude>
     <ClInclude Include="ModuleHighscore.h">
       <Filter>Archivos de encabezado\Application\Other Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleEntityManager.h">
+      <Filter>Archivos de encabezado\Application\Game\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModulePlayer.h">
+      <Filter>Archivos de encabezado\Application\Game\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleScene.h">
+      <Filter>Archivos de encabezado\Application\Game\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Harpoon.h">
+      <Filter>Archivos de encabezado\Application\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Archivos de encabezado\Application\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Time_Count.h">
+      <Filter>Archivos de encabezado\Application\Game\Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

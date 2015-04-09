@@ -47,3 +47,13 @@ bool ModuleRender::CleanUp()
 	}
 	return false;
 }
+
+
+void ModuleRender::Print(SDL_Texture* texture, const SDL_Rect* source_rect, const SDL_Rect* rect)
+{
+	SDL_RenderCopy(renderer, texture, source_rect, rect);
+}
+
+
+
+

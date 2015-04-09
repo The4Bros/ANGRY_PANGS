@@ -20,24 +20,17 @@ bool ModuleInput::Init()
 
 update_status ModuleInput::PreUpdate()
 {
-	//SDL_PumpEvents();
-
 	SDL_PollEvent(mainEvent);
-	
+	if (mainEvent->type == SDL_QUIT){ return UPDATE_STOP; }
+
 	key = SDL_GetKeyboardState(NULL);
+	if (key[SDL_SCANCODE_ESCAPE]){ return UPDATE_STOP; }
 
 	return UPDATE_CONTINUE;
 }
 
 update_status ModuleInput::Update()
 {
-	if (mainEvent->type == SDL_QUIT){ return UPDATE_STOP; }
-
-	if (key[SDL_SCANCODE_ESCAPE])
-	{
-		return UPDATE_STOP;
-	}
-
 	return UPDATE_CONTINUE;
 }
 
