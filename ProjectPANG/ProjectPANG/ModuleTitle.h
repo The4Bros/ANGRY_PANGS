@@ -8,6 +8,9 @@
 
 class ModuleTitle : public Module{
 public:
+
+	SDL_Rect rect;
+
 	ModuleTitle(Application* app);
 	bool Init();
 	update_status PreUpdate();

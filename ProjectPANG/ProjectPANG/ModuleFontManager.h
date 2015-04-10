@@ -19,6 +19,10 @@ public:
 	update_status Update();
 	update_status PostUpdate();
 	bool CleanUp();
+
+	void Write_On_Screen(unsigned int value, unsigned int x, unsigned int y, unsigned int size);
+	void Write_On_Screen(char* string, unsigned int x, unsigned int y, unsigned int size);
+
 };
 
 #endif
