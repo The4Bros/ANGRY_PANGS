@@ -27,10 +27,7 @@ bool ModuleScene::Init()
 
 update_status ModuleScene::PreUpdate()
 {
-	int difference = difftime(time(NULL), time_count->timer);
-	if (difference >= 1) {
-		int i;
-		time_count->Update(); }
+	if (difftime(time(NULL), time_count->timer) >= 1){ time_count->Update(); }
 
 	//if (time_count->current_time == 0){ time_count->Reset(150); }
 

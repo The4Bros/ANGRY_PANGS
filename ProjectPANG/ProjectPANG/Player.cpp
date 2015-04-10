@@ -232,6 +232,8 @@ void Player::Update()
 	case WEAPON_DOUBLE_HARPOON:
 		if (harpoon[1]->alive){ harpoon[1]->Update(); }
 
+
+
 	case WEAPON_HARPOON:
 		if (harpoon[0]->alive){ harpoon[0]->Update(); }
 		break;

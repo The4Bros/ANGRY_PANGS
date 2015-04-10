@@ -1,9 +1,8 @@
 #include "Application.h"
+#include "Globals.h"
 
 #ifndef __Time_Count_H__
 #define __Time_Count_H__
-
-#include <time.h>
 
 class Time_Count
 {
