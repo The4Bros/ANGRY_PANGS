@@ -101,10 +101,7 @@ void ModuleScene::reset_stage()
 
 void ModuleScene::load_stage(int stage)
 {
-	
-
 	/*
-
 	User parser(char *line){
 		User user; char *it;
 		user.init();

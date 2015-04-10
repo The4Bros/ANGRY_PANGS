@@ -55,23 +55,14 @@
     <Filter Include="Archivos de encabezado\Application\Game\Objects">
       <UniqueIdentifier>{ac40ea1f-1e80-4fe8-8cf8-76616b23aac9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de código fuente\Application\Game\Modules">
+      <UniqueIdentifier>{9fa3963e-536e-41d2-8ef9-ffae4fc01959}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\Application\Game\Objects">
+      <UniqueIdentifier>{05b88821-64c4-4d0d-a9ae-fa89ff151700}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ModuleEntityManager.cpp">
-      <Filter>Archivos de código fuente\Application\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleScene.cpp">
-      <Filter>Archivos de código fuente\Application\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="ModulePlayer.cpp">
-      <Filter>Archivos de código fuente\Application\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Archivos de código fuente\Application\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Harpoon.cpp">
-      <Filter>Archivos de código fuente\Application\Game</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleAudio.cpp">
       <Filter>Archivos de código fuente\Application\General Modules</Filter>
     </ClCompile>
@@ -117,8 +108,23 @@
     <ClCompile Include="ModuleTutorial.cpp">
       <Filter>Archivos de código fuente\Application\Other Modules</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleEntityManager.cpp">
+      <Filter>Archivos de código fuente\Application\Game\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModulePlayer.cpp">
+      <Filter>Archivos de código fuente\Application\Game\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleScene.cpp">
+      <Filter>Archivos de código fuente\Application\Game\Modules</Filter>
+    </ClCompile>
     <ClCompile Include="Time_Count.cpp">
-      <Filter>Archivos de código fuente\Application\Game</Filter>
+      <Filter>Archivos de código fuente\Application\Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Harpoon.cpp">
+      <Filter>Archivos de código fuente\Application\Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Archivos de código fuente\Application\Game\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +192,12 @@
       <Filter>Archivos de encabezado\Application\Game\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Time_Count.h">
+      <Filter>Archivos de encabezado\Application\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Particles.h">
+      <Filter>Archivos de encabezado\Application\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Balloon.h">
       <Filter>Archivos de encabezado\Application\Game\Objects</Filter>
     </ClInclude>
   </ItemGroup>

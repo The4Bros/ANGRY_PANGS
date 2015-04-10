@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Balloon.h" />
     <ClInclude Include="Harpoon.h" />
     <ClInclude Include="ModuleChooseCity.h" />
     <ClInclude Include="ModuleCredits.h" />
@@ -102,6 +103,7 @@
     <ClInclude Include="ModulePlayer.h" />
     <ClInclude Include="ModuleTitle.h" />
     <ClInclude Include="ModuleTutorial.h" />
+    <ClInclude Include="Particles.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="Globals.h" />
