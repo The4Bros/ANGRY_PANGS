@@ -36,6 +36,14 @@ update_status ModuleScene::PreUpdate()
 update_status ModuleScene::Update()
 {
 	// PRINT BACKGROUND
+	app->fontManagerModule->Write_On_Screen("P", 8 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
+	app->fontManagerModule->Write_On_Screen("L", 16 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
+	app->fontManagerModule->Write_On_Screen("A", 24 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
+	app->fontManagerModule->Write_On_Screen("Y", 32 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
+	app->fontManagerModule->Write_On_Screen("E", 40 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
+	app->fontManagerModule->Write_On_Screen("R", 48 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
+
+
 	app->renderModule->Print(app->texturesModule->background_sprite, background_const_rect, &background_rect);
 
 	// PRINT TIMER
@@ -66,7 +74,7 @@ update_status ModuleScene::Update()
 	
 
 	// PRINT BALLS
-
+	
 
 
 
