@@ -89,6 +89,7 @@
     <ClCompile Include="ModuleTitle.cpp" />
     <ClCompile Include="ModuleTutorial.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
+    <ClCompile Include="Particles.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Time_Count.cpp" />
   </ItemGroup>

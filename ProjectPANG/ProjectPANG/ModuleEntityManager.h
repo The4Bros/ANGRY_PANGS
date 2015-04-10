@@ -8,6 +8,8 @@
 class ModuleEntityManager : public Module{
 public:
 
+	unsigned int balloon_speed;
+
 	ModuleEntityManager(Application* app);
 	bool Init();
 	update_status PreUpdate();

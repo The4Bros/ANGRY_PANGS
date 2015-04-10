@@ -126,6 +126,9 @@
     <ClCompile Include="Player.cpp">
       <Filter>Archivos de código fuente\Application\Game\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Particles.cpp">
+      <Filter>Archivos de código fuente\Application\Game\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Queue.h">
