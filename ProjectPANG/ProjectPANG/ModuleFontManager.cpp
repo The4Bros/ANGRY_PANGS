@@ -17,9 +17,9 @@ bool ModuleFontManager ::Init()
 	
 
 	color = { 255, 255, 255 };
-	font = TTF_OpenFont("font/PANGTYPO___.TTF", 12);
-	TTF_SetFontStyle(font, TTF_STYLE_NORMAL);
-	SDL_Surface *TTF_RenderText_Solid(TTF_Font *font, const char *text, SDL_Color fg);
+	//font = TTF_OpenFont("font/PANGTYPO___.TTF", 12);
+	//TTF_SetFontStyle(font, TTF_STYLE_NORMAL);
+	//SDL_Surface *TTF_RenderText_Solid(TTF_Font *font, const char *text, SDL_Color fg);
 
 	
 	
@@ -35,7 +35,7 @@ void ModuleFontManager::Write_On_Screen(unsigned int value, unsigned int x, unsi
 
 
 }
-
+/*
 void ModuleFontManager::Write_On_Screen(char* string, unsigned int x, unsigned int y, unsigned int size){
 
 	SDL_Surface *text = TTF_RenderText_Solid(font, string, color);
@@ -55,11 +55,11 @@ void ModuleFontManager::Write_On_Screen(char* string, unsigned int x, unsigned i
 		break;
 	}
 
-	Print(SDL_CreateTextureFromSurface,textrect, textrect);
+	//Print(SDL_CreateTextureFromSurface,textrect, textrect);
 
 
 }
-
+*/
 
 update_status ModuleFontManager::PreUpdate(){ return UPDATE_CONTINUE; }
 update_status ModuleFontManager::Update(){ return UPDATE_CONTINUE; }
