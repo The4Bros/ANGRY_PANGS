@@ -1,7 +1,6 @@
 #include "Module.h"
 #include "Globals.h"
 #include "Application.h"
-
 #include "SDL2_ttf-2.0.12/include/SDL_ttf.h"
 #pragma comment( lib, "SDL2_ttf-2.0.12/lib/x86/SDL2_ttf.lib" )
 
@@ -10,7 +9,8 @@
 
 class ModuleFontManager : public Module{
 public:
-
+	TTF_Font* font;
+	SDL_Color color;
 	char* sample_text;
 
 	ModuleFontManager(Application* app);
