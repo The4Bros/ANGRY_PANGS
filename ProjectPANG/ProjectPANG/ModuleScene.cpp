@@ -27,7 +27,8 @@ bool ModuleScene::Init()
 
 update_status ModuleScene::PreUpdate()
 {
-	if (difftime(time(NULL), time_count->timer) >= 1){ time_count->Update(); }
+	if (difftime(time(NULL), time_count->timer) >= 1)
+	{ time_count->Update(); }
 
 	//if (time_count->current_time == 0){ time_count->Reset(150); }
 
@@ -35,15 +36,17 @@ update_status ModuleScene::PreUpdate()
 }
 update_status ModuleScene::Update()
 {
+	// PRINT SCORES
+	app->fontManagerModule->Write_On_Screen("Player", 8 * app->windowModule->scale, 208 * app->windowModule->scale, 20 * app->windowModule->scale);
+	//app->fontManagerModule->Write_On_Screen("L", 16 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
+	//app->fontManagerModule->Write_On_Screen("A", 24 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
+	//app->fontManagerModule->Write_On_Screen("Y", 32 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
+	//app->fontManagerModule->Write_On_Screen("E", 40 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
+	//app->fontManagerModule->Write_On_Screen("R", 48 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
+
+
+
 	// PRINT BACKGROUND
-	app->fontManagerModule->Write_On_Screen("P", 8 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
-	app->fontManagerModule->Write_On_Screen("L", 16 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
-	app->fontManagerModule->Write_On_Screen("A", 24 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
-	app->fontManagerModule->Write_On_Screen("Y", 32 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
-	app->fontManagerModule->Write_On_Screen("E", 40 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
-	app->fontManagerModule->Write_On_Screen("R", 48 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
-
-
 	app->renderModule->Print(app->texturesModule->background_sprite, background_const_rect, &background_rect);
 
 	// PRINT TIMER

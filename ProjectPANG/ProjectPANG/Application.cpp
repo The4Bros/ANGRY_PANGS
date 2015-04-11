@@ -48,6 +48,9 @@ bool Application::Init()
 		if (!item->data->Init()){ return false; }
 		item = item->next;
 	}
+
+	time(&timer);
+
 	return true;
 }
 
@@ -58,6 +61,9 @@ Application::~Application()
 
 update_status Application::Update()
 {
+	// UPDATE TIME COUNTER
+	if (difftime(time(NULL), timer) >= 1){ current_time++; }
+
 	item = modules_Queue.getStart(); // ------------PreUpdate------------
 	while (item != NULL)
 	{
@@ -226,3 +232,7 @@ bool Application::ChangeTo(update_status new_state)
 	return true;
 }
 
+void  Application::Reset_Time()
+{
+	current_time = 0;
+}

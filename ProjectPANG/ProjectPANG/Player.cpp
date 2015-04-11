@@ -46,7 +46,6 @@ void Player::LeftTrigger()
 				else { source_index = 5; }
 				update_counter = 0;
 			}
-			else { update_counter++; }
 
 			if (rect.x > 8 * app->windowModule->scale) //&& no collision with wall
 			{
@@ -62,7 +61,6 @@ void Player::LeftTrigger()
 			source_index = 5;
 			update_counter = 0;
 		}
-		else { update_counter++; }
 	}
 	else // change of direction
 	{
@@ -82,7 +80,6 @@ void Player::RightTrigger()
 			else { source_index = 0; }
 			update_counter = 0;
 		}
-		else { update_counter++; }
 
 		if (rect.x < (SCREEN_WIDTH - 40) * app->windowModule->scale) //&& no collision with wall
 		{
@@ -98,7 +95,6 @@ void Player::RightTrigger()
 			source_index = 0;
 			update_counter = 0;
 		}
-		else { update_counter++; }
 	}
 	else // change of direction
 	{
@@ -205,27 +201,32 @@ void Player::Shoot()
 
 void Player::Still()
 {
-	switch (state)
+	if (update_counter > 4)
 	{
-	case LEFT:
-	case SHOOT_LEFT:
-		state = STILL;
-		source_index = 19;
-		break;
+		switch (state)
+		{
+		case LEFT:
+		case SHOOT_LEFT:
+			state = STILL;
+			source_index = 19;
+			break;
 
-	case RIGHT:
-	case SHOOT_RIGHT:
-		state = STILL;
-		source_index = 17;
-		break;
-	default:
-		break;
+		case RIGHT:
+		case SHOOT_RIGHT:
+			state = STILL;
+			source_index = 17;
+			break;
+		default:
+			break;
+		}
 	}
 }
 
 void Player::Update()
 {
 	// if no floor: make fall
+
+	update_counter++;
 
 	switch (current_weapon)
 	{

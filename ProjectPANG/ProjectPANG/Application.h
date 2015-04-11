@@ -31,6 +31,10 @@ private:
 	update_status returnValue;
 
 public:
+
+	int current_time;
+	time_t	timer;
+
 	// General Modules
 	ModuleWindow* windowModule;
 	ModuleRender* renderModule;
@@ -57,5 +61,7 @@ public:
 	bool CleanUp();
 
 	bool ChangeTo(update_status new_state);
+
+	void Reset_Time();
 
 };

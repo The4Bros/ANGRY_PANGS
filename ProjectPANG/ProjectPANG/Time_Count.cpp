@@ -6,10 +6,10 @@ Time_Count::Time_Count(Application* app)
 	current_time = 150;
 	time(&timer);
 	
-	rect[3] = { 271 * app->windowModule->scale, 9 * app->windowModule->scale, 62 * app->windowModule->scale, 13 * app->windowModule->scale };
 	rect[0] = { 334 * app->windowModule->scale, 9 * app->windowModule->scale, 13 * app->windowModule->scale, 13 * app->windowModule->scale };
 	rect[1] = { 348 * app->windowModule->scale, 9 * app->windowModule->scale, 13 * app->windowModule->scale, 13 * app->windowModule->scale };
 	rect[2] = { 362 * app->windowModule->scale, 9 * app->windowModule->scale, 13 * app->windowModule->scale, 13 * app->windowModule->scale };
+	rect[3] = { 271 * app->windowModule->scale, 9 * app->windowModule->scale, 62 * app->windowModule->scale, 13 * app->windowModule->scale };
 
 	for (int i = 0; i < 10; i ++){ source_rect[i] = new SDL_Rect({62 + (i * 13), 0, 13, 13}); }
 	source_rect[10] = new SDL_Rect({0, 0, 62, 13});

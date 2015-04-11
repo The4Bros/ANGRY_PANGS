@@ -17,19 +17,19 @@ Particles::Particles(Application* app, Particle_Type type, unsigned int x, unsig
 
 	case PLAYER_SHOOT:
 		rect = { x, y, 29, 26 }; //----------------------------------------------------
-		quantity = 4;
+		quantity = 3;
 		for (int i = 0; i < quantity; i++)
 		{
-			source_rect[i] = new SDL_Rect({ i * 29, 0, 29, 26 });
+			source_rect[i] = new SDL_Rect({ i * 45, 26, 45, 47 });
 		}
 		break;
 
 	case BALL_SIZE_1:
 		rect = { x, y, 29, 26 }; //----------------------------------------------------
-		quantity = 5;
+		quantity = 3;
 		for (int i = 0; i < quantity; i++)
 		{
-			source_rect[i] = new SDL_Rect({ i * 29, 0, 29, 26 });
+			source_rect[i] = new SDL_Rect({ i * 45, 26, 45, 47 });
 		}
 		break;
 
@@ -62,8 +62,6 @@ Particles::Particles(Application* app, Particle_Type type, unsigned int x, unsig
 	}
 
 }
-
-
 
 
 void Particles::Update()

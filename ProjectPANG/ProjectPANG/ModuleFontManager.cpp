@@ -19,7 +19,7 @@ bool ModuleFontManager ::Init()
 	color = { 255, 255, 255 };
 	font = TTF_OpenFont("font/PANGTYPO.TTF", 12);
 	
-	SDL_Surface *TTF_RenderText_Solid(TTF_Font *font, const char *text, SDL_Color fg);
+	//SDL_Surface *TTF_RenderText_Solid(TTF_Font *font, const char *text, SDL_Color fg);
 
 	
 	

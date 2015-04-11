@@ -52,8 +52,7 @@ update_status ModulePlayer::Update()
 	if (app->inputModule->key[SDL_SCANCODE_S] == 1){ player1->DownTrigger(); }
 
 	if (app->inputModule->key[SDL_SCANCODE_A] == 0
-		&& app->inputModule->key[SDL_SCANCODE_D] == 0
-		&& app->inputModule->key[SDL_SCANCODE_SPACE] == 0)
+		&& app->inputModule->key[SDL_SCANCODE_D] == 0)
 	{
 		player1->Still();
 	}
