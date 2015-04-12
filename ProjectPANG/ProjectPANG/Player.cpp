@@ -7,7 +7,7 @@ Player::Player(Application* app, bool player1)
 	state = STILL;
 	alive = true;
 	shoot_key_pressed = false;
-	current_weapon = WEAPON_DOUBLE_HARPOON;
+	current_weapon = WEAPON_HARPOON;
 	source_index = 17;
 
 	harpoon[0] = new Harpoon(app);

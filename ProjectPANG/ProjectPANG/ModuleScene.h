@@ -15,8 +15,10 @@ struct Stage_Arrangement
 {
 	int time_limit;
 	int player_pos[4];
-	std::vector<int[4]> balloons, bricks, enemies, stairs;
-
+	std::vector<int[4]> balloons;
+	std::vector<int[4]> bricks;
+	std::vector<int[4]> enemies;
+	std::vector<int[4]> stairs;
 	~Stage_Arrangement(){}
 };
 

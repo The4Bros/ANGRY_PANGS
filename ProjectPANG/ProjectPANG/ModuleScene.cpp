@@ -93,12 +93,15 @@ bool ModuleScene::CleanUp(){ return true; }
 
 void ModuleScene::reset_stage()
 {
+	time_count->Reset(stage_arrangement.time_limit);
+
+	app->playerModule->player1->setPos(stage_arrangement.player_pos[0], stage_arrangement.player_pos[1]);
+	if (app->playerModule->player2 != NULL){ app->playerModule->player1->setPos(stage_arrangement.player_pos[0], stage_arrangement.player_pos[1]); }
 
 
 
 
-
-	time_count->Reset(150);
+	
 }
 
 
@@ -107,12 +110,19 @@ bool ModuleScene::load_stage(int stage)
 {
 	if (fopen_s(&level_file, "txt files/LevelArrangment.txt", "r") != 0){ return false; }
 
+	current_stage = stage;
+
 	char line[100];
-	for (int i = 0; i < stage; i++)
+	for (int i = 0; i < current_stage; i++)
 	{
 		fgets(line, 100, level_file);
 		if (line == NULL){ return false; }
 	}
+
+	delete[] background_const_rect;
+	background_const_source_rect.x = ((current_stage - 1) % 3) * 384;
+	background_const_source_rect.y = ((current_stage - 1) / 3) * 208;
+	background_const_rect = new SDL_Rect(background_const_source_rect);
 
 	parser(line);
 	fclose(level_file);
@@ -131,8 +141,8 @@ void ModuleScene::parser(char *line)
 	std::vector<int[4]>::iterator it;
 
 	// time limit
-	/*stage_arrangement.time_limit = fast_atoi(strtok_s(line, "%", &token));
-	
+	//stage_arrangement.time_limit = fast_atoi(strtok_s(line, "%", &token));
+	/*
 	// player's initial position
 	tmp_string = strtok_s(NULL, "%", &token);
 	stage_arrangement.player_pos[0] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
@@ -159,7 +169,7 @@ void ModuleScene::parser(char *line)
 	// bricks
 	tmp_string = strtok_s(NULL, "%", &token);
 	stage_arrangement.bricks.clear();
-	if (strcmp(tmp_string, "0") == 0)
+	if (strcmp(tmp_string, "0") != 0)
 	{
 		for (int i = 0; i < 4; i++)
 		{
