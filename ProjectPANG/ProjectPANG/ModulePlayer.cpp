@@ -32,8 +32,8 @@ update_status ModulePlayer::Update()
 		if (app->inputModule->key[SDL_SCANCODE_RCTRL] == 1){ player2->Shoot(); }
 		else { player2->shoot_key_pressed = false; }
 
-		if (app->inputModule->key[SDL_SCANCODE_LEFT] == 0
-			&& app->inputModule->key[SDL_SCANCODE_RIGHT] == 0)
+		if ((app->inputModule->key[SDL_SCANCODE_LEFT] == 0
+			&& app->inputModule->key[SDL_SCANCODE_RIGHT] == 0))
 		{
 			player2->Still();
 		}

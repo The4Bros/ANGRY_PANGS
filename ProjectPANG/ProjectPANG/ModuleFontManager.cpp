@@ -42,8 +42,8 @@ void ModuleFontManager::Write_On_Screen(char* string, unsigned int x, unsigned i
 	SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, string, color); 
 
 	SDL_Texture* Message = SDL_CreateTextureFromSurface(app->renderModule->renderer, surfaceMessage); 
-	SDL_Rect Message_rect = { x, y, size, size - app->windowModule->scale };
-	if (string == "a") Message_rect.w += app->windowModule->scale;
+	SDL_Rect Message_rect = { x, y, 6 * size, size };
+	//if (string == "a") Message_rect.w += app->windowModule->scale;
 
 
 	app->renderModule->Print( Message, NULL, &Message_rect); 

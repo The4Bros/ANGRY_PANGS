@@ -66,12 +66,8 @@ public:
 
 		for (int i = 1; i < quantity; i++){ tmp = tmp->next; }
 
-		while (tmp->next != last)
-		{
-			last = last->previous;
-		}
-
 		last = tmp->previous->next;
+		last->previous = tmp->previous;
 
 		delete tmp;
 	}

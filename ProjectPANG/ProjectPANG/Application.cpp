@@ -126,6 +126,7 @@ update_status Application::Update()
 
 bool Application::CleanUp()
 {
+	modules_Queue.ReduceTo(6);
 	item = modules_Queue.getLast();
 	while (item != NULL)
 	{

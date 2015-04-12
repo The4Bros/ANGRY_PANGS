@@ -7,7 +7,7 @@ Player::Player(Application* app, bool player1)
 	state = STILL;
 	alive = true;
 	shoot_key_pressed = false;
-	current_weapon = WEAPON_HARPOON;
+	current_weapon = WEAPON_DOUBLE_HARPOON;
 	source_index = 17;
 
 	harpoon[0] = new Harpoon(app);
@@ -117,7 +117,8 @@ void Player::DownTrigger()
 
 void Player::Shoot()
 {
-	if (shoot_key_pressed){ return; }
+	
+	if (shoot_key_pressed) { return; }
 	shoot_key_pressed = true;
 
 	switch (current_weapon)
@@ -125,71 +126,94 @@ void Player::Shoot()
 	case WEAPON_DOUBLE_HARPOON:
 		if (!harpoon[1]->alive)
 		{
+			shoot_update_counter = 0;
+
 			if (state == RIGHT || source_index == 17) // leaning left
 			{
 				source_index = 18;
 				update_counter = 0;
-				harpoon[1]->rect.x = rect.x - (14 * app->windowModule->scale);
+				harpoon[1]->Shoot_Harpoon(rect.y, rect.x + (14 * app->windowModule->scale));
 				state = SHOOT_RIGHT;
 			}
 			else if (state == LEFT || source_index == 19) // leaning right
 			{
 				source_index = 20;
 				update_counter = 0;
-				harpoon[1]->rect.x = rect.x + (10 * app->windowModule->scale);
+				harpoon[1]->Shoot_Harpoon(rect.y, rect.x + (10 * app->windowModule->scale));
 				state = SHOOT_LEFT;
 			}
 
-			else { harpoon[1]->rect.x = rect.x + (12 * app->windowModule->scale); } // on stairs
-
-			break;
+			else { harpoon[1]->Shoot_Harpoon(rect.y, rect.x + (12 * app->windowModule->scale)); } // on stairs
 		}
+
+		else if (!harpoon[0]->alive)
+		{
+			shoot_update_counter = 0;
+
+			if (state == RIGHT || source_index == 17) // leaning left
+			{
+				source_index = 18;
+				update_counter = 0;
+				harpoon[0]->Shoot_Harpoon(rect.y, rect.x + (14 * app->windowModule->scale));
+				state = SHOOT_RIGHT;
+			}
+			else if (state == LEFT || source_index == 19) // leaning right
+			{
+				source_index = 20;
+				update_counter = 0;
+				harpoon[0]->Shoot_Harpoon(rect.y, rect.x + (10 * app->windowModule->scale));
+				state = SHOOT_LEFT;
+			}
+
+			else { harpoon[0]->Shoot_Harpoon(rect.y, rect.x + (12 * app->windowModule->scale)); } // on stairs
+		}
+		break;
 
 	case WEAPON_HARPOON:
 		if (!harpoon[0]->alive)
 		{
-			harpoon[0]->Shoot_Harpoon(rect);
+			shoot_update_counter = 0;
 
 			if (state == RIGHT || source_index == 17) // leaning left
 			{
 				source_index = 18;
 				update_counter = 0;
-				harpoon[0]->rect.x = rect.x + (14 * app->windowModule->scale);
+				harpoon[0]->Shoot_Harpoon(rect.y, rect.x + (14 * app->windowModule->scale));
 				state = SHOOT_RIGHT;
 			}
 			else if (state == LEFT || source_index == 19) // leaning right
 			{
 				source_index = 20;
 				update_counter = 0;
-				harpoon[0]->rect.x = rect.x + (10 * app->windowModule->scale);
+				harpoon[0]->Shoot_Harpoon(rect.y, rect.x + (10 * app->windowModule->scale));
 				state = SHOOT_LEFT;
 			}
 
-			else { harpoon[0]->rect.x = rect.x + (12 * app->windowModule->scale); } // on stairs
+			else { harpoon[0]->Shoot_Harpoon(rect.y, rect.x + (12 * app->windowModule->scale)); } // on stairs
 		}
 		break;
 
 	case WEAPON_GRAPPLE:
 		if (!harpoon[0]->alive)
 		{
-			harpoon[0]->Shoot_Harpoon(rect);
+			shoot_update_counter = 0;
 
 			if (state == RIGHT || source_index == 17) // leaning left
 			{
 				source_index = 18;
 				update_counter = 0;
-				harpoon[1]->rect.x = rect.x - (14 * app->windowModule->scale);
+				harpoon[0]->Shoot_Grapple(rect.y, rect.x + (14 * app->windowModule->scale));
 				state = SHOOT_RIGHT;
 			}
 			else if (state == LEFT || source_index == 19) // leaning right
 			{
 				source_index = 20;
 				update_counter = 0;
-				harpoon[0]->rect.x = rect.x + (10 * app->windowModule->scale);
+				harpoon[0]->Shoot_Grapple(rect.y, rect.x + (10 * app->windowModule->scale));
 				state = SHOOT_LEFT;
 			}
 
-			else { harpoon[0]->rect.x = rect.x + (12 * app->windowModule->scale); } // on stairs
+			else { harpoon[0]->Shoot_Grapple(rect.y, rect.x + (12 * app->windowModule->scale)); } // on stairs
 		}
 		break;
 
@@ -227,6 +251,8 @@ void Player::Update()
 	// if no floor: make fall
 
 	update_counter++;
+	if (shoot_update_counter < 10){ shoot_update_counter++; }
+	else { shoot_key_pressed = false; shoot_update_counter = 0; }
 
 	switch (current_weapon)
 	{

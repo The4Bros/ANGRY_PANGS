@@ -9,21 +9,21 @@ class Harpoon
 public:
 	Application* app;
 
-	SDL_Rect rect;
-	SDL_Rect source_rect;
-	const SDL_Rect* const_rect;
+	SDL_Rect head_rect, body_rect;
+	SDL_Rect* source_rect[25];
+	int source_index;
 
-	unsigned int update_counter;
+	int update_counter, length;
 	bool alive;
 
 	Harpoon(Application* app);
 	~Harpoon(){}
 
-	void Shoot_Harpoon(SDL_Rect player_rect);
-	void Shoot_Grapple(SDL_Rect player_rect);
-	void Shoot_Shotgun(SDL_Rect player_rect);
+	void Shoot_Harpoon(unsigned int y, unsigned int x);
+	void Shoot_Grapple(unsigned int y, unsigned int x);
 
 	void Update();
+	void Print();
 
 };
 #endif

@@ -2,18 +2,12 @@
 
 ModuleScene::ModuleScene(Application* app) : Module(app)
 {
-	
 	time_count = NULL;
-	
 }
 
 bool ModuleScene::Init()
 {
 	time_count = new Time_Count(app);
-	//level_file = fopen("dadesED2014-100.txt", "r");
-	//if (level_file == NULL){ LOG("ERROR LOADING FILE"); return false; }
-
-	
 
 	current_stage = 1;
 	load_stage(current_stage);
@@ -27,8 +21,7 @@ bool ModuleScene::Init()
 
 update_status ModuleScene::PreUpdate()
 {
-	if (difftime(time(NULL), time_count->timer) >= 1)
-	{ time_count->Update(); }
+	if (difftime(time(NULL), time_count->timer) >= 1) { time_count->Update(); }
 
 	//if (time_count->current_time == 0){ time_count->Reset(150); }
 
@@ -37,7 +30,7 @@ update_status ModuleScene::PreUpdate()
 update_status ModuleScene::Update()
 {
 	// PRINT SCORES
-	app->fontManagerModule->Write_On_Screen("Player", 8 * app->windowModule->scale, 208 * app->windowModule->scale, 20 * app->windowModule->scale);
+	app->fontManagerModule->Write_On_Screen("Player", 8 * app->windowModule->scale, 209 * app->windowModule->scale, 8 * app->windowModule->scale);
 	//app->fontManagerModule->Write_On_Screen("L", 16 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
 	//app->fontManagerModule->Write_On_Screen("A", 24 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
 	//app->fontManagerModule->Write_On_Screen("Y", 32 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
@@ -54,13 +47,13 @@ update_status ModuleScene::Update()
 
 	// HARPOONS
 
-	if (app->playerModule->player1->harpoon[0]->alive) { app->renderModule->Print(app->texturesModule->harpoons_sprite, app->playerModule->player1->harpoon[0]->const_rect, &app->playerModule->player1->harpoon[0]->rect); }
-	if (app->playerModule->player1->harpoon[1]->alive) { app->renderModule->Print(app->texturesModule->harpoons_sprite, app->playerModule->player1->harpoon[1]->const_rect, &app->playerModule->player1->harpoon[1]->rect); }
+	if (app->playerModule->player1->harpoon[0]->alive) { app->playerModule->player1->harpoon[0]->Print(); }
+	if (app->playerModule->player1->harpoon[1]->alive) { app->playerModule->player1->harpoon[1]->Print(); }
 	
 	if (app->playerModule->player2 != NULL)
 	{
-		if (app->playerModule->player2->harpoon[0]->alive) { app->renderModule->Print(app->texturesModule->harpoons_sprite, app->playerModule->player2->harpoon[0]->const_rect, &app->playerModule->player2->harpoon[0]->rect); }
-		if (app->playerModule->player2->harpoon[1]->alive) { app->renderModule->Print(app->texturesModule->harpoons_sprite, app->playerModule->player2->harpoon[1]->const_rect, &app->playerModule->player2->harpoon[1]->rect); }
+		if (app->playerModule->player2->harpoon[0]->alive) { app->playerModule->player2->harpoon[0]->Print(); }
+		if (app->playerModule->player2->harpoon[1]->alive) { app->playerModule->player2->harpoon[1]->Print(); }
 	}
 
 	// BULLETS
@@ -110,43 +103,112 @@ void ModuleScene::reset_stage()
 
 
 
-void ModuleScene::load_stage(int stage)
+bool ModuleScene::load_stage(int stage)
 {
-	/*
-	User parser(char *line){
-		User user; char *it;
-		user.init();
-		user.setUid(strtok(line, "|"));
-		user.setCountry(strtok(NULL, "|"));
-		user.setMostListenedArtist(strtok(NULL, "&") + 1);
-		user.setTimesListened(strtok(NULL, "&"));
-		user.setMostRelevance(strtok(NULL, "|") + 2);			//num_type temp = ::strtod(str_num.c_str(), 0);  from <cstdlib>
-		user.addArtist(strtok(NULL, "%") + 1);
-		user.addRelevance(strtok(NULL, "&") + 1);
-		while (true){
-			it = strtok(NULL, "%");
-			if (it == NULL){ break; }
-			user.addArtist(it + 2);
-			user.addRelevance(strtok(NULL, "&") + 1);
-		}
-		return user;
+	if (fopen_s(&level_file, "txt files/LevelArrangment.txt", "r") != 0){ return false; }
+
+	char line[100];
+	for (int i = 0; i < stage; i++)
+	{
+		fgets(line, 100, level_file);
+		if (line == NULL){ return false; }
 	}
+
+	parser(line);
+	fclose(level_file);
+
+
+	return true;
+
+}
+
+
+void ModuleScene::parser(char *line)
+{
+	char *token = NULL;
+	char *tmp_string = NULL;
+	int tmp[4] = { 0, 0, 0, 0 };
+	std::vector<int[4]>::iterator it;
+
+	// time limit
+	/*stage_arrangement.time_limit = fast_atoi(strtok_s(line, "%", &token));
 	
+	// player's initial position
+	tmp_string = strtok_s(NULL, "%", &token);
+	stage_arrangement.player_pos[0] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
+	stage_arrangement.player_pos[1] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
+	stage_arrangement.player_pos[2] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
+	stage_arrangement.player_pos[3] = fast_atoi(tmp_string);
 	
-		else{
-			char line[100];
-			for (int i = 0; fgets(line, 2820, fichero) != NULL; i++){ userList[i] = parser(line); }
-			fclose(fichero);
-			//printAllUsers(userList);
-			Stack stack;
-			stack.initialize();
-			for (int i2 = 0; i2 <= i; i2++){
-				stack
+	// balloons
+	tmp_string = strtok_s(NULL, "%", &token);
+	stage_arrangement.balloons.clear();
+	if (strcmp(tmp_string, "0") == 0)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			tmp[0] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp[1] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp[2] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp[3] = fast_atoi(tmp_string);
+
+			stage_arrangement.balloons.push_back(tmp);
+		}
+	}
+
+	// bricks
+	tmp_string = strtok_s(NULL, "%", &token);
+	stage_arrangement.bricks.clear();
+	if (strcmp(tmp_string, "0") == 0)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			tmp[0] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp[1] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp[2] = fast_atoi(tmp_string);
+
+			stage_arrangement.bricks.push_back(tmp);
 			}
+	}
+
+	tmp_string = strtok_s(NULL, "%", &token);
+	stage_arrangement.enemies.clear();
+	if (strcmp(tmp_string, "0") == 0)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			tmp[0] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp[1] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp[2] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp[3] = fast_atoi(tmp_string);
+
+			stage_arrangement.enemies.push_back(tmp);
+		}
+	}
+
+	tmp_string = strtok_s(NULL, "%", &token);
+	stage_arrangement.stairs.clear();
+	if (strcmp(tmp_string, "0") == 0)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			tmp[0] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp[1] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp[2] = fast_atoi(tmp_string);
+
+			stage_arrangement.stairs.push_back(tmp);
+		}
+	}*/
+}
 
 
-
-			*/
-	time_count->Reset(150);
-
+int fast_atoi(const char * string)
+{
+	int return_value = 0;
+	while (*string)
+	{
+		return_value *= 10;
+		return_value += (*string++ - '0');
+	}
+	return return_value;
 }

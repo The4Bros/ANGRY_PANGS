@@ -3,7 +3,7 @@
 Time_Count::Time_Count(Application* app)
 {
 	this->app = app;
-	current_time = 150;
+	current_time = 10;
 	time(&timer);
 	
 	rect[0] = { 334 * app->windowModule->scale, 9 * app->windowModule->scale, 13 * app->windowModule->scale, 13 * app->windowModule->scale };
@@ -25,18 +25,23 @@ void Time_Count::Update()
 	{
 		current_time--;
 		time(&timer);
+		Update_Source_Index();
 	}
-	else { Reset(150); }
+}
 
+void Time_Count::Update_Source_Index()
+{
 	source_index[0] = (current_time / 100) % 10;
 	source_index[1] = (current_time / 10) % 10;
 	source_index[2] = current_time % 10;
 }
 
+
 void Time_Count::Reset(int seconds)
 {
 	current_time = seconds;
 	time(&timer);
+	Update_Source_Index();
 }
 
 void Time_Count::Print_Timer()

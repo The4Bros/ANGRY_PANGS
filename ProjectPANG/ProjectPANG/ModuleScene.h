@@ -7,28 +7,15 @@
 
 #include "Time_Count.h"
 #include <string.h>
+#include <stdio.h>
+#include <vector>
+#include <iterator>
 
 struct Stage_Arrangement
 {
 	int time_limit;
 	int player_pos[4];
-	int* balloons;
-	int* bricks;
-	int* enemies;
-	int* stairs;
-
-	inline Stage_Arrangement()
-	{
-		time_limit = 0;
-		player_pos[0] = 0;
-		player_pos[1] = 0;
-		player_pos[2] = 0;
-		player_pos[3] = 0;
-		balloons = NULL;
-		bricks = NULL;
-		enemies = NULL;
-		stairs = NULL;
-	}
+	std::vector<int[4]> balloons, bricks, enemies, stairs;
 
 	~Stage_Arrangement(){}
 };
@@ -37,13 +24,18 @@ struct Stage_Arrangement
 
 
 class ModuleScene : public Module{
+private:
+	FILE* level_file;
+
+	void parser(char *line);
+	int fast_atoi(const char * str);
+
+
 public:
 
 	Time_Count* time_count;
 
-	FILE* level_file;
-
-	unsigned int current_stage;
+	int current_stage;
 	Stage_Arrangement stage_arrangement;
 
 	SDL_Rect background_rect;
@@ -58,7 +50,7 @@ public:
 	bool CleanUp();
 
 	void reset_stage();
-	void load_stage(int stage);
+	bool load_stage(int stage);
 
 };
 #endif
