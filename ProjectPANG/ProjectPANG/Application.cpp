@@ -127,12 +127,24 @@ update_status Application::Update()
 bool Application::CleanUp()
 {
 	modules_Queue.ReduceTo(6);
+
+	if (playerModule != NULL){        if (playerModule->CleanUp() == false) {        return false; } }
+	if (entityManagerModule != NULL){ if (entityManagerModule->CleanUp() == false) { return false; } }
+	if (sceneModule != NULL){         if (sceneModule->CleanUp() == false) {         return false; } }
+	if (titleModule != NULL){         if (titleModule->CleanUp() == false) {         return false; } }
+	if (tutorialModule != NULL){      if (tutorialModule->CleanUp() == false) {      return false; } }
+	if (chooseCityModule != NULL){    if (chooseCityModule->CleanUp() == false) {    return false; } }
+	if (planeModule != NULL){         if (planeModule->CleanUp() == false) {         return false; } }
+	if (creditsModule != NULL){       if (creditsModule->CleanUp() == false) {       return false; } }
+	if (highscoreModule != NULL){     if (highscoreModule->CleanUp() == false) {     return false; } }
+
 	item = modules_Queue.getLast();
 	while (item != NULL)
 	{
 		if (!item->data->CleanUp()){ return false; }
 		item = item->previous;
 	}
+
 	modules_Queue.clear();
 	return true;
 }

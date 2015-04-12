@@ -62,14 +62,9 @@ public:
 
 	void ReduceTo(const int quantity)
 	{
-		DoubleNode<QueueTYPE>* tmp = init;
-
-		for (int i = 1; i < quantity; i++){ tmp = tmp->next; }
-
-		last = tmp->previous->next;
-		last->previous = tmp->previous;
-
-		delete tmp;
+		last = init;
+		for (int i = 1; i < quantity; i++){ last = last->next; }
+		last->next = NULL;
 	}
 
 };
