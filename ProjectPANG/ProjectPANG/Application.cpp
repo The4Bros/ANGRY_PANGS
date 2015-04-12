@@ -76,9 +76,7 @@ update_status Application::Update()
 		case UPDATE_PAUSE:
 			// check for un-pause or close window -> window updates + input updates
 			break;
-		case UPDATE_ERROR:
-			return returnValue;
-		case UPDATE_STOP:
+		default:
 			return returnValue;
 		}
 	}
@@ -95,9 +93,7 @@ update_status Application::Update()
 		case UPDATE_PAUSE:
 			break;
 			//pause managed
-		case UPDATE_ERROR:
-			return returnValue;
-		case UPDATE_STOP:
+		default:
 			return returnValue;
 		}
 	}
@@ -114,9 +110,7 @@ update_status Application::Update()
 		case UPDATE_PAUSE:
 			break;
 			//pause managed
-		case UPDATE_ERROR:
-			return returnValue;
-		case UPDATE_STOP:
+		default:
 			return returnValue;
 		}
 	}

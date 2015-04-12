@@ -3,7 +3,7 @@
 Time_Count::Time_Count(Application* app)
 {
 	this->app = app;
-	current_time = 10;
+	current_time = 100;
 	time(&timer);
 	
 	rect[0] = { 334 * app->windowModule->scale, 9 * app->windowModule->scale, 13 * app->windowModule->scale, 13 * app->windowModule->scale };

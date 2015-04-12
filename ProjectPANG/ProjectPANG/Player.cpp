@@ -7,7 +7,7 @@ Player::Player(Application* app, bool player1)
 	state = STILL;
 	alive = true;
 	shoot_key_pressed = false;
-	current_weapon = WEAPON_HARPOON;
+	current_weapon = WEAPON_DOUBLE_HARPOON;
 	source_index = 17;
 
 	harpoon[0] = new Harpoon(app);
@@ -202,18 +202,18 @@ void Player::Shoot()
 			{
 				source_index = 18;
 				update_counter = 0;
-				harpoon[0]->Shoot_Grapple(rect.y, rect.x + (14 * app->windowModule->scale));
+				harpoon[0]->Shoot_Grapple(rect.y + (2 * app->windowModule->scale), rect.x + (14 * app->windowModule->scale));
 				state = SHOOT_RIGHT;
 			}
 			else if (state == LEFT || source_index == 19) // leaning right
 			{
 				source_index = 20;
 				update_counter = 0;
-				harpoon[0]->Shoot_Grapple(rect.y, rect.x + (10 * app->windowModule->scale));
+				harpoon[0]->Shoot_Grapple(rect.y + (2 * app->windowModule->scale), rect.x + (10 * app->windowModule->scale));
 				state = SHOOT_LEFT;
 			}
 
-			else { harpoon[0]->Shoot_Grapple(rect.y, rect.x + (12 * app->windowModule->scale)); } // on stairs
+			else { harpoon[0]->Shoot_Grapple(rect.y + (2 * app->windowModule->scale), rect.x + (12 * app->windowModule->scale)); } // on stairs
 		}
 		break;
 

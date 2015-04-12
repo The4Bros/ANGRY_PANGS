@@ -84,7 +84,6 @@ int main(int argc, char *argv[])
 			//LOG("Starting Application:");
 			if (!app->Init()){ state = MAIN_ERROR; }
 			else { state = MAIN_UPDATE; }
-			update_state = CHANGE_TO_PLAY;
 			break;
 		
 		case MAIN_FINISH:            //------------------FINISH-----------------
@@ -97,18 +96,6 @@ int main(int argc, char *argv[])
 		
 		case MAIN_CREATION:          //------------------CREATION-----------------
 			//LOG("Creating Application:\n");
-
-			/*
-			SDL_INIT_TIMER - timer subsystem
-			SDL_INIT_AUDIO - audio subsystem
-			SDL_INIT_VIDEO - video subsystem
-			SDL_INIT_JOYSTICK - joystick subsystem
-			SDL_INIT_HAPTIC - haptic (force feedback) subsystem
-			SDL_INIT_GAMECONTROLLER - controller subsystem
-			SDL_INIT_EVENTS - events subsystem
-			SDL_INIT_EVERYTHING - all of the above subsystems
-			SDL_INIT_NOPARACHUTE - compatibility; this flag is ignored
-			*/
 			if (SDL_Init(SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS) == -1){ state = MAIN_ERROR; }
 			else
 			{
@@ -122,45 +109,14 @@ int main(int argc, char *argv[])
 	
 
 
-	/*
-
-	LOG("Initializing SDL:\n");
-	if (SDL_Init(SDL_INIT_VIDEO) != 0){
->>>>>>> origin/master
-		std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
-		return -1;
-	}
-
-
-
-	// game code eventually goes here
-
-
-	LOG("Exiting SDL:\n");
-
-	SDL_Quit();
-
-
-
-	
-	try {
-		SDL sdl(SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS);
-
-
-
-
-	}
-	
-	catch (const InitError& err) {
-			std::cerr
-				<< "Error while initializing SDL:  "
-				<< err.what() << std::endl;
-		}
-
-		*/
-
-
-
-
-
-
+/*
+SDL_INIT_TIMER - timer subsystem
+SDL_INIT_AUDIO - audio subsystem
+SDL_INIT_VIDEO - video subsystem
+SDL_INIT_JOYSTICK - joystick subsystem
+SDL_INIT_HAPTIC - haptic (force feedback) subsystem
+SDL_INIT_GAMECONTROLLER - controller subsystem
+SDL_INIT_EVENTS - events subsystem
+SDL_INIT_EVERYTHING - all of the above subsystems
+SDL_INIT_NOPARACHUTE - compatibility; this flag is ignored
+*/

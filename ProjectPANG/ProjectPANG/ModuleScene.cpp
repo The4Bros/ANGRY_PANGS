@@ -137,7 +137,8 @@ void ModuleScene::parser(char *line)
 {
 	char *token = NULL;
 	char *tmp_string = NULL;
-	int tmp[4] = { 0, 0, 0, 0 };
+	int tmp[4];
+	for (int i = 0; i < 4; i++){ tmp[i] = 0; }
 	std::vector<int[4]>::iterator it;
 
 	// time limit
