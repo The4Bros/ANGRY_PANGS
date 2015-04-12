@@ -26,11 +26,22 @@ bool ModuleFontManager ::Init()
 	return true;
 }
 
+char* ModuleFontManager::NumberToString(int Number){
+
+	char str[100];
+	sprintf_s(str, 10, "%d", Number);
+	return str;
+}
 
 void ModuleFontManager::Write_On_Screen(unsigned int value, unsigned int x, unsigned int y, unsigned int size){
+	
+	
+	SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, NumberToString(value), color);
+	SDL_Texture* Message = SDL_CreateTextureFromSurface(app->renderModule->renderer, surfaceMessage);
+	SDL_Rect Message_rect = { x, y, strlen(NumberToString(value))*size, size };
 
 
-
+	app->renderModule->Print(Message, NULL, &Message_rect);
 
 
 }
