@@ -30,12 +30,7 @@ update_status ModuleScene::PreUpdate()
 update_status ModuleScene::Update()
 {
 	// PRINT SCORES
-	app->fontManagerModule->Write_On_Screen("Player", 8 * app->windowModule->scale, 209 * app->windowModule->scale, 8 * app->windowModule->scale);
-	//app->fontManagerModule->Write_On_Screen("L", 16 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
-	//app->fontManagerModule->Write_On_Screen("A", 24 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
-	//app->fontManagerModule->Write_On_Screen("Y", 32 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
-	//app->fontManagerModule->Write_On_Screen("E", 40 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
-	//app->fontManagerModule->Write_On_Screen("R", 48 * app->windowModule->scale, 208 * app->windowModule->scale, 7 * app->windowModule->scale);
+	app->fontManagerModule->Write_On_Screen("Player and ruben no swag", 8 * app->windowModule->scale, 209 * app->windowModule->scale, 8 * app->windowModule->scale);
 
 
 

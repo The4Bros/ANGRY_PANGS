@@ -1,5 +1,4 @@
 #include "ModuleFontManager.h"
-
 ModuleFontManager::ModuleFontManager(Application* app) : Module(app)
 {
 	sample_text = "hello world";
@@ -36,18 +35,18 @@ void ModuleFontManager::Write_On_Screen(unsigned int value, unsigned int x, unsi
 
 }
 
-void ModuleFontManager::Write_On_Screen(char* string, unsigned int x, unsigned int y, unsigned int size){
+void ModuleFontManager::Write_On_Screen( char* string, unsigned int x, unsigned int y, unsigned int size){
+	
+	
+		
+		SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, string, color);
+		SDL_Texture* Message = SDL_CreateTextureFromSurface(app->renderModule->renderer, surfaceMessage);
+		SDL_Rect Message_rect = { x , y,  strlen(string)*size, size };
+		//if (string == "a") Message_rect.w += app->windowModule->scale;
 
 
-	SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, string, color); 
-
-	SDL_Texture* Message = SDL_CreateTextureFromSurface(app->renderModule->renderer, surfaceMessage); 
-	SDL_Rect Message_rect = { x, y, 6 * size, size };
-	//if (string == "a") Message_rect.w += app->windowModule->scale;
-
-
-	app->renderModule->Print( Message, NULL, &Message_rect); 
-
+		app->renderModule->Print(Message, NULL, &Message_rect);
+	
 }
 
 
