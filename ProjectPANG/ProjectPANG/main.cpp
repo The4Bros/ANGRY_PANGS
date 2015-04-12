@@ -84,6 +84,7 @@ int main(int argc, char *argv[])
 			//LOG("Starting Application:");
 			if (!app->Init()){ state = MAIN_ERROR; }
 			else { state = MAIN_UPDATE; }
+			update_state = CHANGE_TO_TITLE; //CHANGE_TO_PLAY;
 			break;
 		
 		case MAIN_FINISH:            //------------------FINISH-----------------
