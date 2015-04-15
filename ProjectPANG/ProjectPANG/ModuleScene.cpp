@@ -100,7 +100,36 @@ void ModuleScene::reset_stage()
 	if (app->playerModule->player2 != NULL){ app->playerModule->player1->setPos(stage_arrangement.player_pos[0], stage_arrangement.player_pos[1]); }
 
 	
+	int i = 0;;
+	
+	if (!stage_arrangement.balloons.empty())
+	{
+	while (i < app->entityManagerModule->balloons->Count() && i < stage_arrangement.balloons.size())
+	{
+	app->entityManagerModule->balloons->At(i)->Reset(
+	stage_arrangement.balloons.at(i).x,
+	stage_arrangement.balloons.at(i).y,
+	stage_arrangement.balloons.at(i).type,
+	stage_arrangement.balloons.at(i).aux);
 
+	i++;
+	}
+	while(i < stage_arrangement.balloons.size())
+	{
+	app->entityManagerModule->balloons->PushBack(new Balloon(
+	stage_arrangement.balloons.at(i).x,
+	stage_arrangement.balloons.at(i).y,
+	stage_arrangement.balloons.at(i).type,
+	stage_arrangement.balloons.at(i).aux));
+
+	i++;
+	}
+
+
+	}
+
+	app->entityManagerModule->balloons->Reduce_To(i);
+	
 
 	
 }
@@ -128,36 +157,7 @@ bool ModuleScene::load_stage(int stage)
 	parser(line);
 	fclose(level_file);
 
-	int i = 0;;
-	/*
-	if (!stage_arrangement.balloons.empty())
-	{
-		while (i < app->entityManagerModule->balloons->Count() && i < stage_arrangement.balloons.size())
-		{
-			app->entityManagerModule->balloons->At(i)->Reset(
-				stage_arrangement.balloons.at(i).x,
-				stage_arrangement.balloons.at(i).y,
-				stage_arrangement.balloons.at(i).type,
-				stage_arrangement.balloons.at(i).aux);
-
-			i++;
-		}
-		while(i < stage_arrangement.balloons.size())
-		{
-			app->entityManagerModule->balloons->PushBack(new Balloon(
-				stage_arrangement.balloons.at(i).x,
-				stage_arrangement.balloons.at(i).y,
-				stage_arrangement.balloons.at(i).type,
-				stage_arrangement.balloons.at(i).aux));
-
-			i++;
-		}
-		
-
-	}
-
-	app->entityManagerModule->balloons->Reduce_To(i);
-	*/
+	reset_stage();
 
 	return true;
 

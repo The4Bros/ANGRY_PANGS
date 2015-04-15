@@ -24,7 +24,7 @@ public:
 
 	SDL_Rect rect;
 
-	Balloon(Application* app, unsigned int x, unsigned int y, unsigned int type, unsigned int max_height);
+	Balloon(Application* app, int x, int y, int type, int max_height);
 	~Balloon(){}
 
 	void Update();
@@ -34,6 +34,8 @@ public:
 
 	void Hit();
 	// particles->PushBack(x, y, type);
+
+	void Reset(int x, int y, int type, int max_height);
 
 
 };
