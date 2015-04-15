@@ -11,15 +11,52 @@
 #include <vector>
 #include <iterator>
 
+struct Tri_Struct // Bricks and Stairs
+{
+	unsigned int x;
+	unsigned int y;
+	unsigned int type;
+	Tri_Struct()
+	{
+		x = 0;
+		y = 0;
+		type = 0;
+	}
+	~Tri_Struct(){}
+};
+struct Quadra_Struct // Balloons and Enemies
+{
+	unsigned int x;
+	unsigned int y;
+	unsigned int type;
+	unsigned int aux;
+	Quadra_Struct()
+	{
+		x = 0;
+		y = 0;
+		type = 0;
+		aux = 0;
+	}
+	~Quadra_Struct(){}
+};
+
 struct Stage_Arrangement
 {
 	int time_limit;
 	int player_pos[4];
-	std::vector<int[4]> balloons;
-	std::vector<int[4]> bricks;
-	std::vector<int[4]> enemies;
-	std::vector<int[4]> stairs;
-	~Stage_Arrangement(){}
+	std::vector<Tri_Struct> bricks;
+	std::vector<Tri_Struct> stairs;
+	std::vector<Quadra_Struct> balloons;
+	std::vector<Quadra_Struct> enemies;
+	~Stage_Arrangement()
+	{
+		/*
+		bricks.clear();
+		stairs.clear();
+		balloons.clear();
+		enemies.clear();
+		*/
+	}
 };
 
 
@@ -28,10 +65,7 @@ struct Stage_Arrangement
 class ModuleScene : public Module{
 private:
 	FILE* level_file;
-
 	void parser(char *line);
-	int fast_atoi(const char * str);
-
 
 public:
 

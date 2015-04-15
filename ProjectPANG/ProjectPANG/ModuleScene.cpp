@@ -93,7 +93,10 @@ void ModuleScene::reset_stage()
 	app->playerModule->player1->setPos(stage_arrangement.player_pos[0], stage_arrangement.player_pos[1]);
 	if (app->playerModule->player2 != NULL){ app->playerModule->player1->setPos(stage_arrangement.player_pos[0], stage_arrangement.player_pos[1]); }
 
-
+	if (!stage_arrangement.balloons.empty())
+	{
+		for (int i = 0; i < )
+	}
 
 
 	
@@ -122,6 +125,7 @@ bool ModuleScene::load_stage(int stage)
 	parser(line);
 	fclose(level_file);
 
+	reset_stage();
 
 	return true;
 
@@ -132,89 +136,83 @@ void ModuleScene::parser(char *line)
 {
 	char *token = NULL;
 	char *tmp_string = NULL;
-	int tmp[4];
-	for (int i = 0; i < 4; i++){ tmp[i] = 0; }
-	std::vector<int[4]>::iterator it;
+	int max;
+	Tri_Struct tmp_3;
+	Quadra_Struct tmp_4;
 
 	// time limit
-	//stage_arrangement.time_limit = fast_atoi(strtok_s(line, "%", &token));
-	/*
+	stage_arrangement.time_limit = atoi(strtok_s(line, "%", &token));
+	
 	// player's initial position
 	tmp_string = strtok_s(NULL, "%", &token);
-	stage_arrangement.player_pos[0] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
-	stage_arrangement.player_pos[1] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
-	stage_arrangement.player_pos[2] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
-	stage_arrangement.player_pos[3] = fast_atoi(tmp_string);
+	stage_arrangement.player_pos[0] = atoi(strtok_s(NULL, ",", &tmp_string));
+	stage_arrangement.player_pos[1] = atoi(strtok_s(NULL, ",", &tmp_string));
+	stage_arrangement.player_pos[2] = atoi(strtok_s(NULL, ",", &tmp_string));
+	stage_arrangement.player_pos[3] = atoi(tmp_string);
 	
-	// balloons
-	tmp_string = strtok_s(NULL, "%", &token);
-	stage_arrangement.balloons.clear();
-	if (strcmp(tmp_string, "0") == 0)
-	{
-		for (int i = 0; i < 4; i++)
-		{
-			tmp[0] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp[1] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp[2] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp[3] = fast_atoi(tmp_string);
-
-			stage_arrangement.balloons.push_back(tmp);
-		}
-	}
-
 	// bricks
 	tmp_string = strtok_s(NULL, "%", &token);
 	stage_arrangement.bricks.clear();
 	if (strcmp(tmp_string, "0") != 0)
 	{
-		for (int i = 0; i < 4; i++)
+		max = atoi(strtok_s(NULL, ",", &tmp_string));
+		for (int i = 0; i < max; i++)
 		{
-			tmp[0] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp[1] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp[2] = fast_atoi(tmp_string);
+			tmp_3.x = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_3.y = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_3.type = atoi(tmp_string);
 
-			stage_arrangement.bricks.push_back(tmp);
+			stage_arrangement.bricks.push_back(tmp_3);
+		}
+	}
+
+	// stairs
+	tmp_string = strtok_s(NULL, "%", &token);
+	stage_arrangement.stairs.clear();
+	if (strcmp(tmp_string, "0") != 0)
+	{
+		max = atoi(strtok_s(NULL, ",", &tmp_string));
+		for (int i = 0; i < max; i++)
+		{
+			tmp_3.x = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_3.y = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_3.type = atoi(tmp_string);
+
+			stage_arrangement.stairs.push_back(tmp_3);
 			}
 	}
 
+	// balloons
+	tmp_string = strtok_s(NULL, "%", &token);
+	stage_arrangement.balloons.clear();
+	if (strcmp(tmp_string, "0") != 0)
+	{
+		max = atoi(strtok_s(NULL, ",", &tmp_string));
+		for (int i = 0; i < max; i++)
+		{
+			tmp_4.x = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_4.y = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_4.type = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_4.aux = atoi(tmp_string);
+
+			stage_arrangement.balloons.push_back(tmp_4);
+		}
+	}
+
+	// enemies
 	tmp_string = strtok_s(NULL, "%", &token);
 	stage_arrangement.enemies.clear();
-	if (strcmp(tmp_string, "0") == 0)
+	if (strcmp(tmp_string, "0") != 0)
 	{
-		for (int i = 0; i < 4; i++)
+		max = atoi(strtok_s(NULL, ",", &tmp_string));
+		for (int i = 0; i < max; i++)
 		{
-			tmp[0] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp[1] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp[2] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp[3] = fast_atoi(tmp_string);
+			tmp_4.x = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_4.y = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_4.type = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_4.aux = atoi(tmp_string);
 
-			stage_arrangement.enemies.push_back(tmp);
+			stage_arrangement.enemies.push_back(tmp_4);
 		}
 	}
-
-	tmp_string = strtok_s(NULL, "%", &token);
-	stage_arrangement.stairs.clear();
-	if (strcmp(tmp_string, "0") == 0)
-	{
-		for (int i = 0; i < 4; i++)
-		{
-			tmp[0] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp[1] = fast_atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp[2] = fast_atoi(tmp_string);
-
-			stage_arrangement.stairs.push_back(tmp);
-		}
-	}*/
-}
-
-
-int fast_atoi(const char * string)
-{
-	int return_value = 0;
-	while (*string)
-	{
-		return_value *= 10;
-		return_value += (*string++ - '0');
-	}
-	return return_value;
 }
