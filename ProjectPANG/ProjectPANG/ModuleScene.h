@@ -2,6 +2,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "Balloon.h"
+#include "Stair.h"
 
 #ifndef __ModuleScene_H__
 #define __ModuleScene_H__

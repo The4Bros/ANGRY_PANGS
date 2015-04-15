@@ -2,6 +2,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "Balloon.h"
+#include "Stair.h"
 
 
 #ifndef __ModuleEntityManager_H__
@@ -16,6 +17,8 @@ public:
 	Balloon* balloon_sample;
 	SDL_Rect* source_balloon_rect[12];
 
+	DynArray<Stair*>* stairs;
+	SDL_Rect* source_stair_rect;
 
 	ModuleEntityManager(Application* app);
 	bool Init();

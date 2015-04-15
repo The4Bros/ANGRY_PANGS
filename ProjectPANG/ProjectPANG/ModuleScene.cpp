@@ -94,47 +94,120 @@ bool ModuleScene::CleanUp(){ return true; }
 
 void ModuleScene::reset_stage()
 {
+	// TIME COUNT
 	time_count->Reset(stage_arrangement.time_limit);
 
+	// PLAYER POS
 	app->playerModule->player1->setPos(stage_arrangement.player_pos[0], stage_arrangement.player_pos[1]);
 	if (app->playerModule->player2 != NULL){ app->playerModule->player1->setPos(stage_arrangement.player_pos[0], stage_arrangement.player_pos[1]); }
 
 	
-	int i = 0;;
-	
+	// BRICKS
+	int i = 0;
+	/*if (!stage_arrangement.bricks.empty())
+	{
+		Brick* bricks_tmp = NULL;
+		while (i < app->entityManagerModule->bricks->Count() && i < stage_arrangement.bricks.size())
+		{
+			bricks_tmp = *app->entityManagerModule->bricks->At(i);
+			bricks_tmp->Reset(
+				stage_arrangement.bricks.at(i).x,
+				stage_arrangement.bricks.at(i).y,
+				stage_arrangement.bricks.at(i).type);
+			i++;
+		}
+		while (i < stage_arrangement.bricks.size())
+		{
+			app->entityManagerModule->bricks->PushBack(new Brick(
+				app,
+				stage_arrangement.bricks.at(i).x,
+				stage_arrangement.bricks.at(i).y,
+				stage_arrangement.bricks.at(i).type));
+			i++;
+		}
+	}
+	*/
+
+	// STAIRS
+	i = 0;;
+	if (!stage_arrangement.stairs.empty())
+	{
+		Stair* stair_tmp = NULL;
+		while (i < app->entityManagerModule->stairs->Count() && i < stage_arrangement.stairs.size())
+		{
+			stair_tmp = *app->entityManagerModule->stairs->At(i);
+			stair_tmp->Reset(
+				stage_arrangement.stairs.at(i).x,
+				stage_arrangement.stairs.at(i).y,
+				stage_arrangement.stairs.at(i).type);
+			i++;
+		}
+		while (i < stage_arrangement.stairs.size())
+		{
+			app->entityManagerModule->stairs->PushBack(new Stair(
+				app,
+				stage_arrangement.stairs.at(i).x,
+				stage_arrangement.stairs.at(i).y,
+				stage_arrangement.stairs.at(i).type));
+			i++;
+		}
+	}
+
+	/*
+	// ENEMIES
+	i = 0;
+	if (!stage_arrangement.enemies.empty())
+	{
+		Enemy* enemy_tmp = NULL;
+		while (i < app->entityManagerModule->enemies->Count() && i < stage_arrangement.enemies.size())
+		{
+			enemy_tmp = *app->entityManagerModule->enemies->At(i);
+			enemy_tmp->Reset(
+				stage_arrangement.enemies.at(i).x,
+				stage_arrangement.enemies.at(i).y,
+				stage_arrangement.enemies.at(i).type,
+				stage_arrangement.enemies.at(i).aux);
+			i++;
+		}
+		while (i < stage_arrangement.enemies.size())
+		{
+			app->entityManagerModule->enemies->PushBack(new Enemy(
+				app,
+				stage_arrangement.enemies.at(i).x,
+				stage_arrangement.enemies.at(i).y,
+				stage_arrangement.enemies.at(i).type,
+				stage_arrangement.enemies.at(i).aux));
+			i++;
+		}
+	}*/
+
+
+	// BALLOONS
+	i = 0;
 	if (!stage_arrangement.balloons.empty())
 	{
-		Balloon* tmp = NULL;
+		Balloon* balloon_tmp = NULL;
 		while (i < app->entityManagerModule->balloons->Count() && i < stage_arrangement.balloons.size())
 		{
-			tmp = *app->entityManagerModule->balloons->At(i);
-			tmp->Reset(
+			balloon_tmp = *app->entityManagerModule->balloons->At(i);
+			balloon_tmp->Reset(
 				stage_arrangement.balloons.at(i).x,
 				stage_arrangement.balloons.at(i).y,
 				stage_arrangement.balloons.at(i).type,
 				stage_arrangement.balloons.at(i).aux);
-
 			i++;
 		}
-		while(i < stage_arrangement.balloons.size())
+		while (i < stage_arrangement.balloons.size())
 		{
-		app->entityManagerModule->balloons->PushBack(new Balloon(
-			app,
-			stage_arrangement.balloons.at(i).x,
-			stage_arrangement.balloons.at(i).y,
-			stage_arrangement.balloons.at(i).type,
-			stage_arrangement.balloons.at(i).aux));
-
-	i++;
+			app->entityManagerModule->balloons->PushBack(new Balloon(
+				app,
+				stage_arrangement.balloons.at(i).x,
+				stage_arrangement.balloons.at(i).y,
+				stage_arrangement.balloons.at(i).type,
+				stage_arrangement.balloons.at(i).aux));
+			i++;
+		}
 	}
-
-
-	}
-
-	app->entityManagerModule->balloons->Reduce_To(i);
-	
-
-	
 }
 
 

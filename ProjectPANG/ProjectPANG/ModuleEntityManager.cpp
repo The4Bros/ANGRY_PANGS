@@ -12,7 +12,7 @@ bool ModuleEntityManager::Init()
 	source_balloon_rect[0] = new SDL_Rect({ 0, 0, 32, 32 });
 	balloon_sample = new Balloon(app, 150, 30, 1, 20);
 
-
+	source_stair_rect = new SDL_Rect({ 0, 104, 24, 8 });
 
 
 
