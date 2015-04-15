@@ -12,4 +12,9 @@ update_status ModuleAudio::PostUpdate()
 
 	return UPDATE_CONTINUE;
 }
+
+//void Play_Sound( _____, ...)
+
+
+
 bool ModuleAudio::CleanUp(){ return true; }

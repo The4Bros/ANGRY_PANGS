@@ -14,9 +14,7 @@ Time_Count::Time_Count(Application* app)
 	for (int i = 0; i < 10; i ++){ source_rect[i] = new SDL_Rect({62 + (i * 13), 0, 13, 13}); }
 	source_rect[10] = new SDL_Rect({0, 0, 62, 13});
 
-	source_index[0] = 1;
-	source_index[1] = 5;
-	source_index[2] = 0;
+	Update_Source_Index();
 }
 
 void Time_Count::Update()

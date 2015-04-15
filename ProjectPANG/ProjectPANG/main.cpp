@@ -13,21 +13,6 @@ AUTHORS:
 #include "Globals.h"
 #include "Application.h"
 
-
-/*
-SDL_Surface picture = IMG_Load("picture.png");
-SDL_SetColorKey(picture, SDL_SRCCOLORKEY, SDL_MapRGB(picture->format, 0, 0, 255));
-
-SDL_Window* window = SDL_CreateWindow("name", x, y, w, h, SDL_WINDOW_SHOWN);
-SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDER_ACCELERATED);
-SDL_Texture* image = IMG_LoadTexture(renderer, "image.png");
-
-SDL_Rect rect; rect.x=20; rect.y=30; rect.w=600; rect.h=400;
-
-SDL_RenderCopy(renderer, image, const SDL_Rect *srcrect, rect);
-
-*/
-
 enum main_states
 {
 	MAIN_EXIT,
@@ -66,8 +51,7 @@ int main(int argc, char *argv[])
 				state = MAIN_FINISH;
 				break;
 			default:
-				//LOG("changing_________________________________________________________________________________________________________________________________________");
-				app->ChangeTo(update_state);
+				if (!app->ChangeTo(update_state)){ state = MAIN_ERROR; }
 				update_state = UPDATE_CONTINUE;
 				break;
 			}
@@ -75,7 +59,7 @@ int main(int argc, char *argv[])
 			break;
 		
 		case MAIN_ERROR:            //------------------ERROR-----------------
-			//LOG("Application exit with error: %s", SDL_GetError());
+			LOG("Application exit with error: %s", SDL_GetError());
 			main_return = EXIT_FAILURE;
 			state = MAIN_EXIT;
 			break;
@@ -91,13 +75,13 @@ int main(int argc, char *argv[])
 			//LOG("Finishing Application:");
 			if (!app->CleanUp()){ state = MAIN_ERROR; }
 			else{ state = MAIN_EXIT; }
-			delete app;
+			delete[] app;
 			SDL_Quit();
 			break;
 		
 		case MAIN_CREATION:          //------------------CREATION-----------------
 			//LOG("Creating Application:\n");
-			if (SDL_Init(SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS) == -1){ state = MAIN_ERROR; }
+			if (SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS) == -1){ state = MAIN_ERROR; }
 			else
 			{
 				app = new Application();

@@ -95,7 +95,7 @@ void ModuleScene::reset_stage()
 
 	if (!stage_arrangement.balloons.empty())
 	{
-		for (int i = 0; i < )
+		//for (int i = 0; i < )
 	}
 
 
