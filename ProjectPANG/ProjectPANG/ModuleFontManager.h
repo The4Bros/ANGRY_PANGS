@@ -14,8 +14,7 @@ class ModuleFontManager : public Module{
 public:
 	TTF_Font* font;
 	SDL_Color color;
-	char* sample_text;
-
+	char Num_string[100];
 	ModuleFontManager(Application* app);
 	bool Init();
 	update_status PreUpdate();

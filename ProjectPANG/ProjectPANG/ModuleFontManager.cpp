@@ -1,7 +1,6 @@
 #include "ModuleFontManager.h"
 ModuleFontManager::ModuleFontManager(Application* app) : Module(app)
 {
-	sample_text = "hello world";
 }
 bool ModuleFontManager ::Init()
 {
@@ -18,7 +17,6 @@ bool ModuleFontManager ::Init()
 	color = { 255, 255, 255 };
 	font = TTF_OpenFont("font/PANGTYPO.TTF", 12);
 	
-	//SDL_Surface *TTF_RenderText_Solid(TTF_Font *font, const char *text, SDL_Color fg);
 
 	
 	
@@ -28,20 +26,17 @@ bool ModuleFontManager ::Init()
 
 char* ModuleFontManager::NumberToString(int Number){
 
-	char str[100];
-	sprintf_s(str, 10, "%d", Number);
-	return str;
+	sprintf_s(Num_string, 10, "%d", Number);
+	return Num_string;
 }
 
 void ModuleFontManager::Write_On_Screen(unsigned int value, unsigned int x, unsigned int y, unsigned int size){
 	
 	
-	SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, NumberToString(value), color);
-	SDL_Texture* Message = SDL_CreateTextureFromSurface(app->renderModule->renderer, surfaceMessage);
-	SDL_Rect Message_rect = { x, y, strlen(NumberToString(value))*size, size };
+	char tmp[12];
+	strcpy_s(tmp, 12, NumberToString(value));
 
-
-	app->renderModule->Print(Message, NULL, &Message_rect);
+	Write_On_Screen(tmp, x, y, size);
 
 
 }
@@ -53,9 +48,9 @@ void ModuleFontManager::Write_On_Screen( char* string, unsigned int x, unsigned 
 		SDL_Surface* surfaceMessage = TTF_RenderText_Solid(font, string, color);
 		SDL_Texture* Message = SDL_CreateTextureFromSurface(app->renderModule->renderer, surfaceMessage);
 		SDL_Rect Message_rect = { x , y,  strlen(string)*size, size };
+
+
 		//if (string == "a") Message_rect.w += app->windowModule->scale;
-
-
 		app->renderModule->Print(Message, NULL, &Message_rect);
 	
 }
