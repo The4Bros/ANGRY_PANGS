@@ -35,7 +35,7 @@ public:
 	void Hit();
 	// particles->PushBack(x, y, type);
 
-	void Reset(int x, int y, int type, int max_height);
+	void Reset(unsigned int x, unsigned int y, unsigned int type, unsigned int max_height);
 
 
 };

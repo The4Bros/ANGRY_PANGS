@@ -104,23 +104,26 @@ void ModuleScene::reset_stage()
 	
 	if (!stage_arrangement.balloons.empty())
 	{
-	while (i < app->entityManagerModule->balloons->Count() && i < stage_arrangement.balloons.size())
-	{
-	app->entityManagerModule->balloons->At(i)->Reset(
-	stage_arrangement.balloons.at(i).x,
-	stage_arrangement.balloons.at(i).y,
-	stage_arrangement.balloons.at(i).type,
-	stage_arrangement.balloons.at(i).aux);
+		Balloon* tmp = NULL;
+		while (i < app->entityManagerModule->balloons->Count() && i < stage_arrangement.balloons.size())
+		{
+			tmp = *app->entityManagerModule->balloons->At(i);
+			tmp->Reset(
+				stage_arrangement.balloons.at(i).x,
+				stage_arrangement.balloons.at(i).y,
+				stage_arrangement.balloons.at(i).type,
+				stage_arrangement.balloons.at(i).aux);
 
-	i++;
-	}
-	while(i < stage_arrangement.balloons.size())
-	{
-	app->entityManagerModule->balloons->PushBack(new Balloon(
-	stage_arrangement.balloons.at(i).x,
-	stage_arrangement.balloons.at(i).y,
-	stage_arrangement.balloons.at(i).type,
-	stage_arrangement.balloons.at(i).aux));
+			i++;
+		}
+		while(i < stage_arrangement.balloons.size())
+		{
+		app->entityManagerModule->balloons->PushBack(new Balloon(
+			app,
+			stage_arrangement.balloons.at(i).x,
+			stage_arrangement.balloons.at(i).y,
+			stage_arrangement.balloons.at(i).type,
+			stage_arrangement.balloons.at(i).aux));
 
 	i++;
 	}

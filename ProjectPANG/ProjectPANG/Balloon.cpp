@@ -27,7 +27,7 @@ void Balloon::Hit()
 
 
 
-void Balloon::Reset(int x, int y, int type, int max_height)
+void Balloon::Reset(unsigned int x, unsigned int y, unsigned int type, unsigned int max_height)
 {
 	this->type = RED_1;
 	rect = { x, y, 16, 16 };

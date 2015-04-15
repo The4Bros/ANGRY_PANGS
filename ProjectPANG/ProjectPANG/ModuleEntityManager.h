@@ -16,6 +16,7 @@ public:
 	Balloon* balloon_sample;
 	SDL_Rect* source_balloon_rect[12];
 
+
 	ModuleEntityManager(Application* app);
 	bool Init();
 	update_status PreUpdate();
