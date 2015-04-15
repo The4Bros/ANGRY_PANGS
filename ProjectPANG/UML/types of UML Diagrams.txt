@@ -1,0 +1,5 @@
+Diagrama de clases
+Diagramas de secuencia
+Diagramas de colaboración
+Diagrama de estado
+Diagrama de actividad
