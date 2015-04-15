@@ -1,6 +1,7 @@
 #include "Module.h"
 #include "Globals.h"
 #include "Application.h"
+#include "Balloon.h"
 
 #ifndef __ModuleScene_H__
 #define __ModuleScene_H__

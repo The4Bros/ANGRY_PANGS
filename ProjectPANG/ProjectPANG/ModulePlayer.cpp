@@ -39,7 +39,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	else{ if (app->inputModule->key[SDL_SCANCODE_Y] == 1){ player2 = new Player(app, false); } }
+	else if (app->inputModule->key[SDL_SCANCODE_Y] == 1){ player2 = new Player(app, false); }
 
 
 

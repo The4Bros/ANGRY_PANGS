@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <Windows.h>
 #include <time.h>
+#include "DynArray.h"
 
 #include "SDL/include/SDL.h"
 #pragma comment( lib, "SDL/libx86/SDL2.lib" )

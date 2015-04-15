@@ -129,6 +129,9 @@
     <ClCompile Include="Particles.cpp">
       <Filter>Archivos de código fuente\Application\Game\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Balloon.cpp">
+      <Filter>Archivos de código fuente\Application\Game\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Queue.h">
@@ -202,6 +205,9 @@
     </ClInclude>
     <ClInclude Include="Balloon.h">
       <Filter>Archivos de encabezado\Application\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="DynArray.h">
+      <Filter>Archivos de encabezado\Other Resources\TDA%27s</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

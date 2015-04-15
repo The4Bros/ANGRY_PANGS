@@ -21,12 +21,13 @@ class Particles
 {
 	Application* app;
 
+	bool alive;
 	SDL_Rect rect;
 	SDL_Rect* source_rect[5];
 
 	int quantity;
 
-	Particles(Application* app, Particle_Type type, unsigned int x, unsigned int w);
+	Particles(Application* app, Particle_Type type, unsigned int x, unsigned int y);
 	~Particles(){}
 
 	void Update();

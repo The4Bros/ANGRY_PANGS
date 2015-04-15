@@ -1,6 +1,8 @@
 #include "Module.h"
 #include "Globals.h"
 #include "Application.h"
+#include "Balloon.h"
+
 
 #ifndef __ModuleEntityManager_H__
 #define __ModuleEntityManager_H__
@@ -9,6 +11,10 @@ class ModuleEntityManager : public Module{
 public:
 
 	unsigned int balloon_speed;
+
+	DynArray<Balloon*>* balloons;
+	Balloon* balloon_sample;
+	SDL_Rect* source_balloon_rect[12];
 
 	ModuleEntityManager(Application* app);
 	bool Init();

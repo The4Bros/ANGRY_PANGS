@@ -71,6 +71,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Balloon.cpp" />
     <ClCompile Include="Harpoon.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="main.cpp" />
@@ -95,7 +96,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
-    <ClInclude Include="Balloon.h" />
+    <ClInclude Include="Balloon.h">
+      <DeploymentContent>false</DeploymentContent>
+    </ClInclude>
+    <ClInclude Include="DynArray.h" />
     <ClInclude Include="Harpoon.h" />
     <ClInclude Include="ModuleChooseCity.h" />
     <ClInclude Include="ModuleCredits.h" />
