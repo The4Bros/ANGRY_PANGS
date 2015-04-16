@@ -14,6 +14,15 @@ enum PlayerState
 	STILL,
 	SHOOT_LEFT,
 	SHOOT_RIGHT,
+	HIT
+};
+
+enum Hit_State
+{
+	HIT_LEFT_UP,
+	HIT_LEFT_DOWN,
+	HIT_RIGHT_UP,
+	HIT_RIGHT_DOWN
 };
 
 enum Weapon
@@ -38,7 +47,10 @@ public:
 
 	unsigned int score, lives, update_counter, shoot_update_counter;
 	PlayerState state;
-	bool alive, shoot_key_pressed;
+	bool shoot_key_pressed, shielded;
+
+	int height;
+	Hit_State hit_State;
 
 	Player(Application* app, bool player1);
 	~Player(){}
@@ -49,6 +61,7 @@ public:
 	void DownTrigger();
 	void Shoot();
 	void Still();
+	void Hit(SDL_Rect* killer);
 
 	void Update();
 	void setPos(unsigned int x, unsigned int y);

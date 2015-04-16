@@ -3,11 +3,12 @@
 Player::Player(Application* app, bool player1)
 {
 	this->app = app;
+	shielded = false;
 
 	state = STILL;
-	alive = true;
 	shoot_key_pressed = false;
 	current_weapon = WEAPON_DOUBLE_HARPOON;
+	hit_State = HIT_RIGHT_UP;
 	source_index = 17;
 
 	harpoon[0] = new Harpoon(app);
@@ -51,7 +52,7 @@ void Player::LeftTrigger()
 				update_counter = 0;
 			}
 
-			if (rect.x > 8 * app->windowModule->scale) //&& no collision with wall
+			if (rect.x > 8 * app->windowModule->scale) //&& no collision with brick
 			{
 				rect.x -= app->playerModule->player_speed;
 			}
@@ -66,7 +67,7 @@ void Player::LeftTrigger()
 			update_counter = 0;
 		}
 	}
-	else // change of direction
+	else if (state == RIGHT || state == STILL)// change of direction
 	{
 		state = LEFT;
 		source_index = 5;
@@ -85,7 +86,7 @@ void Player::RightTrigger()
 			update_counter = 0;
 		}
 
-		if (rect.x < (SCREEN_WIDTH - 40) * app->windowModule->scale) //&& no collision with wall
+		if (rect.x < (SCREEN_WIDTH - 40) * app->windowModule->scale) //&& no collision with brick
 		{
 			rect.x += app->playerModule->player_speed;
 		}
@@ -100,7 +101,7 @@ void Player::RightTrigger()
 			update_counter = 0;
 		}
 	}
-	else // change of direction
+	else if (state == LEFT || state == STILL)// change of direction
 	{
 		state = RIGHT;
 		source_index = 0;
@@ -110,11 +111,15 @@ void Player::RightTrigger()
 
 void Player::UpTrigger()
 {
+	SDL_Rect killer = { 400, 0, 0, 0 };
+	Hit(&killer);
 	return;
 }
 
 void Player::DownTrigger()
 {
+	SDL_Rect killer = { 0, 0, 0, 0 };
+	Hit(&killer);
 	return;
 }
 
@@ -122,7 +127,7 @@ void Player::DownTrigger()
 void Player::Shoot()
 {
 	
-	if (shoot_key_pressed) { return; }
+	if (shoot_key_pressed || state == HIT) { return; }
 	shoot_key_pressed = true;
 
 	switch (current_weapon)
@@ -229,6 +234,7 @@ void Player::Shoot()
 
 void Player::Still()
 {
+	if (state == HIT || state == UP || state == DOWN){ return; }
 	if (update_counter > 4)
 	{
 		switch (state)
@@ -250,9 +256,119 @@ void Player::Still()
 	}
 }
 
+void Player::Hit(SDL_Rect* killer)
+{
+	if (shielded){ shielded = false; } // kill shield
+
+	else
+	{
+		if (rect.x + (rect.w / 2) <= killer->x + (killer->w / 2))
+		{
+			source_index = 21;
+			hit_State = HIT_LEFT_UP;
+		}
+		else
+		{
+			source_index = 22;
+			hit_State = HIT_RIGHT_UP;
+		}
+
+		height = rect.y;
+		update_counter = 0;
+		shoot_update_counter = 0;
+		state = HIT;
+	}
+}
+
+
 void Player::Update()
 {
+
+	if (shoot_update_counter > 30)
+	{
+		if (state == HIT)
+		{
+			switch (hit_State)
+			{
+			case HIT_LEFT_UP:
+				rect.x -= app->windowModule->scale;
+				if (rect.y < 9 * app->windowModule->scale) // && no collision with bricks
+				{
+					hit_State = HIT_LEFT_DOWN;
+				}
+				else
+				{
+					rect.y = height - ((app->windowModule->scale) * ((update_counter * update_counter) / 10));
+				}
+				break;
+
+			case HIT_LEFT_DOWN:
+				rect.x -= app->windowModule->scale;
+
+				if (rect.y > 167 * app->windowModule->scale) // && no collision with bricks
+				{
+					hit_State = HIT_LEFT_UP;
+				}
+				else
+				{
+					rect.y = height + ((app->windowModule->scale) *  ((update_counter * update_counter) / 10));
+				}
+				break;
+
+			case HIT_RIGHT_UP:
+				rect.x += app->windowModule->scale;
+				if (rect.y < 9 * app->windowModule->scale) // && no collision with bricks
+				{
+					hit_State = HIT_LEFT_UP;
+				}
+				else
+				{
+					rect.y = height - ((app->windowModule->scale) *  ((update_counter * update_counter) / 10));
+				}
+				break;
+
+			case HIT_RIGHT_DOWN:
+				rect.x += app->windowModule->scale;
+				if (rect.y > 167 * app->windowModule->scale)
+				{
+					height = rect.y;
+					hit_State = HIT_LEFT_UP;
+				}
+				// else if() no collision with bricks
+				// { height = rect.y
+				else
+				{
+					rect.y = height + ((app->windowModule->scale) *  ((update_counter * update_counter) / 10));
+				}
+				break;
+			}
+
+			update_counter++;
+
+			
+		}
+
+		else { shoot_update_counter++; }
+
+		return;
+	}
+
+
+
 	// if no floor: make fall
+	if (rect.y < 168 && state != UP && state != DOWN) // not on ground
+	{
+		/*
+		
+		if () // collision with brick
+		
+		else // fall
+		{
+			rect.y += 3 * app->windowModule->scale;
+		}
+		
+		*/
+	}
 
 	update_counter++;
 	if (shoot_update_counter < 10){ shoot_update_counter++; }
@@ -262,8 +378,6 @@ void Player::Update()
 	{
 	case WEAPON_DOUBLE_HARPOON:
 		if (harpoon[1]->alive){ harpoon[1]->Update(); }
-
-
 
 	case WEAPON_HARPOON:
 		if (harpoon[0]->alive){ harpoon[0]->Update(); }

@@ -49,6 +49,7 @@ bool Application::Init()
 		item = item->next;
 	}
 
+	current_time = 0;
 	time(&timer);
 
 	return true;
