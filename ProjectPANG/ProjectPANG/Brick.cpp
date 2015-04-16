@@ -42,11 +42,6 @@ void Brick::Print()
 	}
 }
 
-void Brick::Update()
-{
-
-}
-
 //when a brick breaks + animation destroy brick
 void Brick::Hit()
 {

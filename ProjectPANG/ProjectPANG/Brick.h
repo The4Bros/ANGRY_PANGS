@@ -43,9 +43,6 @@ class Brick
 		~Brick(){}
 
 		void Print();
-
-		void Update();
-
 		void Hit();
 
 		void Reset(unsigned int x, unsigned int y, unsigned int type);

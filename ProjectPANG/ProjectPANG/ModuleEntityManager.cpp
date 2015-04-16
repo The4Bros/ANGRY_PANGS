@@ -55,16 +55,8 @@ bool ModuleEntityManager::Init()
 }
 update_status ModuleEntityManager::PreUpdate(){ return UPDATE_CONTINUE; }
 update_status ModuleEntityManager::Update()
-{	
-	brick_sample->Update();
+{
 	balloon_sample->Update();
-
-	// BRICKS
-	for (unsigned int i = 0; i < bricks->Count(); i++)
-	{
-		tmp_brick = *bricks->at(i);
-		tmp_brick->Update();
-	}
 	
 	// BALLOONS
 	for (unsigned int i = 0; i < balloons->Count(); i++)
