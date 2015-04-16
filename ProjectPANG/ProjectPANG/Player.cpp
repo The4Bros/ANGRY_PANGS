@@ -111,7 +111,7 @@ void Player::RightTrigger()
 
 void Player::UpTrigger()
 {
-	SDL_Rect killer = { 400, 0, 0, 0 };
+	SDL_Rect killer = { 800, 0, 0, 0 };
 	Hit(&killer);
 	return;
 }
@@ -284,9 +284,9 @@ void Player::Hit(SDL_Rect* killer)
 void Player::Update()
 {
 
-	if (shoot_update_counter > 30)
+	if (state == HIT)
 	{
-		if (state == HIT)
+		if (shoot_update_counter > 30)
 		{
 			switch (hit_State)
 			{

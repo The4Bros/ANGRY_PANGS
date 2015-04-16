@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
 			//LOG("Finishing Application:");
 			if (!app->CleanUp()){ state = MAIN_ERROR; }
 			else{ state = MAIN_EXIT; }
-			delete[] app;
+			delete app;
 			SDL_Quit();
 			break;
 		

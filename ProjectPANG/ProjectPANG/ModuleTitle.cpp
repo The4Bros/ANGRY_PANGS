@@ -4,19 +4,18 @@ ModuleTitle::ModuleTitle(Application* app) : Module(app){}
 
 bool ModuleTitle::Init()
 {
-	
-	//app->current_time = 0;
+	app->current_time = 0;
 	return true;
 }
 
 update_status ModuleTitle::PreUpdate()
 {
-	
 	return UPDATE_CONTINUE;
 }
 update_status ModuleTitle::Update()
 {	
 	int resto = app->current_time % 2;
+
 	//Print inital screens
 	if (app->current_time < 10){
 		SDL_Rect tmp = { 0, 0, 384 * app->windowModule->scale, 240 * app->windowModule->scale };

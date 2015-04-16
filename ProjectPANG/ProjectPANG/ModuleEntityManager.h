@@ -16,16 +16,20 @@ public:
 
 	unsigned int balloon_speed;
 
-	DynArray<Balloon*>* balloons;
-	Balloon* balloon_sample;
-	SDL_Rect* source_balloon_rect[12];
+	DynArray<Brick*>* bricks;
+	Brick* brick_sample;
+	SDL_Rect* source_brick_rect[18];
 
 	DynArray<Stair*>* stairs;
 	SDL_Rect* source_stair_rect;
 
-	DynArray<Brick*>* bricks;
-	Brick* brick_sample;
-	SDL_Rect* source_brick_rect[18];
+	DynArray<Balloon*>* balloons;
+	Balloon* balloon_sample;
+	SDL_Rect* source_balloon_rect[12];
+
+	//DynArray<Enemy*>* enemies;
+	SDL_Rect* source_enemy_rect[74];
+	
 
 	ModuleEntityManager(Application* app);
 	bool Init();

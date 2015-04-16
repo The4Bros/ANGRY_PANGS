@@ -61,7 +61,7 @@ public:
 
 	Time_Count* time_count;
 
-	int current_stage;
+	unsigned int current_stage;
 	Stage_Arrangement stage_arrangement;
 
 	SDL_Rect background_rect;

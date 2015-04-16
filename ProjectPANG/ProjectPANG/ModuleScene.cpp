@@ -21,7 +21,6 @@ update_status ModuleScene::PreUpdate()
 {
 	if (difftime(time(NULL), time_count->timer) >= 1) { time_count->Update(); }
 
-
 	/*
 	
 	change print 

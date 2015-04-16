@@ -4,6 +4,7 @@
 Application::Application()
 {
 	returnValue = UPDATE_CONTINUE;
+	current_time = 0;
 
 	windowModule = NULL;
 	renderModule = NULL;
@@ -63,7 +64,7 @@ Application::~Application()
 update_status Application::Update()
 {
 	// UPDATE TIME COUNTER
-	if (difftime(time(NULL), timer) >= 1){ current_time++; }
+	if (difftime(time(NULL), timer) > 1){ current_time++; time(&timer); }
 
 	item = modules_Queue.getStart(); // ------------PreUpdate------------
 	while (item != NULL)
