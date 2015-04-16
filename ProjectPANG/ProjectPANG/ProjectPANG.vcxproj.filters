@@ -135,6 +135,9 @@
     <ClCompile Include="Stair.cpp">
       <Filter>Archivos de código fuente\Application\Game\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Brick.cpp">
+      <Filter>Archivos de código fuente\Application\Game\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Queue.h">
@@ -213,6 +216,9 @@
       <Filter>Archivos de encabezado\Other Resources\TDA%27s</Filter>
     </ClInclude>
     <ClInclude Include="Stair.h">
+      <Filter>Archivos de encabezado\Application\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Brick.h">
       <Filter>Archivos de encabezado\Application\Game\Objects</Filter>
     </ClInclude>
   </ItemGroup>

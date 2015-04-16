@@ -3,7 +3,7 @@
 #include "Application.h"
 #include "Balloon.h"
 #include "Stair.h"
-
+#include "Brick.h"
 
 #ifndef __ModuleEntityManager_H__
 #define __ModuleEntityManager_H__
@@ -19,6 +19,10 @@ public:
 
 	DynArray<Stair*>* stairs;
 	SDL_Rect* source_stair_rect;
+
+	DynArray<Brick*>* bricks;
+	Brick* brick_sample;
+	SDL_Rect* source_brick_rect[18];
 
 	ModuleEntityManager(Application* app);
 	bool Init();
