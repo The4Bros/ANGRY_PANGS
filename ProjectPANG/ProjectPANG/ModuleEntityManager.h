@@ -1,9 +1,11 @@
-#ifndef __ModuleEntityManager_H__
-#define __ModuleEntityManager_H__
-
 #include "Module.h"
 #include "Globals.h"
 #include "Application.h"
+
+#ifndef __ModuleEntityManager_H__
+#define __ModuleEntityManager_H__
+
+
 #include "Balloon.h"
 #include "Stair.h"
 #include "Brick.h"

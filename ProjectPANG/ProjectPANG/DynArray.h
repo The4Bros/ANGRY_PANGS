@@ -58,7 +58,7 @@ public:
 
 	void clear() { num_elements = 0; }
 
-	DynArrayTYPE* At(unsigned int index)
+	DynArrayTYPE* at(unsigned int index)
 	{
 		if (index < num_elements){ return &data[index]; }
 		return NULL;
@@ -73,7 +73,7 @@ public:
 
 	// Utils
 	unsigned int size() const { return capacity; }
-	unsigned int Count() const { return num_elements; }
+ 	unsigned int Count() const { return num_elements; }
 	bool empty(){ return num_elements == 0; }
 	void Reduce_To(unsigned int num_elements) { this->num_elements = num_elements; }
 

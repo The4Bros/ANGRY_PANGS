@@ -7,7 +7,18 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 }
 bool ModuleEntityManager::Init()
 {
+	// BRICKS
+	bricks = new DynArray<Brick*>();
+	source_brick_rect[0] = new SDL_Rect({ 0, 0, 31, 7 });
+	brick_sample = new Brick(app, 75, 48, 1);
 
+
+	// STAIRS
+	stairs = new DynArray<Stair*>();
+	source_stair_rect = new SDL_Rect({ 0, 104, 24, 8 });
+
+
+	// BALLOONS
 	balloons = new DynArray<Balloon*>();
 
 	source_balloon_rect[0] = new SDL_Rect({ 0, 0, 48, 40 });
@@ -25,16 +36,14 @@ bool ModuleEntityManager::Init()
 	source_balloon_rect[9] = new SDL_Rect({ 96, 76, 8, 7 });
 	source_balloon_rect[10] = new SDL_Rect({ 102, 76, 8, 7 });
 	source_balloon_rect[11] = new SDL_Rect({ 96, 83, 8, 7 });
-	
-	
 
 	balloon_sample = new Balloon(app, 150, 30, 1, 20);
+	
 
-	source_stair_rect = new SDL_Rect({ 0, 104, 24, 8 });
 
-	bricks = new DynArray<Brick*>();
-	source_brick_rect[0] = new SDL_Rect({ 0, 0, 31, 7 });
-	brick_sample = new Brick(app, 75, 48, 1);
+	// ENEMIES
+	//enemies = new DynArray<Enemy*>();
+	//source_enemy_rect = new SDL_Rect({ 0, 104, 24, 8 });
 	
 	return true;
 }

@@ -173,6 +173,13 @@ void Balloon::Update()
 
 
 
+void Balloon::Print()
+{
+	app->renderModule->Print(app->texturesModule->balls_sprite, app->entityManagerModule->source_balloon_rect[type], &rect);
+}
+
+
+
 
 void Balloon::Hit()
 {

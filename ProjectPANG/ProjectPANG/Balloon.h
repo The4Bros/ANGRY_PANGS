@@ -64,6 +64,7 @@ public:
 
 	void Update();
 	
+	void Print();
 
 	void Hit();
 	// particles->PushBack(x, y, type);

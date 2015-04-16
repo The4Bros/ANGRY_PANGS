@@ -17,7 +17,7 @@ void Stair::Print()
 {
 	for (unsigned int i = 0; i < rects->Count(); i++)
 	{
-		app->renderModule->Print(app->texturesModule->bricks_sprite, app->entityManagerModule->source_stair_rect, rects->At(i));
+		app->renderModule->Print(app->texturesModule->bricks_sprite, app->entityManagerModule->source_stair_rect, rects->at(i));
 	}
 
 }

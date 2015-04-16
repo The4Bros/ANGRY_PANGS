@@ -45,6 +45,29 @@ update_status ModuleScene::Update()
 	// PRINT TIMER
 	time_count->Print_Timer();
 
+	// STAIRS
+	if (!app->entityManagerModule->stairs->empty())
+	{
+		Stair* tmp_stair = NULL;
+		for (unsigned int i = 0; i < app->entityManagerModule->stairs->Count(); i++)
+		{
+			tmp_stair = *app->entityManagerModule->stairs->at(i);
+			tmp_stair->Print();
+		}
+	}
+
+	// BRICKS
+	if (!app->entityManagerModule->bricks->empty())
+	{
+		Brick* tmp_brick = NULL;
+		for (unsigned int i = 0; i < app->entityManagerModule->bricks->Count(); i++)
+		{
+			tmp_brick = *app->entityManagerModule->bricks->at(i);
+			tmp_brick->Print();
+		}
+	}
+
+
 	// HARPOONS
 
 	if (app->playerModule->player1->harpoon[0]->alive) { app->playerModule->player1->harpoon[0]->Print(); }
@@ -72,7 +95,16 @@ update_status ModuleScene::Update()
 	// PRINT BALLS
 	
 	app->renderModule->Print(app->texturesModule->balls_sprite, app->entityManagerModule->source_balloon_rect[0], &app->entityManagerModule->balloon_sample->rect);
-
+	
+	if (!app->entityManagerModule->balloons->empty())
+	{
+		Balloon* tmp_balloon = NULL;
+		for (unsigned int i = 0; i < app->entityManagerModule->balloons->Count(); i++)
+		{
+			tmp_balloon = *app->entityManagerModule->balloons->at(i);
+			tmp_balloon->Print();
+		}
+	}
 
 
 	//app->renderModule->Print(app->texturesModule->, app->, &app->);
@@ -132,7 +164,7 @@ void ModuleScene::reset_stage()
 	
 
 	// STAIRS
-	i = 0;;
+	i = 0;
 	if (!stage_arrangement.stairs.empty())
 	{
 		Stair* stair_tmp = NULL;
@@ -163,7 +195,7 @@ void ModuleScene::reset_stage()
 		Balloon* balloon_tmp = NULL;
 		while (i < app->entityManagerModule->balloons->Count() && i < stage_arrangement.balloons.size())
 		{
-			balloon_tmp = *app->entityManagerModule->balloons->At(i);
+			balloon_tmp = *app->entityManagerModule->balloons->at(i);
 			balloon_tmp->Reset(
 				stage_arrangement.balloons[i].x,
 				stage_arrangement.balloons[i].y,

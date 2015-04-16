@@ -32,6 +32,10 @@ Player::Player(Application* app, bool player1)
 		}
 		source_rect[23] = new SDL_Rect({ 736, 32, 51, 32 });
 		source_rect[24] = new SDL_Rect({ 787, 32, 51, 32 });
+
+		// update position
+		setPos(app->sceneModule->stage_arrangement.player_pos[2], app->sceneModule->stage_arrangement.player_pos[3]);
+
 	}
 
 }
