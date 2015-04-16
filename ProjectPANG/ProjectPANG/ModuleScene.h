@@ -9,9 +9,7 @@
 
 #include "Time_Count.h"
 #include <string.h>
-#include <stdio.h>
-#include <vector>
-#include <iterator>
+
 
 struct Tri_Struct // Bricks and Stairs
 {
@@ -46,19 +44,11 @@ struct Stage_Arrangement
 {
 	int time_limit;
 	int player_pos[4];
-	std::vector<Tri_Struct> bricks;
-	std::vector<Tri_Struct> stairs;
-	std::vector<Quadra_Struct> balloons;
-	std::vector<Quadra_Struct> enemies;
-	~Stage_Arrangement()
-	{
-		/*
-		bricks.clear();
-		stairs.clear();
-		balloons.clear();
-		enemies.clear();
-		*/
-	}
+	DynArray<Tri_Struct> bricks;
+	DynArray<Tri_Struct> stairs;
+	DynArray<Quadra_Struct> balloons;
+	DynArray<Quadra_Struct> enemies;
+	~Stage_Arrangement(){}
 };
 
 

@@ -74,6 +74,7 @@ public:
 	// Utils
 	unsigned int Size() const { return size; }
 	unsigned int Count() const { return num_elements; }
+	bool empty(){ return num_elements == 0; }
 	void Reduce_To(unsigned int size) { this->size = size; }
 
 };
