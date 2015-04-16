@@ -3,7 +3,13 @@
 ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 {
 	balloons = NULL;
+	tmp_balloon = NULL;
+	
+	stairs = NULL;
+	tmp_stair = NULL;
+
 	bricks = NULL;
+	tmp_brick = NULL;
 }
 bool ModuleEntityManager::Init()
 {
@@ -52,6 +58,23 @@ update_status ModuleEntityManager::Update()
 {	
 	brick_sample->Update();
 	balloon_sample->Update();
+
+	// BRICKS
+	for (unsigned int i = 0; i < bricks->Count(); i++)
+	{
+		tmp_brick = *bricks->at(i);
+		tmp_brick->Update();
+	}
+	
+	// BALLOONS
+	for (unsigned int i = 0; i < balloons->Count(); i++)
+	{
+		tmp_balloon = *balloons->at(i);
+		tmp_balloon->Update();
+	}
+
+
+
 	return UPDATE_CONTINUE;
 }
 update_status ModuleEntityManager::PostUpdate(){ return UPDATE_CONTINUE; }

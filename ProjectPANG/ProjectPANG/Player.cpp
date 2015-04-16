@@ -374,22 +374,13 @@ void Player::Update()
 	if (shoot_update_counter < 10){ shoot_update_counter++; }
 	else { shoot_key_pressed = false; shoot_update_counter = 0; }
 
-	switch (current_weapon)
-	{
-	case WEAPON_DOUBLE_HARPOON:
-		if (harpoon[1]->alive){ harpoon[1]->Update(); }
+	if (harpoon[1]->alive){ harpoon[1]->Update(); }
+	if (harpoon[0]->alive){ harpoon[0]->Update(); }
 
-	case WEAPON_HARPOON:
-		if (harpoon[0]->alive){ harpoon[0]->Update(); }
-		break;
-
-	case WEAPON_GRAPPLE:
-		if (harpoon[0]->alive){ harpoon[0]->Update(); }
-		break;
-
-	case WEAPON_SHOTGUN:
-		break;
-	}
+	//-------------------------------------------------------
+	// shotgun update
+	//-------------------------------------------------------
+	
 }
 
 
