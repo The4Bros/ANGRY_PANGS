@@ -24,7 +24,8 @@
 
 
 
-class Application{
+class Application
+{
 private:
 	DoubleNodedQueue<Module*> modules_Queue;
 	DoubleNode<Module*>* item;

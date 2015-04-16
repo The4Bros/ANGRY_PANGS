@@ -7,14 +7,14 @@ template<class DynArrayTYPE> class DynArray
 {
 private:
 	DynArrayTYPE* data;
-	unsigned int size;
+	unsigned int capacity;
 	unsigned int num_elements;
 
-	void Alloc(unsigned int size)
+	void Alloc(unsigned int capacity)
 	{
 		DynArrayTYPE* tmp = data;
-		this->size = size;
-		data = new DynArrayTYPE[size];
+		this->capacity = capacity;
+		data = new DynArrayTYPE[capacity];
 
 		if (tmp != NULL)
 		{
@@ -24,8 +24,8 @@ private:
 	}
 
 public:
-	DynArray() : size(0), num_elements(0), data(NULL) { Alloc(BLOCK_SIZE); }
-	DynArray(unsigned int capacity) : size(0), num_elements(0), data(NULL) { Alloc(capacity); }
+	DynArray() : capacity(0), num_elements(0), data(NULL) { Alloc(BLOCK_SIZE); }
+	DynArray(unsigned int capacity) : capacity(0), num_elements(0), data(NULL) { Alloc(capacity); }
 
 	~DynArray(){ delete[] data; }
 
@@ -45,9 +45,9 @@ public:
 
 
 	// Data Management
-	void PushBack(const DynArrayTYPE& element)
+	void push_back(const DynArrayTYPE& element)
 	{
-		if (num_elements >= size){ Alloc(size + BLOCK_SIZE); }
+		if (num_elements >= capacity){ Alloc(capacity + BLOCK_SIZE); }
 		data[num_elements++] = element;
 	}
 
@@ -56,7 +56,7 @@ public:
 		if(num_elements > 0){ num_elements--; }
 	}
 
-	void Clear() { num_elements = 0; }
+	void clear() { num_elements = 0; }
 
 	DynArrayTYPE* At(unsigned int index)
 	{
@@ -64,7 +64,7 @@ public:
 		return NULL;
 	}
 
-	const DynArrayTYPE* At(unsigned int index) const
+	const DynArrayTYPE* at(unsigned int index) const
 	{
 		if (index < num_elements){ return &data[index]; }
 		return NULL;
@@ -72,10 +72,10 @@ public:
 
 
 	// Utils
-	unsigned int Size() const { return size; }
+	unsigned int size() const { return capacity; }
 	unsigned int Count() const { return num_elements; }
 	bool empty(){ return num_elements == 0; }
-	void Reduce_To(unsigned int size) { this->size = size; }
+	void Reduce_To(unsigned int num_elements) { this->num_elements = num_elements; }
 
 };
 

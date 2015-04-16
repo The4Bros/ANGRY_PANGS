@@ -103,29 +103,29 @@ void ModuleScene::reset_stage()
 
 	
 	// BRICKS
-	int i = 0;
+	unsigned int i = 0;
 	if (!stage_arrangement.bricks.empty())
 	{
 		Brick* bricks_tmp = NULL;
-		while (i < app->entityManagerModule->bricks->Count() && i < stage_arrangement.bricks.Size())
+		while (i < app->entityManagerModule->bricks->Count() && i < stage_arrangement.bricks.size())
 		{
-			bricks_tmp = *app->entityManagerModule->bricks->At(i);
+			bricks_tmp = *app->entityManagerModule->bricks->at(i);
 			bricks_tmp->Reset(
-				stage_arrangement.bricks.At(i).x,
-				stage_arrangement.bricks.At(i).y,
-				stage_arrangement.bricks.At(i).type);
+				stage_arrangement.bricks.at(i).x,
+				stage_arrangement.bricks.at(i).y,
+				stage_arrangement.bricks.at(i).type);
 			i++;
 		}
 
 		app->entityManagerModule->bricks->Reduce_To(i);
 
-		while (i < stage_arrangement.bricks.Size())
+		while (i < stage_arrangement.bricks.size())
 		{
-			app->entityManagerModule->bricks->PushBack(new Brick(
+			app->entityManagerModule->bricks->push_back(new Brick(
 				app,
-				stage_arrangement.bricks.At(i).x,
-				stage_arrangement.bricks.At(i).y,
-				stage_arrangement.bricks.At(i).type));
+				stage_arrangement.bricks.at(i).x,
+				stage_arrangement.bricks.at(i).y,
+				stage_arrangement.bricks.at(i).type));
 			i++;
 		}
 	}
@@ -136,22 +136,22 @@ void ModuleScene::reset_stage()
 	if (!stage_arrangement.stairs.empty())
 	{
 		Stair* stair_tmp = NULL;
-		while (i < app->entityManagerModule->stairs->Count() && i < stage_arrangement.stairs.Size())
+		while (i < app->entityManagerModule->stairs->Count() && i < stage_arrangement.stairs.size())
 		{
-			stair_tmp = *app->entityManagerModule->stairs->At(i);
+			stair_tmp = *app->entityManagerModule->stairs->at(i);
 			stair_tmp->Reset(
-				stage_arrangement.stairs.At(i).x,
-				stage_arrangement.stairs.At(i).y,
-				stage_arrangement.stairs.At(i).type);
+				stage_arrangement.stairs.at(i).x,
+				stage_arrangement.stairs.at(i).y,
+				stage_arrangement.stairs.at(i).type);
 			i++;
 		}
-		while (i < stage_arrangement.stairs.Size())
+		while (i < stage_arrangement.stairs.size())
 		{
-			app->entityManagerModule->stairs->PushBack(new Stair(
+			app->entityManagerModule->stairs->push_back(new Stair(
 				app,
-				stage_arrangement.stairs.At(i).x,
-				stage_arrangement.stairs.At(i).y,
-				stage_arrangement.stairs.At(i).type));
+				stage_arrangement.stairs.at(i).x,
+				stage_arrangement.stairs.at(i).y,
+				stage_arrangement.stairs.at(i).type));
 			i++;
 		}
 	}
@@ -161,26 +161,27 @@ void ModuleScene::reset_stage()
 	if (!stage_arrangement.balloons.empty())
 	{
 		Balloon* balloon_tmp = NULL;
-		while (i < app->entityManagerModule->balloons->Count() && i < stage_arrangement.balloons.Size())
+		while (i < app->entityManagerModule->balloons->Count() && i < stage_arrangement.balloons.size())
 		{
 			balloon_tmp = *app->entityManagerModule->balloons->At(i);
 			balloon_tmp->Reset(
-				stage_arrangement.balloons.At(i).x,
-				stage_arrangement.balloons.At(i).y,
-				stage_arrangement.balloons.At(i).type,
-				stage_arrangement.balloons.At(i).aux);
+				stage_arrangement.balloons[i].x,
+				stage_arrangement.balloons[i].y,
+				stage_arrangement.balloons[i].type,
+				stage_arrangement.balloons[i].aux);
 			i++;
 		}
-		while (i < stage_arrangement.balloons.Size())
+		while (i < stage_arrangement.balloons.size())
 		{
-			app->entityManagerModule->balloons->PushBack(new Balloon(
+			app->entityManagerModule->balloons->push_back(new Balloon(
 				app,
-				stage_arrangement.balloons.At(i).x,
-				stage_arrangement.balloons.At(i).y,
-				stage_arrangement.balloons.At(i).type,
-				stage_arrangement.balloons.At(i).aux));
+				stage_arrangement.balloons.at(i).x,
+				stage_arrangement.balloons.at(i).y,
+				stage_arrangement.balloons.at(i).type,
+				stage_arrangement.balloons.at(i).aux));
 			i++;
 		}
+		app->entityManagerModule->balloons->Reduce_To(i);
 	}
 
 	/*
@@ -223,7 +224,7 @@ bool ModuleScene::load_stage(int stage)
 	char line[100];
 	for (int i = 0; i < current_stage; i++)
 	{
-		fgets(line, 100, level_file);
+		fgets(line, 300, level_file);
 		if (line == NULL){ return false; }
 	}
 

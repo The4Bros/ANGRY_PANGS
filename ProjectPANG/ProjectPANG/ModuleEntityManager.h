@@ -1,3 +1,6 @@
+#ifndef __ModuleEntityManager_H__
+#define __ModuleEntityManager_H__
+
 #include "Module.h"
 #include "Globals.h"
 #include "Application.h"
@@ -5,8 +8,6 @@
 #include "Stair.h"
 #include "Brick.h"
 
-#ifndef __ModuleEntityManager_H__
-#define __ModuleEntityManager_H__
 
 class ModuleEntityManager : public Module{
 public:

@@ -48,7 +48,7 @@ void Brick::Update()
 }
 
 //when a brick breaks + animation destroy brick
-void Brick::Break()
+void Brick::Hit()
 {
 
 }
