@@ -19,9 +19,6 @@ bool ModuleEntityManager::Init()
 	source_brick_rect[0] = new SDL_Rect({ 0, 0, 31, 7 });
 	brick_sample = new Brick(app, 75, 48, 1);
 	
-
-
-
 	return true;
 }
 update_status ModuleEntityManager::PreUpdate(){ return UPDATE_CONTINUE; }

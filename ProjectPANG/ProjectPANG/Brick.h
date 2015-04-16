@@ -15,7 +15,7 @@ enum BRICK_TYPE
 	FUCSIA2,
 	FUCSIA3,
 	BLUE1,
-	BLU2,
+	BLUE2,
 	BLUE3,
 	YELLOW1,//-----bricks breakeables-----
 	YELLOW2,
@@ -42,7 +42,11 @@ class Brick
 		Brick(Application* app, unsigned int x, unsigned int y,  unsigned int type);
 		~Brick(){}
 
+		void Print();
+
 		void Update();
+
+		void Break();
 	
 };
 
