@@ -301,7 +301,7 @@ void Player::Update()
 				}
 				else
 				{
-					rect.y = height - ((app->windowModule->scale) * ((update_counter * update_counter) / 10));
+					rect.y = height - ((6 * app->windowModule->scale) + ((update_counter * update_counter) / 9));
 				}
 				break;
 
@@ -316,7 +316,7 @@ void Player::Update()
 				}
 				else
 				{
-					rect.y = height + ((app->windowModule->scale) *  ((update_counter * update_counter) / 10));
+					rect.y = height + ((6 * app->windowModule->scale) -  ((update_counter * update_counter) / 9));
 				}
 				break;
 

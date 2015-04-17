@@ -5,6 +5,7 @@ ModuleTitle::ModuleTitle(Application* app) : Module(app){}
 bool ModuleTitle::Init()
 {
 	app->current_time = 0;
+	ticks = 0;
 
 	rect = { 0, 0, 384 * app->windowModule->scale, 240 * app->windowModule->scale };
 	insert_coin_rect = { 100 * app->windowModule->scale, 200 * app->windowModule->scale, 177 * app->windowModule->scale, 15 * app->windowModule->scale };
@@ -80,6 +81,7 @@ bool ModuleTitle::CleanUp(){ return true; }
 
 void ModuleTitle::Update_Balloons()
 {
+	ticks++;
 	/*
 	balloon_rects[0] ...
 	balloon_rects[0] ...

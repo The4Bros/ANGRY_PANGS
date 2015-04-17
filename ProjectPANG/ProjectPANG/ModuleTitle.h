@@ -9,6 +9,8 @@
 class ModuleTitle : public Module{
 public:
 
+	int ticks;
+
 	SDL_Rect rect;
 	SDL_Rect insert_coin_rect;
 	SDL_Rect* source_rect[5];
