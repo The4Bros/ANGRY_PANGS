@@ -13,6 +13,9 @@ public:
 	SDL_Rect insert_coin_rect;
 	SDL_Rect* source_rect[5];
 
+	SDL_Rect balloon_rects[4];
+	SDL_Rect* balloon_source_rect;
+
 	bool insert_coin_pressed;
 
 	ModuleTitle(Application* app);
@@ -21,6 +24,8 @@ public:
 	update_status Update();
 	update_status PostUpdate();
 	bool CleanUp();
+
+	void Update_Balloons();
 };
 
 #endif

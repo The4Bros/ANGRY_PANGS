@@ -12,6 +12,12 @@ bool ModuleTitle::Init()
 	for (int i = 0; i < 4; i++){ source_rect[i] = new SDL_Rect({ i * 384, 0, 384, 240 }); }
 	source_rect[4] = new SDL_Rect({ 1536, 0, 176, 15 });
 
+	balloon_rects[0] = { 0, 0, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
+	balloon_rects[1] = { 0, 0, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
+	balloon_rects[2] = { 0, 0, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
+	balloon_rects[3] = { 0, 0, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
+	balloon_source_rect = new SDL_Rect({ 0, 0, 48, 40 });
+
 	insert_coin_pressed = false;
 
 	return true;
@@ -31,6 +37,14 @@ update_status ModuleTitle::Update()
 	else if (app->coins == 0)
 	{
 		app->renderModule->Print(app->texturesModule->title_sprite, source_rect[3], &rect);
+		
+		//begginning animation:
+		if (app->current_time < 5)
+		{
+			Update_Balloons();
+			for (int i = 0; i < 4; i++){ app->renderModule->Print(app->texturesModule->balls_sprite, balloon_source_rect, &balloon_rects[i]); }
+		}
+		// insert coin 
 		if (app->current_time % 2 == 1) { app->renderModule->Print(app->texturesModule->title_sprite, source_rect[4], &insert_coin_rect); }
 	}
 	else
@@ -46,7 +60,7 @@ update_status ModuleTitle::Update()
 		}
 	}
 	
-	if (app->current_time >= 4)
+	if (app->current_time > 5)
 	{
 		if (app->inputModule->key[SDL_SCANCODE_5] == 1)
 		{
@@ -62,3 +76,14 @@ update_status ModuleTitle::Update()
 update_status ModuleTitle::PostUpdate(){ return UPDATE_CONTINUE; }
 
 bool ModuleTitle::CleanUp(){ return true; }
+
+
+void Update_Balloons()
+{
+	/*
+	balloon_rects[0] ...
+	balloon_rects[0] ...
+	balloon_rects[0] ...
+	balloon_rects[0] ...
+	*/
+}
