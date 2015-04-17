@@ -227,6 +227,7 @@ void Player::Shoot()
 		break;
 
 	case WEAPON_SHOTGUN:
+		//--------------------------------------------------------------
 		break;
 	}
 }
