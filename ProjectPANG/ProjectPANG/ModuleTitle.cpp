@@ -1,21 +1,20 @@
 #include "ModuleTitle.h"
 
 ModuleTitle::ModuleTitle(Application* app) : Module(app){}
-
 bool ModuleTitle::Init()
-{
+{	
 	app->current_time = 0;
 	ticks = 0;
-
+	dir = 1;
 	rect = { 0, 0, 384 * app->windowModule->scale, 240 * app->windowModule->scale };
 	insert_coin_rect = { 100 * app->windowModule->scale, 200 * app->windowModule->scale, 177 * app->windowModule->scale, 15 * app->windowModule->scale };
 
 	for (int i = 0; i < 4; i++){ source_rect[i] = new SDL_Rect({ i * 384, 0, 384, 240 }); }
 	source_rect[4] = new SDL_Rect({ 1536, 0, 176, 15 });
 
-	balloon_rects[0] = { 0, 0, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
+	balloon_rects[0] = { 384*app->windowModule->scale, 0, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 	balloon_rects[1] = { 0, 0, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
-	balloon_rects[2] = { 0, 0, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
+	balloon_rects[2] = { 384*app->windowModule->scale, 0, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 	balloon_rects[3] = { 0, 0, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 	balloon_source_rect = new SDL_Rect({ 0, 0, 48, 40 });
 
@@ -43,7 +42,7 @@ update_status ModuleTitle::Update()
 		if (app->current_time < 5)
 		{
 			Update_Balloons();
-			for (int i = 0; i < 4; i++){ app->renderModule->Print(app->texturesModule->balls_sprite, balloon_source_rect, &balloon_rects[i]); }
+			
 		}
 		// insert coin 
 		if (app->current_time % 2 == 1) { app->renderModule->Print(app->texturesModule->title_sprite, source_rect[4], &insert_coin_rect); }
@@ -79,13 +78,20 @@ update_status ModuleTitle::PostUpdate(){ return UPDATE_CONTINUE; }
 bool ModuleTitle::CleanUp(){ return true; }
 
 
-void ModuleTitle::Update_Balloons()
+void ModuleTitle::Update_Balloons()//Balls title animation 
 {
+	
 	ticks++;
-	/*
-	balloon_rects[0] ...
-	balloon_rects[0] ...
-	balloon_rects[0] ...
-	balloon_rects[0] ...
-	*/
+	balloon_rects[0].x -= 2*app->windowModule->scale;
+	//balloon_rects[1].x += app->windowModule->scale;
+	//balloon_rects[2].x -= app->windowModule->scale;
+	//balloon_rects[3].x += app->windowModule->scale;
+
+	balloon_rects[0].y += (app->windowModule->scale) + (dir*0.09*(ticks /10)*(ticks / 10));
+	//balloon_rects[1].y += app->windowModule->scale;
+	//balloon_rects[2].y += app->windowModule->scale;
+	//balloon_rects[3].y += app->windowModule->scale;
+	if (balloon_rects[0].y > 208 * app->windowModule->scale){ dir = -1; }
+
+	for (int i = 0; i < 4; i++){ app->renderModule->Print(app->texturesModule->balls_sprite, balloon_source_rect, &balloon_rects[i]);  }
 }
