@@ -4,7 +4,6 @@
 Application::Application()
 {
 	returnValue = UPDATE_CONTINUE;
-	current_time = 0;
 
 	windowModule = NULL;
 	renderModule = NULL;
@@ -52,6 +51,8 @@ bool Application::Init()
 
 	current_time = 0;
 	time(&timer);
+
+	coins = 0;
 
 	return true;
 }
@@ -245,3 +246,15 @@ void  Application::Reset_Time()
 {
 	current_time = 0;
 }
+
+void Application::Add_Coin()
+{
+	if (coins < 9) { coins++; }
+}
+
+bool Application::Lose_Coin()
+{
+	if (coins > 0) { coins--; return true; }
+	return false;
+}
+

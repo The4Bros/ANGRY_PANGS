@@ -36,6 +36,8 @@ public:
 	int current_time;
 	time_t	timer;
 
+	unsigned int coins;
+
 	// General Modules
 	ModuleWindow* windowModule;
 	ModuleRender* renderModule;
@@ -64,5 +66,7 @@ public:
 	bool ChangeTo(update_status new_state);
 
 	void Reset_Time();
+	void Add_Coin();
+	bool Lose_Coin();
 
 };

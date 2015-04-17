@@ -9,10 +9,11 @@
 class ModuleTitle : public Module{
 public:
 
-	SDL_Rect background_rect, insert_coin_rect;
-	unsigned int coin;
-	int current_time;
-	time_t 	timer;
+	SDL_Rect rect;
+	SDL_Rect insert_coin_rect;
+	SDL_Rect* source_rect[5];
+
+	bool insert_coin_pressed;
 
 	ModuleTitle(Application* app);
 	bool Init();
