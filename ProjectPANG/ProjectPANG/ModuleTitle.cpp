@@ -30,10 +30,10 @@ update_status ModuleTitle::PreUpdate()
 update_status ModuleTitle::Update()
 {	
 	//Print inital screens
-	if (app->current_time < 1){ app->renderModule->Print(app->texturesModule->title_sprite, source_rect[0], &rect); }
-	else if (app->current_time < 2){ app->renderModule->Print(app->texturesModule->title_sprite, source_rect[1], &rect); }
-	else if (app->current_time < 4){ app->renderModule->Print(app->texturesModule->title_sprite, source_rect[2], &rect); }
-	else if (app->current_time > 12){ return CHANGE_TO_TUTORIAL; }
+	if (ticks < 30){ app->renderModule->Print(app->texturesModule->title_sprite, source_rect[0], &rect); }
+	else if (ticks < 60){ app->renderModule->Print(app->texturesModule->title_sprite, source_rect[1], &rect); }
+	else if (app->current_time < 3){ app->renderModule->Print(app->texturesModule->title_sprite, source_rect[2], &rect); }
+	else if (app->current_time > 15){ return CHANGE_TO_TUTORIAL; }
 	else if (app->coins == 0)
 	{
 		app->renderModule->Print(app->texturesModule->title_sprite, source_rect[3], &rect);
@@ -45,7 +45,7 @@ update_status ModuleTitle::Update()
 			
 		}
 		// insert coin 
-		if (app->current_time % 2 == 1) { app->renderModule->Print(app->texturesModule->title_sprite, source_rect[4], &insert_coin_rect); }
+		if (ticks % 60 < 30) { app->renderModule->Print(app->texturesModule->title_sprite, source_rect[4], &insert_coin_rect); }
 	}
 	else
 	{
@@ -73,15 +73,13 @@ update_status ModuleTitle::Update()
 	
 }
 	
-update_status ModuleTitle::PostUpdate(){ return UPDATE_CONTINUE; }
+update_status ModuleTitle::PostUpdate(){ ticks++; return UPDATE_CONTINUE; }
 
 bool ModuleTitle::CleanUp(){ return true; }
 
 
 void ModuleTitle::Update_Balloons()//Balls title animation 
 {
-	
-	ticks++;
 	balloon_rects[0].x -= 2*app->windowModule->scale;
 	//balloon_rects[1].x += app->windowModule->scale;
 	//balloon_rects[2].x -= app->windowModule->scale;

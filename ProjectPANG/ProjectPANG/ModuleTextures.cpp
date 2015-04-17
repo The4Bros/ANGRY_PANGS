@@ -38,9 +38,6 @@ bool ModuleTextures::Init()
 	harpoons_sprite = IMG_LoadTexture(app->renderModule->renderer, "images/Harpoons.png");
 	if (harpoons_sprite == NULL){ return false; }
 
-	instructions_sprite = IMG_LoadTexture(app->renderModule->renderer, "images/Instructions.png");
-	if (instructions_sprite == NULL){ return false; }
-
 	map_countdown_sprite = IMG_LoadTexture(app->renderModule->renderer, "images/Map Countdown.png");
 	if (map_countdown_sprite == NULL){ return false; }
 
