@@ -15,7 +15,7 @@ bool ModuleEntityManager::Init()
 {
 	// BRICKS
 	bricks = new DynArray<Brick*>();
-	source_brick_rect[0] = new SDL_Rect({ 0, 0, 31, 7 });
+	source_brick_rect[0] = new SDL_Rect({ 0, 0, 32, 8 });
 	brick_sample = new Brick(app, 75, 48, 1);
 
 
@@ -51,6 +51,11 @@ bool ModuleEntityManager::Init()
 	//enemies = new DynArray<Enemy*>();
 	//source_enemy_rect = new SDL_Rect({ 0, 104, 24, 8 });
 	
+
+	
+
+
+
 	return true;
 }
 update_status ModuleEntityManager::PreUpdate(){ return UPDATE_CONTINUE; }

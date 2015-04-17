@@ -1,6 +1,6 @@
 # include "Particles.h"
 
-Particles::Particles(Application* app, Particle_Type type, unsigned int x, unsigned int y)
+Particles::Particles(Application* app, unsigned int type,  int x,  int y)
 {
 	this->app = app;
 

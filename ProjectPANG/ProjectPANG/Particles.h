@@ -19,6 +19,7 @@ enum Particle_Type
 
 class Particles
 {
+public:
 	Application* app;
 
 	bool alive;
@@ -27,7 +28,7 @@ class Particles
 
 	int quantity;
 
-	Particles(Application* app, Particle_Type type, unsigned int x, unsigned int y);
+	Particles(Application* app, unsigned int type,  int x,  int y);
 	~Particles(){}
 
 	void Update();

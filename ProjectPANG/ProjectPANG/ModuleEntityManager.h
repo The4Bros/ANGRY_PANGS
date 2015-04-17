@@ -9,6 +9,7 @@
 #include "Balloon.h"
 #include "Stair.h"
 #include "Brick.h"
+#include "Particles.h"
 
 
 class ModuleEntityManager : public Module{
@@ -32,6 +33,9 @@ public:
 
 	//DynArray<Enemy*>* enemies;
 	SDL_Rect* source_enemy_rect[74];
+	
+
+	DynArray<Particles*>* particles;
 	
 
 	ModuleEntityManager(Application* app);
