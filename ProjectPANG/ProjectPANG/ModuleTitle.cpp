@@ -36,8 +36,6 @@ update_status ModuleTitle::Update()
 	else if (app->current_time > 15){ return CHANGE_TO_TUTORIAL; }
 	else if (app->coins == 0)
 	{
-		app->renderModule->Print(app->texturesModule->title_sprite, source_rect[3], &rect);
-		
 		//begginning animation:
 		if (app->current_time < 5)
 		{
@@ -45,7 +43,12 @@ update_status ModuleTitle::Update()
 			
 		}
 		// insert coin 
-		if (ticks % 60 < 30) { app->renderModule->Print(app->texturesModule->title_sprite, source_rect[4], &insert_coin_rect); }
+		else
+		{
+			app->renderModule->Print(app->texturesModule->title_sprite, source_rect[3], &rect);
+			if (ticks % 60 < 30) { app->renderModule->Print(app->texturesModule->title_sprite, source_rect[4], &insert_coin_rect); }
+
+		}
 	}
 	else
 	{
