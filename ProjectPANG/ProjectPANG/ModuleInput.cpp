@@ -26,6 +26,8 @@ update_status ModuleInput::PreUpdate()
 	key = SDL_GetKeyboardState(NULL);
 	if (key[SDL_SCANCODE_ESCAPE] == 1){ return UPDATE_STOP; }
 
+	if (app->inputModule->key[SDL_SCANCODE_5] == 1){ app->titleModule->coin++; }
+
 	return UPDATE_CONTINUE;
 }
 

@@ -34,9 +34,9 @@ update_status ModuleScene::PreUpdate()
 update_status ModuleScene::Update()
 {
 	// PRINT SCORES
-	app->fontManagerModule->Write_On_Screen("Player and ruben no swag", 8 * app->windowModule->scale, 209 * app->windowModule->scale, 8 * app->windowModule->scale);
-	app->fontManagerModule->Write_On_Screen(900000, 8 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale);
-
+	app->fontManagerModule->Write_On_Screen("Player-1", 8 * app->windowModule->scale, 209 * app->windowModule->scale, 8 * app->windowModule->scale);
+	//app->fontManagerModule->Write_On_Screen(900000, 8 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale);
+	app->fontManagerModule->Write_On_Screen(app->titleModule->coin, 8 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale);
 
 	// PRINT BACKGROUND
 	app->renderModule->Print(app->texturesModule->background_sprite, background_const_rect, &background_rect);

@@ -10,7 +10,7 @@ class ModuleTitle : public Module{
 public:
 
 	SDL_Rect background_rect, insert_coin_rect;
-
+	unsigned int coin;
 	int current_time;
 	time_t 	timer;
 
