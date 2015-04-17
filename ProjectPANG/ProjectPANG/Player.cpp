@@ -33,7 +33,7 @@ Player::Player(Application* app, bool player1)
 		}
 		source_rect[23] = new SDL_Rect({ 736, 32, 51, 32 });
 		source_rect[24] = new SDL_Rect({ 787, 32, 51, 32 });
-
+		
 		// update position
 		setPos(app->sceneModule->stage_arrangement.player_pos[2], app->sceneModule->stage_arrangement.player_pos[3]);
 
@@ -278,6 +278,7 @@ void Player::Hit(SDL_Rect* killer)
 		update_counter = 0;
 		shoot_update_counter = 0;
 		state = HIT;
+		app->sceneModule->game_state = PLAYER_KILLED;
 	}
 }
 
@@ -360,31 +361,43 @@ void Player::Update()
 
 
 
-	// if no floor: make fall
-	if (rect.y < 168 && state != UP && state != DOWN) // not on ground
+
+
+
+
+
+	if (app->sceneModule->game_state == PLAYING)
 	{
-		/*
-		
-		if () // collision with brick
-		
-		else // fall
+		// if no floor: make fall
+		if (rect.y < 168 && state != UP && state != DOWN) // not on ground
 		{
+			/*
+
+			if () // collision with brick
+
+			else // fall
+			{
 			rect.y += 3 * app->windowModule->scale;
+			}
+
+			*/
 		}
-		
-		*/
+
+		update_counter++;
+		if (shoot_update_counter < 10){ shoot_update_counter++; }
+		else { shoot_key_pressed = false; shoot_update_counter = 0; }
+
+		if (harpoon[1]->alive){ harpoon[1]->Update(); }
+		if (harpoon[0]->alive){ harpoon[0]->Update(); }
+
+		//-------------------------------------------------------
+		// shotgun update
+		//-------------------------------------------------------
 	}
 
-	update_counter++;
-	if (shoot_update_counter < 10){ shoot_update_counter++; }
-	else { shoot_key_pressed = false; shoot_update_counter = 0; }
 
-	if (harpoon[1]->alive){ harpoon[1]->Update(); }
-	if (harpoon[0]->alive){ harpoon[0]->Update(); }
 
-	//-------------------------------------------------------
-	// shotgun update
-	//-------------------------------------------------------
+	
 	
 }
 

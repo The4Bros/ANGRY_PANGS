@@ -15,20 +15,18 @@
 class ModuleEntityManager : public Module{
 public:
 
-	unsigned int balloon_speed;
+	
+	SDL_Rect* harpoon_source_rect[25];
 
 	DynArray<Brick*>* bricks;
-	Brick* brick_sample;
 	SDL_Rect* source_brick_rect[18];
-	Brick* tmp_brick;
 
 	DynArray<Stair*>* stairs;
 	SDL_Rect* source_stair_rect;
-	Stair* tmp_stair;
 
 	DynArray<Balloon*>* balloons;
-	Balloon* balloon_sample;
 	SDL_Rect* source_balloon_rect[12];
+	unsigned int balloon_speed;
 	Balloon* tmp_balloon;
 
 	//DynArray<Enemy*>* enemies;

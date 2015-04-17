@@ -3,51 +3,64 @@
 ModuleScene::ModuleScene(Application* app) : Module(app)
 {
 	time_count = NULL;
+
+	ready_source_rect = NULL;
+	game_over_source_rect = NULL;
 }
 
 bool ModuleScene::Init()
 {
 	time_count = new Time_Count(app);
-	load_stage(1);
+
+	game_state = READY;
+	update_counter = 0;
+
+	load_stage(app->stage);
+
+	tmp_stair = NULL;
+	tmp_brick = NULL;
+	tmp_balloon = NULL;
+
+	ready_rect = { 100, 100, 160 * app->windowModule->scale,  32 * app->windowModule->scale };
+	game_over_rect = { 100, 100, 160 * app->windowModule->scale, 32 * app->windowModule->scale };
 
 	background_rect = { 0, 0, SCREEN_WIDTH * app->windowModule->scale, (SCREEN_HEIGHT - 32) * app->windowModule->scale };
-	background_const_source_rect = { 0, 0, 384, 208};
-	background_const_rect = new SDL_Rect(background_const_source_rect);
 
 	return true;
 }
 
 update_status ModuleScene::PreUpdate()
 {
-	if (difftime(time(NULL), time_count->timer) >= 1) { time_count->Update(); }
+	if (difftime(time(NULL), time_count->timer) >= 1 && game_state == PLAYING) { time_count->Update(); }
 
-	/*
-	
-	change print 
-	
-	*/
-
-
+	if (app->inputModule->key[SDL_SCANCODE_5] == 1)
+	{
+		if (!insert_coin_pressed){ app->Add_Coin(); insert_coin_pressed = true; }
+	}
+	else { insert_coin_pressed = false; }
 
 	return UPDATE_CONTINUE;
 }
 update_status ModuleScene::Update()
 {
+
 	// PRINT SCORES
 	app->fontManagerModule->Write_On_Screen("Player-1", 8 * app->windowModule->scale, 209 * app->windowModule->scale, 8 * app->windowModule->scale);
-	//app->fontManagerModule->Write_On_Screen(900000, 8 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale);
 	app->fontManagerModule->Write_On_Screen(app->coins, 8 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale);
 
+
+
+
+
 	// PRINT BACKGROUND
-	app->renderModule->Print(app->texturesModule->background_sprite, background_const_rect, &background_rect);
+	app->renderModule->Print(app->texturesModule->background_sprite, background_source_rect, &background_rect);
 
 	// PRINT TIMER
 	time_count->Print_Timer();
 
-	// STAIRS
+	// PRINT STAIRS
 	if (!app->entityManagerModule->stairs->empty())
 	{
-		Stair* tmp_stair = NULL;
 		for (unsigned int i = 0; i < app->entityManagerModule->stairs->Count(); i++)
 		{
 			tmp_stair = *app->entityManagerModule->stairs->at(i);
@@ -55,10 +68,9 @@ update_status ModuleScene::Update()
 		}
 	}
 
-	// BRICKS
+	// PRINT BRICKS
 	if (!app->entityManagerModule->bricks->empty())
 	{
-		Brick* tmp_brick = NULL;
 		for (unsigned int i = 0; i < app->entityManagerModule->bricks->Count(); i++)
 		{
 			tmp_brick = *app->entityManagerModule->bricks->at(i);
@@ -67,7 +79,7 @@ update_status ModuleScene::Update()
 	}
 
 
-	// HARPOONS
+	// PRINT HARPOONS
 
 	if (app->playerModule->player1->harpoon[0]->alive) { app->playerModule->player1->harpoon[0]->Print(); }
 	if (app->playerModule->player1->harpoon[1]->alive) { app->playerModule->player1->harpoon[1]->Print(); }
@@ -78,7 +90,7 @@ update_status ModuleScene::Update()
 		if (app->playerModule->player2->harpoon[1]->alive) { app->playerModule->player2->harpoon[1]->Print(); }
 	}
 
-	// BULLETS
+	// PRINT BULLETS
 
 
 
@@ -93,17 +105,32 @@ update_status ModuleScene::Update()
 
 	// PRINT BALLS
 	
-	app->renderModule->Print(app->texturesModule->balls_sprite, app->entityManagerModule->source_balloon_rect[0], &app->entityManagerModule->balloon_sample->rect);
-	
 	if (!app->entityManagerModule->balloons->empty())
 	{
-		Balloon* tmp_balloon = NULL;
 		for (unsigned int i = 0; i < app->entityManagerModule->balloons->Count(); i++)
 		{
 			tmp_balloon = *app->entityManagerModule->balloons->at(i);
 			tmp_balloon->Print();
 		}
 	}
+
+
+
+	if (game_state == READY)
+	{
+		app->renderModule->Print(app->texturesModule->ready, ready_source_rect, &ready_rect);
+
+		if (update_counter > 180){ game_state = PLAYING; update_counter = 0; }
+		else { update_counter++; }
+	}
+	if (game_state == GAME_OVER)
+	{
+		app->renderModule->Print(app->texturesModule->ready, game_over_source_rect, &game_over_rect);
+
+		if (update_counter > 60){ game_state = PLAYING; update_counter = 0; }
+		else { update_counter++; }
+	}
+
 
 
 	//app->renderModule->Print(app->texturesModule->, app->, &app->);
@@ -259,13 +286,11 @@ bool ModuleScene::load_stage(int stage)
 		if (line == NULL){ return false; }
 	}
 
-	delete[] background_const_rect;
-	background_const_source_rect.x = ((current_stage - 1) % 3) * 384;
-	background_const_source_rect.y = ((current_stage - 1) / 3) * 208;
-	background_const_rect = new SDL_Rect(background_const_source_rect);
-
 	parser(line);
 	fclose(level_file);
+
+	if (background_source_rect != NULL){ delete background_source_rect; background_source_rect = NULL; }
+	background_source_rect = new SDL_Rect({ ((current_stage - 1) % 3) * 384, ((current_stage - 1) / 3) * 208, 384, 208 });
 
 	reset_stage();
 

@@ -10,7 +10,6 @@ public:
 	Application* app;
 
 	SDL_Rect head_rect, body_rect;
-	SDL_Rect* source_rect[25];
 	int source_index;
 
 	int update_counter, length;

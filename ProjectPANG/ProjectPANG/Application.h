@@ -36,7 +36,7 @@ public:
 	int current_time;
 	time_t	timer;
 
-	unsigned int coins;
+	unsigned int coins, stage;
 
 	// General Modules
 	ModuleWindow* windowModule;
@@ -50,6 +50,7 @@ public:
 	ModulePlayer* playerModule;
 	ModuleEntityManager* entityManagerModule;
 	ModuleScene* sceneModule;
+
 	ModuleTitle* titleModule;
 	ModuleTutorial* tutorialModule;
 	ModuleChooseCity* chooseCityModule;

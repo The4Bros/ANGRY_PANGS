@@ -53,6 +53,7 @@ bool Application::Init()
 	time(&timer);
 
 	coins = 0;
+	stage = 1;
 
 	return true;
 }
@@ -151,35 +152,38 @@ bool Application::ChangeTo(update_status new_state)
 	// Clear Unnecessary Modules
 	modules_Queue.ReduceTo(6);
 
+	if (titleModule != NULL) { 
+		delete titleModule; 
+		titleModule = NULL; }
+	if (tutorialModule != NULL) { delete tutorialModule; tutorialModule = NULL; }
+	if (chooseCityModule != NULL) { delete chooseCityModule; chooseCityModule = NULL; }
+	if (planeModule != NULL) { delete planeModule; planeModule = NULL; }
+	if (creditsModule != NULL) { delete creditsModule; creditsModule = NULL; }
+	if (highscoreModule != NULL) { delete highscoreModule; highscoreModule = NULL; }
+
 	switch (new_state)
 	{
 	case CHANGE_TO_TITLE:
 
-		if (titleModule == NULL)
-		{
-			titleModule = new ModuleTitle(this);
-			if (titleModule->Init() == false) { return false; }
-		}
+		titleModule = new ModuleTitle(this);
+		if (titleModule->Init() == false) { return false; }
+
 		modules_Queue.push(titleModule);
 		break;
 
 	case CHANGE_TO_TUTORIAL:
 
-		if (tutorialModule == NULL)
-		{
-			tutorialModule = new ModuleTutorial(this);
-			if (tutorialModule->Init() == false) { return false; }
-		}
+		tutorialModule = new ModuleTutorial(this);
+		if (tutorialModule->Init() == false) { return false; }
+
 		modules_Queue.push(tutorialModule);
 		break;
 
 	case CHANGE_TO_CHOOSE_CITY:
 
-		if (chooseCityModule == NULL)
-		{
-			chooseCityModule = new ModuleChooseCity(this);
-			if (chooseCityModule->Init() == false) { return false; }
-		}
+		chooseCityModule = new ModuleChooseCity(this);
+		if (chooseCityModule->Init() == false) { return false; }
+
 		modules_Queue.push(chooseCityModule);
 		break;
 
@@ -209,31 +213,25 @@ bool Application::ChangeTo(update_status new_state)
 
 	case CHANGE_TO_MAP_PLANE:
 
-		if (planeModule == NULL)
-		{
-			planeModule = new ModulePlane(this);
-			if (planeModule->Init() == false) { return false; }
-		}
+		planeModule = new ModulePlane(this);
+		if (planeModule->Init() == false) { return false; }
+
 		modules_Queue.push(planeModule);
 		break;
 
 	case CHANGE_TO_CREDITS:
 
-		if (creditsModule == NULL)
-		{
-			creditsModule = new ModuleCredits(this);
-			if (creditsModule->Init() == false) { return false; }
-		}
+		creditsModule = new ModuleCredits(this);
+		if (creditsModule->Init() == false) { return false; }
+
 		modules_Queue.push(creditsModule);
 		break;
 
 	case CHANGE_TO_HIGHSCORE:
 
-		if (highscoreModule == NULL)
-		{
-			highscoreModule = new ModuleHighscore(this);
-			if (highscoreModule->Init() == false) { return false; }
-		}
+		highscoreModule = new ModuleHighscore(this);
+		if (highscoreModule->Init() == false) { return false; }
+
 		modules_Queue.push(highscoreModule);
 		break;
 

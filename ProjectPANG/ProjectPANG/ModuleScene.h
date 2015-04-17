@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "Balloon.h"
 #include "Stair.h"
+#include "Brick.h"
 
 #ifndef __ModuleScene_H__
 #define __ModuleScene_H__
@@ -49,7 +50,14 @@ struct Stage_Arrangement
 	~Stage_Arrangement(){}
 };
 
+enum Game_State
+{
+	PLAYING,
+	PLAYER_KILLED,
+	READY,
+	GAME_OVER
 
+};
 
 
 class ModuleScene : public Module{
@@ -61,12 +69,26 @@ public:
 
 	Time_Count* time_count;
 
+	Game_State game_state;
+	unsigned int update_counter;
+
+	SDL_Rect ready_rect;
+	SDL_Rect* ready_source_rect;
+
+	SDL_Rect game_over_rect;
+	SDL_Rect* game_over_source_rect;
+
+	bool insert_coin_pressed;
+
 	unsigned int current_stage;
 	Stage_Arrangement stage_arrangement;
 
+	Stair* tmp_stair;
+	Brick* tmp_brick;
+	Balloon* tmp_balloon;
+
 	SDL_Rect background_rect;
-	SDL_Rect background_const_source_rect;
-	const SDL_Rect* background_const_rect;
+	SDL_Rect* background_source_rect;
 
 	ModuleScene(Application* app);
 	bool Init();
