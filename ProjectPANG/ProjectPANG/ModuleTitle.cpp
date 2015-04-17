@@ -78,7 +78,7 @@ update_status ModuleTitle::PostUpdate(){ return UPDATE_CONTINUE; }
 bool ModuleTitle::CleanUp(){ return true; }
 
 
-void Update_Balloons()
+void ModuleTitle::Update_Balloons()
 {
 	/*
 	balloon_rects[0] ...

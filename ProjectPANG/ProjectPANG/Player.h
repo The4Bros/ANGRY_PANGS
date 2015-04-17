@@ -14,8 +14,7 @@ enum PlayerState
 	STILL,
 	SHOOT_LEFT,
 	SHOOT_RIGHT,
-	HIT,
-	HIT_FLY
+	HIT
 };
 
 enum Hit_State

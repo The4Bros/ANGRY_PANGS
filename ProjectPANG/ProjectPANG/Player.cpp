@@ -295,6 +295,8 @@ void Player::Update()
 				rect.x -= app->windowModule->scale;
 				if (rect.y < 9 * app->windowModule->scale) // && no collision with bricks
 				{
+					height = rect.y;
+					update_counter = 0;
 					hit_State = HIT_LEFT_DOWN;
 				}
 				else
@@ -308,6 +310,8 @@ void Player::Update()
 
 				if (rect.y > 167 * app->windowModule->scale) // && no collision with bricks
 				{
+					height = rect.y;
+					update_counter = 0;
 					hit_State = HIT_LEFT_UP;
 				}
 				else
