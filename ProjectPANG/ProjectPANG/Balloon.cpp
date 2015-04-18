@@ -93,7 +93,7 @@ void Balloon::Update()
 	Check_Collision_Balloon_Players();
 
 
-
+	Check_Collision_Balloon_Players();
 
 	//						-- VERTICAL --	
 
@@ -105,7 +105,6 @@ void Balloon::Update()
 		if (rect.y > 8 * app->windowModule->scale && bounce_height > 0)
 		{
 			rect.y = rect.y - gravity;
-
 			
 		}
 		else
@@ -122,12 +121,11 @@ void Balloon::Update()
 		{
 			
 			rect.y = rect.y + gravity;
-			
-
 		}
 		else
 		{
 			state_balloon_V = BALLOON_UP;
+		
 		}
 		break;
 

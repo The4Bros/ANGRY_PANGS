@@ -52,7 +52,7 @@ public:
 	int bounce_height_start;// ?
 	int gravity_counter=1;
 	int max_jump_gravity;
-	int gravity = 1;
+	int gravity = 2;
 	int gravity_start = 1;
 	int horizontal_speed = 2;
 
