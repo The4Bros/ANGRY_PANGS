@@ -48,12 +48,7 @@ public:
 	// Collisions
 	bool Collision(SDL_Rect* rect_1, SDL_Rect* rect_2);
 
-	bool Collision_Player_Brick_Horizontal(SDL_Rect* rect_1, SDL_Rect* rect_2);
-	bool Collision_Player_Brick_Vertical(SDL_Rect* rect_1, SDL_Rect* rect_2);
-
 	void Collision_Balloon_Players(SDL_Rect* balloon_rect);
-	bool Collision_Balloon_Brick_Vertical(SDL_Rect* balloon_rect);
-	bool Collision_Balloon_Brick_Horizontal(SDL_Rect* balloon_rect);
 };
 
 #endif

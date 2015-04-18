@@ -16,6 +16,14 @@ bool ModuleAudio::Init()
 
 	if (Mix_OpenAudio(44100, AUDIO_U8 /*MIX_DEFAULT_FORMAT*/, 2, 2048) == -1){ return false; } // Initialize SDL_mixer
 
+
+
+
+
+
+
+
+
 	return true;
 }
 update_status ModuleAudio::PreUpdate(){ return UPDATE_CONTINUE; }

@@ -138,38 +138,3 @@ bool ModuleEntityManager::Collision(SDL_Rect* rect_1, SDL_Rect* rect_2)
 	return false;
 }
 
-bool ModuleEntityManager::Collision_Player_Brick_Horizontal(SDL_Rect* player_rect, SDL_Rect* brick_rect)
-{
-	if (player_rect->x + player_rect->w >= brick_rect->x) // player right
-	{
-		if (brick_rect->x + brick_rect->w >= player_rect->x) // player left
-		{
-			if (player_rect->y + brick_rect->h >= player_rect->y) // player up
-			{
-				if (player_rect->y + player_rect->h >= brick_rect->y) // player down
-				{
-					return true;
-				}
-			}
-		}
-	}
-	return false;
-}
-
-bool ModuleEntityManager::Collision_Player_Brick_Vertical(SDL_Rect* player_rect, SDL_Rect* brick_rect)
-{
-	if (player_rect->x + player_rect->w >= brick_rect->x) // player right
-	{
-		if (brick_rect->x + brick_rect->w >= player_rect->x) // player left
-		{
-			if (player_rect->y + brick_rect->h >= player_rect->y) // player up
-			{
-				if (player_rect->y + player_rect->h >= brick_rect->y) // player down
-				{
-					return true;
-				}
-			}
-		}
-	}
-	return false;
-}

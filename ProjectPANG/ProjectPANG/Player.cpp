@@ -407,3 +407,53 @@ void Player::setPos(unsigned int x, unsigned int y)
 	rect.x = x * app->windowModule->scale;
 	rect.y = y * app->windowModule->scale;
 }
+
+
+
+bool Player::Check_Collision_Player_Brick_Horizontal()
+{
+	for (unsigned int i = 0; i < app->entityManagerModule->bricks->Count(); i++)
+	{
+		app->entityManagerModule->tmp_brick = *app->entityManagerModule->bricks->at(i);
+
+		if (rect.x + rect.w >= app->entityManagerModule->tmp_brick->rect.x) // player right
+		{
+			if (app->entityManagerModule->tmp_brick->rect.x + app->entityManagerModule->tmp_brick->rect.w >= rect.x) // player left
+			{
+				if (app->entityManagerModule->tmp_brick->rect.y + app->entityManagerModule->tmp_brick->rect.h >= rect.y) // player up
+				{
+					if (rect.y + rect.h >= app->entityManagerModule->tmp_brick->rect.y) // player down
+					{
+						return true;
+					}
+				}
+			}
+		}
+	}
+
+	return false;
+}
+
+bool Player::Check_Collision_Player_Brick_Vertical()
+{
+	for (unsigned int i = 0; i < app->entityManagerModule->bricks->Count(); i++)
+	{
+		app->entityManagerModule->tmp_brick = *app->entityManagerModule->bricks->at(i);
+
+		if (rect.x + rect.w >= app->entityManagerModule->tmp_brick->rect.x) // player right
+		{
+			if (app->entityManagerModule->tmp_brick->rect.x + app->entityManagerModule->tmp_brick->rect.w >= rect.x) // player left
+			{
+				if (app->entityManagerModule->tmp_brick->rect.y + app->entityManagerModule->tmp_brick->rect.h >= rect.y) // player up
+				{
+					if (rect.y + rect.h >= app->entityManagerModule->tmp_brick->rect.y) // player down
+					{
+						return true;
+					}
+				}
+			}
+		}
+	}
+
+	return false;
+}

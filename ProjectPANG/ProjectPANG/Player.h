@@ -66,5 +66,8 @@ public:
 	void Update();
 	void setPos(unsigned int x, unsigned int y);
 
+	bool Check_Collision_Player_Brick_Horizontal();
+	bool Check_Collision_Player_Brick_Vertical();
+
 };
 #endif
