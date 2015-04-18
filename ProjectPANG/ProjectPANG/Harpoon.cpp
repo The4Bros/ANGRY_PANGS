@@ -136,3 +136,83 @@ void Harpoon::Print()
 
 	
 }
+
+
+void Harpoon::Check_Collision_Harpoon_Balloon()
+{
+	//Closest point to harpoon
+	int closest_x, closest_y;
+
+	for (int i = 0; i < app->entityManagerModule->balloons->Count(); i++)
+	{
+		app->entityManagerModule->tmp_balloon = *app->entityManagerModule->balloons->at(i);
+
+		//closest_x offset
+		if (app->entityManagerModule->tmp_balloon->rect.x < head_rect.x){ closest_x = head_rect.x; }
+		else if (app->entityManagerModule->tmp_balloon->rect.x > head_rect.x + head_rect.w){ closest_x = head_rect.x + head_rect.w; }
+		else{ closest_x = app->entityManagerModule->tmp_balloon->rect.x; }
+
+		//closest_y offset
+		if (app->entityManagerModule->tmp_balloon->rect.y < head_rect.y){ closest_y = head_rect.y; }
+		else if (app->entityManagerModule->tmp_balloon->rect.y > head_rect.y + head_rect.h + body_rect.h){ closest_y = head_rect.y + head_rect.h + body_rect.h; }
+		else{ closest_y = app->entityManagerModule->tmp_balloon->rect.y; }
+
+		//Check distance between points
+		if ((app->entityManagerModule->tmp_balloon->rect.h * app->entityManagerModule->tmp_balloon->rect.h)
+						> ((closest_x - app->entityManagerModule->tmp_balloon->rect.x) * (closest_x - app->entityManagerModule->tmp_balloon->rect.x))
+						+ ((closest_y - app->entityManagerModule->tmp_balloon->rect.y) * (closest_y - app->entityManagerModule->tmp_balloon->rect.y)))
+		{
+			
+			app->entityManagerModule->tmp_balloon->Hit();
+			alive = false;
+			return;
+		}
+	}
+}
+
+void Harpoon::Check_Collision_Harpoon_Brick()
+{
+	for (int i = 0; i < app->entityManagerModule->bricks->Count(); i++)
+	{
+		app->entityManagerModule->tmp_brick = *app->entityManagerModule->bricks->at(i);
+
+		if (head_rect.x + head_rect.w >= app->entityManagerModule->tmp_brick->rect.x) // player right
+		{
+			if (app->entityManagerModule->tmp_brick->rect.x + app->entityManagerModule->tmp_brick->rect.w >= head_rect.x) // player left
+			{
+				if (app->entityManagerModule->tmp_brick->rect.y + app->entityManagerModule->tmp_brick->rect.h >= head_rect.y) // player up
+				{
+					if (head_rect.y + head_rect.h + body_rect.h >= app->entityManagerModule->tmp_brick->rect.y) // player down
+					{
+						app->entityManagerModule->tmp_brick->Hit();
+						alive = false;
+						return;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+//void Harpoon::Check_Collision_Bullet_Balloon()
+/*
+{
+	//Closest point to bullet
+	int closest_x, closest_y;
+
+	//closest_x offset
+	if (balloon_rect->x < bullet_rect->x){ closest_x = bullet_rect->x; }
+	else if (balloon_rect->x > bullet_rect->x + bullet_rect->w){ closest_x = bullet_rect->x + bullet_rect->w; }
+	else{ closest_x = balloon_rect->x; }
+
+	//closest_y offset
+	if (balloon_rect->y < bullet_rect->y){ closest_y = bullet_rect->y; }
+	else if (balloon_rect->y > bullet_rect->y + bullet_rect->h){ closest_y = bullet_rect->y + bullet_rect->h; }
+	else{ closest_y = balloon_rect->y; }
+
+	//Check distance between points
+	return (balloon_rect->h * balloon_rect->h) > ((closest_x - balloon_rect->x) * (closest_x - balloon_rect->x)) + ((closest_y - balloon_rect->y) * (closest_y - balloon_rect->y));
+}
+
+*/

@@ -174,10 +174,7 @@ bool ModuleEntityManager::Collision_Player_Brick_Vertical(SDL_Rect* player_rect,
 	return false;
 }
 
-bool ModuleEntityManager::Collision_Harpoon_Balloon(SDL_Rect* balloon_rect);
-bool ModuleEntityManager::Collision_Harpoon_Brick(SDL_Rect* balloon_rect);
 
-bool ModuleEntityManager::Collision_Bullet_Balloon(SDL_Rect* balloon_rect);
 
 
 void ModuleEntityManager::Collision_Balloon_Players(SDL_Rect* balloon_rect)
@@ -218,7 +215,7 @@ void ModuleEntityManager::Collision_Balloon_Players(SDL_Rect* balloon_rect)
 
 bool ModuleEntityManager::Collision_Balloon_Brick_Vertical(SDL_Rect* balloon_rect)
 {
-	//Closest point to player
+	//Closest point to brick
 	int closest_x, closest_y;
 
 	//closest_x offset
@@ -238,7 +235,7 @@ bool ModuleEntityManager::Collision_Balloon_Brick_Vertical(SDL_Rect* balloon_rec
 
 bool ModuleEntityManager::Collision_Balloon_Brick_Horizontal(SDL_Rect* balloon_rect)
 {
-	//Closest point to player
+	//Closest point to brick
 	int closest_x, closest_y;
 
 	//closest_x offset
