@@ -114,9 +114,11 @@ void Balloon::Update()
 			}
 			else
 			{
+				
 				state_balloon_V = BALLOON_DOWN;
 				bounce_height = bounce_height_start; // fix this
-				//gravity = gravity_start;
+				gravity = gravity_start;
+				gravity_strenght = gravity_start;
 			}
 			break;
 
@@ -140,7 +142,7 @@ void Balloon::Update()
 				state_balloon_V = BALLOON_UP;
 				bounce_height = bounce_height_start; // fix this
 				//gravity = gravity_start;
-				//gravity_strenght = gravity_start;
+				gravity_strenght = gravity_start;
 			}
 			break;
 		

@@ -46,7 +46,7 @@ public:
 	unsigned int max_height;
 	int bounce_height = 100;// ?
 	int bounce_height_start = 100;// ?
-    int gravity_strenght = 1;
+    int gravity_strenght = 2;
 	
 	int gravity = 2;
 	int gravity_start = 2;
