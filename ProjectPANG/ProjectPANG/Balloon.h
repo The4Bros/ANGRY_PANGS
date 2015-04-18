@@ -75,6 +75,10 @@ public:
 	void Hit();
 	// particles->PushBack(x, y, type);
 
+	void Check_Collision_Balloon_Players();
+	void Check_Collision_Balloon_Brick_Vertical();
+	void Check_Collision_Balloon_Brick_Horizontal();
+
 	void Reset(unsigned int x, unsigned int y, unsigned int type, unsigned int max_height);
 
 
