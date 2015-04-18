@@ -16,6 +16,9 @@ Balloon::Balloon(Application* app, int x, int y, int type, int max_height)
 	state_balloon_H = BALLOON_RIGHT;
 	state_balloon_V = BALLOON_DOWN;
 
+	bounce_height = max_height*app->windowModule->scale;
+	bounce_height_start = bounce_height;
+
 
 	//---
 
@@ -79,7 +82,7 @@ Balloon::Balloon(Application* app, int x, int y, int type, int max_height)
 	}
 
 
-	bounce_height = bounce_height_start; // fix this
+
 	
 }
 
@@ -87,90 +90,73 @@ Balloon::Balloon(Application* app, int x, int y, int type, int max_height)
 
 void Balloon::Update()
 {
-	// 8 * app->windowModule->scale;   left coord
-	// (376 * app->windowModule->scale) - rect.w;  right coord
-	// 168 down floor y coord
-	
 
-	
-	
-//						-- VERTICAL --	
 
-		switch (state_balloon_V)
+
+
+
+	//						-- VERTICAL --	
+
+	switch (state_balloon_V)
+	{
+	case BALLOON_UP:
+		
+
+		if (rect.y > 8 * app->windowModule->scale && bounce_height > 0)
 		{
-		case BALLOON_UP:
+			rect.y = rect.y - gravity;
 
-			if(/* rect.y > 8 * app->windowModule->scale) &&*/ bounce_height > 0)
-			{
-				rect.y = rect.y - gravity;
-				//gravity = gravity - 0.1f;
-				gravity_strenght = gravity_strenght--;
-				if (gravity_strenght % 10 == 0)
-				{
-					gravity--;
-				}
-				bounce_height--;
 			
-			}
-			else
-			{
-				
-				state_balloon_V = BALLOON_DOWN;
-				bounce_height = bounce_height_start; // fix this
-				gravity = gravity_start;
-				gravity_strenght = gravity_start;
-			}
-			break;
-
-		case BALLOON_DOWN:
-
-			if (rect.y < 167 * app->windowModule->scale)
-			{
-				rect.y = rect.y + gravity;
-				//gravity = gravity ; // timer please
-				
-				gravity_strenght = gravity_strenght++;
-				if (gravity_strenght%10==0)
-				{
-					gravity++;
-				}
-			
-				
-			}
-			else
-			{
-				state_balloon_V = BALLOON_UP;
-				bounce_height = bounce_height_start; // fix this
-				//gravity = gravity_start;
-				gravity_strenght = gravity_start;
-			}
-			break;
-		
-		default:
-			break;
 		}
-		
-//						-- HORIZONTAL --
-
-		switch (state_balloon_H)
+		else
 		{
-		case BALLOON_LEFT:
-
-			if (rect.x > 8 * app->windowModule->scale) rect.x -= horizontal_speed;
-			else state_balloon_H = BALLOON_RIGHT;
-
-			break;
-		case BALLOON_RIGHT:
-
-			if (rect.x < 376 * app->windowModule->scale) rect.x += horizontal_speed;
-			else state_balloon_H = BALLOON_LEFT;
-
-			break;
-		default:
-			break;
+			state_balloon_V = BALLOON_DOWN;
+			
 		}
+		break;
+
+	case BALLOON_DOWN:
 		
+
+		if (rect.y + rect.h < 199 * app->windowModule->scale /* || collision bricks*/)
+		{
+			
+			rect.y = rect.y + gravity;
+			
+
+		}
+		else
+		{
+			state_balloon_V = BALLOON_UP;
+		}
+		break;
+
+	default:
+		break;
 	}
+
+	//						-- HORIZONTAL --
+
+	switch (state_balloon_H)
+	{
+	case BALLOON_LEFT:
+
+		if (rect.x > 8 * app->windowModule->scale) rect.x -= horizontal_speed;
+		else state_balloon_H = BALLOON_RIGHT;
+
+		break;
+	case BALLOON_RIGHT:
+
+		if (rect.x + rect.w < 376 * app->windowModule->scale) rect.x += horizontal_speed;
+		else state_balloon_H = BALLOON_LEFT;
+
+		break;
+	default:
+		break;
+	}
+
+}
+
 
 
 

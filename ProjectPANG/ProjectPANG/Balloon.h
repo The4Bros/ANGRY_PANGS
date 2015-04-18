@@ -44,16 +44,18 @@ enum BALLOON_STATE_HORIZONTAL
 class Balloon
 {
 public:
+
 	Application* app;
 
 	unsigned int max_height;
 	int bounce_height;// ?
 	int bounce_height_start;// ?
-	int gravity_strenght = 1;
+	int gravity_counter=1;
 	int max_jump_gravity;
 	int gravity = 1;
 	int gravity_start = 1;
 	int horizontal_speed = 2;
+
 	BALL_TYPE type;
 
 	BALLOON_STATE_VERTICAL state_balloon_V;
