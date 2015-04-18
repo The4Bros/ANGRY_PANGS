@@ -71,15 +71,15 @@ bool ModuleEntityManager::Init()
 
 	source_balloon_rect[3] = new SDL_Rect({ 48, 40, 32, 26 });
 	source_balloon_rect[4] = new SDL_Rect({ 80, 40, 32, 26 });
-	source_balloon_rect[5] = new SDL_Rect({ 48, 62, 32, 26 });
+	source_balloon_rect[5] = new SDL_Rect({ 48, 66, 32, 26 });
 
-	source_balloon_rect[6] = new SDL_Rect({ 80, 62, 16, 14 });
-	source_balloon_rect[7] = new SDL_Rect({ 96, 62, 16, 14 });
-	source_balloon_rect[8] = new SDL_Rect({ 80, 76, 16, 14 });
+	source_balloon_rect[6] = new SDL_Rect({ 80, 66, 16, 14 });
+	source_balloon_rect[7] = new SDL_Rect({ 96, 66, 16, 14 });
+	source_balloon_rect[8] = new SDL_Rect({ 80, 80, 16, 14 });
 
-	source_balloon_rect[9] = new SDL_Rect({ 96, 76, 8, 7 });
-	source_balloon_rect[10] = new SDL_Rect({ 102, 76, 8, 7 });
-	source_balloon_rect[11] = new SDL_Rect({ 96, 83, 8, 7 });
+	source_balloon_rect[9] = new SDL_Rect({ 96, 80, 8, 7 });
+	source_balloon_rect[10] = new SDL_Rect({ 104, 80, 8, 7 });
+	source_balloon_rect[11] = new SDL_Rect({ 96, 87, 8, 7 });
 	
 
 

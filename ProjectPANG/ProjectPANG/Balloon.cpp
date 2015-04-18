@@ -25,49 +25,49 @@ Balloon::Balloon(Application* app, int x, int y, int type, int max_height)
 
 	switch (type)
 	{
-	case 1:
+	case 0:
 		this->type = RED_1;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 		break;
 	case 2:
-		this->type = RED_2;
-		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 32 * app->windowModule->scale, 26 * app->windowModule->scale };
-		break;
-	case 3:
-		this->type = RED_3;
-		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 16 * app->windowModule->scale, 14 * app->windowModule->scale };
-		break;
-	case 4:
-		this->type = RED_4;
-		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 8 * app->windowModule->scale, 7 * app->windowModule->scale };
-		break;
-	case 5:
 		this->type = BLUE_1;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 		break;
-	case 6:
-		this->type = BLUE_2;
-		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 32 * app->windowModule->scale, 26 * app->windowModule->scale };
-		break;
-	case 7:
-		this->type = BLUE_3;
-		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 16 * app->windowModule->scale, 14 * app->windowModule->scale };
-		break;
-	case 8:
-		this->type = BLUE_4;
-		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 8 * app->windowModule->scale, 7 * app->windowModule->scale };
-		break;
-	case 9:
+	case 3:
 		this->type = GREEN_1;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 		break;
-	case 10:
+	case 4:
+		this->type = RED_2;
+		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 32 * app->windowModule->scale, 26 * app->windowModule->scale };
+		break;
+	case 5:
+		this->type = BLUE_2;
+		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 32 * app->windowModule->scale, 26 * app->windowModule->scale };
+		break;
+	case 6:
 		this->type = GREEN_2;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 32 * app->windowModule->scale, 26 * app->windowModule->scale };
 		break;
-	case 11:
+	case 7:
+		this->type = RED_3;
+		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 16 * app->windowModule->scale, 14 * app->windowModule->scale };
+		break;
+	case 8:
+		this->type = BLUE_3;
+		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 16 * app->windowModule->scale, 14 * app->windowModule->scale };
+		break;
+	case 9:
 		this->type = GREEN_3;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 16 * app->windowModule->scale, 14 * app->windowModule->scale };
+		break;
+	case 10:
+		this->type = RED_4;
+		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 8 * app->windowModule->scale, 7 * app->windowModule->scale };
+		break;
+	case 11:
+		this->type = BLUE_4;
+		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 8 * app->windowModule->scale, 7 * app->windowModule->scale };
 		break;
 	case 12:
 		this->type = GREEN_4;
@@ -78,6 +78,7 @@ Balloon::Balloon(Application* app, int x, int y, int type, int max_height)
 	default:
 		break;
 	}
+
 
 	bounce_height = bounce_height_start; // fix this
 	
