@@ -140,9 +140,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Queue.h">
-      <Filter>Archivos de encabezado\Other Resources\TDA%27s</Filter>
-    </ClInclude>
     <ClInclude Include="Globals.h">
       <Filter>Archivos de encabezado\Other Resources</Filter>
     </ClInclude>
@@ -220,6 +217,9 @@
     </ClInclude>
     <ClInclude Include="Brick.h">
       <Filter>Archivos de encabezado\Application\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="DoubleNodedList.h">
+      <Filter>Archivos de encabezado\Other Resources\TDA%27s</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

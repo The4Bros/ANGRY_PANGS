@@ -313,7 +313,7 @@ void Balloon::Check_Collision_Balloon_Brick_Vertical()
 	else{ closest_y = rect.y; }
 
 	//Check distance between points
-	return (rect.h * rect.h) > ((closest_x - rect.x) * (closest_x - rect.x)) + ((closest_y - rect.y) * (closest_y - rect.y));
+	//return (rect.h * rect.h) > ((closest_x - rect.x) * (closest_x - rect.x)) + ((closest_y - rect.y) * (closest_y - rect.y));
 }
 
 
@@ -333,5 +333,5 @@ void Balloon::Check_Collision_Balloon_Brick_Horizontal()
 	else{ closest_y = rect.y; }
 
 	//Check distance between points
-	return (rect.h * rect.h) > ((closest_x - rect.x) * (closest_x - rect.x)) + ((closest_y - rect.y) * (closest_y - rect.y));
+	//return (rect.h * rect.h) > ((closest_x - rect.x) * (closest_x - rect.x)) + ((closest_y - rect.y) * (closest_y - rect.y));
 }

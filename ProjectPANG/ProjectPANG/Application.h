@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Globals.h"
-#include "Queue.h"
+#include "DoubleNodedList.h"
 
 #include "Module.h"
 #include "ModuleWindow.h"
@@ -22,12 +22,10 @@
 #include "ModuleHighscore.h"
 
 
-
-
 class Application
 {
 private:
-	DoubleNodedQueue<Module*> modules_Queue;
+	DoubleNodedList<Module*> modules_Queue;
 	DoubleNode<Module*>* item;
 	update_status returnValue;
 

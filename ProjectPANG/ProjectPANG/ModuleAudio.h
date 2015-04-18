@@ -8,7 +8,14 @@
 #ifndef __ModuleAudio_H__
 #define __ModuleAudio_H__
 
-class ModuleAudio : public Module{
+#define DEFAULT_MUSIC_FADE_TIME 2.0f
+
+class ModuleAudio : public Module
+{
+private:
+	Mix_Music* music;
+	DoubleNodedList<Mix_Chunk*>	fx;
+
 public:
 	ModuleAudio(Application* app);
 	bool Init();
@@ -16,6 +23,10 @@ public:
 	update_status Update();
 	update_status PostUpdate();
 	bool CleanUp();
+
+	bool PlayMusic(const char* path, float fade_time = DEFAULT_MUSIC_FADE_TIME); // Play a music file
+	unsigned int LoadFx(const char* path); // Load a WAV in memory
+	bool PlayFx(unsigned int fx, int repeat = 0); // Play a previously loaded WAV
 };
 
 #endif

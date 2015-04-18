@@ -17,21 +17,23 @@ template <class DoubleNodeDataTYPE>struct DoubleNode
 	~DoubleNode(){}
 };
 
-template <class QueueTYPE> class DoubleNodedQueue
+template <class QueueTYPE> class DoubleNodedList
 {
 private:
 
 	DoubleNode<QueueTYPE>* init;
 	DoubleNode<QueueTYPE>* last;
+	unsigned int num_elements;
 
 public:
 
-	inline DoubleNodedQueue(){ init = last = NULL; }
+	inline DoubleNodedList(){ init = last = NULL; num_elements = 0; }
 
-	~DoubleNodedQueue(){ clear(); }
+	~DoubleNodedList(){ clear(); }
 
 	DoubleNode<QueueTYPE>* getStart(){ return init; }
 	DoubleNode<QueueTYPE>* getLast(){ return last; }
+	unsigned int Count(){ return num_elements; }
 
 	void push(const QueueTYPE& data)
 	{
@@ -47,6 +49,7 @@ public:
 			node->previous = last;
 			last = node;
 		}
+		num_elements++;
 	}
 
 	void clear()
@@ -57,13 +60,30 @@ public:
 			init = init->next;
 		}
 		last = NULL;
+		num_elements = 0;
 	}
 
 	void ReduceTo(const int quantity)
 	{
 		last = init;
-		for (int i = 1; i < quantity; i++){ last = last->next; }
+		num_elements = quantity;
+		for (int i = 1; i < num_elements; i++){ last = last->next; }
 		last->next = NULL;
+	}
+	
+	bool at(unsigned int index, QueueTYPE& data) const
+	{
+		DoubleNode<QueueTYPE>* p_data = init;
+
+		for (unsigned int i = 0; i < index && p_data != NULL; ++i) { p_data = p_data->next; }
+
+		if (p_data != NULL)
+		{
+			data = p_data->data;
+			return true;
+		}
+
+		return false;
 	}
 
 };

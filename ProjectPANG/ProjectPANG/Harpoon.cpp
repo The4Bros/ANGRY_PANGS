@@ -143,7 +143,7 @@ void Harpoon::Check_Collision_Harpoon_Balloon()
 	//Closest point to harpoon
 	int closest_x, closest_y;
 
-	for (int i = 0; i < app->entityManagerModule->balloons->Count(); i++)
+	for (unsigned int i = 0; i < app->entityManagerModule->balloons->Count(); i++)
 	{
 		app->entityManagerModule->tmp_balloon = *app->entityManagerModule->balloons->at(i);
 
@@ -172,7 +172,7 @@ void Harpoon::Check_Collision_Harpoon_Balloon()
 
 void Harpoon::Check_Collision_Harpoon_Brick()
 {
-	for (int i = 0; i < app->entityManagerModule->bricks->Count(); i++)
+	for (unsigned int i = 0; i < app->entityManagerModule->bricks->Count(); i++)
 	{
 		app->entityManagerModule->tmp_brick = *app->entityManagerModule->bricks->at(i);
 

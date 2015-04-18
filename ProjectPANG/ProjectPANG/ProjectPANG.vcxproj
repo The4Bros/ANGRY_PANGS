@@ -113,7 +113,7 @@
     <ClInclude Include="ModuleTutorial.h" />
     <ClInclude Include="Particles.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Queue.h" />
+    <ClInclude Include="DoubleNodedList.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="ModuleAudio.h" />
     <ClInclude Include="ModuleEntityManager.h" />

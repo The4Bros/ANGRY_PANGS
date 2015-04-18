@@ -280,7 +280,7 @@ bool ModuleScene::load_stage(int stage)
 	current_stage = stage;
 
 	char line[100];
-	for (int i = 0; i < current_stage; i++)
+	for (unsigned int i = 0; i < current_stage; i++)
 	{
 		fgets(line, 300, level_file);
 		if (line == NULL){ return false; }
