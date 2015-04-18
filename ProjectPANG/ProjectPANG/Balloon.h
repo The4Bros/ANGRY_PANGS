@@ -53,8 +53,11 @@ public:
 	int gravity_counter=1;
 	int max_jump_gravity;
 	int gravity = 2;
-	int gravity_start = 1;
+	int gravity_start = 2;
 	int horizontal_speed = 2;
+	float aux_float_gravity=0.1f;
+	
+	int gravity_strenght = 2;
 
 	BALL_TYPE type;
 

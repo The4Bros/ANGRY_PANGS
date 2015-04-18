@@ -100,32 +100,50 @@ void Balloon::Update()
 	switch (state_balloon_V)
 	{
 	case BALLOON_UP:
-		
 
-		if (rect.y > 8 * app->windowModule->scale && bounce_height > 0)
+		if (/* rect.y > 8 * app->windowModule->scale) &&*/ gravity != 0)
 		{
 			rect.y = rect.y - gravity;
-			
+			//gravity = gravity - 0.1f;
+			gravity_strenght = gravity_strenght--;
+			if (gravity_strenght % 10 == 0)
+			{
+				gravity--;
+			}
+			bounce_height--;
+
 		}
 		else
 		{
+
 			state_balloon_V = BALLOON_DOWN;
-			
+			bounce_height = bounce_height_start; // fix this
+			gravity = 0;
+			gravity_strenght = gravity_start;
 		}
 		break;
 
 	case BALLOON_DOWN:
-		
 
-		if (rect.y + rect.h < 199 * app->windowModule->scale /* || collision bricks*/)
+		if (rect.y + rect.h < 199 * app->windowModule->scale)
 		{
-			
 			rect.y = rect.y + gravity;
+			//gravity = gravity ; // timer please
+
+			gravity_strenght = gravity_strenght++;
+			if (gravity_strenght % 10 == 0)
+			{
+				gravity++;
+			}
+
+
 		}
 		else
 		{
 			state_balloon_V = BALLOON_UP;
-		
+			bounce_height = bounce_height_start; // fix this
+			//gravity = gravity_start;
+			gravity_strenght = gravity_start;
 		}
 		break;
 
