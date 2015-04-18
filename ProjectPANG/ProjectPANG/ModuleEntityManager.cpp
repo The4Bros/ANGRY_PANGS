@@ -85,11 +85,15 @@ bool ModuleEntityManager::Init()
 
 	// ENEMIES
 	//enemies = new DynArray<Enemy*>();
-	//source_enemy_rect = new SDL_Rect({ 0, 104, 24, 8 });
-	
-
-	
-
+	/*
+	for (int i = 0; i < 16; i++){ source_enemy_rect[i] = new SDL_Rect({ i * 32, 0, 32, 32 }); }
+	for (int i = 0; i < 10; i++){ source_enemy_rect[i + 16] = new SDL_Rect({ i * 32, 32, 32, 32 }); }
+	for (int i = 0; i < 22; i++){ source_enemy_rect[i + 26] = new SDL_Rect({ i * 32, 64, 32, 32 }); }
+	for (int i = 0; i < 11; i++){ source_enemy_rect[i + 48] = new SDL_Rect({ i * 32, 96, 32, 32 }); }
+	for (int i = 0; i < 13; i++){ source_enemy_rect[i + 59] = new SDL_Rect({ i * 32, 128, 32, 32 }); }
+	source_enemy_rect[72] = new SDL_Rect({ 416, 128, 36, 24 });
+	source_enemy_rect[73] = new SDL_Rect({ 452, 182, 36, 24 });
+	*/
 
 
 	return true;
@@ -113,3 +117,140 @@ update_status ModuleEntityManager::Update()
 }
 update_status ModuleEntityManager::PostUpdate(){ return UPDATE_CONTINUE; }
 bool ModuleEntityManager::CleanUp(){ return true; }
+
+
+
+bool ModuleEntityManager::Collision(SDL_Rect* rect_1, SDL_Rect* rect_2)
+{
+	if (rect_1->x + rect_1->w >= rect_2->x) // rect_1 right
+	{
+		if (rect_2->x + rect_2->w >= rect_1->x) // rect_1 left
+		{
+			if (rect_1->y <= rect_2->y + rect_2->h) // rect_1 up
+			{
+				if (rect_1->y + rect_1->h >= rect_2->y) // rect_1 down
+				{
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+}
+
+bool ModuleEntityManager::Collision_Player_Brick_Horizontal(SDL_Rect* player_rect, SDL_Rect* brick_rect)
+{
+	if (player_rect->x + player_rect->w >= brick_rect->x) // player right
+	{
+		if (brick_rect->x + brick_rect->w >= player_rect->x) // player left
+		{
+			if (player_rect->y + brick_rect->h >= player_rect->y) // player up
+			{
+				if (player_rect->y + player_rect->h >= brick_rect->y) // player down
+				{
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+}
+
+bool ModuleEntityManager::Collision_Player_Brick_Vertical(SDL_Rect* player_rect, SDL_Rect* brick_rect)
+{
+	if (player_rect->x + player_rect->w >= brick_rect->x) // player right
+	{
+		if (brick_rect->x + brick_rect->w >= player_rect->x) // player left
+		{
+			if (player_rect->y + brick_rect->h >= player_rect->y) // player up
+			{
+				if (player_rect->y + player_rect->h >= brick_rect->y) // player down
+				{
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+}
+
+bool ModuleEntityManager::Collision_Harpoon_Balloon(SDL_Rect* balloon_rect);
+bool ModuleEntityManager::Collision_Harpoon_Brick(SDL_Rect* balloon_rect);
+
+bool ModuleEntityManager::Collision_Bullet_Balloon(SDL_Rect* balloon_rect);
+
+
+void ModuleEntityManager::Collision_Balloon_Players(SDL_Rect* balloon_rect)
+{
+	//Closest point to player
+	int closest_x, closest_y;
+
+	//closest_x offset
+	if (balloon_rect->x < app->playerModule->player1->rect.x){ closest_x = app->playerModule->player1->rect.x; }
+	else if (balloon_rect->x > app->playerModule->player1->rect.x + app->playerModule->player1->rect.w){ closest_x = app->playerModule->player1->rect.x + app->playerModule->player1->rect.w; }
+	else{ closest_x = balloon_rect->x; }
+
+	//closest_y offset
+	if (balloon_rect->y < app->playerModule->player1->rect.y){ closest_y = app->playerModule->player1->rect.y; }
+	else if (balloon_rect->y > app->playerModule->player1->rect.y + app->playerModule->player1->rect.h){ closest_y = app->playerModule->player1->rect.y + app->playerModule->player1->rect.h; }
+	else{ closest_y = balloon_rect->y; }
+
+	//Check distance between points
+	if ((balloon_rect->h * balloon_rect->h) >= ((closest_x - balloon_rect->x) * (closest_x - balloon_rect->x)) + ((closest_y - balloon_rect->y) * (closest_y - balloon_rect->y))){ app->playerModule->player1->Hit(balloon_rect); }
+
+	else if (app->playerModule->player2 != NULL)
+	{
+		//closest_x offset
+		if (balloon_rect->x < app->playerModule->player2->rect.x){ closest_x = app->playerModule->player2->rect.x; }
+		else if (balloon_rect->x > app->playerModule->player2->rect.x + app->playerModule->player2->rect.w){ closest_x = app->playerModule->player2->rect.x + app->playerModule->player2->rect.w; }
+		else{ closest_x = balloon_rect->x; }
+
+		//closest_y offset
+		if (balloon_rect->y < app->playerModule->player2->rect.y){ closest_y = app->playerModule->player2->rect.y; }
+		else if (balloon_rect->y > app->playerModule->player2->rect.y + app->playerModule->player2->rect.h){ closest_y = app->playerModule->player2->rect.y + app->playerModule->player2->rect.h; }
+		else{ closest_y = balloon_rect->y; }
+
+		//Check distance between points
+		if ((balloon_rect->h * balloon_rect->h) >= ((closest_x - balloon_rect->x) * (closest_x - balloon_rect->x)) + ((closest_y - balloon_rect->y) * (closest_y - balloon_rect->y))){ app->playerModule->player2->Hit(balloon_rect); }
+	}
+}
+
+
+bool ModuleEntityManager::Collision_Balloon_Brick_Vertical(SDL_Rect* balloon_rect)
+{
+	//Closest point to player
+	int closest_x, closest_y;
+
+	//closest_x offset
+	if (balloon_rect->x < app->playerModule->player1->rect.x){ closest_x = app->playerModule->player1->rect.x; }
+	else if (balloon_rect->x > app->playerModule->player1->rect.x + app->playerModule->player1->rect.w){ closest_x = app->playerModule->player1->rect.x + app->playerModule->player1->rect.w; }
+	else{ closest_x = balloon_rect->x; }
+
+	//closest_y offset
+	if (balloon_rect->y < app->playerModule->player1->rect.y){ closest_y = app->playerModule->player1->rect.y; }
+	else if (balloon_rect->y > app->playerModule->player1->rect.y + app->playerModule->player1->rect.h){ closest_y = app->playerModule->player1->rect.y + app->playerModule->player1->rect.h; }
+	else{ closest_y = balloon_rect->y; }
+
+	//Check distance between points
+	return (balloon_rect->h * balloon_rect->h) > ((closest_x - balloon_rect->x) * (closest_x - balloon_rect->x)) + ((closest_y - balloon_rect->y) * (closest_y - balloon_rect->y));
+}
+
+
+bool ModuleEntityManager::Collision_Balloon_Brick_Horizontal(SDL_Rect* balloon_rect)
+{
+	//Closest point to player
+	int closest_x, closest_y;
+
+	//closest_x offset
+	if (balloon_rect->x < app->playerModule->player1->rect.x){ closest_x = app->playerModule->player1->rect.x; }
+	else if (balloon_rect->x > app->playerModule->player1->rect.x + app->playerModule->player1->rect.w){ closest_x = app->playerModule->player1->rect.x + app->playerModule->player1->rect.w; }
+	else{ closest_x = balloon_rect->x; }
+
+	//closest_y offset
+	if (balloon_rect->y < app->playerModule->player1->rect.y){ closest_y = app->playerModule->player1->rect.y; }
+	else if (balloon_rect->y > app->playerModule->player1->rect.y + app->playerModule->player1->rect.h){ closest_y = app->playerModule->player1->rect.y + app->playerModule->player1->rect.h; }
+	else{ closest_y = balloon_rect->y; }
+
+	//Check distance between points
+	return (balloon_rect->h * balloon_rect->h) > ((closest_x - balloon_rect->x) * (closest_x - balloon_rect->x)) + ((closest_y - balloon_rect->y) * (closest_y - balloon_rect->y));
+}

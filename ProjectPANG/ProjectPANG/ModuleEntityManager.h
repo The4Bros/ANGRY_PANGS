@@ -43,8 +43,20 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
-	bool colision(SDL_Rect* rect_1, SDL_Rect* rect_2);
-	bool colisionHarpoonBall(SDL_Rect* rect_1, SDL_Rect* rect_2);
+	// Collisions
+	bool Collision(SDL_Rect* rect_1, SDL_Rect* rect_2);
+
+	bool Collision_Player_Brick_Horizontal(SDL_Rect* rect_1, SDL_Rect* rect_2);
+	bool Collision_Player_Brick_Vertical(SDL_Rect* rect_1, SDL_Rect* rect_2);
+
+	bool Collision_Harpoon_Balloon(SDL_Rect* balloon_rect);
+	bool Collision_Harpoon_Brick(SDL_Rect* balloon_rect);
+
+	bool Collision_Bullet_Balloon(SDL_Rect* balloon_rect);
+
+	void Collision_Balloon_Players(SDL_Rect* balloon_rect);
+	bool Collision_Balloon_Brick_Vertical(SDL_Rect* balloon_rect);
+	bool Collision_Balloon_Brick_Horizontal(SDL_Rect* balloon_rect);
 };
 
 #endif

@@ -31,7 +31,6 @@ public:
 	~DoubleNodedQueue(){ clear(); }
 
 	DoubleNode<QueueTYPE>* getStart(){ return init; }
-
 	DoubleNode<QueueTYPE>* getLast(){ return last; }
 
 	void push(const QueueTYPE& data)
