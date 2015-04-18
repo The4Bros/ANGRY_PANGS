@@ -90,7 +90,7 @@ Balloon::Balloon(Application* app, int x, int y, int type, int max_height)
 
 void Balloon::Update()
 {
-
+	Check_Collision_Balloon_Players();
 
 
 
