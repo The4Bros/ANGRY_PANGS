@@ -97,20 +97,20 @@ void ModuleTitle::Update_Balloons()//Balls title animation
 	balloon_rects[0].y += (aux[0] * 3 * app->windowModule->scale) + (dir[0] * 4.5*(ticks / 150)*(ticks / 150));
 
 	//A
-	if (ticks > 360){ balloon_rects[1].x += 8 * app->windowModule->scale;
+	if (ticks > 340){ balloon_rects[1].x += 8 * app->windowModule->scale;
 	balloon_rects[1].y += (aux[1] * 3 * app->windowModule->scale) + (dir[1] * 4.5*(ticks / 150)*(ticks / 150));
 	}
 	
 	
 
 	//N
-	if (ticks > 365){
+	if (ticks > 350){
 		balloon_rects[2].y += (aux[2] * 3 * app->windowModule->scale) + (dir[2] * 4.5*(ticks / 150)*(ticks / 150));
 		
 		balloon_rects[2].x -= 8 * app->windowModule->scale;
 	}
 	//G
-	if (ticks > 370){
+	if (ticks > 360){
 	balloon_rects[3].x += 8 * app->windowModule->scale;
 	balloon_rects[3].y += (aux[3] * 3 * app->windowModule->scale) + (dir[3] * 4.5*(ticks / 150)*(ticks / 150));
 	}
