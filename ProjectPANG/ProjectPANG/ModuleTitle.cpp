@@ -101,8 +101,6 @@ void ModuleTitle::Update_Balloons()//Balls title animation
 	balloon_rects[1].y += (aux[1] * 3 * app->windowModule->scale) + (dir[1] * 4.5*(ticks / 150)*(ticks / 150));
 	}
 	
-	
-
 	//N
 	if (ticks > 350){
 		balloon_rects[2].y += (aux[2] * 3 * app->windowModule->scale) + (dir[2] * 4.5*(ticks / 150)*(ticks / 150));
