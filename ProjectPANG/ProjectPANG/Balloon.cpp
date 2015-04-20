@@ -75,10 +75,6 @@ Balloon::Balloon(Application* app, int x, int y, int type, int max_height)
 		this->type = GREEN_4;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 8 * app->windowModule->scale, 7 * app->windowModule->scale };
 		break;
-
-
-	default:
-		break;
 	}
 
 
@@ -190,6 +186,65 @@ void Balloon::Hit()
 	int aux_type;
 	int aux_max_height;
 	SDL_Rect aux_rect;
+
+	/*
+	switch (type)
+	{
+	case RED_1:
+		this->type = RED_1;
+		rect.h
+		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
+		app->entityManagerModule->balloons->push_back(new Balloon(rect.x, rect.y, type + 3, max_height));
+		//app->entityManagerModule->particles->push_back(new Particles(...));
+		break;
+	case 2:
+		this->type = BLUE_1;
+		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
+		break;
+	case 3:
+		this->type = GREEN_1;
+		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
+		break;
+	case 4:
+		this->type = RED_2;
+		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 32 * app->windowModule->scale, 26 * app->windowModule->scale };
+		break;
+	case 5:
+		this->type = BLUE_2;
+		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 32 * app->windowModule->scale, 26 * app->windowModule->scale };
+		break;
+	case 6:
+		this->type = GREEN_2;
+		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 32 * app->windowModule->scale, 26 * app->windowModule->scale };
+		break;
+	case 7:
+		this->type = RED_3;
+		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 16 * app->windowModule->scale, 14 * app->windowModule->scale };
+		break;
+	case 8:
+		this->type = BLUE_3;
+		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 16 * app->windowModule->scale, 14 * app->windowModule->scale };
+		break;
+	case 9:
+		this->type = GREEN_3;
+		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 16 * app->windowModule->scale, 14 * app->windowModule->scale };
+		break;
+
+
+
+
+
+	 default:
+		rect = {0, 0, 0, 0};
+
+
+	}
+	*/
+
+
+
+
+
 
 
 	if (type <= 9)
