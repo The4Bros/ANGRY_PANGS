@@ -31,6 +31,7 @@ public:
 	unsigned int balloon_speed;
 	Balloon* tmp_balloon;
 
+
 	//DynArray<Enemy*>* enemies;
 	SDL_Rect* source_enemy_rect[74];
 	

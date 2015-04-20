@@ -93,7 +93,7 @@ void Balloon::Update()
 	Check_Collision_Balloon_Players();
 
 
-	Check_Collision_Balloon_Players();
+	Check_Collision_Balloon_Players();     //									 COLLISIONS HERE! remove comments !
 
 	//						-- VERTICAL --	
 
@@ -106,7 +106,7 @@ void Balloon::Update()
 			rect.y = rect.y - gravity;
 			//gravity = gravity - 0.1f;
 			gravity_strenght = gravity_strenght--;
-			if (gravity_strenght % 10 == 0)
+			if (gravity_strenght % 8 == 0)
 			{
 				gravity--;
 			}
@@ -115,7 +115,7 @@ void Balloon::Update()
 		}
 		else
 		{
-
+			Hit();
 			state_balloon_V = BALLOON_DOWN;
 			bounce_height = bounce_height_start; // fix this
 			gravity = 0;
@@ -131,7 +131,7 @@ void Balloon::Update()
 			//gravity = gravity ; // timer please
 
 			gravity_strenght = gravity_strenght++;
-			if (gravity_strenght % 10 == 0)
+			if (gravity_strenght % 8 == 0)
 			{
 				gravity++;
 			}
@@ -175,8 +175,6 @@ void Balloon::Update()
 
 
 
-
-
 void Balloon::Print()
 {
 	app->renderModule->Print(app->texturesModule->balls_sprite, app->entityManagerModule->source_balloon_rect[type], &rect);
@@ -185,9 +183,48 @@ void Balloon::Print()
 
 
 
+
+
 void Balloon::Hit()
 {
+	int aux_type;
+	int aux_max_height;
+	SDL_Rect aux_rect;
 
+
+	if (type <= 9)
+	{
+		aux_rect = rect;
+
+		aux_rect.x = rect.x - 10;
+		aux_rect.y = rect.y - 10;
+
+		aux_type = type + 4;
+
+		aux_max_height = max_height; // change to lower height value of the type
+
+		//tmp_Balloon_hit = new Balloon(app, aux_rect.x, aux_rect.y, aux_type, aux_max_height);
+
+		
+		//app->renderModule->Print(app->texturesModule->balls_sprite, app->entityManagerModule->source_balloon_rect[type], &rect);
+
+		aux_rect.x = rect.x + 10;
+		aux_rect.y = rect.y - 10;
+
+		//tmp_Balloon_hit2 = new Balloon(app, aux_rect.x, aux_rect.y, aux_type, aux_max_height);
+
+		//app->renderModule->Print(app->texturesModule->balls_sprite, app->entityManagerModule->source_balloon_rect[type], &rect);
+		
+	
+		//tmp_Balloon_hit->Update();
+		//tmp_Balloon_hit2->Update();
+		
+	}
+	else
+	{
+		// delete current balloon
+	}
+	
 }
 
 

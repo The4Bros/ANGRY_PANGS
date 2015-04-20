@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "Particles.h"
+#include "Module.h"
 
 #ifndef __Balloon_H__
 #define __Balloon_H__
@@ -58,6 +59,8 @@ public:
 	float aux_float_gravity=0.1f;
 	
 	int gravity_strenght = 2;
+	Balloon *tmp_Balloon_hit;
+	Balloon *tmp_Balloon_hit2;
 
 	BALL_TYPE type;
 
@@ -74,8 +77,8 @@ public:
 	~Balloon(){}
 
 	void Update();
-
 	void Print();
+	
 
 	void Hit();
 	// particles->PushBack(x, y, type);
