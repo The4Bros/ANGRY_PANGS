@@ -52,7 +52,7 @@ public:
 	unsigned int position_in_list;
 	int gravity;
 	int horizontal_speed;
-	int gravity_aux;
+	int ticks;
 
 	BALL_TYPE type;
 	BALLOON_STATE_VERTICAL state_balloon_V;

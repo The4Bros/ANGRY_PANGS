@@ -6,7 +6,7 @@ Balloon::Balloon(Application* app, int x, int y, int type, int max_height)
 {
 	gravity = 2;
 	horizontal_speed = 2;
-	gravity_aux = 2;
+	ticks = 2;
 	position_in_list = 0;
 
 	while (position_in_list < app->entityManagerModule->balloons->Count())
@@ -16,7 +16,6 @@ Balloon::Balloon(Application* app, int x, int y, int type, int max_height)
 
 
 	this->app = app;
-	rect = { x*app->windowModule->scale, y*app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 	this->max_height = max_height;
 
 	state_balloon_H = BALLOON_RIGHT;
@@ -34,47 +33,47 @@ Balloon::Balloon(Application* app, int x, int y, int type, int max_height)
 		this->type = RED_1;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 		break;
-	case 2:
+	case 1:
 		this->type = BLUE_1;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 		break;
-	case 3:
+	case 2:
 		this->type = GREEN_1;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 		break;
-	case 4:
+	case 3:
 		this->type = RED_2;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 32 * app->windowModule->scale, 26 * app->windowModule->scale };
 		break;
-	case 5:
+	case 4:
 		this->type = BLUE_2;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 32 * app->windowModule->scale, 26 * app->windowModule->scale };
 		break;
-	case 6:
+	case 5:
 		this->type = GREEN_2;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 32 * app->windowModule->scale, 26 * app->windowModule->scale };
 		break;
-	case 7:
+	case 6:
 		this->type = RED_3;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 16 * app->windowModule->scale, 14 * app->windowModule->scale };
 		break;
-	case 8:
+	case 7:
 		this->type = BLUE_3;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 16 * app->windowModule->scale, 14 * app->windowModule->scale };
 		break;
-	case 9:
+	case 8:
 		this->type = GREEN_3;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 16 * app->windowModule->scale, 14 * app->windowModule->scale };
 		break;
-	case 10:
+	case 9:
 		this->type = RED_4;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 8 * app->windowModule->scale, 7 * app->windowModule->scale };
 		break;
-	case 11:
+	case 10:
 		this->type = BLUE_4;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 8 * app->windowModule->scale, 7 * app->windowModule->scale };
 		break;
-	case 12:
+	case 11:
 		this->type = GREEN_4;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 8 * app->windowModule->scale, 7 * app->windowModule->scale };
 		break;
@@ -90,10 +89,11 @@ Balloon::Balloon(Application* app, int x, int y, int type, int max_height)
 void Balloon::Update()
 {
 
+
 	if (type < RED_3){ Size1_Check_Collision_Balloon_Players(); }
 	else{ Size4_Check_Collision_Balloon_Players(); }
 
-	//						-- VERTICAL --	
+	//														-- VERTICAL --	
 
 	switch (state_balloon_V)
 	{
@@ -102,11 +102,9 @@ void Balloon::Update()
 		if ((rect.y > 8 * app->windowModule->scale) && gravity != 0)
 		{
 			rect.y = rect.y - gravity;
-			gravity_aux = gravity_aux--;
+			ticks--;
 
-			if (gravity_aux % 8 == 0) gravity--;
-
-
+			if (ticks % 8 == 0) gravity--;
 
 		}
 		else
@@ -115,7 +113,7 @@ void Balloon::Update()
 			state_balloon_V = BALLOON_DOWN;
 
 			gravity = 0;
-			gravity_aux = 1;
+			ticks = 1;
 		}
 		break;
 
@@ -125,9 +123,8 @@ void Balloon::Update()
 		{
 			rect.y = rect.y + gravity;
 
-
-			gravity_aux = gravity_aux++;
-			if (gravity_aux % 8 == 0)
+			ticks++;
+			if (ticks % 8 == 0)
 			{
 				gravity++;
 			}
@@ -136,12 +133,16 @@ void Balloon::Update()
 		}
 		else
 		{
+			state_balloon_V = BALLOON_UP;
+
+			// Jump height for each balloon
+
 			if (type < 3) gravity = 9;
 			else if (type < 6) gravity = 8;
 			else if (type < 9) gravity = 7;
 			else gravity = 6;
-			state_balloon_V = BALLOON_UP;
-			gravity_aux = 1;
+
+			ticks = 1;
 		}
 		break;
 
@@ -149,7 +150,7 @@ void Balloon::Update()
 		break;
 	}
 
-	//						-- HORIZONTAL --
+	//														-- HORIZONTAL --
 
 	switch (state_balloon_H)
 	{
@@ -185,58 +186,73 @@ void Balloon::Print()
 
 void Balloon::Hit()
 {
+	int aux_rect_X = rect.x;
+	int aux_rect_Y = rect.y;
+	rect.x -= rect.w;
 
+	app->entityManagerModule->balloons->push_back(new Balloon(app, aux_rect_X, aux_rect_Y, type, max_height));
 
-
+	if (BALLOON_RIGHT)
+	{
+		BALLOON_LEFT;
+	}
 
 	switch (type)
 	{
+
 	case 0:
-		this->type = RED_2;
-		rect.x = rect.x - (rect.w*app->windowModule->scale);
-		if (BALLOON_RIGHT)
-		{
-			BALLOON_LEFT;
-		}
+
+		type = RED_2;
+
+
 		break;
+
+	case 1:
+
+		type = BLUE_2;
+
+
+		break;
+
 	case 2:
-		this->type = BLUE_2;
 
-		this->type = BLUE_2;
-		rect.x = rect.x - (rect.w*app->windowModule->scale);
-		if (BALLOON_RIGHT)
-		{
-			BALLOON_LEFT;
-		}
-
+		type = GREEN_2;
 
 		break;
+
 	case 3:
-		this->type = GREEN_2;
+
+		type = RED_3;
 
 		break;
+
 	case 4:
-		this->type = RED_3;
+
+		type = BLUE_3;
 
 		break;
+
 	case 5:
-		this->type = BLUE_3;
+
+		type = GREEN_3;
 
 		break;
+
 	case 6:
-		this->type = GREEN_3;
+
+		type = RED_4;
 
 		break;
+
 	case 7:
-		this->type = RED_4;
+
+		type = BLUE_4;
 
 		break;
+
 	case 8:
-		this->type = BLUE_4;
 
-		break;
-	case 9:
-		this->type = GREEN_4;
+		type = GREEN_4;
 
 		break;
 
@@ -247,7 +263,8 @@ void Balloon::Hit()
 
 	}
 
-	app->entityManagerModule->balloons->push_back(new Balloon(app, rect.x + rect.w, rect.y, type, max_height));
+
+
 
 
 }
@@ -259,7 +276,7 @@ void Balloon::Reset(unsigned int x, unsigned int y, unsigned int type, unsigned 
 {
 	gravity = 2;
 	horizontal_speed = 2;
-	gravity_aux = 2;
+	ticks = 2;
 	position_in_list = 0;
 
 	while (position_in_list < app->entityManagerModule->balloons->Count())
