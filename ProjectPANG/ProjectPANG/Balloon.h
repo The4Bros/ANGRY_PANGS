@@ -57,8 +57,8 @@ public:
 	BALL_TYPE type;
 	BALLOON_STATE_VERTICAL state_balloon_V;
 	BALLOON_STATE_HORIZONTAL state_balloon_H;
-	BOOL change_movement_V;// true if the ball has to change its direction, change it on Hit()
-	BOOL change_movement_H;
+	bool change_movement_V;// true if the ball has to change its direction, change it on Hit()
+	bool change_movement_H;
 	SDL_Rect rect;
 	
 
@@ -73,9 +73,8 @@ public:
 	void Hit();
 	// particles->PushBack(x, y, type);
 
-	void Check_Collision_Balloon_Players();
-	bool Deep_Check_Collision_Balloon_Player1();
-	void Deep_Check_Collision_Balloon_Player2();
+	void Size1_Check_Collision_Balloon_Players();
+	void Size4_Check_Collision_Balloon_Players();
 
 
 	void Check_Collision_Balloon_Brick_Vertical();

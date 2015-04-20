@@ -39,6 +39,12 @@ update_status ModuleScene::PreUpdate()
 	}
 	else { insert_coin_pressed = false; }
 
+
+	if (app->inputModule->key[SDL_SCANCODE_9] == 1)
+	{
+		reset_stage();
+	}
+
 	return UPDATE_CONTINUE;
 }
 update_status ModuleScene::Update()
@@ -158,8 +164,8 @@ void ModuleScene::reset_stage()
 	time_count->Reset(stage_arrangement.time_limit);
 
 	// PLAYER POS
-	app->playerModule->player1->setPos(stage_arrangement.player_pos[0], stage_arrangement.player_pos[1]);
-	if (app->playerModule->player2 != NULL){ app->playerModule->player1->setPos(stage_arrangement.player_pos[0], stage_arrangement.player_pos[1]); }
+	app->playerModule->player1->Reset(stage_arrangement.player_pos[0], stage_arrangement.player_pos[1]);
+	if (app->playerModule->player2 != NULL){ app->playerModule->player1->Reset(stage_arrangement.player_pos[0], stage_arrangement.player_pos[1]); }
 
 	
 	// BRICKS

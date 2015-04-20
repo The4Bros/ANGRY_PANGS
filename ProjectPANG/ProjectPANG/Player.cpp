@@ -3,13 +3,14 @@
 Player::Player(Application* app, bool player1)
 {
 	this->app = app;
-	shielded = false;
 
+	shielded = false;
 	state = STILL;
 	shoot_key_pressed = false;
 	current_weapon = WEAPON_DOUBLE_HARPOON;
 	hit_State = HIT_RIGHT_UP;
 	source_index = 17;
+
 
 	harpoon[0] = new Harpoon(app);
 	harpoon[1] = new Harpoon(app);
@@ -24,7 +25,13 @@ Player::Player(Application* app, bool player1)
 		}
 		source_rect[23] = new SDL_Rect({ 736, 0, 51, 32 });
 		source_rect[24] = new SDL_Rect({ 787, 0, 51, 32 });
+
+		if (app->sceneModule != NULL) // Scene initalized
+		{
+			Reset(app->sceneModule->stage_arrangement.player_pos[0], app->sceneModule->stage_arrangement.player_pos[1]);
+		}
 	}
+
 	else
 	{
 		for (int i = 0; i < 23; i++)
@@ -35,10 +42,11 @@ Player::Player(Application* app, bool player1)
 		source_rect[24] = new SDL_Rect({ 787, 32, 51, 32 });
 		
 		// update position
-		setPos(app->sceneModule->stage_arrangement.player_pos[2], app->sceneModule->stage_arrangement.player_pos[3]);
-
+		if (app->sceneModule != NULL) // Scene initalized
+		{
+			Reset(app->sceneModule->stage_arrangement.player_pos[2], app->sceneModule->stage_arrangement.player_pos[3]);
+		}
 	}
-
 }
 
 void Player::LeftTrigger()
@@ -263,7 +271,7 @@ void Player::Hit(SDL_Rect* killer)
 
 	else
 	{
-		/*
+		
 		if (rect.x + (rect.w / 2) <= killer->x + (killer->w / 2))
 		{
 			source_index = 21;
@@ -280,9 +288,9 @@ void Player::Hit(SDL_Rect* killer)
 		shoot_update_counter = 0;
 		state = HIT;
 		app->sceneModule->game_state = PLAYER_KILLED;
-		*/
+		
 
-		app->sceneModule->reset_stage();
+		//app->sceneModule->reset_stage();
 	}
 }
 
@@ -406,10 +414,18 @@ void Player::Update()
 }
 
 
-void Player::setPos(unsigned int x, unsigned int y)
+void Player::Reset(unsigned int x, unsigned int y)
 {
 	rect.x = x * app->windowModule->scale;
 	rect.y = y * app->windowModule->scale;
+
+	shielded = false;
+
+	state = STILL;
+	shoot_key_pressed = false;
+	current_weapon = WEAPON_DOUBLE_HARPOON;
+	hit_State = HIT_RIGHT_UP;
+	source_index = 17;
 }
 
 
