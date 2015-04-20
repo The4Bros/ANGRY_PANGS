@@ -70,6 +70,21 @@ public:
 		return NULL;
 	}
 
+	void Delete_Element_At(const unsigned int index)
+	{
+		if (index < num_elements)
+		{
+			DynArrayTYPE* tmp = data;
+			for (unsigned int i = index; i < num_elements - 1; i++)
+			{
+				data[i] = tmp[i + 1];
+			}
+			
+			delete[] tmp;
+			data[--num_elements] = NULL;
+		}
+	}
+
 
 	// Utils
 	unsigned int size() const { return capacity; }
