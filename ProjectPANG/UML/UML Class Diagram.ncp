@@ -283,6 +283,139 @@
         <Member type="Method">public bool CleanUp()</Member>
         <Modifier>None</Modifier>
       </Entity>
+      <Entity type="Class">
+        <Name>ModuleEntityManager</Name>
+        <Access>Public</Access>
+        <Location left="442" top="1009" />
+        <Size width="162" height="417" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public SDL_Rect harpoon_source_rect</Member>
+        <Member type="Field">public DynArray&lt;Brick&gt; bricks</Member>
+        <Member type="Field">public SDL_Rect source_brick_rect</Member>
+        <Member type="Field">public Brick tmp_brick</Member>
+        <Member type="Field">public DynArray&lt;Stair&gt; stairs</Member>
+        <Member type="Field">public SDL_Rect source_stair_rect</Member>
+        <Member type="Field">public Stair tmp_stair</Member>
+        <Member type="Field">public DynArray&lt;Balloon&gt; balloons</Member>
+        <Member type="Field">public SDL_Rect source_balloon_rect</Member>
+        <Member type="Field">public int balloon_speed</Member>
+        <Member type="Field">public Balloon tmp_balloon</Member>
+        <Member type="Field">public SDL_Rect source_enemy_rect</Member>
+        <Member type="Field">public DynArray&lt;Particles&gt; particles</Member>
+        <Member type="Method">public bool Init()</Member>
+        <Member type="Method">public update_status PreUpdate()</Member>
+        <Member type="Method">public update_status Update()</Member>
+        <Member type="Method">public update_status PostUpdate()</Member>
+        <Member type="Method">public bool CleanUp()</Member>
+        <Member type="Method">public bool Collisions(SDL_Rect rect_1, SDL_Rect rect_2)</Member>
+        <Member type="Method">public void Collision_Balloon_Players(SDL_Rect balloon_rect)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Module</Name>
+        <Access>Public</Access>
+        <Location left="621" top="966" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public Application app</Member>
+        <Member type="Method">public virtual bool Init()</Member>
+        <Member type="Method">public virtual update_status PreUpdate()</Member>
+        <Member type="Method">public virtual update_status Update()</Member>
+        <Member type="Method">public virtual update_status PostUpdate()</Member>
+        <Member type="Method">public virtual bool CleanUp()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ModuleFontManager</Name>
+        <Access>Public</Access>
+        <Location left="624" top="1196" />
+        <Size width="162" height="264" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public TTF_Font font</Member>
+        <Member type="Field">public SDL_Color color</Member>
+        <Member type="Field">public char Num_string</Member>
+        <Member type="Method">public bool Init()</Member>
+        <Member type="Method">public update_status PreUpdate()</Member>
+        <Member type="Method">public char NumberToString(int number)</Member>
+        <Member type="Method">public update_status Update()</Member>
+        <Member type="Method">public update_status PostUpdate()</Member>
+        <Member type="Method">public bool CleanUp()</Member>
+        <Member type="Method">public void Write_On_Screen(int value, int x, int y, int size)</Member>
+        <Member type="Method">public void Write_On_Screen(char str, int x, int y, int size)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ModuleInput</Name>
+        <Access>Public</Access>
+        <Location left="809" top="966" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public SDL_Event maintEvent</Member>
+        <Member type="Field">public Uint8 key</Member>
+        <Member type="Method">public bool Init()</Member>
+        <Member type="Method">public update_status PreUpdate()</Member>
+        <Member type="Method">public update_status Update()</Member>
+        <Member type="Method">public update_status PostUpdate()</Member>
+        <Member type="Method">public bool CleanUp()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ModuleRender</Name>
+        <Access>Public</Access>
+        <Location left="811" top="1198" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public SDL_Renderer renderer</Member>
+        <Member type="Method">public bool init()</Member>
+        <Member type="Method">public update_status PreUpdate()</Member>
+        <Member type="Method">public update_status Update()</Member>
+        <Member type="Method">public update_status PostUpdate()</Member>
+        <Member type="Method">public bool CleanUp()</Member>
+        <Member type="Method">public void Print(SDL_Texture texture, SDL_Rect source_rect, SDL_Rect rect)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ModuleTexture</Name>
+        <Access>Public</Access>
+        <Location left="1018" top="966" />
+        <Size width="162" height="400" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public SDL_Texture background_sprite</Member>
+        <Member type="Field">public SDL_Texture balls_sprite</Member>
+        <Member type="Field">public SDL_Texture bricks_sprite</Member>
+        <Member type="Field">public SDL_Texture enemies_sprite</Member>
+        <Member type="Field">public SDL_Texture harpoons_sprite</Member>
+        <Member type="Field">public SDL_Texture instructions_sprite</Member>
+        <Member type="Field">public SDL_Texture map_countdown_sprite</Member>
+        <Member type="Field">public SDL_Texture map_sprite</Member>
+        <Member type="Field">public SDL_Texture particles_sprite</Member>
+        <Member type="Field">public SDL_Texture players_sprite</Member>
+        <Member type="Field">public SDL_Texture ready</Member>
+        <Member type="Field">public SDL_Texture score_sprite</Member>
+        <Member type="Field">public SDL_Texture timer_sprite</Member>
+        <Member type="Field">public SDL_Texture tittle_sprite</Member>
+        <Member type="Method">public bool Init()</Member>
+        <Member type="Method">public update_status PreUpdate()</Member>
+        <Member type="Method">public update_status Update()</Member>
+        <Member type="Method">public update_status PostUpdate()</Member>
+        <Member type="Method">public bool CleanUp()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ModuleWindow</Name>
+        <Access>Public</Access>
+        <Location left="1207" top="968" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public SDL_Window window</Member>
+        <Member type="Field">public int scale</Member>
+        <Member type="Method">public bool Init()</Member>
+        <Member type="Method">public update_status PreUpdate()</Member>
+        <Member type="Method">public update_status Update()</Member>
+        <Member type="Method">public update_status PostUpdate()</Member>
+        <Member type="Method">public bool CleanUp()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
     </Entities>
     <Relationships />
   </ProjectItem>
