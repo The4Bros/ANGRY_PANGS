@@ -31,14 +31,257 @@
       <Entity type="Structure">
         <Name>DoubleNode</Name>
         <Access>Public</Access>
-        <Location left="407" top="92" />
+        <Location left="409" top="52" />
         <Size width="162" height="216" />
         <Collapsed>False</Collapsed>
         <Member type="Field">public DoubleNodeDataTYPE data</Member>
         <Member type="Field">public DoubleNode next</Member>
         <Member type="Field">public DoubleNode previous</Member>
-        <Member type="Method">public void DoubleNode(DoubleNodeDataTYPE item)</Member>
         <Member type="Method">private void DoubleNode()</Member>
+        <Member type="Method">public inline DoubleNode(DoubleNodeTYPE item)</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>Balloon</Name>
+        <Access>Public</Access>
+        <Location left="624" top="52" />
+        <Size width="162" height="332" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public int max_height</Member>
+        <Member type="Field">public int bounce_height</Member>
+        <Member type="Field">public int bounce_height_start</Member>
+        <Member type="Field">public int gravity_counter</Member>
+        <Member type="Field">public int max_jump_gravity</Member>
+        <Member type="Field">public int gravity</Member>
+        <Member type="Field">public int gravity_start</Member>
+        <Member type="Field">public int horizontal_speed</Member>
+        <Member type="Method">public void Update()</Member>
+        <Member type="Method">public void Hit()</Member>
+        <Member type="Method">public void Print()</Member>
+        <Member type="Method">public void Check_Collision_Balloon_Players()</Member>
+        <Member type="Method">public void Check_Collision_Balloon_Brick_Vertical()</Member>
+        <Member type="Method">public void Check_Collision_Balloon_Brick_Horizontal()</Member>
+        <Member type="Method">public void Reset()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Brick</Name>
+        <Access>Public</Access>
+        <Location left="811" top="52" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public bool alive</Member>
+        <Member type="Field">public int type</Member>
+        <Member type="Field">public SDL_Rect rect</Member>
+        <Member type="Field">public Application app</Member>
+        <Member type="Method">public void Print()</Member>
+        <Member type="Method">public void Hit()</Member>
+        <Member type="Method">public void Reset()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Harpoon</Name>
+        <Access>Public</Access>
+        <Location left="995" top="52" />
+        <Size width="162" height="315" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public Applicatio app</Member>
+        <Member type="Field">public bool alive</Member>
+        <Member type="Field">public int counter</Member>
+        <Member type="Field">public int length</Member>
+        <Member type="Field">public int Source_index</Member>
+        <Member type="Field">public SDL_Rect head_rect</Member>
+        <Member type="Field">public SDL_Rect body_rect</Member>
+        <Member type="Method">public void Shoot_Harpoon(int y, int x)</Member>
+        <Member type="Method">public void Shoot_Grapple(int y, int x)</Member>
+        <Member type="Method">public void Print()</Member>
+        <Member type="Method">public void Update()</Member>
+        <Member type="Method">public void Check_Collision_Harpoon_Balloon()</Member>
+        <Member type="Method">public void Check_Collision_Harpoon_Brick()</Member>
+        <Member type="Method">public void Check_Collision_Bullet_Balloon()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Player</Name>
+        <Access>Public</Access>
+        <Location left="624" top="405" />
+        <Size width="162" height="519" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public Application app</Member>
+        <Member type="Field">public SDL_Rect rect</Member>
+        <Member type="Field">public SDL_Rect source_rect</Member>
+        <Member type="Field">public int Source_index</Member>
+        <Member type="Field">public Harpoon harpoon</Member>
+        <Member type="Field">public Weapon current_weapon</Member>
+        <Member type="Field">public int score</Member>
+        <Member type="Field">public int lives</Member>
+        <Member type="Field">public int update_counter</Member>
+        <Member type="Field">public int shoot_update_counter</Member>
+        <Member type="Field">public PlayerState state</Member>
+        <Member type="Field">public bool shoot_key_pressed</Member>
+        <Member type="Field">public bool shielded</Member>
+        <Member type="Field">public int height</Member>
+        <Member type="Field">public Hit_State hit_state</Member>
+        <Member type="Method">public void LeftTrigger()</Member>
+        <Member type="Method">public void RightTrigger()</Member>
+        <Member type="Method">public void UpTrigger()</Member>
+        <Member type="Method">public void DownTrigger()</Member>
+        <Member type="Method">public void Shoot()</Member>
+        <Member type="Method">public void Still()</Member>
+        <Member type="Method">public void Hit(SDL_Rect killer)</Member>
+        <Member type="Method">public void Update()</Member>
+        <Member type="Method">public void SetPos(int x, int y)</Member>
+        <Member type="Method">public bool Check_Collision_Player_Brick_Horizontal()</Member>
+        <Member type="Method">public void Check_Collision_Player_Brick_Vertical()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Stair</Name>
+        <Access>Public</Access>
+        <Location left="809" top="300" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public Applicatio app</Member>
+        <Member type="Field">public SDL_Rect rect</Member>
+        <Member type="Field">public DynArray&lt;SDL_Rect&gt; rects</Member>
+        <Member type="Method">public void Print()</Member>
+        <Member type="Method">public void Reset(int x, int y, int size)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>TimeCount</Name>
+        <Access>Public</Access>
+        <Location left="812" top="538" />
+        <Size width="162" height="247" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public Application app</Member>
+        <Member type="Field">public SDL_Rect rect</Member>
+        <Member type="Field">public SDL_Rect source_rect</Member>
+        <Member type="Field">public int source_index</Member>
+        <Member type="Field">public int current_time</Member>
+        <Member type="Field">public time_t timer</Member>
+        <Member type="Method">public void Update()</Member>
+        <Member type="Method">public void Update_Source_Index()</Member>
+        <Member type="Method">public void Reset(int time)</Member>
+        <Member type="Method">public void Print_Timer()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>DoubleNodedList</Name>
+        <Access>Public</Access>
+        <Location left="409" top="280" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">int num_elements</Member>
+        <Member type="Field">DoubleNode&lt;QueueType&gt; init</Member>
+        <Member type="Field">DoubleNode&lt;QueueTYPE&gt; last</Member>
+        <Member type="Method">public void Puh(QueueTYPE data)</Member>
+        <Member type="Method">public void Clear()</Member>
+        <Member type="Method">public void ReduceTo(int quantity)</Member>
+        <Member type="Method">public bool at(int index, QueueTYPE data)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Structure">
+        <Name>Tri_Struct</Name>
+        <Access>Public</Access>
+        <Location left="75" top="762" />
+        <Size width="162" height="158" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">int x</Member>
+        <Member type="Field">int y</Member>
+        <Member type="Field">int type</Member>
+        <Member type="Method">public void Tri_Struct()</Member>
+      </Entity>
+      <Entity type="Structure">
+        <Name>Quada_Struct</Name>
+        <Access>Public</Access>
+        <Location left="76" top="955" />
+        <Size width="162" height="172" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">int x</Member>
+        <Member type="Field">int y</Member>
+        <Member type="Field">int type</Member>
+        <Member type="Field">int aux</Member>
+        <Member type="Method">public void Quadra_Struct()</Member>
+      </Entity>
+      <Entity type="Structure">
+        <Name>Stage_Arrangement</Name>
+        <Access>Public</Access>
+        <Location left="76" top="1152" />
+        <Size width="162" height="181" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">int time_limit</Member>
+        <Member type="Field">int player_pos</Member>
+        <Member type="Field">vector&lt;Tri_Struct&gt; bricks</Member>
+        <Member type="Field">vector&lt;Tri_Struct&gt; stairs</Member>
+        <Member type="Field">vector&lt;Quadra_Struct&gt; balloons</Member>
+        <Member type="Field">vector&lt;Quadra_Struct&gt; enemies</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>ModuleScene</Name>
+        <Access>Public</Access>
+        <Location left="258" top="774" />
+        <Size width="162" height="468" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">FILE level_file</Member>
+        <Member type="Field">public Time_Count time_count</Member>
+        <Member type="Field">public Game_State game_state</Member>
+        <Member type="Field">public int update_counter</Member>
+        <Member type="Field">public SDL_Rect ready_rect</Member>
+        <Member type="Field">public SDL_Rect ready_source_rect</Member>
+        <Member type="Field">public SDL_Rect game_over_rect</Member>
+        <Member type="Field">public SDL_Rect game_over_source_rect</Member>
+        <Member type="Field">public bool insert_coin_pressed</Member>
+        <Member type="Field">public int current_stage</Member>
+        <Member type="Field">public Stage_Arrangement state_arrangement</Member>
+        <Member type="Field">public Stair tmp_stair</Member>
+        <Member type="Field">public Brick tmp_brick</Member>
+        <Member type="Field">public Balloon tmp_balloon</Member>
+        <Member type="Field">public SDL_Rect background_rect</Member>
+        <Member type="Field">public SDL_Rect background_source_rect</Member>
+        <Member type="Method">public bool Init()</Member>
+        <Member type="Method">public update_status PreUpdate()</Member>
+        <Member type="Method">public update_status Update()</Member>
+        <Member type="Method">public update_status PostUpdate()</Member>
+        <Member type="Method">public bool ClearUp()</Member>
+        <Member type="Method">public void reset_stage()</Member>
+        <Member type="Method">public void load_stage(int stage)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>DynArray</Name>
+        <Access>Public</Access>
+        <Location left="75" top="437" />
+        <Size width="162" height="281" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">int capacity</Member>
+        <Member type="Field">int num_elements</Member>
+        <Member type="Method">private void Alloc(int capacity)</Member>
+        <Member type="Method">public DynArray at(int index)</Member>
+        <Member type="Method">public void count()</Member>
+        <Member type="Method">public void clear()</Member>
+        <Member type="Method">public void Delete_Element_At(int index)</Member>
+        <Member type="Method">public bool empty()</Member>
+        <Member type="Method">public void pop()</Member>
+        <Member type="Method">public void push_back(DynArraType element)</Member>
+        <Member type="Method">public void Reduce_To(int num_elements)</Member>
+        <Member type="Method">public void size()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ModulePlayer</Name>
+        <Access>Public</Access>
+        <Location left="442" top="774" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public Player player1</Member>
+        <Member type="Field">public Player player2</Member>
+        <Member type="Field">public int player_speed</Member>
+        <Member type="Method">public bool Init()</Member>
+        <Member type="Method">public update_status PreUdate()</Member>
+        <Member type="Method">public update_status Udate()</Member>
+        <Member type="Method">public update_status PostUdate()</Member>
+        <Member type="Method">public bool CleanUp()</Member>
+        <Modifier>None</Modifier>
       </Entity>
     </Entities>
     <Relationships />
