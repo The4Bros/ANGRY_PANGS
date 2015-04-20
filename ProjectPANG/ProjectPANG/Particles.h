@@ -9,8 +9,6 @@ enum Particle_Type
 	ENEMY_HIT,
 	PLAYER_SHOOT,
 
-
-
 	BALL_SIZE_1,
 	BALL_SIZE_2,
 	BALL_SIZE_3,

@@ -152,6 +152,8 @@ bool ModuleScene::CleanUp(){ return true; }
 
 void ModuleScene::reset_stage()
 {
+	game_state = READY;
+
 	// TIME COUNT
 	time_count->Reset(stage_arrangement.time_limit);
 

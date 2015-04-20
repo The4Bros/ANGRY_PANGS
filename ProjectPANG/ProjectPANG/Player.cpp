@@ -263,6 +263,7 @@ void Player::Hit(SDL_Rect* killer)
 
 	else
 	{
+		/*
 		if (rect.x + (rect.w / 2) <= killer->x + (killer->w / 2))
 		{
 			source_index = 21;
@@ -279,6 +280,9 @@ void Player::Hit(SDL_Rect* killer)
 		shoot_update_counter = 0;
 		state = HIT;
 		app->sceneModule->game_state = PLAYER_KILLED;
+		*/
+
+		app->sceneModule->reset_stage();
 	}
 }
 
