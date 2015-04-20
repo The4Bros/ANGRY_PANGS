@@ -49,30 +49,20 @@ public:
 	Application* app;
 
 	unsigned int max_height;
-	int bounce_height;// ?
-	int bounce_height_start;// ?
-	int gravity_counter=1;
-	int max_jump_gravity;
-	int gravity = 2;
-	int gravity_start = 2;
-	int horizontal_speed = 2;
-	float aux_float_gravity=0.1f;
-	
-	int gravity_strenght = 2;
-	Balloon *tmp_Balloon_hit;
-	Balloon *tmp_Balloon_hit2;
+	unsigned int position_in_list;
+	int gravity;
+	int horizontal_speed;
+	int gravity_aux;
 
 	BALL_TYPE type;
-
 	BALLOON_STATE_VERTICAL state_balloon_V;
 	BALLOON_STATE_HORIZONTAL state_balloon_H;
-	BOOL alive_balloon;
 	BOOL change_movement_V;// true if the ball has to change its direction, change it on Hit()
 	BOOL change_movement_H;
 	SDL_Rect rect;
+	
 
 
-	bool falling_exceeds_max_height;
 	Balloon(Application* app, int x, int y, int type, int max_height);
 	~Balloon(){}
 
