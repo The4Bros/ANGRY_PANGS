@@ -416,6 +416,95 @@
         <Member type="Method">public bool CleanUp()</Member>
         <Modifier>None</Modifier>
       </Entity>
+      <Entity type="Class">
+        <Name>ModuleChooseCity</Name>
+        <Access>Public</Access>
+        <Location left="1418" top="970" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public bool Init()</Member>
+        <Member type="Method">public update_status PreUpdate()</Member>
+        <Member type="Method">public update_status Update()</Member>
+        <Member type="Method">public update_status PostUpdate()</Member>
+        <Member type="Method">public bool CleanUp()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ModuleCredits</Name>
+        <Access>Public</Access>
+        <Location left="1418" top="1221" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public bool Init()</Member>
+        <Member type="Method">public update_status PreUpdate()</Member>
+        <Member type="Method">public update_status Update()</Member>
+        <Member type="Method">public update_status PostUpdate()</Member>
+        <Member type="Method">public bool CleanUp()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ModuleHighScore</Name>
+        <Access>Public</Access>
+        <Location left="1638" top="966" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public bool Init()</Member>
+        <Member type="Method">public update_status PreUpdate()</Member>
+        <Member type="Method">public update_status Update()</Member>
+        <Member type="Method">public update_status PostUpdate()</Member>
+        <Member type="Method">public bool CleanUp()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ModulePlane</Name>
+        <Access>Public</Access>
+        <Location left="1638" top="1221" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public bool Init()</Member>
+        <Member type="Method">public update_status PreUpdate()</Member>
+        <Member type="Method">public update_status Update()</Member>
+        <Member type="Method">public update_status PostUpdate()</Member>
+        <Member type="Method">public bool CleanUp()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ModuleTutorial</Name>
+        <Access>Public</Access>
+        <Location left="1864" top="953" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public bool Init()</Member>
+        <Member type="Method">public update_status PreUpdate()</Member>
+        <Member type="Method">public update_status Update()</Member>
+        <Member type="Method">public update_status PostUpdate()</Member>
+        <Member type="Method">public bool CleanUp()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ModuleTittle</Name>
+        <Access>Public</Access>
+        <Location left="2086" top="953" />
+        <Size width="162" height="349" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public int ticks</Member>
+        <Member type="Field">public SDL_Rect rect</Member>
+        <Member type="Field">public SDL_Rect insert_coin_rect</Member>
+        <Member type="Field">public SDL_Rect source_rect</Member>
+        <Member type="Field">public int dir</Member>
+        <Member type="Field">public int aux</Member>
+        <Member type="Field">public SDL_Rect balloon_rects</Member>
+        <Member type="Field">public SDL_Rect balloon_source_rect</Member>
+        <Member type="Field">public SDL_Rect balloon_split</Member>
+        <Member type="Field">public SDL_Rect balloon_split_source_rect</Member>
+        <Member type="Field">public bool insert_coin_pressed</Member>
+        <Member type="Method">public bool Init()</Member>
+        <Member type="Method">public update_status PreUpdate()</Member>
+        <Member type="Method">public update_status Update()</Member>
+        <Member type="Method">public update_status PostUpdate()</Member>
+        <Member type="Method">public bool CleanUp()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
     </Entities>
     <Relationships />
   </ProjectItem>
