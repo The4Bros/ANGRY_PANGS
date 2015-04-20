@@ -84,6 +84,10 @@ public:
 	// particles->PushBack(x, y, type);
 
 	void Check_Collision_Balloon_Players();
+	bool Deep_Check_Collision_Balloon_Player1();
+	void Deep_Check_Collision_Balloon_Player2();
+
+
 	void Check_Collision_Balloon_Brick_Vertical();
 	void Check_Collision_Balloon_Brick_Horizontal();
 

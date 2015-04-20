@@ -286,6 +286,8 @@ void Balloon::Reset(unsigned int x, unsigned int y, unsigned int type, unsigned 
 	rect = { x*app->windowModule->scale, y*app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 	this->max_height = max_height;
 
+
+
 	state_balloon_H = BALLOON_RIGHT;
 	state_balloon_V = BALLOON_DOWN;
 
@@ -354,38 +356,71 @@ void Balloon::Reset(unsigned int x, unsigned int y, unsigned int type, unsigned 
 
 void Balloon::Check_Collision_Balloon_Players()
 {
+	if (rect.x < app->playerModule->player1->rect.x + app->playerModule->player1->rect.w
+		&& rect.x + rect.w > app->playerModule->player1->rect.x
+		&& rect.y < app->playerModule->player1->rect.y + app->playerModule->player1->rect.h
+		&& rect.h + rect.y > app->playerModule->player1->rect.y)
+	{
+		if (Deep_Check_Collision_Balloon_Player1()){ return; } // no need to check player2 if player1 got hit
+	}
+
+	if (app->playerModule->player2 != NULL)
+	{
+		if (rect.x < app->playerModule->player2->rect.x + app->playerModule->player2->rect.w
+			&& rect.x + rect.w > app->playerModule->player2->rect.x
+			&& rect.y < app->playerModule->player2->rect.y + app->playerModule->player2->rect.h
+			&& rect.h + rect.y > app->playerModule->player2->rect.y)
+		{
+			Deep_Check_Collision_Balloon_Player2();
+		}
+	}
+}
+
+
+bool Balloon::Deep_Check_Collision_Balloon_Player1()
+{
 	//Closest point to ball
 	int closest_x, closest_y;
 
 	//closest_x offset
 	if (rect.x < app->playerModule->player1->rect.x){ closest_x = app->playerModule->player1->rect.x; } // Player to the right
-	else if (rect.x > app->playerModule->player1->rect.x + app->playerModule->player1->rect.w){ closest_x = app->playerModule->player1->rect.x + app->playerModule->player1->rect.w; } // Player to the left
-	else{ closest_x = rect.x; } // default is center of player
+	else{ closest_x = app->playerModule->player1->rect.x + app->playerModule->player1->rect.w; } // Player to the left
 
 	//closest_y offset
 	if (rect.y < app->playerModule->player1->rect.y){ closest_y = app->playerModule->player1->rect.y; } // Player bellow
-	else if (rect.y > app->playerModule->player1->rect.y + app->playerModule->player1->rect.h){ closest_y = app->playerModule->player1->rect.y + app->playerModule->player1->rect.h; } // Player above
-	else{ closest_y = rect.y; } // default is center of player
+	else{ closest_y = app->playerModule->player1->rect.y + app->playerModule->player1->rect.h; } // Player above
 
 	//Check distance between points
-	if (((rect.h * rect.h) / 4) > ((closest_x - rect.x) * (closest_x - rect.x)) + ((closest_y - rect.y) * (closest_y - rect.y))){ app->playerModule->player1->Hit(&rect); } // true if player1 got hit
-
-	else if (app->playerModule->player2 != NULL) // no need to check player2 if player1 got hit
+	if (((rect.h * rect.w) / 4) >((closest_x - (rect.x + (rect.w / 2))) * (closest_x - (rect.x + (rect.w / 2)))) + ((closest_y - (rect.y + (rect.h / 2))) * (closest_y - (rect.y + (rect.h / 2)))))
 	{
-		//closest_x offset
-		if (rect.x + rect.w < app->playerModule->player2->rect.x){ closest_x = app->playerModule->player2->rect.x; }
-		else if (rect.x > app->playerModule->player2->rect.x + app->playerModule->player2->rect.w){ closest_x = app->playerModule->player2->rect.x + app->playerModule->player2->rect.w; }
-		else{ closest_x = app->playerModule->player2->rect.x + (app->playerModule->player2->rect.w / 2); }
+		app->playerModule->player1->Hit(&rect); // true if player1 got hit
+		return true;
+	}
 
-		//closest_y offset
-		if (rect.y + rect.h < app->playerModule->player2->rect.y){ closest_y = app->playerModule->player2->rect.y; }
-		else if (rect.y > app->playerModule->player2->rect.y + app->playerModule->player2->rect.h){ closest_y = app->playerModule->player2->rect.y + app->playerModule->player2->rect.h; }
-		else{ closest_y = app->playerModule->player2->rect.y; }
+	return false;
+}
 
-		//Check distance between points
-		if ((rect.h * rect.h / 4) > ((closest_x - rect.x) * (closest_x - rect.x)) + ((closest_y - rect.y) * (closest_y - rect.y))){ app->playerModule->player2->Hit(&rect); }
+void Balloon::Deep_Check_Collision_Balloon_Player2()
+{
+	//Closest point to ball
+	int closest_x, closest_y;
+
+	//closest_x offset
+	if (rect.x + rect.w < app->playerModule->player2->rect.x){ closest_x = app->playerModule->player2->rect.x; }
+	else{ closest_x = app->playerModule->player2->rect.x + app->playerModule->player2->rect.w; }
+
+	//closest_y offset
+	if (rect.y + rect.h < app->playerModule->player2->rect.y){ closest_y = app->playerModule->player2->rect.y; }
+	else{ closest_y = app->playerModule->player2->rect.y + app->playerModule->player2->rect.h; }
+
+	//Check distance between points
+	if (((rect.h * rect.w) / 4) > ((closest_x - (rect.x + (rect.w / 2))) * (closest_x - (rect.x + (rect.w / 2)))) + ((closest_y - (rect.y + (rect.h / 2))) * (closest_y - (rect.y + (rect.h / 2)))))
+	{
+		app->playerModule->player2->Hit(&rect); // true if player2 got hit
 	}
 }
+
+
 
 
 void Balloon::Check_Collision_Balloon_Brick_Vertical()
