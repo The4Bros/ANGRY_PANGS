@@ -437,19 +437,86 @@ void Balloon::Size4_Check_Collision_Balloon_Players()
 
 void Balloon::Check_Collision_Balloon_Bricks()
 {
-	//Closest point to brick
-	int closest_x, closest_y;
+	SDL_Rect tmp_rect;
 
-	//closest_x offset
-	if (rect.x < app->playerModule->player1->rect.x){ closest_x = app->playerModule->player1->rect.x; }
-	else if (rect.x > app->playerModule->player1->rect.x + app->playerModule->player1->rect.w){ closest_x = app->playerModule->player1->rect.x + app->playerModule->player1->rect.w; }
-	else{ closest_x = rect.x; }
+	for (unsigned int i = 0; i < app->entityManagerModule->bricks->Count(); i++)
+	{
+		tmp_rect = (*app->entityManagerModule->bricks->at(i))->rect;
 
-	//closest_y offset
-	if (rect.y < app->playerModule->player1->rect.y){ closest_y = app->playerModule->player1->rect.y; }
-	else if (rect.y > app->playerModule->player1->rect.y + app->playerModule->player1->rect.h){ closest_y = app->playerModule->player1->rect.y + app->playerModule->player1->rect.h; }
-	else{ closest_y = rect.y; }
+		if (rect.x  < tmp_rect.x + tmp_rect.w
+			&& rect.x + rect.w > tmp_rect.x
+			&& rect.y < tmp_rect.y + tmp_rect.h
+			&& rect.y + rect.h > tmp_rect.y)
+		{
+			//Closest point to brick
+			int closest_x, closest_y;
 
-	//Check distance between points
-	//return (rect.h * rect.h) > ((closest_x - rect.x) * (closest_x - rect.x)) + ((closest_y - rect.y) * (closest_y - rect.y));
+			//closest_x offset
+			if (rect.x < tmp_rect.x){ closest_x = tmp_rect.x; }
+			else if (rect.x > tmp_rect.x + tmp_rect.w){ closest_x = tmp_rect.x + tmp_rect.w; }
+			else{ closest_x = rect.x; }
+
+			//closest_y offset
+			if (rect.y < tmp_rect.y){ closest_y = tmp_rect.y; }
+			else if (rect.y > tmp_rect.y + tmp_rect.h){ closest_y = tmp_rect.y + tmp_rect.h; }
+			else{ closest_y = rect.y; }
+
+			//Check distance between points
+			if ((rect.h * rect.h) > ((closest_x - rect.x) * (closest_x - rect.x)) + ((closest_y - rect.y) * (closest_y - rect.y)))
+			{
+				if (tmp_rect.x + (tmp_rect.w / 2) > rect.x + (rect.w / 2)) // brick to the right
+				{
+					if (tmp_rect.y + (tmp_rect.h / 2) < rect.y + (rect.h / 2)) // brick above
+					{
+						if (rect.y + (rect.h / 2) - tmp_rect.y + (tmp_rect.h / 2) > tmp_rect.x + (tmp_rect.w / 2) - rect.x + (rect.w / 2))
+						{
+							//horizontal collision -> balloon moves left---------------------------
+						}
+						else
+						{
+							//vertical collision -> balloon moves down -----------------------------
+						}
+					}
+					else // brick bellow
+					{
+						if (tmp_rect.y + (tmp_rect.h / 2) - rect.y + (rect.h / 2) > tmp_rect.x + (tmp_rect.w / 2) - rect.x + (rect.w / 2))
+						{
+							//horizontal collision -> balloon moves left-----------------------------
+						}
+						else
+						{
+							//vertical collision -> balloon moves up -----------------------------
+						}
+					}
+				}
+				else // brick to the left
+				{
+					if (tmp_rect.y + (tmp_rect.h / 2) < rect.y + (rect.h / 2)) // brick above
+					{
+						if (rect.y + (rect.h / 2) - tmp_rect.y + (tmp_rect.h / 2) > rect.x + (rect.w / 2) - tmp_rect.x + (tmp_rect.w / 2))
+						{
+							//horizontal collision -> balloon moves right-----------------------------
+						}
+						else
+						{
+							//vertical collision -> balloon moves down -----------------------------
+						}
+					}
+					else // brick bellow
+					{
+						if (tmp_rect.y + (tmp_rect.h / 2) - rect.y + (rect.h / 2) > rect.x + (rect.w / 2) - tmp_rect.x + (tmp_rect.w / 2))
+						{
+							//horizontal collision -> balloon moves right-----------------------------
+						}
+						else
+						{
+							//vertical collision -> balloon moves up -----------------------------
+						}
+					}
+				}
+
+				return;
+			}
+		}
+	}
 }
