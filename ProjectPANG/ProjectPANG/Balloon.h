@@ -53,29 +53,23 @@ public:
 	int gravity;
 	int horizontal_speed;
 	int ticks;
+	bool change_movement_V;// true if the ball has to change its direction, change it on Hit()
+	bool change_movement_H;
 
 	BALL_TYPE type;
 	BALLOON_STATE_VERTICAL state_balloon_V;
 	BALLOON_STATE_HORIZONTAL state_balloon_H;
-	bool change_movement_V;// true if the ball has to change its direction, change it on Hit()
-	bool change_movement_H;
 	SDL_Rect rect;
 	
-
-
 	Balloon(Application* app, int x, int y, int type, int max_height);
 	~Balloon(){}
 
 	void Update();
 	void Print();
-	
-
 	void Hit();
 	// particles->PushBack(x, y, type);
-
 	void Size1_Check_Collision_Balloon_Players();
 	void Size4_Check_Collision_Balloon_Players();
-
 
 	void Check_Collision_Balloon_Brick_Vertical();
 	void Check_Collision_Balloon_Brick_Horizontal();

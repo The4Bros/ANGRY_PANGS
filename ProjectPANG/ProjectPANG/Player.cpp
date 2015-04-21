@@ -3,7 +3,7 @@
 Player::Player(Application* app, bool player1)
 {
 	this->app = app;
-
+	
 	shielded = false;
 	state = STILL;
 	shoot_key_pressed = false;
@@ -267,6 +267,7 @@ void Player::Still()
 
 void Player::Hit(SDL_Rect* killer)
 {
+	hit_State = HIT_LEFT_UP;
 	if (shielded){ shielded = false; } // kill shield
 
 	else
@@ -276,19 +277,20 @@ void Player::Hit(SDL_Rect* killer)
 		{
 			source_index = 21;
 			hit_State = HIT_LEFT_UP;
+			
 		}
 		else
 		{
 			source_index = 22;
 			hit_State = HIT_RIGHT_UP;
 		}
-
+		ticks = 0;
+		player_gravity = 10;
 		height = rect.y;
 		update_counter = 0;
 		shoot_update_counter = 0;
 		state = HIT;
 		app->sceneModule->game_state = PLAYER_KILLED;
-		
 
 		//app->sceneModule->reset_stage();
 	}
@@ -305,58 +307,91 @@ void Player::Update()
 			switch (hit_State)
 			{
 			case HIT_LEFT_UP:
-				rect.x -= app->windowModule->scale;
-				if (rect.y < 9 * app->windowModule->scale) // && no collision with bricks
+				//rect.x -= app->windowModule->scale;
+				if ((rect.y > 8 * app->windowModule->scale) && player_gravity != 0) // && no collision with bricks
 				{
+					rect.x -= 2;
+					rect.y = rect.y - player_gravity;
+					ticks--;
+					if (ticks % 8 == 0) player_gravity--;
+					/*
 					height = rect.y;
 					update_counter = 0;
-					hit_State = HIT_LEFT_DOWN;
+					hit_State = HIT_LEFT_DOWN;*/
 				}
 				else
 				{
-					rect.y = height - ((6 * app->windowModule->scale) + ((update_counter * update_counter) / 9));
+					hit_State = HIT_LEFT_DOWN;
+
+					player_gravity = 0;
+					ticks = 1;
+					//rect.y = height - ((6 * app->windowModule->scale) + ((update_counter * update_counter) / 9));
 				}
 				break;
 
 			case HIT_LEFT_DOWN:
-				rect.x -= app->windowModule->scale;
+				//rect.x -= app->windowModule->scale;
 
-				if (rect.y > 167 * app->windowModule->scale) // && no collision with bricks
+				if (rect.y + rect.h < 199 * app->windowModule->scale) // && no collision with bricks
 				{
-					height = rect.y;
+					rect.x -= 2;
+					rect.y = rect.y + player_gravity;
+					ticks--;
+					if (ticks % 8 == 0) player_gravity++;
+					/*height = rect.y;
 					update_counter = 0;
-					hit_State = HIT_LEFT_UP;
+					hit_State = HIT_LEFT_UP;*/
 				}
 				else
 				{
-					rect.y = height + ((6 * app->windowModule->scale) -  ((update_counter * update_counter) / 9));
+					hit_State = HIT_LEFT_UP;
+					ticks = 1;
+					player_gravity--;
+					//rect.y = height + ((6 * app->windowModule->scale) -  ((update_counter * update_counter) / 9));
 				}
 				break;
 
 			case HIT_RIGHT_UP:
-				rect.x += app->windowModule->scale;
-				if (rect.y < 9 * app->windowModule->scale) // && no collision with bricks
+				//rect.x += app->windowModule->scale;
+				if ((rect.y > 8 * app->windowModule->scale) && player_gravity != 0) // && no collision with bricks
 				{
-					hit_State = HIT_LEFT_UP;
+					rect.x += 2;
+					rect.y = rect.y - player_gravity;
+					ticks--;
+					if (ticks % 8 == 0) player_gravity--;
+					//hit_State = HIT_LEFT_UP;
 				}
 				else
 				{
-					rect.y = height - ((app->windowModule->scale) *  ((update_counter * update_counter) / 10));
+					hit_State = HIT_RIGHT_DOWN;
+
+					player_gravity = 0;
+					ticks = 1;
+					//rect.y = height - ((app->windowModule->scale) *  ((update_counter * update_counter) / 10));
 				}
 				break;
 
 			case HIT_RIGHT_DOWN:
-				rect.x += app->windowModule->scale;
-				if (rect.y > 167 * app->windowModule->scale)
+				//rect.x += app->windowModule->scale;
+
+				if (rect.y + rect.h < 199 * app->windowModule->scale)
 				{
-					height = rect.y;
-					hit_State = HIT_LEFT_UP;
+
+					rect.x -= 2;
+					rect.y = rect.y + player_gravity;
+					ticks--;
+					if (ticks % 8 == 0) player_gravity++;
+					//height = rect.y;
+					//hit_State = HIT_LEFT_UP;
 				}
 				// else if() no collision with bricks
 				// { height = rect.y
 				else
 				{
-					rect.y = height + ((app->windowModule->scale) *  ((update_counter * update_counter) / 10));
+					hit_State = HIT_RIGHT_UP;
+					ticks = 1;
+					player_gravity--;
+					//rect.y = height + ((app->windowModule->scale) *  ((update_counter * update_counter) / 10));
 				}
 				break;
 			}

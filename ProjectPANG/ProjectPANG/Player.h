@@ -40,7 +40,7 @@ public:
 
 	SDL_Rect rect;
 	SDL_Rect* source_rect[25];
-	int source_index;
+	int source_index, player_gravity,ticks;
 
 	Harpoon* harpoon[2];
 	Weapon current_weapon;
