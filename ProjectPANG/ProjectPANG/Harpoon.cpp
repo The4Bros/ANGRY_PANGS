@@ -40,7 +40,7 @@ void Harpoon::Shoot_Grapple(unsigned int y, unsigned int x)
 
 void Harpoon::Update()
 {
-	if (Check_Collision_Harpoon_Balloon()){ return; }
+	if (Check_Collision_Harpoon_Balloon()){ alive = false; return; }
 
 	if (source_index < 18) // HARPOON
 	{

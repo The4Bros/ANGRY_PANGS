@@ -186,87 +186,69 @@ void Balloon::Print()
 
 void Balloon::Hit()
 {
-	int aux_rect_X = rect.x;
-	int aux_rect_Y = rect.y;
-	rect.x -= rect.w;
-
-	app->entityManagerModule->balloons->push_back(new Balloon(app, aux_rect_X, aux_rect_Y, type, max_height));
-
-	if (BALLOON_RIGHT)
+	if (type < 9)
 	{
-		BALLOON_LEFT;
+		Reduce_Balloon_Size();
+		rect.x -= rect.w / 4;
+		state_balloon_H = BALLOON_LEFT;
+		app->entityManagerModule->balloons->push_back(new Balloon(app, ((rect.x + (rect.w / 2)) / app->windowModule->scale), (rect.y / app->windowModule->scale), type, (max_height / app->windowModule->scale) /*  app->entityManagerModule->balloons->Count(), true  */));
 	}
+	else
+	{
+		// kill balloon
+	}
+}
 
+void Balloon::Reduce_Balloon_Size()
+{
 	switch (type)
 	{
-
-	case 0:
-
+	case  0:
 		type = RED_2;
-
-
+		rect.w = 32 * app->windowModule->scale;
+		rect.h = 26 * app->windowModule->scale;
 		break;
-
-	case 1:
-
+	case  1:
 		type = BLUE_2;
-
-
+		rect.w = 32 * app->windowModule->scale;
+		rect.h = 26 * app->windowModule->scale;
 		break;
-
-	case 2:
-
+	case  2:
 		type = GREEN_2;
-
+		rect.w = 32 * app->windowModule->scale;
+		rect.h = 26 * app->windowModule->scale;
 		break;
-
-	case 3:
-
+	case  3:
 		type = RED_3;
-
+		rect.w = 16 * app->windowModule->scale;
+		rect.h = 14 * app->windowModule->scale;
 		break;
-
-	case 4:
-
+	case  4:
 		type = BLUE_3;
-
+		rect.w = 16 * app->windowModule->scale;
+		rect.h = 14 * app->windowModule->scale;
 		break;
-
-	case 5:
-
+	case  5:
 		type = GREEN_3;
-
+		rect.w = 16 * app->windowModule->scale;
+		rect.h = 14 * app->windowModule->scale;
 		break;
-
-	case 6:
-
+	case  6:
 		type = RED_4;
-
+		rect.w = 8 * app->windowModule->scale;
+		rect.h = 7 * app->windowModule->scale;
 		break;
-
-	case 7:
-
+	case  7:
 		type = BLUE_4;
-
+		rect.w = 8 * app->windowModule->scale;
+		rect.h = 7 * app->windowModule->scale;
 		break;
-
-	case 8:
-
+	case  8:
 		type = GREEN_4;
-
+		rect.w = 8 * app->windowModule->scale;
+		rect.h = 7 * app->windowModule->scale;
 		break;
-
-	default:
-		rect = { 0, 0, 0, 0 };
-
-		break;
-
 	}
-
-
-
-
-
 }
 
 
@@ -438,58 +420,7 @@ void Balloon::Size4_Check_Collision_Balloon_Players()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-void Balloon::Check_Collision_Balloon_Brick_Vertical()
-{
-	//Closest point to brick
-	int closest_x, closest_y;
-
-	//closest_x offset
-	if (rect.x < app->playerModule->player1->rect.x){ closest_x = app->playerModule->player1->rect.x; }
-	else if (rect.x > app->playerModule->player1->rect.x + app->playerModule->player1->rect.w){ closest_x = app->playerModule->player1->rect.x + app->playerModule->player1->rect.w; }
-	else{ closest_x = rect.x; }
-
-	//closest_y offset
-	if (rect.y < app->playerModule->player1->rect.y){ closest_y = app->playerModule->player1->rect.y; }
-	else if (rect.y > app->playerModule->player1->rect.y + app->playerModule->player1->rect.h){ closest_y = app->playerModule->player1->rect.y + app->playerModule->player1->rect.h; }
-	else{ closest_y = rect.y; }
-
-	//Check distance between points
-	//return (rect.h * rect.h) > ((closest_x - rect.x) * (closest_x - rect.x)) + ((closest_y - rect.y) * (closest_y - rect.y));
-}
-
-
-void Balloon::Check_Collision_Balloon_Brick_Horizontal()
+void Balloon::Check_Collision_Balloon_Bricks()
 {
 	//Closest point to brick
 	int closest_x, closest_y;

@@ -23,9 +23,9 @@ enum BALL_TYPE
 	RED_4,
 	BLUE_4,
 	GREEN_4
-
-
 };
+
+
 enum BALLOON_STATE_VERTICAL
 {
 	BALLOON_UP,
@@ -68,14 +68,14 @@ public:
 	void Print();
 	void Hit();
 	// particles->PushBack(x, y, type);
-	void Size1_Check_Collision_Balloon_Players();
-	void Size4_Check_Collision_Balloon_Players();
-
-	void Check_Collision_Balloon_Brick_Vertical();
-	void Check_Collision_Balloon_Brick_Horizontal();
+	void Reduce_Balloon_Size();
 
 	void Reset(unsigned int x, unsigned int y, unsigned int type, unsigned int max_height);
 
+	void Size1_Check_Collision_Balloon_Players();
+	void Size4_Check_Collision_Balloon_Players();
+
+	void Check_Collision_Balloon_Bricks();
 
 };
 #endif
