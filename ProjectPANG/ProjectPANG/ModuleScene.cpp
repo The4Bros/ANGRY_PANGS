@@ -93,6 +93,7 @@ update_status ModuleScene::Update()
 
 	return UPDATE_CONTINUE;
 }
+update_status ModuleScene::PostUpdate(){ return UPDATE_CONTINUE; }
 
 bool ModuleScene::CleanUp(){ return true; }
 
@@ -457,9 +458,7 @@ void ModuleScene::parser(char *line)
 			tmp_struct.x = atoi(strtok_s(NULL, ",", &tmp_string));
 			tmp_struct.y = atoi(strtok_s(NULL, ",", &tmp_string));
 			tmp_struct.type = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_struct.aux1 = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_struct.aux2 = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_struct.aux3 = atoi(strtok_s(NULL, ";", &tmp_string));
+			tmp_struct.aux1 = atoi(strtok_s(NULL, ";", &tmp_string));
 
 			stage_arrangement.balloons.push_back(tmp_struct);
 		}
@@ -476,9 +475,7 @@ void ModuleScene::parser(char *line)
 			tmp_struct.x = atoi(strtok_s(NULL, ",", &tmp_string));
 			tmp_struct.y = atoi(strtok_s(NULL, ",", &tmp_string));
 			tmp_struct.type = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_struct.aux1 = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_struct.aux2 = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_struct.aux3 = atoi(strtok_s(NULL, ";", &tmp_string));
+			tmp_struct.aux1 = atoi(strtok_s(NULL, ";", &tmp_string));
 
 			stage_arrangement.enemies.push_back(tmp_struct);
 		}

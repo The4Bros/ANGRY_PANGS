@@ -15,7 +15,6 @@
 class ModuleEntityManager : public Module{
 public:
 
-	
 	SDL_Rect* harpoon_source_rect[25];
 
 	DynArray<Brick*>* bricks;
@@ -44,6 +43,7 @@ public:
 	bool Init();
 	update_status PreUpdate();
 	update_status Update();
+	update_status PostUpdate();
 	bool CleanUp();
 
 	// Collisions
