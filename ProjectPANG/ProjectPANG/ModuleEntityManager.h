@@ -37,7 +37,8 @@ public:
 	
 
 	DynArray<Particles*>* particles;
-	
+	SDL_Rect* particles_source_rect[5];
+	Particles* tmp_particle;
 
 	ModuleEntityManager(Application* app);
 	bool Init();

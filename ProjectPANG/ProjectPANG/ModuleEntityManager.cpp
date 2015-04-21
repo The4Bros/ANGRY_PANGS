@@ -3,10 +3,14 @@
 ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 {
 	balloons = NULL;
-	tmp_balloon = NULL;
-	
 	stairs = NULL;
 	bricks = NULL;
+	particles = NULL;
+
+	tmp_balloon = NULL;
+	tmp_stair = NULL;
+	tmp_brick = NULL;
+	tmp_particle = NULL;
 }
 bool ModuleEntityManager::Init()
 {
@@ -96,6 +100,14 @@ bool ModuleEntityManager::Init()
 	*/
 
 
+	// PARTICLES
+	particles = new DynArray<Particles*>();
+	for (int i = 0; i < 5; i++)
+	{
+		particles_source_rect[i] = new SDL_Rect({ i * 29, 0, 29, 26 });
+	}
+
+
 	return true;
 }
 update_status ModuleEntityManager::PreUpdate(){ return UPDATE_CONTINUE; }
@@ -107,6 +119,11 @@ update_status ModuleEntityManager::Update()
 		{
 			tmp_balloon = *balloons->at(i);
 			tmp_balloon->Update();
+		}
+		for (unsigned int i = 0; i < particles->Count(); i++)
+		{
+			tmp_particle = *particles->at(i);
+			tmp_particle->Update();
 		}
 	}
 	

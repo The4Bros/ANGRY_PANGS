@@ -83,10 +83,6 @@ public:
 	unsigned int current_stage;
 	Stage_Arrangement stage_arrangement;
 
-	Stair* tmp_stair;
-	Brick* tmp_brick;
-	Balloon* tmp_balloon;
-
 	SDL_Rect background_rect;
 	SDL_Rect* background_source_rect;
 

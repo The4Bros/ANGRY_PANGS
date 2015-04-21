@@ -192,6 +192,7 @@ void Balloon::Hit()
 		rect.x -= rect.w / 4;
 		state_balloon_H = BALLOON_LEFT;
 		app->entityManagerModule->balloons->push_back(new Balloon(app, ((rect.x + (rect.w / 2)) / app->windowModule->scale), (rect.y / app->windowModule->scale), type, (max_height / app->windowModule->scale) /*  app->entityManagerModule->balloons->Count(), true  */));
+		app->entityManagerModule->particles->push_back(new Particles(app, 0, rect.x, rect.y));
 	}
 	else
 	{

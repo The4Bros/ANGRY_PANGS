@@ -17,10 +17,6 @@ bool ModuleScene::Init()
 
 	load_stage(app->stage);
 
-	tmp_stair = NULL;
-	tmp_brick = NULL;
-	tmp_balloon = NULL;
-
 	ready_rect = { 100, 100, 160 * app->windowModule->scale,  32 * app->windowModule->scale };
 	game_over_rect = { 100, 100, 160 * app->windowModule->scale, 32 * app->windowModule->scale };
 
@@ -69,8 +65,8 @@ update_status ModuleScene::Update()
 	{
 		for (unsigned int i = 0; i < app->entityManagerModule->stairs->Count(); i++)
 		{
-			tmp_stair = *app->entityManagerModule->stairs->at(i);
-			tmp_stair->Print();
+			app->entityManagerModule->tmp_stair = *app->entityManagerModule->stairs->at(i);
+			app->entityManagerModule->tmp_stair->Print();
 		}
 	}
 
@@ -79,8 +75,8 @@ update_status ModuleScene::Update()
 	{
 		for (unsigned int i = 0; i < app->entityManagerModule->bricks->Count(); i++)
 		{
-			tmp_brick = *app->entityManagerModule->bricks->at(i);
-			tmp_brick->Print();
+			app->entityManagerModule->tmp_brick = *app->entityManagerModule->bricks->at(i);
+			app->entityManagerModule->tmp_brick->Print();
 		}
 	}
 
@@ -115,8 +111,18 @@ update_status ModuleScene::Update()
 	{
 		for (unsigned int i = 0; i < app->entityManagerModule->balloons->Count(); i++)
 		{
-			tmp_balloon = *app->entityManagerModule->balloons->at(i);
-			tmp_balloon->Print();
+			app->entityManagerModule->tmp_balloon = *app->entityManagerModule->balloons->at(i);
+			app->entityManagerModule->tmp_balloon->Print();
+		}
+	}
+
+	// PRINT PARTICLES
+	if (!app->entityManagerModule->particles->empty())
+	{
+		for (unsigned int i = 0; i < app->entityManagerModule->particles->Count(); i++)
+		{
+			app->entityManagerModule->tmp_particle = *app->entityManagerModule->particles->at(i);
+			app->entityManagerModule->tmp_particle->Print();
 		}
 	}
 

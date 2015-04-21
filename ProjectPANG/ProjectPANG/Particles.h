@@ -22,14 +22,14 @@ public:
 
 	bool alive;
 	SDL_Rect rect;
-	SDL_Rect* source_rect[5];
 
-	int quantity;
+	unsigned int quantity, update_counter, source_index;
 
-	Particles(Application* app, unsigned int type,  int x,  int y);
+	Particles(Application* app, unsigned int type, int x, int y);
 	~Particles(){}
 
 	void Update();
+	void Print();
 
 };
 #endif
