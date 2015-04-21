@@ -55,7 +55,16 @@ update_status ModuleScene::Update()
 			update_counter = 0;
 			pause_pressed = true;
 		}
+		if (app->entityManagerModule->balloons->empty())
+		{
+			game_state = NEXT_STAGE_LAPSE;
+			update_counter = 0;
+		}
 
+		break;
+	case NEXT_STAGE_LAPSE:
+		if (update_counter > 40){ return CHANGE_TO_MAP_PLANE; }
+		update_counter++;
 		break;
 
 	case READY:

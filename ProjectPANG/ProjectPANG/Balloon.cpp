@@ -212,7 +212,11 @@ void Balloon::Hit()
 	}
 	else
 	{
-		// kill balloon
+		for (int i = position_in_list + 1; i < app->entityManagerModule->balloons->Count(); i++)
+		{
+			(*app->entityManagerModule->balloons->at(i))->position_in_list = i - 1;
+		}
+		app->entityManagerModule->balloons->Delete_Element_At(position_in_list);
 	}
 	Restart_Movement_Balloons_hit();
 }

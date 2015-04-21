@@ -74,18 +74,12 @@ public:
 	{
 		if (index < num_elements)
 		{
-			delete data[index];
-			data[i] = NULL;
-
-			DynArrayTYPE* tmp = data;
-			for (unsigned int i = index; i < num_elements - 1; i++)
+			num_elements--;
+			for (unsigned int i = index; i < num_elements; i++)
 			{
-				data[i] = tmp[i + 1];
+				data[i] = data[i + 1];
 			}
-			
-			delete[] tmp;
-			delete data[num_elements];
-			data[--num_elements] = NULL;
+			data[num_elements] = NULL;
 		}
 	}
 

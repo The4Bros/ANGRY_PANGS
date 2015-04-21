@@ -72,24 +72,24 @@ update_status Application::Update()
 	while (item != NULL)
 	{
 		returnValue = item->data->PreUpdate();
-		if (returnValue == UPDATE_CONTINUE){ item = item->next; }
-		else{ return returnValue; }
+		if (returnValue != UPDATE_CONTINUE){ return returnValue; }
+		item = item->next;
 	}
 
 	item = modules_Queue.getStart(); // ------------Update------------
 	while (item != NULL)
 	{
 		returnValue = item->data->Update();
-		if (returnValue == UPDATE_CONTINUE){ item = item->next; }
-		else{ return returnValue; }
+		if (returnValue != UPDATE_CONTINUE){ return returnValue; }
+		item = item->next;
 	}
 
 	item = modules_Queue.getStart(); // ------------PostUpdate------------
 	while (item != NULL)
 	{
 		returnValue = item->data->PostUpdate();
-		if (returnValue == UPDATE_CONTINUE){ item = item->next; }
-		else{ return returnValue; }
+		if (returnValue != UPDATE_CONTINUE){ return returnValue; }
+		item = item->next;
 	}
 
 	return returnValue;

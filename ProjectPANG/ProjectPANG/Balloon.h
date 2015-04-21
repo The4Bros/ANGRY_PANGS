@@ -48,7 +48,7 @@ public:
 
 	Application* app;
 
-	unsigned int position_in_list;
+	int position_in_list;
 	int gravity;
 	int horizontal_speed;
 	int ticks;
