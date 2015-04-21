@@ -97,7 +97,7 @@ void Balloon::Update()
 			rect.y = rect.y - gravity;
 			ticks--;
 
-			if (ticks % 8 == 0) gravity--;
+			if (ticks % 5 == 0) gravity--;
 
 		}
 		else
@@ -117,7 +117,7 @@ void Balloon::Update()
 			rect.y = rect.y + gravity;
 
 			ticks++;
-			if (ticks % 8 == 0)
+			if (ticks % 5 == 0)
 			{
 				gravity++;
 			}
@@ -130,10 +130,10 @@ void Balloon::Update()
 
 			// Jump height for each balloon
 
-			if (type < 3) gravity = 9;
-			else if (type < 6) gravity = 8;
-			else if (type < 9) gravity = 7;
-			else gravity = 6;
+			if (type < 3) gravity = 12;
+			else if (type < 6) gravity = 11;
+			else if (type < 9) gravity = 9;
+			else gravity = 7;
 
 			ticks = 1;
 		}
@@ -183,7 +183,7 @@ void Balloon::Hit()
 	{
 		Reduce_Balloon_Size();
 		rect.x -= rect.w / 4;
-		//state_balloon_H = BALLOON_LEFT;
+		if (state_balloon_H == BALLOON_RIGHT) state_balloon_H = BALLOON_LEFT;
 		app->entityManagerModule->balloons->push_back(new Balloon(app, app->entityManagerModule->balloons->Count(), ((rect.x + (rect.w / 2)) / app->windowModule->scale), (rect.y / app->windowModule->scale), type, 1));
 		app->entityManagerModule->particles->push_back(new Particles(app, 0, rect.x, rect.y));
 	}
