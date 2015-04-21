@@ -272,20 +272,25 @@ void Player::Hit(SDL_Rect* killer)
 
 	else
 	{
-		
+
 		if (rect.x + (rect.w / 2) <= killer->x + (killer->w / 2))
 		{
 			source_index = 21;
 			hit_State = HIT_LEFT_UP;
-			
+
 		}
 		else
 		{
 			source_index = 22;
 			hit_State = HIT_RIGHT_UP;
 		}
+
 		ticks = 0;
 		player_gravity = 10;
+
+
+		alive = false;
+
 		height = rect.y;
 		update_counter = 0;
 		shoot_update_counter = 0;
@@ -398,7 +403,7 @@ void Player::Update()
 
 			update_counter++;
 
-			
+
 		}
 
 		else { shoot_update_counter++; }
@@ -444,8 +449,8 @@ void Player::Update()
 
 
 
-	
-	
+
+
 }
 
 
