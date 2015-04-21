@@ -40,40 +40,57 @@ void Harpoon::Shoot_Grapple(unsigned int y, unsigned int x)
 
 void Harpoon::Update()
 {
+	if (Check_Collision_Harpoon_Balloon()){ return; }
+
 	if (source_index < 18) // HARPOON
 	{
-		if (head_rect.y > 8 * app->windowModule->scale)
+		if (Check_Collision_Harpoon_Brick())
 		{
-			head_rect.y -= 2 * app->windowModule->scale;
-			body_rect.y -= 2 * app->windowModule->scale;
-			body_rect.h += 2 * app->windowModule->scale;
-
-			if (update_counter > 4)
-			{
-				update_counter = 0;
-				//source_index == 16 ? source_index = 17 : source_index = 16; *******************************************************
-			}
-			else{ update_counter++; }
+			alive = false;
 		}
-		else{ alive = false; }
+		else
+		{
+			if (head_rect.y > 8 * app->windowModule->scale)
+			{
+				head_rect.y -= 2 * app->windowModule->scale;
+				body_rect.y -= 2 * app->windowModule->scale;
+				body_rect.h += 2 * app->windowModule->scale;
+
+				if (update_counter > 4)
+				{
+					update_counter = 0;
+					//source_index == 16 ? source_index = 17 : source_index = 16; *******************************************************
+				}
+				else{ update_counter++; }
+			}
+			else{ alive = false; }
+		}
 	}
 
 	else if (source_index < 20) // GRAPPLE
 	{
-		if (head_rect.y > 8 * app->windowModule->scale)
+		if (Check_Collision_Harpoon_Brick())
 		{
-			head_rect.y -= 2 * app->windowModule->scale;
-			body_rect.y -= 2 * app->windowModule->scale;
-			body_rect.h += 2 * app->windowModule->scale;
-
-			if (update_counter > 4)
-			{
-				update_counter = 0;
-				//source_index == 18 ? source_index = 19 : source_index = 18; ************************************************************
-			}
-			else{ update_counter++; }
+			source_index = 20;
+			update_counter = app->sceneModule->time_count->current_time;
 		}
-		else{ source_index = 20; update_counter = app->sceneModule->time_count->current_time; }
+		else
+		{
+			if (head_rect.y > 8 * app->windowModule->scale)
+			{
+				head_rect.y -= 2 * app->windowModule->scale;
+				body_rect.y -= 2 * app->windowModule->scale;
+				body_rect.h += 2 * app->windowModule->scale;
+
+				if (update_counter > 4)
+				{
+					update_counter = 0;
+					//source_index == 18 ? source_index = 19 : source_index = 18; ************************************************************
+				}
+				else{ update_counter++; }
+			}
+			else{ source_index = 20; update_counter = app->sceneModule->time_count->current_time; }
+		}
 	}
 
 	else if (app->sceneModule->time_count->current_time <= update_counter - 5) // GRAPPLED
@@ -138,60 +155,57 @@ void Harpoon::Print()
 }
 
 
-void Harpoon::Check_Collision_Harpoon_Balloon()
+bool Harpoon::Check_Collision_Harpoon_Balloon()
 {
-	//Closest point to harpoon
-	int closest_x, closest_y;
-
 	for (unsigned int i = 0; i < app->entityManagerModule->balloons->Count(); i++)
 	{
 		app->entityManagerModule->tmp_balloon = *app->entityManagerModule->balloons->at(i);
 
-		//closest_x offset
-		if (app->entityManagerModule->tmp_balloon->rect.x < head_rect.x){ closest_x = head_rect.x; }
-		else if (app->entityManagerModule->tmp_balloon->rect.x > head_rect.x + head_rect.w){ closest_x = head_rect.x + head_rect.w; }
-		else{ closest_x = app->entityManagerModule->tmp_balloon->rect.x; }
-
-		//closest_y offset
-		if (app->entityManagerModule->tmp_balloon->rect.y < head_rect.y){ closest_y = head_rect.y; }
-		else if (app->entityManagerModule->tmp_balloon->rect.y > head_rect.y + head_rect.h + body_rect.h){ closest_y = head_rect.y + head_rect.h + body_rect.h; }
-		else{ closest_y = app->entityManagerModule->tmp_balloon->rect.y; }
-
-		//Check distance between points
-		if ((app->entityManagerModule->tmp_balloon->rect.h * app->entityManagerModule->tmp_balloon->rect.h)
-						> ((closest_x - app->entityManagerModule->tmp_balloon->rect.x) * (closest_x - app->entityManagerModule->tmp_balloon->rect.x))
-						+ ((closest_y - app->entityManagerModule->tmp_balloon->rect.y) * (closest_y - app->entityManagerModule->tmp_balloon->rect.y)))
+		if (app->entityManagerModule->tmp_balloon->rect.x <= head_rect.x + head_rect.w
+			&& app->entityManagerModule->tmp_balloon->rect.x + app->entityManagerModule->tmp_balloon->rect.w >= head_rect.x
+			&& app->entityManagerModule->tmp_balloon->rect.y <= head_rect.y + body_rect.h
+			&& app->entityManagerModule->tmp_balloon->rect.h + app->entityManagerModule->tmp_balloon->rect.y >= head_rect.y)
 		{
+			//Closest point to harpoon
+			int closest_x, closest_y;
 			
-			app->entityManagerModule->tmp_balloon->Hit();
-			alive = false;
-			return;
+			if (app->entityManagerModule->tmp_balloon->rect.x + (app->entityManagerModule->tmp_balloon->rect.w / 2) < head_rect.x){ closest_x = head_rect.x; }
+			else if (app->entityManagerModule->tmp_balloon->rect.x + (app->entityManagerModule->tmp_balloon->rect.w / 2) > head_rect.x + (head_rect.w / 2)){ closest_x = head_rect.x + (head_rect.w / 2); }
+			else{ closest_x = app->entityManagerModule->tmp_balloon->rect.x + (app->entityManagerModule->tmp_balloon->rect.w / 2); }
+
+			if (app->entityManagerModule->tmp_balloon->rect.y + (app->entityManagerModule->tmp_balloon->rect.h / 2) < head_rect.y){ closest_y = head_rect.y; }
+			else if (app->entityManagerModule->tmp_balloon->rect.y + (app->entityManagerModule->tmp_balloon->rect.h / 2) > head_rect.y + head_rect.h + body_rect.h){ closest_y = head_rect.y + head_rect.h + body_rect.h; }
+			else{ closest_y = app->entityManagerModule->tmp_balloon->rect.y + (app->entityManagerModule->tmp_balloon->rect.h / 2); }
+
+			//Check distance between points
+			if (((app->entityManagerModule->tmp_balloon->rect.h * app->entityManagerModule->tmp_balloon->rect.w) / 5)
+				> ((closest_x - (app->entityManagerModule->tmp_balloon->rect.x + (app->entityManagerModule->tmp_balloon->rect.w / 2))) * (closest_x - (app->entityManagerModule->tmp_balloon->rect.x + (app->entityManagerModule->tmp_balloon->rect.w / 2))))
+				+ ((closest_y - (app->entityManagerModule->tmp_balloon->rect.y + (app->entityManagerModule->tmp_balloon->rect.h / 2))) * (closest_y - (app->entityManagerModule->tmp_balloon->rect.y + (app->entityManagerModule->tmp_balloon->rect.h / 2)))))
+			{
+				app->entityManagerModule->tmp_balloon->Hit();
+				return true;
+			}
 		}
 	}
+	return false;
 }
 
-void Harpoon::Check_Collision_Harpoon_Brick()
+bool Harpoon::Check_Collision_Harpoon_Brick()
 {
 	for (unsigned int i = 0; i < app->entityManagerModule->bricks->Count(); i++)
 	{
 		app->entityManagerModule->tmp_brick = *app->entityManagerModule->bricks->at(i);
 
-		if (head_rect.x + head_rect.w >= app->entityManagerModule->tmp_brick->rect.x) // player right
+		if (head_rect.x + head_rect.w >= app->entityManagerModule->tmp_brick->rect.x // brick left
+		&& app->entityManagerModule->tmp_brick->rect.x + app->entityManagerModule->tmp_brick->rect.w >= head_rect.x // brick right
+		&& app->entityManagerModule->tmp_brick->rect.y + app->entityManagerModule->tmp_brick->rect.h >= head_rect.y // brick up
+		&& head_rect.y + head_rect.h + body_rect.h >= app->entityManagerModule->tmp_brick->rect.y) // brick down
 		{
-			if (app->entityManagerModule->tmp_brick->rect.x + app->entityManagerModule->tmp_brick->rect.w >= head_rect.x) // player left
-			{
-				if (app->entityManagerModule->tmp_brick->rect.y + app->entityManagerModule->tmp_brick->rect.h >= head_rect.y) // player up
-				{
-					if (head_rect.y + head_rect.h + body_rect.h >= app->entityManagerModule->tmp_brick->rect.y) // player down
-					{
-						app->entityManagerModule->tmp_brick->Hit();
-						alive = false;
-						return;
-					}
-				}
-			}
+			app->entityManagerModule->tmp_brick->Hit();
+			return true;
 		}
 	}
+	return false;
 }
 
 

@@ -5,6 +5,7 @@ Player::Player(Application* app, bool player1)
 	this->app = app;
 
 	shielded = false;
+	alive = true;
 	state = STILL;
 	shoot_key_pressed = false;
 	current_weapon = WEAPON_DOUBLE_HARPOON;
@@ -283,6 +284,7 @@ void Player::Hit(SDL_Rect* killer)
 			hit_State = HIT_RIGHT_UP;
 		}
 
+		alive = false;
 		height = rect.y;
 		update_counter = 0;
 		shoot_update_counter = 0;
@@ -420,7 +422,7 @@ void Player::Reset(unsigned int x, unsigned int y)
 	rect.y = y * app->windowModule->scale;
 
 	shielded = false;
-
+	alive = true;
 	state = STILL;
 	shoot_key_pressed = false;
 	current_weapon = WEAPON_DOUBLE_HARPOON;

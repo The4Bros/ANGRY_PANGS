@@ -20,7 +20,7 @@ void Brick::Print()
 void Brick::Hit()
 {
 	alive = false;
-	app->entityManagerModule->particles->push_back(new Particles( app, type, rect.x, rect.y));
+	//app->entityManagerModule->particles->push_back(new Particles( app, type, rect.x, rect.y));
 
 }
 

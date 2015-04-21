@@ -124,7 +124,7 @@ update_status ModuleScene::Update()
 
 	if (game_state == READY)
 	{
-		app->renderModule->Print(app->texturesModule->ready, ready_source_rect, &ready_rect);
+		if (update_counter % 30){ app->renderModule->Print(app->texturesModule->ready, ready_source_rect, &ready_rect); }
 
 		if (update_counter > 180){ game_state = PLAYING; update_counter = 0; }
 		else { update_counter++; }
@@ -133,7 +133,7 @@ update_status ModuleScene::Update()
 	{
 		app->renderModule->Print(app->texturesModule->ready, game_over_source_rect, &game_over_rect);
 
-		if (update_counter > 60){ game_state = PLAYING; update_counter = 0; }
+		if (update_counter > 240){ return CHANGE_TO_TITLE; }
 		else { update_counter++; }
 	}
 
