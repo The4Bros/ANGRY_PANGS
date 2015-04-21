@@ -3,6 +3,10 @@
 ModuleTitle::ModuleTitle(Application* app) : Module(app){}
 bool ModuleTitle::Init()
 {	
+	gravity[0] = 5;
+	gravity[1] = 30;
+	gravity[2] = 10;
+	gravity[3] = 10;
 	app->current_time = 0;
 	ticks = 0;
 	for (int i = 0; i < 4; i++){ dir[i] = 1; aux[i] = 1; }
@@ -91,31 +95,77 @@ bool ModuleTitle::CleanUp(){ return true; }
 
 void ModuleTitle::Update_Balloons()//Balls title animation 
 {
-	app->fontManagerModule->Write_On_Screen(ticks, 50*2, 100, 8*app->windowModule->scale);
+	//app->fontManagerModule->Write_On_Screen(ticks, 50*2, 100, 8*app->windowModule->scale);
 	//P
-	balloon_rects[0].x -= 8*app->windowModule->scale;
-	balloon_rects[0].y += (aux[0] * 3 * app->windowModule->scale) + (dir[0] * 4.5*(ticks / 150)*(ticks / 150));
+	
+	if (balloon_rects[0].x > 88 * app->windowModule->scale) balloon_rects[0].x -= 6 * app->windowModule->scale;
+
+	if (balloon_rects[0].y > 53 * app->windowModule->scale && balloons_title_up[0])balloon_rects[0].y -= gravity[0]--;
+	else if (balloon_rects[0].y < 208 * app->windowModule->scale && balloons_title_up[0] == false)
+		 {
+			 balloon_rects[0].y += gravity[0]++;
+		 }
+		 else balloons_title_up[0] = true;
+
+	//balloon_rects[0].x -= 8*app->windowModule->scale;
+	//balloon_rects[0].y += (aux[0] * 3 * app->windowModule->scale) + (dir[0] * 4.5*(ticks / 150)*(ticks / 150));
 
 	//A
-	if (ticks > 340){ balloon_rects[1].x += 8 * app->windowModule->scale;
-	balloon_rects[1].y += (aux[1] * 3 * app->windowModule->scale) + (dir[1] * 4.5*(ticks / 150)*(ticks / 150));
-	}
-	
+	if (ticks > 340)
+	{
+				
+		if (balloon_rects[1].x < 130 * app->windowModule->scale) balloon_rects[1].x += 5 * app->windowModule->scale;
+
+		if (balloon_rects[1].y > 69 * app->windowModule->scale && balloons_title_up[1]) balloon_rects[1].y -= gravity[1]--;
+		else if (balloon_rects[1].y < 208 * app->windowModule->scale && balloons_title_up[1] == false)
+			 {
+				 balloon_rects[1].y += gravity[1]++;
+			 }
+			 else balloons_title_up[1] = true;
+	 }
+	//if (ticks > 340){ balloon_rects[1].x += 8 * app->windowModule->scale;
+	//balloon_rects[1].y += (aux[1] * 3 * app->windowModule->scale) + (dir[1] * 4.5*(ticks / 150)*(ticks / 150));
+	//}
+
 	//N
-	if (ticks > 350){
-		balloon_rects[2].y += (aux[2] * 3 * app->windowModule->scale) + (dir[2] * 4.5*(ticks / 150)*(ticks / 150));
-		
-		balloon_rects[2].x -= 8 * app->windowModule->scale;
+	if (ticks > 350)
+	{
+
+		if (balloon_rects[2].x > 192 * app->windowModule->scale) balloon_rects[2].x -= 5 * app->windowModule->scale;
+
+		if (balloon_rects[2].y > 50 * app->windowModule->scale && balloons_title_up[2]) balloon_rects[2].y -= gravity[2]--;
+		else if (balloon_rects[2].y < 208 * app->windowModule->scale && balloons_title_up[2] == false)
+			 {
+			 	 balloon_rects[2].y += gravity[2]++;
+			 }
+			 else balloons_title_up[2] = true;
 	}
+	//if (ticks > 350){
+	//balloon_rects[2].y += (aux[2] * 3 * app->windowModule->scale) + (dir[2] * 4.5*(ticks / 150)*(ticks / 150));
+
+	//balloon_rects[2].x -= 8 * app->windowModule->scale;
+	//}
+
 	//G
-	if (ticks > 360){
-	balloon_rects[3].x += 8 * app->windowModule->scale;
-	balloon_rects[3].y += (aux[3] * 3 * app->windowModule->scale) + (dir[3] * 4.5*(ticks / 150)*(ticks / 150));
+	if (ticks > 360)
+	{
+
+		if (balloon_rects[3].x < 230 * app->windowModule->scale) balloon_rects[3].x += 5 * app->windowModule->scale;
+
+		if (balloon_rects[3].y > 50 * app->windowModule->scale && balloons_title_up[3]) balloon_rects[3].y -= gravity[3]--;
+		else if (balloon_rects[3].y < 208 * app->windowModule->scale && balloons_title_up[3] == false)
+			 {
+				 balloon_rects[3].y += gravity[3]++;
+			 }
+			 else balloons_title_up[3] = true;
 	}
+	//if (ticks > 360){
+	//balloon_rects[3].x += 8 * app->windowModule->scale;
+	//balloon_rects[3].y += (aux[3] * 3 * app->windowModule->scale) + (dir[3] * 4.5*(ticks / 150)*(ticks / 150));
+	//}
 
 	for (unsigned int i = 0; i < 4; i++){ if (balloon_rects[i].y > 208 * app->windowModule->scale){ dir[i] = -1; aux[i] = -0.8; } }
 
 	for (unsigned int i = 0; i < 4; i++){ app->renderModule->Print(app->texturesModule->balls_sprite, balloon_source_rect, &balloon_rects[i]);  }
-
 
 }

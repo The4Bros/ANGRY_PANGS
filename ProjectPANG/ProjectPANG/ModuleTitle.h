@@ -10,6 +10,7 @@
 class ModuleTitle : public Module{
 public:
 
+	int gravity[4];
 	int ticks;
 	SDL_Rect rect;
 	SDL_Rect insert_coin_rect;
@@ -21,6 +22,7 @@ public:
 	SDL_Rect balloon_split[4];
 	SDL_Rect* balloon_split_source_rect[4];
 	bool insert_coin_pressed;
+	bool balloons_title_up[4];
 
 	ModuleTitle(Application* app);
 	bool Init();
