@@ -83,16 +83,10 @@ public:
 		}
 	}
 
-	void Reduce_To(int quantity)
+	void Reduce_To(unsigned int quantity)
 	{
-		if (quantity < num_elements && quantity >= 0)
+		if (quantity < num_elements)
 		{
-			for (int i = num_elements - 1; i >= quantity; i--)
-			{
-				delete data[i];
-				data[i] = NULL;
-			}
-
 			num_elements = quantity;
 		}
 	}

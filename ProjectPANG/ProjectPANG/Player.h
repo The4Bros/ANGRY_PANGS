@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "Harpoon.h"
+#include "Stair.h"
 
 #ifndef __Player_H__
 #define __Player_H__
@@ -9,8 +10,7 @@ enum PlayerState
 {
 	LEFT,
 	RIGHT,
-	DOWN,
-	UP,
+	ON_STAIR,
 	STILL,
 	SHOOT_LEFT,
 	SHOOT_RIGHT,
@@ -45,12 +45,14 @@ public:
 	Harpoon* harpoon[2];
 	Weapon current_weapon;
 
-	unsigned int score, lives, update_counter, shoot_update_counter;
+	unsigned int score, lives, update_counter, shoot_update_counter, stair_update_counter;
 	PlayerState state;
 	bool shoot_key_pressed, shielded, alive;
 
 	int height;
 	Hit_State hit_State;
+
+	Stair* current_stair;
 
 	Player(Application* app, bool player1);
 	~Player(){}
@@ -67,7 +69,8 @@ public:
 	void Reset(unsigned int x, unsigned int y);
 
 	bool Check_Collision_Player_Brick_Horizontal();
-	bool Check_Collision_Player_Brick_Vertical();
+	bool Check_Collision_Player_Verticals();
+	bool Check_Collision_Player_Stair();
 
 };
 #endif

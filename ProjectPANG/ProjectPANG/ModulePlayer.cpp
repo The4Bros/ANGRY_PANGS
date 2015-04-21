@@ -33,8 +33,11 @@ update_status ModulePlayer::Update()
 			if (app->inputModule->key[SDL_SCANCODE_RCTRL] == 1){ player2->Shoot(); }
 			else { player2->shoot_key_pressed = false; }
 
-			if ((app->inputModule->key[SDL_SCANCODE_LEFT] == 0
-				&& app->inputModule->key[SDL_SCANCODE_RIGHT] == 0))
+			if (app->inputModule->key[SDL_SCANCODE_LEFT] == 0 && app->inputModule->key[SDL_SCANCODE_RIGHT] == 0)
+			{
+				player2->Still();
+			}
+			if (app->inputModule->key[SDL_SCANCODE_UP] == 0 && app->inputModule->key[SDL_SCANCODE_DOWN] == 0)
 			{
 				player2->Still();
 			}
@@ -51,8 +54,11 @@ update_status ModulePlayer::Update()
 		if (app->inputModule->key[SDL_SCANCODE_W] == 1){ player1->UpTrigger(); }
 		if (app->inputModule->key[SDL_SCANCODE_S] == 1){ player1->DownTrigger(); }
 
-		if (app->inputModule->key[SDL_SCANCODE_A] == 0
-			&& app->inputModule->key[SDL_SCANCODE_D] == 0)
+		if (app->inputModule->key[SDL_SCANCODE_A] == 0 && app->inputModule->key[SDL_SCANCODE_D] == 0)
+		{
+			player1->Still();
+		}
+		if (app->inputModule->key[SDL_SCANCODE_W] == 0 && app->inputModule->key[SDL_SCANCODE_S] == 0)
 		{
 			player1->Still();
 		}

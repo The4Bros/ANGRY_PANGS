@@ -10,6 +10,8 @@ Player::Player(Application* app, bool player1)
 	current_weapon = WEAPON_DOUBLE_HARPOON;
 	hit_State = HIT_RIGHT_UP;
 	source_index = 17;
+	stair_update_counter = 0;
+	current_stair = NULL;
 
 
 	harpoon[0] = new Harpoon(app);
@@ -119,16 +121,87 @@ void Player::RightTrigger()
 
 void Player::UpTrigger()
 {
-	SDL_Rect killer = { 800, 0, 0, 0 };
-	Hit(&killer);
-	return;
+	if (current_stair == NULL)
+	{
+		if (stair_update_counter > 30)
+		{
+			if (Check_Collision_Player_Stair())
+			{
+				stair_update_counter = 0;
+				source_index = 15;
+				state = ON_STAIR;
+			}
+		}
+		else{ stair_update_counter++; }
+	}
+	else
+	{
+		if (rect.y + (16 * app->windowModule->scale) > current_stair->rect.y) // still on stair
+		{
+			rect.y -= app->playerModule->player_speed;
+
+			if (update_counter > 8) // ticks till update
+			{
+				if (source_index < 13){ source_index++; }
+				else { source_index = 10; }
+				update_counter = 0;
+			}
+		}
+
+		else if (stair_update_counter < 8)
+		{
+			stair_update_counter++;
+			source_index = 16;
+		}
+		else // no longer on stair
+		{
+			state = STILL;
+			source_index = 17;
+			rect.y = current_stair->rect.y - rect.h;
+			stair_update_counter = 0;
+			current_stair = NULL;
+		}
+	}
+
 }
 
 void Player::DownTrigger()
 {
-	SDL_Rect killer = { 0, 0, 0, 0 };
-	Hit(&killer);
-	return;
+	if (current_stair == NULL)
+	{
+		if (stair_update_counter > 30)
+		{
+			if (rect.y < 168 && Check_Collision_Player_Stair())
+			{
+				stair_update_counter = 0;
+				source_index = 16;
+				state = ON_STAIR;
+			}
+		}
+		else{ stair_update_counter++; }
+	}
+	else
+	{
+		if (rect.y + rect.h < current_stair->rect.y + current_stair->rect.h) // still on stair
+		{
+			rect.y += app->playerModule->player_speed;
+
+			if (update_counter > 8) // ticks till update
+			{
+				if (source_index > 10){ source_index--; }
+				else { source_index = 13; }
+				update_counter = 0;
+			}
+		}
+		else // no longer on stair
+		{
+			state = STILL;
+			source_index = 17;
+			rect.y = current_stair->rect.y - rect.h;
+			stair_update_counter = 0;
+			current_stair = NULL;
+		}
+	}
 }
 
 
@@ -243,7 +316,7 @@ void Player::Shoot()
 
 void Player::Still()
 {
-	if (state == HIT || state == UP || state == DOWN){ return; }
+	if (state == HIT){ return; }
 	if (update_counter > 4)
 	{
 		switch (state)
@@ -258,6 +331,9 @@ void Player::Still()
 		case SHOOT_RIGHT:
 			state = STILL;
 			source_index = 17;
+			break;
+		case ON_STAIR:
+			source_index = 15;
 			break;
 		default:
 			break;
@@ -304,7 +380,7 @@ void Player::Hit(SDL_Rect* killer)
 
 void Player::Update()
 {
-
+	// PLAYER HIT___________________________________________________________________________________________________________________
 	if (state == HIT)
 	{
 		if (shoot_update_counter > 30)				//4rth bounce -> player killed(this)
@@ -422,22 +498,13 @@ void Player::Update()
 
 
 
-
+	// PLAYER NORMAL___________________________________________________________________________________________________________________
 	if (app->sceneModule->game_state == PLAYING)
 	{
 		// if no floor: make fall
-		if (rect.y < 168 && state != UP && state != DOWN) // not on ground
+		if (rect.y < 168 && state != ON_STAIR) // not on ground
 		{
-			/*
-
-			if () // collision with brick
-
-			else // fall
-			{
-			rect.y += 3 * app->windowModule->scale;
-			}
-
-			*/
+			if (!Check_Collision_Player_Verticals()) { rect.y += app->windowModule->scale; } // no bricks bellow, fall
 		}
 
 		update_counter++;
@@ -465,60 +532,105 @@ void Player::Reset(unsigned int x, unsigned int y)
 	rect.y = y * app->windowModule->scale;
 
 	shielded = false;
-
+	current_stair = NULL;
 	state = STILL;
 	shoot_key_pressed = false;
 	current_weapon = WEAPON_DOUBLE_HARPOON;
 	hit_State = HIT_RIGHT_UP;
 	source_index = 17;
+	stair_update_counter = 0;
 }
 
 
 
 bool Player::Check_Collision_Player_Brick_Horizontal()
 {
+	SDL_Rect tmp_rect;
+
 	for (unsigned int i = 0; i < app->entityManagerModule->bricks->Count(); i++)
 	{
-		app->entityManagerModule->tmp_brick = *app->entityManagerModule->bricks->at(i);
+		tmp_rect = (*app->entityManagerModule->bricks->at(i))->rect;
 
-		if (rect.x + rect.w >= app->entityManagerModule->tmp_brick->rect.x) // player right
+		if (rect.x - app->windowModule->scale < tmp_rect.x + tmp_rect.w
+			&& rect.x + rect.w > tmp_rect.x - app->windowModule->scale
+			&& rect.y < tmp_rect.y + tmp_rect.h
+			&& rect.h + rect.y  > tmp_rect.y + tmp_rect.h)
 		{
-			if (app->entityManagerModule->tmp_brick->rect.x + app->entityManagerModule->tmp_brick->rect.w >= rect.x) // player left
-			{
-				if (app->entityManagerModule->tmp_brick->rect.y + app->entityManagerModule->tmp_brick->rect.h >= rect.y) // player up
-				{
-					if (rect.y + rect.h >= app->entityManagerModule->tmp_brick->rect.y) // player down
-					{
-						return true;
-					}
-				}
-			}
+			return true;
 		}
 	}
-
 	return false;
 }
 
-bool Player::Check_Collision_Player_Brick_Vertical()
+bool Player::Check_Collision_Player_Verticals()
 {
+	SDL_Rect tmp_rect;
+
 	for (unsigned int i = 0; i < app->entityManagerModule->bricks->Count(); i++)
 	{
-		app->entityManagerModule->tmp_brick = *app->entityManagerModule->bricks->at(i);
+		tmp_rect = (*app->entityManagerModule->bricks->at(i))->rect;
 
-		if (rect.x + rect.w >= app->entityManagerModule->tmp_brick->rect.x) // player right
+		if (rect.x  < tmp_rect.x + tmp_rect.w
+			&& rect.x + rect.w > tmp_rect.x
+			&& rect.y - app->windowModule->scale < tmp_rect.y + tmp_rect.h
+			&& rect.y + rect.h + app->windowModule->scale > tmp_rect.y)
 		{
-			if (app->entityManagerModule->tmp_brick->rect.x + app->entityManagerModule->tmp_brick->rect.w >= rect.x) // player left
+			return true;
+		}
+	}
+
+	for (unsigned int i = 0; i < app->entityManagerModule->stairs->Count(); i++)
+	{
+		tmp_rect = (*app->entityManagerModule->stairs->at(i))->rect;
+
+		if (rect.x  < tmp_rect.x + tmp_rect.w
+			&& rect.x + rect.w > tmp_rect.x + tmp_rect.w
+			&& rect.y - app->windowModule->scale < tmp_rect.y + tmp_rect.h
+			&& rect.y + rect.h + app->windowModule->scale > tmp_rect.y)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Player::Check_Collision_Player_Stair()
+{
+	SDL_Rect stair_rect;
+
+	for (unsigned int i = 0; i < app->entityManagerModule->stairs->Count(); i++)
+	{
+		// get stair rect
+		stair_rect = (*app->entityManagerModule->stairs->at(i))->rect;
+
+		if (rect.x >stair_rect.x) // player to the right
+		{
+			if (rect.x - stair_rect.x <= 4 * app->windowModule->scale) // player close enough to stairs
 			{
-				if (app->entityManagerModule->tmp_brick->rect.y + app->entityManagerModule->tmp_brick->rect.h >= rect.y) // player up
+				if (rect.y + (rect.h / 2) >= stair_rect.y && rect.y + (rect.h / 2) <= stair_rect.y + stair_rect.h) // player close enough to stairs
 				{
-					if (rect.y + rect.h >= app->entityManagerModule->tmp_brick->rect.y) // player down
-					{
-						return true;
-					}
+					current_stair = *app->entityManagerModule->stairs->at(i);
+					rect.x = current_stair->rect.x - app->windowModule->scale;
+					stair_update_counter = 0;
+					update_counter = 0;
+					return true;
+				}
+			}
+		}
+		else // player to the left
+		{
+			if (stair_rect.x - rect.x <= 4 * app->windowModule->scale) // player close enough to stairs
+			{
+				if (rect.y + (rect.h / 2) >= stair_rect.y && rect.y + (rect.h / 2) <= stair_rect.y + stair_rect.h) // player close enough to stairs
+				{
+					current_stair = *app->entityManagerModule->stairs->at(i);
+					rect.x = current_stair->rect.x - app->windowModule->scale;
+					stair_update_counter = 0;
+					update_counter = 0;
+					return true;
 				}
 			}
 		}
 	}
-
 	return false;
 }
