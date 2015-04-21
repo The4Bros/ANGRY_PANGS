@@ -29,7 +29,7 @@ bool ModuleScene::Init()
 
 update_status ModuleScene::PreUpdate()
 {
-	if (difftime(time(NULL), time_count->timer) >= 1 && game_state == PLAYING) { time_count->Update(); }
+	
 
 	if (app->inputModule->key[SDL_SCANCODE_5] == 1)
 	{
@@ -48,13 +48,18 @@ update_status ModuleScene::Update()
 
 	switch (game_state)
 	{
-	case PLAYING || PLAYER_KILLED:
+	case PLAYING:
+		//TIMER MANAGED
+		if (difftime(time(NULL), time_count->timer) >= 1 && game_state == PLAYING) { time_count->Update(); }
+
+		// PAUSE MANAGED
 		if (app->inputModule->key[SDL_SCANCODE_P] == 1)
 		{
-			game_state = PAUSED;
-			update_counter = 0;
-			pause_pressed = true;
+			if (!pause_pressed){ game_state = PAUSED; pause_pressed = true; }
 		}
+		else{ pause_pressed = false; }
+
+		// STAGE END MANAGED
 		if (app->entityManagerModule->balloons->empty())
 		{
 			game_state = NEXT_STAGE_LAPSE;
@@ -63,7 +68,7 @@ update_status ModuleScene::Update()
 
 		break;
 	case NEXT_STAGE_LAPSE:
-		if (update_counter > 40){ return CHANGE_TO_MAP_PLANE; }
+		if (update_counter > 120){ return CHANGE_TO_MAP_PLANE; }
 		update_counter++;
 		break;
 
@@ -93,7 +98,7 @@ update_status ModuleScene::Update()
 
 		if (app->inputModule->key[SDL_SCANCODE_P] == 1)
 		{
-			if (!pause_pressed){ game_state = PLAYING; }
+			if (!pause_pressed){ game_state = PLAYING; pause_pressed = true; }
 		}
 		else{ pause_pressed = false; }
 
