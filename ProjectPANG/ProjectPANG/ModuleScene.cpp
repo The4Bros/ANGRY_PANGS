@@ -169,7 +169,7 @@ void ModuleScene::Print_All_Objects()
 
 void ModuleScene::reset_stage()
 {
-	unsigned int i;
+	int i;
 
 	game_state = READY;
 
@@ -187,7 +187,7 @@ void ModuleScene::reset_stage()
 	{
 		i = 0;
 
-		if (stage_arrangement.bricks.size() > app->entityManagerModule->bricks->Count()) // needs more bricks
+		if (stage_arrangement.bricks.Count() > app->entityManagerModule->bricks->Count()) // needs more bricks
 		{
 			while (i < app->entityManagerModule->bricks->Count())
 			{
@@ -198,7 +198,7 @@ void ModuleScene::reset_stage()
 					(*stage_arrangement.bricks.at(i)).type);
 				i++;
 			}
-			while (i < stage_arrangement.bricks.size())
+			while (i < stage_arrangement.bricks.Count())
 			{
 				app->entityManagerModule->bricks->push_back(new Brick(
 					app, i,
@@ -210,7 +210,7 @@ void ModuleScene::reset_stage()
 		}
 		else
 		{
-			while (i < stage_arrangement.bricks.size())
+			while (i < stage_arrangement.bricks.Count())
 			{
 				(*app->entityManagerModule->bricks->at(i))->Reset(
 					i,
@@ -234,7 +234,7 @@ void ModuleScene::reset_stage()
 	{
 		i = 0;
 
-		if (stage_arrangement.stairs.size() > app->entityManagerModule->stairs->Count()) // needs more bricks
+		if (stage_arrangement.stairs.Count() > app->entityManagerModule->stairs->Count()) // needs more bricks
 		{
 			while (i < app->entityManagerModule->stairs->Count())
 			{
@@ -244,7 +244,7 @@ void ModuleScene::reset_stage()
 					(*stage_arrangement.stairs.at(i)).type);
 				i++;
 			}
-			while (i < stage_arrangement.stairs.size())
+			while (i < stage_arrangement.stairs.Count())
 			{
 				app->entityManagerModule->stairs->push_back(new Stair(
 					app,
@@ -256,7 +256,7 @@ void ModuleScene::reset_stage()
 		}
 		else
 		{
-			while (i < stage_arrangement.stairs.size())
+			while (i < stage_arrangement.stairs.Count())
 			{
 				(*app->entityManagerModule->stairs->at(i))->Reset(
 					(*stage_arrangement.stairs.at(i)).x,
@@ -276,7 +276,7 @@ void ModuleScene::reset_stage()
 	{
 		i = 0;
 
-		if (stage_arrangement.balloons.size() > app->entityManagerModule->balloons->Count()) // needs more bricks
+		if (stage_arrangement.balloons.Count() > app->entityManagerModule->balloons->Count()) // needs more bricks
 		{
 			while (i < app->entityManagerModule->balloons->Count())
 			{
@@ -288,7 +288,7 @@ void ModuleScene::reset_stage()
 					(*stage_arrangement.balloons.at(i)).aux1);
 				i++;
 			}
-			while (i < stage_arrangement.balloons.size())
+			while (i < stage_arrangement.balloons.Count())
 			{
 				app->entityManagerModule->balloons->push_back(new Balloon(
 					app, i,
@@ -301,7 +301,7 @@ void ModuleScene::reset_stage()
 		}
 		else
 		{
-			while (i < stage_arrangement.balloons.size())
+			while (i < stage_arrangement.balloons.Count())
 			{
 				(*app->entityManagerModule->balloons->at(i))->Reset(
 					i,
@@ -324,7 +324,7 @@ void ModuleScene::reset_stage()
 	{
 		i = 0;
 
-		if (stage_arrangement.enemies.size() > app->entityManagerModule->enemies->Count()) // needs more bricks
+		if (stage_arrangement.enemies.Count() > app->entityManagerModule->enemies->Count()) // needs more bricks
 		{
 			while (i < app->entityManagerModule->enemies->Count())
 			{
@@ -337,7 +337,7 @@ void ModuleScene::reset_stage()
 					(*stage_arrangement.enemies.at(i)).aux3);
 				i++;
 			}
-			while (i < stage_arrangement.enemies.size())
+			while (i < stage_arrangement.enemies.Count())
 			{
 				app->entityManagerModule->enemies->push_back(new Enemy(
 					app, i,
@@ -352,7 +352,7 @@ void ModuleScene::reset_stage()
 		}
 		else
 		{
-			while (i < stage_arrangement.enemies.size())
+			while (i < stage_arrangement.enemies.Count())
 			{
 				(*app->entityManagerModule->enemies->at(i))->Reset(
 					(*stage_arrangement.enemies.at(i)).x,
