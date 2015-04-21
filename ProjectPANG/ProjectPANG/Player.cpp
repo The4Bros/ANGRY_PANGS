@@ -307,7 +307,7 @@ void Player::Update()
 
 	if (state == HIT)
 	{
-		if (shoot_update_counter > 30)
+		if (shoot_update_counter > 30)				//4rth bounce -> player killed(this)
 		{
 			switch (hit_State)
 			{
@@ -319,6 +319,7 @@ void Player::Update()
 					rect.y = rect.y - player_gravity;
 					ticks--;
 					if (ticks % 8 == 0) player_gravity--;
+					if (rect.x < 8 * app->windowModule->scale)hit_State = HIT_RIGHT_UP;
 					/*
 					height = rect.y;
 					update_counter = 0;
@@ -343,6 +344,7 @@ void Player::Update()
 					rect.y = rect.y + player_gravity;
 					ticks--;
 					if (ticks % 8 == 0) player_gravity++;
+					if (rect.x< 8 * app->windowModule->scale)hit_State = HIT_RIGHT_DOWN;
 					/*height = rect.y;
 					update_counter = 0;
 					hit_State = HIT_LEFT_UP;*/
@@ -351,7 +353,7 @@ void Player::Update()
 				{
 					hit_State = HIT_LEFT_UP;
 					ticks = 1;
-					player_gravity--;
+					player_gravity=player_gravity-3;
 					//rect.y = height + ((6 * app->windowModule->scale) -  ((update_counter * update_counter) / 9));
 				}
 				break;
@@ -364,6 +366,7 @@ void Player::Update()
 					rect.y = rect.y - player_gravity;
 					ticks--;
 					if (ticks % 8 == 0) player_gravity--;
+					if (rect.x - rect.w > 376 * app->windowModule->scale)hit_State = HIT_LEFT_UP;
 					//hit_State = HIT_LEFT_UP;
 				}
 				else
@@ -372,6 +375,7 @@ void Player::Update()
 
 					player_gravity = 0;
 					ticks = 1;
+					
 					//rect.y = height - ((app->windowModule->scale) *  ((update_counter * update_counter) / 10));
 				}
 				break;
@@ -386,6 +390,7 @@ void Player::Update()
 					rect.y = rect.y + player_gravity;
 					ticks--;
 					if (ticks % 8 == 0) player_gravity++;
+					if (rect.x + rect.w > 376 * app->windowModule->scale)hit_State = HIT_LEFT_DOWN;
 					//height = rect.y;
 					//hit_State = HIT_LEFT_UP;
 				}
@@ -395,7 +400,7 @@ void Player::Update()
 				{
 					hit_State = HIT_RIGHT_UP;
 					ticks = 1;
-					player_gravity--;
+					player_gravity = player_gravity - 3;;
 					//rect.y = height + ((app->windowModule->scale) *  ((update_counter * update_counter) / 10));
 				}
 				break;
