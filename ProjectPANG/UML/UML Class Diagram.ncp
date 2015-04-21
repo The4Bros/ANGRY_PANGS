@@ -251,7 +251,7 @@
         <Name>DynArray</Name>
         <Access>Public</Access>
         <Location left="75" top="437" />
-        <Size width="162" height="281" />
+        <Size width="162" height="298" />
         <Collapsed>False</Collapsed>
         <Member type="Field">int capacity</Member>
         <Member type="Field">int num_elements</Member>
