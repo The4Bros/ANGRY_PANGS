@@ -4,7 +4,6 @@
 #include <Windows.h>
 #include <time.h>
 #include <string.h>
-#include <vector>
 
 #include "DynArray.h"
 

@@ -48,7 +48,6 @@ public:
 
 	Application* app;
 
-	unsigned int max_height;
 	unsigned int position_in_list;
 	int gravity;
 	int horizontal_speed;
@@ -61,7 +60,7 @@ public:
 	BALLOON_STATE_HORIZONTAL state_balloon_H;
 	SDL_Rect rect;
 	
-	Balloon(Application* app, int x, int y, int type, int max_height, int position_in_list, int direction);
+	Balloon(Application* app, int position_in_list, int x, int y, int type, int direction);
 	~Balloon(){}
 
 	void Update();
@@ -70,7 +69,7 @@ public:
 	// particles->PushBack(x, y, type);
 	void Reduce_Balloon_Size();
 
-	void Reset(unsigned int x, unsigned int y, unsigned int type, unsigned int max_height, int position_in_list, int direction);
+	void Reset(int position_in_list, int x, int y, int type, int direction);
 
 	void Size1_Check_Collision_Balloon_Players();
 	void Size4_Check_Collision_Balloon_Players();

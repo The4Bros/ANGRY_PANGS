@@ -37,11 +37,8 @@ update_status ModuleScene::PreUpdate()
 	}
 	else { insert_coin_pressed = false; }
 
-
-	if (app->inputModule->key[SDL_SCANCODE_9] == 1)
-	{
-		reset_stage();
-	}
+	// STAGE CHEAT - 9: RESET STAGE
+	if (app->inputModule->key[SDL_SCANCODE_9] == 1){ reset_stage(); }
 
 	return UPDATE_CONTINUE;
 }
@@ -96,10 +93,6 @@ update_status ModuleScene::Update()
 
 	return UPDATE_CONTINUE;
 }
-
-
-update_status ModuleScene::PostUpdate(){ return UPDATE_CONTINUE; }
-
 
 bool ModuleScene::CleanUp(){ return true; }
 
@@ -173,21 +166,10 @@ void ModuleScene::Print_All_Objects()
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 void ModuleScene::reset_stage()
 {
+	unsigned int i;
+
 	game_state = READY;
 
 	// TIME COUNT
@@ -198,115 +180,192 @@ void ModuleScene::reset_stage()
 	if (app->playerModule->player2 != NULL){ app->playerModule->player1->Reset(stage_arrangement.player_pos[0], stage_arrangement.player_pos[1]); }
 
 	
-	// BRICKS
-	unsigned int i = 0;
+	// BRICKS____________________________________________________________________________________________________________________________
+
 	if (!stage_arrangement.bricks.empty())
 	{
-		while (i < app->entityManagerModule->bricks->Count() && i < stage_arrangement.bricks.size())
+		i = 0;
+
+		if (stage_arrangement.bricks.size() > app->entityManagerModule->bricks->Count()) // needs more bricks
 		{
-			(*app->entityManagerModule->bricks->at(i))->Reset(
-				stage_arrangement.bricks.at(i).x,
-				stage_arrangement.bricks.at(i).y,
-				stage_arrangement.bricks.at(i).type);
-			i++;
+			while (i < app->entityManagerModule->bricks->Count())
+			{
+				(*app->entityManagerModule->bricks->at(i))->Reset(
+					i,
+					(*stage_arrangement.bricks.at(i)).x,
+					(*stage_arrangement.bricks.at(i)).y,
+					(*stage_arrangement.bricks.at(i)).type);
+				i++;
+			}
+			while (i < stage_arrangement.bricks.size())
+			{
+				app->entityManagerModule->bricks->push_back(new Brick(
+					app, i,
+					(*stage_arrangement.bricks.at(i)).x,
+					(*stage_arrangement.bricks.at(i)).y,
+					(*stage_arrangement.bricks.at(i)).type));
+				i++;
+			}
 		}
-
-		app->entityManagerModule->bricks->Reduce_To(i);
-
-		while (i < stage_arrangement.bricks.size())
+		else
 		{
-			app->entityManagerModule->bricks->push_back(new Brick(
-				app,
-				stage_arrangement.bricks.at(i).x,
-				stage_arrangement.bricks.at(i).y,
-				stage_arrangement.bricks.at(i).type));
-			i++;
+			while (i < stage_arrangement.bricks.size())
+			{
+				(*app->entityManagerModule->bricks->at(i))->Reset(
+					i,
+					(*stage_arrangement.bricks.at(i)).x,
+					(*stage_arrangement.bricks.at(i)).y,
+					(*stage_arrangement.bricks.at(i)).type);
+				i++;
+			}
+
+			app->entityManagerModule->bricks->Reduce_To(i);
 		}
 	}
+	else { app->entityManagerModule->bricks->Reduce_To(0); }
 	
 
-	// STAIRS
-	i = 0;
+
+
+	// STAIRS____________________________________________________________________________________________________________________________
+
 	if (!stage_arrangement.stairs.empty())
 	{
-		while (i < app->entityManagerModule->stairs->Count() && i < stage_arrangement.stairs.size())
+		i = 0;
+
+		if (stage_arrangement.stairs.size() > app->entityManagerModule->stairs->Count()) // needs more bricks
 		{
-			(*app->entityManagerModule->stairs->at(i))->Reset(
-				stage_arrangement.stairs.at(i).x,
-				stage_arrangement.stairs.at(i).y,
-				stage_arrangement.stairs.at(i).type);
-			i++;
+			while (i < app->entityManagerModule->stairs->Count())
+			{
+				(*app->entityManagerModule->stairs->at(i))->Reset(
+					(*stage_arrangement.stairs.at(i)).x,
+					(*stage_arrangement.stairs.at(i)).y,
+					(*stage_arrangement.stairs.at(i)).type);
+				i++;
+			}
+			while (i < stage_arrangement.stairs.size())
+			{
+				app->entityManagerModule->stairs->push_back(new Stair(
+					app,
+					(*stage_arrangement.stairs.at(i)).x,
+					(*stage_arrangement.stairs.at(i)).y,
+					(*stage_arrangement.stairs.at(i)).type));
+				i++;
+			}
 		}
-		while (i < stage_arrangement.stairs.size())
+		else
 		{
-			app->entityManagerModule->stairs->push_back(new Stair(
-				app,
-				stage_arrangement.stairs.at(i).x,
-				stage_arrangement.stairs.at(i).y,
-				stage_arrangement.stairs.at(i).type));
-			i++;
+			while (i < stage_arrangement.stairs.size())
+			{
+				(*app->entityManagerModule->stairs->at(i))->Reset(
+					(*stage_arrangement.stairs.at(i)).x,
+					(*stage_arrangement.stairs.at(i)).y,
+					(*stage_arrangement.stairs.at(i)).type);
+				i++;
+			}
+
+			app->entityManagerModule->stairs->Reduce_To(i);
 		}
 	}
+	else { app->entityManagerModule->stairs->Reduce_To(0); }
 
-	// BALLOONS
-	i = 0;
+	// BALLOONS____________________________________________________________________________________________________________________________
+
 	if (!stage_arrangement.balloons.empty())
 	{
-		while (i < app->entityManagerModule->balloons->Count() && i < stage_arrangement.balloons.size())
+		i = 0;
+
+		if (stage_arrangement.balloons.size() > app->entityManagerModule->balloons->Count()) // needs more bricks
 		{
-			(*app->entityManagerModule->balloons->at(i))->Reset(
-				stage_arrangement.balloons[i].x,
-				stage_arrangement.balloons[i].y,
-				stage_arrangement.balloons[i].type,
-				stage_arrangement.balloons[i].aux1,
-				stage_arrangement.balloons[i].aux2,
-				stage_arrangement.balloons[i].aux3);
-			i++;
+			while (i < app->entityManagerModule->balloons->Count())
+			{
+				(*app->entityManagerModule->balloons->at(i))->Reset(
+					i,
+					(*stage_arrangement.balloons.at(i)).x,
+					(*stage_arrangement.balloons.at(i)).y,
+					(*stage_arrangement.balloons.at(i)).type,
+					(*stage_arrangement.balloons.at(i)).aux1);
+				i++;
+			}
+			while (i < stage_arrangement.balloons.size())
+			{
+				app->entityManagerModule->balloons->push_back(new Balloon(
+					app, i,
+					(*stage_arrangement.balloons.at(i)).x,
+					(*stage_arrangement.balloons.at(i)).y,
+					(*stage_arrangement.balloons.at(i)).type,
+					(*stage_arrangement.balloons.at(i)).aux1));
+				i++;
+			}
 		}
-		while (i < stage_arrangement.balloons.size())
+		else
 		{
-			app->entityManagerModule->balloons->push_back(new Balloon(
-				app,
-				stage_arrangement.balloons.at(i).x,
-				stage_arrangement.balloons.at(i).y,
-				stage_arrangement.balloons.at(i).type,
-				stage_arrangement.balloons.at(i).aux1,
-				stage_arrangement.balloons.at(i).aux2,
-				stage_arrangement.balloons.at(i).aux3));
-			i++;
+			while (i < stage_arrangement.balloons.size())
+			{
+				(*app->entityManagerModule->balloons->at(i))->Reset(
+					i,
+					(*stage_arrangement.balloons.at(i)).x,
+					(*stage_arrangement.balloons.at(i)).y,
+					(*stage_arrangement.balloons.at(i)).type,
+					(*stage_arrangement.balloons.at(i)).aux1);
+				i++;
+			}
+			app->entityManagerModule->balloons->Reduce_To(i);
 		}
-		app->entityManagerModule->balloons->Reduce_To(i);
 	}
+	else { app->entityManagerModule->balloons->Reduce_To(0); }
+
 
 	/*
-	// ENEMIES
-	i = 0;
+	// ENEMIES____________________________________________________________________________________________________________________________
+
 	if (!stage_arrangement.enemies.empty())
 	{
-		while (i < app->entityManagerModule->enemies->Count() && i < stage_arrangement.enemies.Size())
+		i = 0;
+
+		if (stage_arrangement.enemies.size() > app->entityManagerModule->enemies->Count()) // needs more bricks
 		{
-			(*app->entityManagerModule->enemies->At(i))->Reset(
-			stage_arrangement.enemies.At(i).x,
-			stage_arrangement.enemies.At(i).y,
-			stage_arrangement.enemies.At(i).type,
-			stage_arrangement.enemies.At(i).aux1,
-			stage_arrangement.enemies.At(i).aux2,
-			stage_arrangement.enemies.At(i).aux3);
-			i++;
+			while (i < app->entityManagerModule->enemies->Count())
+			{
+				(*app->entityManagerModule->enemies->at(i))->Reset(
+					(*stage_arrangement.enemies.at(i)).x,
+					(*stage_arrangement.enemies.at(i)).y,
+					(*stage_arrangement.enemies.at(i)).type,
+					(*stage_arrangement.enemies.at(i)).aux1,
+					(*stage_arrangement.enemies.at(i)).aux2,
+					(*stage_arrangement.enemies.at(i)).aux3);
+				i++;
+			}
+			while (i < stage_arrangement.enemies.size())
+			{
+				app->entityManagerModule->enemies->push_back(new Enemy(
+					app, i,
+					(*stage_arrangement.enemies.at(i)).x,
+					(*stage_arrangement.enemies.at(i)).y,
+					(*stage_arrangement.enemies.at(i)).type
+					(*stage_arrangement.enemies.at(i)).aux1,
+					(*stage_arrangement.enemies.at(i)).aux2,
+					(*stage_arrangement.enemies.at(i)).aux3));
+				i++;
+			}
 		}
-		while (i < stage_arrangement.enemies.Size())
+		else
 		{
-			app->entityManagerModule->enemies->PushBack(new Enemy(
-			app,
-			stage_arrangement.enemies.At(i).x,
-			stage_arrangement.enemies.At(i).y,
-			stage_arrangement.enemies.At(i).type,
-			stage_arrangement.enemies.At(i).aux1,
-			stage_arrangement.enemies.At(i).aux2,
-			stage_arrangement.enemies.At(i).aux3));
-			i++;
+			while (i < stage_arrangement.enemies.size())
+			{
+				(*app->entityManagerModule->enemies->at(i))->Reset(
+					(*stage_arrangement.enemies.at(i)).x,
+					(*stage_arrangement.enemies.at(i)).y,
+					(*stage_arrangement.enemies.at(i)).type,
+					(*stage_arrangement.enemies.at(i)).aux1,
+					(*stage_arrangement.enemies.at(i)).aux2,
+					(*stage_arrangement.enemies.at(i)).aux3);
+				i++;
+			}
+			app->entityManagerModule->enemies->Reduce_To(i);
 		}
-	}*/
+	}
+	else { app->entityManagerModule->enemies->Reduce_To(0); }*/
 }
 
 
@@ -339,89 +398,89 @@ bool ModuleScene::load_stage(int stage)
 
 void ModuleScene::parser(char *line)
 {
-	char *token = NULL;
+	char *main_token = NULL;
 	char *tmp_string = NULL;
 	int max;
-	Tri_Struct tmp_3;
-	Hexa_Struct tmp_6;
+	Hexa_Struct tmp_struct;
+	tmp_struct.Reset();
 
 	// time limit
-	stage_arrangement.time_limit = atoi(strtok_s(line, "%", &token));
+	stage_arrangement.time_limit = atoi(strtok_s(line, "%", &main_token));
 	
 	// player's initial position
-	tmp_string = strtok_s(NULL, "%", &token);
+	tmp_string = strtok_s(NULL, "%", &main_token);
 	stage_arrangement.player_pos[0] = atoi(strtok_s(NULL, ",", &tmp_string));
 	stage_arrangement.player_pos[1] = atoi(strtok_s(NULL, ",", &tmp_string));
 	stage_arrangement.player_pos[2] = atoi(strtok_s(NULL, ",", &tmp_string));
 	stage_arrangement.player_pos[3] = atoi(tmp_string);
 	
 	// bricks
-	tmp_string = strtok_s(NULL, "%", &token);
+	tmp_string = strtok_s(NULL, "%", &main_token);
 	stage_arrangement.bricks.clear();
 	if (strcmp(tmp_string, "0") != 0)
 	{
 		max = atoi(strtok_s(NULL, ";", &tmp_string));
 		for (int i = 0; i < max; i++)
 		{
-			tmp_3.x = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_3.y = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_3.type = atoi(strtok_s(NULL, ";", &tmp_string));
+			tmp_struct.x = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_struct.y = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_struct.type = atoi(strtok_s(NULL, ";", &tmp_string));
 
-			stage_arrangement.bricks.push_back(tmp_3);
+			stage_arrangement.bricks.push_back(tmp_struct);
 		}
 	}
 
 	// stairs
-	tmp_string = strtok_s(NULL, "%", &token);
+	tmp_string = strtok_s(NULL, "%", &main_token);
 	stage_arrangement.stairs.clear();
 	if (strcmp(tmp_string, "0") != 0)
 	{
 		max = atoi(strtok_s(NULL, ";", &tmp_string));
 		for (int i = 0; i < max; i++)
 		{
-			tmp_3.x = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_3.y = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_3.type = atoi(strtok_s(NULL, ";", &tmp_string));
+			tmp_struct.x = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_struct.y = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_struct.type = atoi(strtok_s(NULL, ";", &tmp_string));
 
-			stage_arrangement.stairs.push_back(tmp_3);
+			stage_arrangement.stairs.push_back(tmp_struct);
 			}
 	}
 
 	// balloons
-	tmp_string = strtok_s(NULL, "%", &token);
+	tmp_string = strtok_s(NULL, "%", &main_token);
 	stage_arrangement.balloons.clear();
 	if (strcmp(tmp_string, "0") != 0)
 	{
 		max = atoi(strtok_s(NULL, ";", &tmp_string));
 		for (int i = 0; i < max; i++)
 		{
-			tmp_6.x = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_6.y = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_6.type = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_6.aux1 = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_6.aux2 = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_6.aux3 = atoi(strtok_s(NULL, ";", &tmp_string));
+			tmp_struct.x = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_struct.y = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_struct.type = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_struct.aux1 = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_struct.aux2 = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_struct.aux3 = atoi(strtok_s(NULL, ";", &tmp_string));
 
-			stage_arrangement.balloons.push_back(tmp_6);
+			stage_arrangement.balloons.push_back(tmp_struct);
 		}
 	}
 
 	// enemies
-	tmp_string = strtok_s(NULL, "%", &token);
+	tmp_string = strtok_s(NULL, "%", &main_token);
 	stage_arrangement.enemies.clear();
 	if (strcmp(tmp_string, "0") != 0)
 	{
 		max = atoi(strtok_s(NULL, ";", &tmp_string));
 		for (int i = 0; i < max; i++)
 		{
-			tmp_6.x = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_6.y = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_6.type = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_6.aux1 = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_6.aux2 = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_6.aux3 = atoi(strtok_s(NULL, ";", &tmp_string));
+			tmp_struct.x = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_struct.y = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_struct.type = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_struct.aux1 = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_struct.aux2 = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_struct.aux3 = atoi(strtok_s(NULL, ";", &tmp_string));
 
-			stage_arrangement.enemies.push_back(tmp_6);
+			stage_arrangement.enemies.push_back(tmp_struct);
 		}
 	}
 }

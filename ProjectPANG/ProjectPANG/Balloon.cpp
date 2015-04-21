@@ -2,21 +2,14 @@
 
 
 
-Balloon::Balloon(Application* app, int x, int y, int type, int max_height, int position_in_list, int direction)
+Balloon::Balloon(Application* app, int position_in_list, int x, int y, int type, int direction)
 {
 	gravity = 2;
 	horizontal_speed = 2;
 	ticks = 2;
-	position_in_list = 0;
-
-	while (position_in_list < app->entityManagerModule->balloons->Count())
-	{
-		position_in_list++;
-	}
-
 
 	this->app = app;
-	this->max_height = max_height;
+	this->position_in_list = position_in_list;
 
 	state_balloon_H = BALLOON_RIGHT;
 	state_balloon_V = BALLOON_DOWN;
@@ -176,7 +169,7 @@ void Balloon::Update()
 
 void Balloon::Print()
 {
-	app->renderModule->Print(app->texturesModule->balls_sprite, app->entityManagerModule->source_balloon_rect[type], &rect);
+	app->renderModule->Print(app->texturesModule->balls_sprite, app->entityManagerModule->source_balloon_rect[int(type)], &rect);
 }
 
 
@@ -191,7 +184,7 @@ void Balloon::Hit()
 		Reduce_Balloon_Size();
 		rect.x -= rect.w / 4;
 		//state_balloon_H = BALLOON_LEFT;
-		app->entityManagerModule->balloons->push_back(new Balloon(app, ((rect.x + (rect.w / 2)) / app->windowModule->scale), (rect.y / app->windowModule->scale), type, (max_height / app->windowModule->scale), app->entityManagerModule->balloons->Count(), 1));
+		app->entityManagerModule->balloons->push_back(new Balloon(app, app->entityManagerModule->balloons->Count(), ((rect.x + (rect.w / 2)) / app->windowModule->scale), (rect.y / app->windowModule->scale), type, 1));
 		app->entityManagerModule->particles->push_back(new Particles(app, 0, rect.x, rect.y));
 	}
 	else
@@ -255,31 +248,18 @@ void Balloon::Reduce_Balloon_Size()
 
 
 
-void Balloon::Reset(unsigned int x, unsigned int y, unsigned int type, unsigned int max_height, int position_in_list, int direction)
+void Balloon::Reset(int position_in_list, int x, int y, int type, int direction)
 {
 	gravity = 2;
 	horizontal_speed = 2;
 	ticks = 2;
-	position_in_list = 0;
-
-	while (position_in_list < app->entityManagerModule->balloons->Count())
-	{
-		position_in_list++;
-	}
-
+	this->position_in_list = position_in_list;
 
 	this->app = app;
 	rect = { x*app->windowModule->scale, y*app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
-	this->max_height = max_height;
 
 	state_balloon_H = BALLOON_RIGHT;
 	state_balloon_V = BALLOON_DOWN;
-
-
-	//---
-
-
-
 
 	switch (type)
 	{

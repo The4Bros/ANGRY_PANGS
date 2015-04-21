@@ -1,9 +1,10 @@
 #include "Brick.h"
 
 
-Brick::Brick(Application* app, unsigned int x, unsigned int y, unsigned int type)
+Brick::Brick(Application* app, int position_in_list, unsigned int x, unsigned int y, unsigned int type)
 {
 	this->app = app;
+	this->position_in_list = position_in_list;
 	alive = true;
 	this->type = type;
 	rect = { x * app->windowModule->scale, y * app->windowModule->scale,
@@ -25,9 +26,10 @@ void Brick::Hit()
 }
 
 
-void Brick::Reset(unsigned int x, unsigned int y, unsigned int type)
+void Brick::Reset(int position_in_list, unsigned int x, unsigned int y, unsigned int type)
 {
 	this->app = app;
+	this->position_in_list = position_in_list;
 	alive = true;
 	this->type = type;
 	rect = { x * app->windowModule->scale, y * app->windowModule->scale,

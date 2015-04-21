@@ -14,18 +14,17 @@ class Brick
 		Application* app;
 
 		SDL_Rect rect;
-
 		bool alive;
-
 		unsigned int type;
+		int position_in_list;
 
-		Brick(Application* app, unsigned int x, unsigned int y,  unsigned int type);
+		Brick(Application* app, int position_in_list, unsigned int x, unsigned int y, unsigned int type);
 		~Brick(){}
 
 		void Print();
 		void Hit();
 
-		void Reset(unsigned int x, unsigned int y, unsigned int type);
+		void Reset(int position_in_list, unsigned int x, unsigned int y, unsigned int type);
 	
 };
 

@@ -10,19 +10,6 @@
 
 #include "Time_Count.h"
 
-struct Tri_Struct // Bricks and Stairs
-{
-	unsigned int x;
-	unsigned int y;
-	unsigned int type;
-	Tri_Struct()
-	{
-		x = 0;
-		y = 0;
-		type = 0;
-	}
-	~Tri_Struct(){}
-};
 struct Hexa_Struct // Balloons and Enemies
 {
 	unsigned int x;
@@ -31,7 +18,8 @@ struct Hexa_Struct // Balloons and Enemies
 	unsigned int aux1;
 	unsigned int aux2;
 	unsigned int aux3;
-	Hexa_Struct()
+
+	void Reset()
 	{
 		x = 0;
 		y = 0;
@@ -47,10 +35,10 @@ struct Stage_Arrangement
 {
 	int time_limit;
 	int player_pos[4];
-	std::vector<Tri_Struct> bricks;
-	std::vector<Tri_Struct> stairs;
-	std::vector<Hexa_Struct> balloons;
-	std::vector<Hexa_Struct> enemies;
+	DynArray<Hexa_Struct> bricks;
+	DynArray<Hexa_Struct> stairs;
+	DynArray<Hexa_Struct> balloons;
+	DynArray<Hexa_Struct> enemies;
 	~Stage_Arrangement(){}
 };
 
