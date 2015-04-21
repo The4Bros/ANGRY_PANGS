@@ -1,6 +1,10 @@
 #include "Balloon.h"
-
-
+//direction odd-> left
+//direction pair->
+//0 -> start right
+// 1 -> start left
+// 2 -> new right
+// 3 -> new left
 
 Balloon::Balloon(Application* app, int position_in_list, int x, int y, int type, int direction)
 {
@@ -11,10 +15,29 @@ Balloon::Balloon(Application* app, int position_in_list, int x, int y, int type,
 	this->app = app;
 	this->position_in_list = position_in_list;
 
-	state_balloon_H = BALLOON_RIGHT;
-	state_balloon_V = BALLOON_DOWN;
+	
 
-
+	Restart_Movement_Balloons_hit();
+	if (direction == 0)
+	{
+		state_balloon_H = BALLOON_RIGHT;
+		state_balloon_V = BALLOON_DOWN;
+	}
+	if(direction == 1)
+	{
+		state_balloon_H = BALLOON_LEFT;
+		state_balloon_V = BALLOON_DOWN;
+	}
+	if (direction == 2)
+	{
+		state_balloon_H = BALLOON_RIGHT;
+	
+	}
+	if (direction == 3)
+	{
+		state_balloon_H = BALLOON_LEFT;
+	
+	}
 	//---
 
 
@@ -184,13 +207,20 @@ void Balloon::Hit()
 		Reduce_Balloon_Size();
 		rect.x -= rect.w / 4;
 		if (state_balloon_H == BALLOON_RIGHT) state_balloon_H = BALLOON_LEFT;
-		app->entityManagerModule->balloons->push_back(new Balloon(app, app->entityManagerModule->balloons->Count(), ((rect.x + (rect.w / 2)) / app->windowModule->scale), (rect.y / app->windowModule->scale), type, 1));
+		app->entityManagerModule->balloons->push_back(new Balloon(app, app->entityManagerModule->balloons->Count(), ((rect.x + (rect.w / 2)) / app->windowModule->scale), (rect.y / app->windowModule->scale), type, 2));
 		app->entityManagerModule->particles->push_back(new Particles(app, 0, rect.x, rect.y));
 	}
 	else
 	{
 		// kill balloon
 	}
+	Restart_Movement_Balloons_hit();
+}
+void Balloon::Restart_Movement_Balloons_hit()
+{
+	
+	state_balloon_V = BALLOON_UP;
+	gravity = 1;
 }
 
 void Balloon::Reduce_Balloon_Size()
