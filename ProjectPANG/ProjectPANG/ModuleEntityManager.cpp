@@ -102,9 +102,9 @@ bool ModuleEntityManager::Init()
 
 	// PARTICLES
 	particles = new DynArray<Particles*>();
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 4; i++)
 	{
-		particles_source_rect[i] = new SDL_Rect({ i * 29, 0, 29, 26 });
+		particles_source_rect[i] = new SDL_Rect({ i * 48, 0, 48, 40 });
 	}
 
 

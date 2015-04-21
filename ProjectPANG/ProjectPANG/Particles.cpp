@@ -3,15 +3,15 @@
 Particles::Particles(Application* app, unsigned int type, int x, int y)
 {
 	this->app = app;
-	rect = { x, y, 29 * app->windowModule->scale, 26 * app->windowModule->scale };
+	rect = { x, y, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 	update_counter = 0;
-	quantity = 5;
+	quantity = 4;
 }
 
 
 void Particles::Update()
 {
-	if (update_counter > 4)
+	if (update_counter >2)
 	{
 		if (quantity > 0)
 		{
