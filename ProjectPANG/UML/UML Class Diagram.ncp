@@ -1,15 +1,15 @@
 <Project>
-  <Name>Sin titulo</Name>
+  <Name>PANG</Name>
   <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
-    <Name>Sin titulo</Name>
+    <Name>Diagrama Clases</Name>
     <Language>CSharp</Language>
     <Entities>
       <Entity type="Class">
         <Name>Application</Name>
         <Access>Public</Access>
-        <Location left="63" top="52" />
+        <Location left="678" top="57" />
         <Size width="206" height="349" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">private DoubleNodedQueue module_queue</Member>
         <Member type="Field">private DoubleNode item</Member>
         <Member type="Field">private update_status returnValue</Member>
@@ -31,9 +31,9 @@
       <Entity type="Structure">
         <Name>DoubleNode</Name>
         <Access>Public</Access>
-        <Location left="409" top="52" />
+        <Location left="1485" top="325" />
         <Size width="162" height="216" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">public DoubleNodeDataTYPE data</Member>
         <Member type="Field">public DoubleNode next</Member>
         <Member type="Field">public DoubleNode previous</Member>
@@ -43,9 +43,9 @@
       <Entity type="Class">
         <Name>Balloon</Name>
         <Access>Public</Access>
-        <Location left="624" top="52" />
+        <Location left="1016" top="507" />
         <Size width="162" height="332" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">public int max_height</Member>
         <Member type="Field">public int bounce_height</Member>
         <Member type="Field">public int bounce_height_start</Member>
@@ -66,9 +66,9 @@
       <Entity type="Class">
         <Name>Brick</Name>
         <Access>Public</Access>
-        <Location left="811" top="52" />
+        <Location left="1203" top="507" />
         <Size width="162" height="216" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">public bool alive</Member>
         <Member type="Field">public int type</Member>
         <Member type="Field">public SDL_Rect rect</Member>
@@ -81,9 +81,9 @@
       <Entity type="Class">
         <Name>Harpoon</Name>
         <Access>Public</Access>
-        <Location left="995" top="52" />
+        <Location left="1387" top="507" />
         <Size width="162" height="315" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">public Applicatio app</Member>
         <Member type="Field">public bool alive</Member>
         <Member type="Field">public int counter</Member>
@@ -103,9 +103,9 @@
       <Entity type="Class">
         <Name>Player</Name>
         <Access>Public</Access>
-        <Location left="624" top="405" />
+        <Location left="1016" top="582" />
         <Size width="162" height="519" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">public Application app</Member>
         <Member type="Field">public SDL_Rect rect</Member>
         <Member type="Field">public SDL_Rect source_rect</Member>
@@ -137,9 +137,9 @@
       <Entity type="Class">
         <Name>Stair</Name>
         <Access>Public</Access>
-        <Location left="809" top="300" />
+        <Location left="1204" top="582" />
         <Size width="162" height="216" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">public Applicatio app</Member>
         <Member type="Field">public SDL_Rect rect</Member>
         <Member type="Field">public DynArray&lt;SDL_Rect&gt; rects</Member>
@@ -150,9 +150,9 @@
       <Entity type="Class">
         <Name>TimeCount</Name>
         <Access>Public</Access>
-        <Location left="812" top="538" />
+        <Location left="1562" top="507" />
         <Size width="162" height="247" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">public Application app</Member>
         <Member type="Field">public SDL_Rect rect</Member>
         <Member type="Field">public SDL_Rect source_rect</Member>
@@ -168,9 +168,9 @@
       <Entity type="Class">
         <Name>DoubleNodedList</Name>
         <Access>Public</Access>
-        <Location left="409" top="280" />
+        <Location left="1485" top="238" />
         <Size width="162" height="216" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">int num_elements</Member>
         <Member type="Field">DoubleNode&lt;QueueType&gt; init</Member>
         <Member type="Field">DoubleNode&lt;QueueTYPE&gt; last</Member>
@@ -183,9 +183,9 @@
       <Entity type="Structure">
         <Name>Tri_Struct</Name>
         <Access>Public</Access>
-        <Location left="75" top="762" />
+        <Location left="15" top="308" />
         <Size width="162" height="158" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">int x</Member>
         <Member type="Field">int y</Member>
         <Member type="Field">int type</Member>
@@ -194,9 +194,9 @@
       <Entity type="Structure">
         <Name>Quada_Struct</Name>
         <Access>Public</Access>
-        <Location left="76" top="955" />
+        <Location left="186" top="308" />
         <Size width="162" height="172" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">int x</Member>
         <Member type="Field">int y</Member>
         <Member type="Field">int type</Member>
@@ -206,9 +206,9 @@
       <Entity type="Structure">
         <Name>Stage_Arrangement</Name>
         <Access>Public</Access>
-        <Location left="76" top="1152" />
+        <Location left="106" top="371" />
         <Size width="162" height="181" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">int time_limit</Member>
         <Member type="Field">int player_pos</Member>
         <Member type="Field">vector&lt;Tri_Struct&gt; bricks</Member>
@@ -219,9 +219,9 @@
       <Entity type="Class">
         <Name>ModuleScene</Name>
         <Access>Public</Access>
-        <Location left="258" top="774" />
+        <Location left="106" top="242" />
         <Size width="162" height="468" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">FILE level_file</Member>
         <Member type="Field">public Time_Count time_count</Member>
         <Member type="Field">public Game_State game_state</Member>
@@ -250,9 +250,9 @@
       <Entity type="Class">
         <Name>DynArray</Name>
         <Access>Public</Access>
-        <Location left="75" top="437" />
+        <Location left="1268" top="238" />
         <Size width="162" height="298" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">int capacity</Member>
         <Member type="Field">int num_elements</Member>
         <Member type="Method">private void Alloc(int capacity)</Member>
@@ -270,9 +270,9 @@
       <Entity type="Class">
         <Name>ModulePlayer</Name>
         <Access>Public</Access>
-        <Location left="442" top="774" />
+        <Location left="381" top="242" />
         <Size width="162" height="216" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">public Player player1</Member>
         <Member type="Field">public Player player2</Member>
         <Member type="Field">public int player_speed</Member>
@@ -286,9 +286,9 @@
       <Entity type="Class">
         <Name>ModuleEntityManager</Name>
         <Access>Public</Access>
-        <Location left="442" top="1009" />
+        <Location left="610" top="242" />
         <Size width="162" height="417" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">public SDL_Rect harpoon_source_rect</Member>
         <Member type="Field">public DynArray&lt;Brick&gt; bricks</Member>
         <Member type="Field">public SDL_Rect source_brick_rect</Member>
@@ -314,9 +314,9 @@
       <Entity type="Class">
         <Name>Module</Name>
         <Access>Public</Access>
-        <Location left="621" top="966" />
+        <Location left="892" top="238" />
         <Size width="162" height="216" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">public Application app</Member>
         <Member type="Method">public virtual bool Init()</Member>
         <Member type="Method">public virtual update_status PreUpdate()</Member>
@@ -328,9 +328,9 @@
       <Entity type="Class">
         <Name>ModuleFontManager</Name>
         <Access>Public</Access>
-        <Location left="624" top="1196" />
+        <Location left="419" top="444" />
         <Size width="162" height="264" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">public TTF_Font font</Member>
         <Member type="Field">public SDL_Color color</Member>
         <Member type="Field">public char Num_string</Member>
@@ -347,9 +347,9 @@
       <Entity type="Class">
         <Name>ModuleInput</Name>
         <Access>Public</Access>
-        <Location left="809" top="966" />
+        <Location left="419" top="371" />
         <Size width="162" height="216" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">public SDL_Event maintEvent</Member>
         <Member type="Field">public Uint8 key</Member>
         <Member type="Method">public bool Init()</Member>
@@ -362,9 +362,9 @@
       <Entity type="Class">
         <Name>ModuleRender</Name>
         <Access>Public</Access>
-        <Location left="811" top="1198" />
+        <Location left="626" top="444" />
         <Size width="162" height="216" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">public SDL_Renderer renderer</Member>
         <Member type="Method">public bool init()</Member>
         <Member type="Method">public update_status PreUpdate()</Member>
@@ -377,9 +377,9 @@
       <Entity type="Class">
         <Name>ModuleTexture</Name>
         <Access>Public</Access>
-        <Location left="1018" top="966" />
+        <Location left="626" top="371" />
         <Size width="162" height="400" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">public SDL_Texture background_sprite</Member>
         <Member type="Field">public SDL_Texture balls_sprite</Member>
         <Member type="Field">public SDL_Texture bricks_sprite</Member>
@@ -404,9 +404,9 @@
       <Entity type="Class">
         <Name>ModuleWindow</Name>
         <Access>Public</Access>
-        <Location left="1207" top="968" />
+        <Location left="824" top="371" />
         <Size width="162" height="216" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">public SDL_Window window</Member>
         <Member type="Field">public int scale</Member>
         <Member type="Method">public bool Init()</Member>
@@ -419,9 +419,9 @@
       <Entity type="Class">
         <Name>ModuleChooseCity</Name>
         <Access>Public</Access>
-        <Location left="1418" top="970" />
+        <Location left="290" top="773" />
         <Size width="162" height="216" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Method">public bool Init()</Member>
         <Member type="Method">public update_status PreUpdate()</Member>
         <Member type="Method">public update_status Update()</Member>
@@ -432,9 +432,9 @@
       <Entity type="Class">
         <Name>ModuleCredits</Name>
         <Access>Public</Access>
-        <Location left="1418" top="1221" />
+        <Location left="478" top="692" />
         <Size width="162" height="216" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Method">public bool Init()</Member>
         <Member type="Method">public update_status PreUpdate()</Member>
         <Member type="Method">public update_status Update()</Member>
@@ -445,9 +445,9 @@
       <Entity type="Class">
         <Name>ModuleHighScore</Name>
         <Access>Public</Access>
-        <Location left="1638" top="966" />
+        <Location left="478" top="773" />
         <Size width="162" height="216" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Method">public bool Init()</Member>
         <Member type="Method">public update_status PreUpdate()</Member>
         <Member type="Method">public update_status Update()</Member>
@@ -458,9 +458,9 @@
       <Entity type="Class">
         <Name>ModulePlane</Name>
         <Access>Public</Access>
-        <Location left="1638" top="1221" />
+        <Location left="277" top="692" />
         <Size width="162" height="216" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Method">public bool Init()</Member>
         <Member type="Method">public update_status PreUpdate()</Member>
         <Member type="Method">public update_status Update()</Member>
@@ -471,9 +471,9 @@
       <Entity type="Class">
         <Name>ModuleTutorial</Name>
         <Access>Public</Access>
-        <Location left="1864" top="953" />
+        <Location left="88" top="692" />
         <Size width="162" height="216" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Method">public bool Init()</Member>
         <Member type="Method">public update_status PreUpdate()</Member>
         <Member type="Method">public update_status Update()</Member>
@@ -484,9 +484,9 @@
       <Entity type="Class">
         <Name>ModuleTittle</Name>
         <Access>Public</Access>
-        <Location left="2086" top="953" />
+        <Location left="88" top="773" />
         <Size width="162" height="349" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">public int ticks</Member>
         <Member type="Field">public SDL_Rect rect</Member>
         <Member type="Field">public SDL_Rect insert_coin_rect</Member>
@@ -508,9 +508,9 @@
       <Entity type="Class">
         <Name>Particles</Name>
         <Access>Public</Access>
-        <Location left="998" top="400" />
+        <Location left="1387" top="582" />
         <Size width="162" height="216" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">public Application app</Member>
         <Member type="Field">public bool alive</Member>
         <Member type="Field">public SDL_Rect rect</Member>
@@ -522,9 +522,9 @@
       <Entity type="Class">
         <Name>ModuleAudio</Name>
         <Access>Public</Access>
-        <Location left="1214" top="1224" />
+        <Location left="824" top="444" />
         <Size width="162" height="247" />
-        <Collapsed>False</Collapsed>
+        <Collapsed>True</Collapsed>
         <Member type="Field">Mix_music music</Member>
         <Member type="Field">DoubleNodedList&lt;Mix_Chunk&gt; fx</Member>
         <Member type="Method">public bool Init()</Member>
