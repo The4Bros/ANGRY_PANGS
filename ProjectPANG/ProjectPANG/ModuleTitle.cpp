@@ -113,9 +113,9 @@ void ModuleTitle::Update_Balloons()//Balls title animation
 	balloon_rects[3].y += (aux[3] * 3 * app->windowModule->scale) + (dir[3] * 4.5*(ticks / 150)*(ticks / 150));
 	}
 
-	for (int i = 0; i < 4; i++){ if (balloon_rects[i].y > 208 * app->windowModule->scale){ dir[i] = -1; aux[i] = -0.8; } }
+	for (unsigned int i = 0; i < 4; i++){ if (balloon_rects[i].y > 208 * app->windowModule->scale){ dir[i] = -1; aux[i] = -0.8; } }
 
-	for (int i = 0; i < 4; i++){ app->renderModule->Print(app->texturesModule->balls_sprite, balloon_source_rect, &balloon_rects[i]);  }
+	for (unsigned int i = 0; i < 4; i++){ app->renderModule->Print(app->texturesModule->balls_sprite, balloon_source_rect, &balloon_rects[i]);  }
 
 
 }

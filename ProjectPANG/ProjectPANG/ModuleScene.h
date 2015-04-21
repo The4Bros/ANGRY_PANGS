@@ -23,20 +23,24 @@ struct Tri_Struct // Bricks and Stairs
 	}
 	~Tri_Struct(){}
 };
-struct Quadra_Struct // Balloons and Enemies
+struct Hexa_Struct // Balloons and Enemies
 {
 	unsigned int x;
 	unsigned int y;
 	unsigned int type;
-	unsigned int aux;
-	Quadra_Struct()
+	unsigned int aux1;
+	unsigned int aux2;
+	unsigned int aux3;
+	Hexa_Struct()
 	{
 		x = 0;
 		y = 0;
 		type = 0;
-		aux = 0;
+		aux1 = 0;
+		aux2 = 0;
+		aux3 = 0;
 	}
-	~Quadra_Struct(){}
+	~Hexa_Struct(){}
 };
 
 struct Stage_Arrangement
@@ -45,8 +49,8 @@ struct Stage_Arrangement
 	int player_pos[4];
 	std::vector<Tri_Struct> bricks;
 	std::vector<Tri_Struct> stairs;
-	std::vector<Quadra_Struct> balloons;
-	std::vector<Quadra_Struct> enemies;
+	std::vector<Hexa_Struct> balloons;
+	std::vector<Hexa_Struct> enemies;
 	~Stage_Arrangement(){}
 };
 
@@ -55,7 +59,9 @@ enum Game_State
 	PLAYING,
 	PLAYER_KILLED,
 	READY,
-	GAME_OVER
+	COUNTDOWN,
+	GAME_OVER,
+	PAUSED
 
 };
 
@@ -71,6 +77,7 @@ public:
 
 	Game_State game_state;
 	unsigned int update_counter;
+	bool pause_pressed;
 
 	SDL_Rect ready_rect;
 	SDL_Rect* ready_source_rect;
@@ -93,6 +100,7 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 
+	void Print_All_Objects();
 	void reset_stage();
 	bool load_stage(int stage);
 

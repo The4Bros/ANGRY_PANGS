@@ -67,7 +67,7 @@ public:
 	{
 		last = init;
 		num_elements = quantity;
-		for (int i = 1; i < num_elements; i++){ last = last->next; }
+		for (unsigned int i = 1; i < num_elements; i++){ last = last->next; }
 		last->next = NULL;
 	}
 	

@@ -6,6 +6,8 @@ ModuleScene::ModuleScene(Application* app) : Module(app)
 
 	ready_source_rect = NULL;
 	game_over_source_rect = NULL;
+
+	pause_pressed = false;
 }
 
 bool ModuleScene::Init()
@@ -45,13 +47,72 @@ update_status ModuleScene::PreUpdate()
 }
 update_status ModuleScene::Update()
 {
+	Print_All_Objects();
+
+	switch (game_state)
+	{
+	case PLAYING || PLAYER_KILLED:
+		if (app->inputModule->key[SDL_SCANCODE_P] == 1)
+		{
+			game_state = PAUSED;
+			update_counter = 0;
+			pause_pressed = true;
+		}
+
+		break;
+
+	case READY:
+		if (update_counter < 30){ app->renderModule->Print(app->texturesModule->ready, ready_source_rect, &ready_rect); }
+		else if (update_counter % 30 > 15){ app->renderModule->Print(app->texturesModule->ready, ready_source_rect, &ready_rect); }
+
+		if (update_counter > 120){ game_state = PLAYING; update_counter = 0; }
+		else { update_counter++; }
+
+		break;
+
+	case COUNTDOWN:
+		// Handle countdown??
+		break;
+
+	case GAME_OVER:
+		app->renderModule->Print(app->texturesModule->ready, game_over_source_rect, &game_over_rect);
+
+		if (update_counter > 240){ return CHANGE_TO_TITLE; }
+		else { update_counter++; }
+
+		break;
+
+	case PAUSED:
+		app->renderModule->Print(app->texturesModule->ready, game_over_source_rect, &game_over_rect);
+
+		if (app->inputModule->key[SDL_SCANCODE_P] == 1)
+		{
+			if (!pause_pressed){ game_state = PLAYING; }
+		}
+		else{ pause_pressed = false; }
+
+		break;
+	}
+
+	return UPDATE_CONTINUE;
+}
+
+
+update_status ModuleScene::PostUpdate(){ return UPDATE_CONTINUE; }
+
+
+bool ModuleScene::CleanUp(){ return true; }
+
+
+
+
+void ModuleScene::Print_All_Objects()
+{
+
 
 	// PRINT SCORES
 	app->fontManagerModule->Write_On_Screen("Player-1", 8 * app->windowModule->scale, 209 * app->windowModule->scale, 8 * app->windowModule->scale);
 	app->fontManagerModule->Write_On_Screen(app->coins, 8 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale);
-
-
-
 
 
 	// PRINT BACKGROUND
@@ -61,23 +122,15 @@ update_status ModuleScene::Update()
 	time_count->Print_Timer();
 
 	// PRINT STAIRS
-	if (!app->entityManagerModule->stairs->empty())
+	for (unsigned int i = 0; i < app->entityManagerModule->stairs->Count(); i++)
 	{
-		for (unsigned int i = 0; i < app->entityManagerModule->stairs->Count(); i++)
-		{
-			app->entityManagerModule->tmp_stair = *app->entityManagerModule->stairs->at(i);
-			app->entityManagerModule->tmp_stair->Print();
-		}
+		(*app->entityManagerModule->stairs->at(i))->Print();
 	}
 
 	// PRINT BRICKS
-	if (!app->entityManagerModule->bricks->empty())
+	for (unsigned int i = 0; i < app->entityManagerModule->bricks->Count(); i++)
 	{
-		for (unsigned int i = 0; i < app->entityManagerModule->bricks->Count(); i++)
-		{
-			app->entityManagerModule->tmp_brick = *app->entityManagerModule->bricks->at(i);
-			app->entityManagerModule->tmp_brick->Print();
-		}
+		(*app->entityManagerModule->bricks->at(i))->Print();
 	}
 
 
@@ -85,7 +138,7 @@ update_status ModuleScene::Update()
 
 	if (app->playerModule->player1->harpoon[0]->alive) { app->playerModule->player1->harpoon[0]->Print(); }
 	if (app->playerModule->player1->harpoon[1]->alive) { app->playerModule->player1->harpoon[1]->Print(); }
-	
+
 	if (app->playerModule->player2 != NULL)
 	{
 		if (app->playerModule->player2->harpoon[0]->alive) { app->playerModule->player2->harpoon[0]->Print(); }
@@ -98,65 +151,36 @@ update_status ModuleScene::Update()
 
 	// PRINT PLAYERS
 	app->renderModule->Print(app->texturesModule->players_sprite, app->playerModule->player1->source_rect[app->playerModule->player1->source_index], &app->playerModule->player1->rect);
-	
+
 	if (app->playerModule->player2 != NULL)
 	{
 		app->renderModule->Print(app->texturesModule->players_sprite, app->playerModule->player2->source_rect[app->playerModule->player2->source_index], &app->playerModule->player2->rect);
 	}
-	
+
 
 	// PRINT BALLS
-	
-	if (!app->entityManagerModule->balloons->empty())
+
+	for (unsigned int i = 0; i < app->entityManagerModule->balloons->Count(); i++)
 	{
-		for (unsigned int i = 0; i < app->entityManagerModule->balloons->Count(); i++)
-		{
-			app->entityManagerModule->tmp_balloon = *app->entityManagerModule->balloons->at(i);
-			app->entityManagerModule->tmp_balloon->Print();
-		}
+		(*app->entityManagerModule->balloons->at(i))->Print();
 	}
 
 	// PRINT PARTICLES
-	if (!app->entityManagerModule->particles->empty())
+	for (unsigned int i = 0; i < app->entityManagerModule->particles->Count(); i++)
 	{
-		for (unsigned int i = 0; i < app->entityManagerModule->particles->Count(); i++)
-		{
-			app->entityManagerModule->tmp_particle = *app->entityManagerModule->particles->at(i);
-			app->entityManagerModule->tmp_particle->Print();
-		}
+		(*app->entityManagerModule->particles->at(i))->Print();
 	}
-
-
-
-	if (game_state == READY)
-	{
-		if (update_counter < 30){ app->renderModule->Print(app->texturesModule->ready, ready_source_rect, &ready_rect); }
-		else if (update_counter % 30 > 15){ app->renderModule->Print(app->texturesModule->ready, ready_source_rect, &ready_rect); }
-		if (update_counter > 120){ game_state = PLAYING; update_counter = 0; }
-		else { update_counter++; }
-	}
-	if (game_state == GAME_OVER)
-	{
-		app->renderModule->Print(app->texturesModule->ready, game_over_source_rect, &game_over_rect);
-
-		if (update_counter > 240){ return CHANGE_TO_TITLE; }
-		else { update_counter++; }
-	}
-
-
-
-	//app->renderModule->Print(app->texturesModule->, app->, &app->);
-
-
-
-	return UPDATE_CONTINUE;
 }
 
 
-update_status ModuleScene::PostUpdate(){ return UPDATE_CONTINUE; }
 
 
-bool ModuleScene::CleanUp(){ return true; }
+
+
+
+
+
+
 
 
 
@@ -178,11 +202,9 @@ void ModuleScene::reset_stage()
 	unsigned int i = 0;
 	if (!stage_arrangement.bricks.empty())
 	{
-		Brick* bricks_tmp = NULL;
 		while (i < app->entityManagerModule->bricks->Count() && i < stage_arrangement.bricks.size())
 		{
-			bricks_tmp = *app->entityManagerModule->bricks->at(i);
-			bricks_tmp->Reset(
+			(*app->entityManagerModule->bricks->at(i))->Reset(
 				stage_arrangement.bricks.at(i).x,
 				stage_arrangement.bricks.at(i).y,
 				stage_arrangement.bricks.at(i).type);
@@ -207,11 +229,9 @@ void ModuleScene::reset_stage()
 	i = 0;
 	if (!stage_arrangement.stairs.empty())
 	{
-		Stair* stair_tmp = NULL;
 		while (i < app->entityManagerModule->stairs->Count() && i < stage_arrangement.stairs.size())
 		{
-			stair_tmp = *app->entityManagerModule->stairs->at(i);
-			stair_tmp->Reset(
+			(*app->entityManagerModule->stairs->at(i))->Reset(
 				stage_arrangement.stairs.at(i).x,
 				stage_arrangement.stairs.at(i).y,
 				stage_arrangement.stairs.at(i).type);
@@ -232,15 +252,15 @@ void ModuleScene::reset_stage()
 	i = 0;
 	if (!stage_arrangement.balloons.empty())
 	{
-		Balloon* balloon_tmp = NULL;
 		while (i < app->entityManagerModule->balloons->Count() && i < stage_arrangement.balloons.size())
 		{
-			balloon_tmp = *app->entityManagerModule->balloons->at(i);
-			balloon_tmp->Reset(
+			(*app->entityManagerModule->balloons->at(i))->Reset(
 				stage_arrangement.balloons[i].x,
 				stage_arrangement.balloons[i].y,
 				stage_arrangement.balloons[i].type,
-				stage_arrangement.balloons[i].aux);
+				stage_arrangement.balloons[i].aux1,
+				stage_arrangement.balloons[i].aux2,
+				stage_arrangement.balloons[i].aux3);
 			i++;
 		}
 		while (i < stage_arrangement.balloons.size())
@@ -250,7 +270,9 @@ void ModuleScene::reset_stage()
 				stage_arrangement.balloons.at(i).x,
 				stage_arrangement.balloons.at(i).y,
 				stage_arrangement.balloons.at(i).type,
-				stage_arrangement.balloons.at(i).aux));
+				stage_arrangement.balloons.at(i).aux1,
+				stage_arrangement.balloons.at(i).aux2,
+				stage_arrangement.balloons.at(i).aux3));
 			i++;
 		}
 		app->entityManagerModule->balloons->Reduce_To(i);
@@ -261,15 +283,15 @@ void ModuleScene::reset_stage()
 	i = 0;
 	if (!stage_arrangement.enemies.empty())
 	{
-		Enemy* enemy_tmp = NULL;
 		while (i < app->entityManagerModule->enemies->Count() && i < stage_arrangement.enemies.Size())
 		{
-			enemy_tmp = *app->entityManagerModule->enemies->At(i);
-			enemy_tmp->Reset(
+			(*app->entityManagerModule->enemies->At(i))->Reset(
 			stage_arrangement.enemies.At(i).x,
 			stage_arrangement.enemies.At(i).y,
 			stage_arrangement.enemies.At(i).type,
-			stage_arrangement.enemies.At(i).aux);
+			stage_arrangement.enemies.At(i).aux1,
+			stage_arrangement.enemies.At(i).aux2,
+			stage_arrangement.enemies.At(i).aux3);
 			i++;
 		}
 		while (i < stage_arrangement.enemies.Size())
@@ -279,7 +301,9 @@ void ModuleScene::reset_stage()
 			stage_arrangement.enemies.At(i).x,
 			stage_arrangement.enemies.At(i).y,
 			stage_arrangement.enemies.At(i).type,
-			stage_arrangement.enemies.At(i).aux));
+			stage_arrangement.enemies.At(i).aux1,
+			stage_arrangement.enemies.At(i).aux2,
+			stage_arrangement.enemies.At(i).aux3));
 			i++;
 		}
 	}*/
@@ -319,7 +343,7 @@ void ModuleScene::parser(char *line)
 	char *tmp_string = NULL;
 	int max;
 	Tri_Struct tmp_3;
-	Quadra_Struct tmp_4;
+	Hexa_Struct tmp_6;
 
 	// time limit
 	stage_arrangement.time_limit = atoi(strtok_s(line, "%", &token));
@@ -371,12 +395,14 @@ void ModuleScene::parser(char *line)
 		max = atoi(strtok_s(NULL, ";", &tmp_string));
 		for (int i = 0; i < max; i++)
 		{
-			tmp_4.x = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_4.y = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_4.type = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_4.aux = atoi(strtok_s(NULL, ";", &tmp_string));
+			tmp_6.x = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_6.y = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_6.type = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_6.aux1 = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_6.aux2 = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_6.aux3 = atoi(strtok_s(NULL, ";", &tmp_string));
 
-			stage_arrangement.balloons.push_back(tmp_4);
+			stage_arrangement.balloons.push_back(tmp_6);
 		}
 	}
 
@@ -388,12 +414,14 @@ void ModuleScene::parser(char *line)
 		max = atoi(strtok_s(NULL, ";", &tmp_string));
 		for (int i = 0; i < max; i++)
 		{
-			tmp_4.x = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_4.y = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_4.type = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_4.aux = atoi(strtok_s(NULL, ";", &tmp_string));
+			tmp_6.x = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_6.y = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_6.type = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_6.aux1 = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_6.aux2 = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_6.aux3 = atoi(strtok_s(NULL, ";", &tmp_string));
 
-			stage_arrangement.enemies.push_back(tmp_4);
+			stage_arrangement.enemies.push_back(tmp_6);
 		}
 	}
 }

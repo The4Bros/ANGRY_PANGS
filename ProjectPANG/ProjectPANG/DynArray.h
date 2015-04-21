@@ -74,6 +74,9 @@ public:
 	{
 		if (index < num_elements)
 		{
+			delete data[index];
+			data[i] = NULL;
+
 			DynArrayTYPE* tmp = data;
 			for (unsigned int i = index; i < num_elements - 1; i++)
 			{
@@ -81,7 +84,22 @@ public:
 			}
 			
 			delete[] tmp;
+			delete data[num_elements];
 			data[--num_elements] = NULL;
+		}
+	}
+
+	void Reduce_To(unsigned int quantity)
+	{
+		if (quantity < num_elements)
+		{
+			for (unsigned int i = num_elements - 1; i >= quantity; i--)
+			{
+				delete data[i];
+				data[i] = NULL;
+			}
+
+			num_elements = quantity;
 		}
 	}
 
@@ -90,7 +108,6 @@ public:
 	unsigned int size() const { return capacity; }
  	unsigned int Count() const { return num_elements; }
 	bool empty(){ return num_elements == 0; }
-	void Reduce_To(unsigned int num_elements) { this->num_elements = num_elements; }
 
 };
 

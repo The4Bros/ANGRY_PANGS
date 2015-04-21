@@ -72,51 +72,24 @@ update_status Application::Update()
 	while (item != NULL)
 	{
 		returnValue = item->data->PreUpdate();
-		switch (returnValue)
-		{
-		case UPDATE_CONTINUE:
-			item = item->next;
-			break;
-		case UPDATE_PAUSE:
-			// check for un-pause or close window -> window updates + input updates
-			break;
-		default:
-			return returnValue;
-		}
+		if (returnValue == UPDATE_CONTINUE){ item = item->next; }
+		else{ return returnValue; }
 	}
 
 	item = modules_Queue.getStart(); // ------------Update------------
 	while (item != NULL)
 	{
 		returnValue = item->data->Update();
-		switch (returnValue)
-		{
-		case UPDATE_CONTINUE:
-			item = item->next;
-			break;
-		case UPDATE_PAUSE:
-			break;
-			//pause managed
-		default:
-			return returnValue;
-		}
+		if (returnValue == UPDATE_CONTINUE){ item = item->next; }
+		else{ return returnValue; }
 	}
 
 	item = modules_Queue.getStart(); // ------------PostUpdate------------
 	while (item != NULL)
 	{
 		returnValue = item->data->PostUpdate();
-		switch (returnValue)
-		{
-		case UPDATE_CONTINUE:
-			item = item->next;
-			break;
-		case UPDATE_PAUSE:
-			break;
-			//pause managed
-		default:
-			return returnValue;
-		}
+		if (returnValue == UPDATE_CONTINUE){ item = item->next; }
+		else{ return returnValue; }
 	}
 
 	return returnValue;
@@ -152,9 +125,7 @@ bool Application::ChangeTo(update_status new_state)
 	// Clear Unnecessary Modules
 	modules_Queue.ReduceTo(6);
 
-	if (titleModule != NULL) { 
-		delete titleModule; 
-		titleModule = NULL; }
+	if (titleModule != NULL) { delete titleModule; titleModule = NULL; }
 	if (tutorialModule != NULL) { delete tutorialModule; tutorialModule = NULL; }
 	if (chooseCityModule != NULL) { delete chooseCityModule; chooseCityModule = NULL; }
 	if (planeModule != NULL) { delete planeModule; planeModule = NULL; }

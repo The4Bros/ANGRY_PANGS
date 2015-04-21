@@ -42,8 +42,6 @@ int main(int argc, char *argv[])
 			case UPDATE_CONTINUE:
 				update_state = app->Update();
 				break;
-			case UPDATE_PAUSE:
-				break; // manage pause
 			case UPDATE_ERROR:
 				state = MAIN_ERROR;
 				break;

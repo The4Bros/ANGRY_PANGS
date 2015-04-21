@@ -2,7 +2,7 @@
 
 
 
-Balloon::Balloon(Application* app, int x, int y, int type, int max_height)
+Balloon::Balloon(Application* app, int x, int y, int type, int max_height, int position_in_list, int direction)
 {
 	gravity = 2;
 	horizontal_speed = 2;
@@ -190,8 +190,8 @@ void Balloon::Hit()
 	{
 		Reduce_Balloon_Size();
 		rect.x -= rect.w / 4;
-		state_balloon_H = BALLOON_LEFT;
-		app->entityManagerModule->balloons->push_back(new Balloon(app, ((rect.x + (rect.w / 2)) / app->windowModule->scale), (rect.y / app->windowModule->scale), type, (max_height / app->windowModule->scale) /*  app->entityManagerModule->balloons->Count(), true  */));
+		//state_balloon_H = BALLOON_LEFT;
+		app->entityManagerModule->balloons->push_back(new Balloon(app, ((rect.x + (rect.w / 2)) / app->windowModule->scale), (rect.y / app->windowModule->scale), type, (max_height / app->windowModule->scale), app->entityManagerModule->balloons->Count(), 1));
 		app->entityManagerModule->particles->push_back(new Particles(app, 0, rect.x, rect.y));
 	}
 	else
@@ -255,7 +255,7 @@ void Balloon::Reduce_Balloon_Size()
 
 
 
-void Balloon::Reset(unsigned int x, unsigned int y, unsigned int type, unsigned int max_height)
+void Balloon::Reset(unsigned int x, unsigned int y, unsigned int type, unsigned int max_height, int position_in_list, int direction)
 {
 	gravity = 2;
 	horizontal_speed = 2;

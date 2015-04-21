@@ -19,7 +19,6 @@ void log(const char file[], int line, const char* format, ...);
 enum update_status
 {
 	UPDATE_CONTINUE,
-	UPDATE_PAUSE, //PollEvent != SDL_QUIT
 	UPDATE_ERROR,
 	UPDATE_STOP,
 	
