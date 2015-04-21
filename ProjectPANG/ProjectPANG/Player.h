@@ -47,7 +47,7 @@ public:
 
 	unsigned int score, lives, update_counter, shoot_update_counter;
 	PlayerState state;
-	bool shoot_key_pressed, shielded;
+	bool shoot_key_pressed, shielded, alive;
 
 	int height;
 	Hit_State hit_State;

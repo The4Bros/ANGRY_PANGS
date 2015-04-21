@@ -22,7 +22,6 @@ update_status ModulePlayer::Update()
 	if (app->sceneModule->game_state == PLAYING)
 	{
 		// PLAYER 2
-
 		if (player2 != NULL)
 		{
 			player2->Update();
@@ -44,7 +43,6 @@ update_status ModulePlayer::Update()
 		else if (app->inputModule->key[SDL_SCANCODE_Y] == 1){ player2 = new Player(app, false); }
 
 
-
 		// PLAYER 1
 		player1->Update();
 
@@ -61,6 +59,18 @@ update_status ModulePlayer::Update()
 
 		if (app->inputModule->key[SDL_SCANCODE_SPACE] == 1){ player1->Shoot(); }
 		else { player1->shoot_key_pressed = false; }
+	}
+
+	else if (app->sceneModule->game_state == PLAYER_KILLED)
+	{
+		// PLAYER 2
+		if (player2 != NULL)
+		{
+			if (!player2->alive){ player2->Update(); }
+		}
+
+		// PLAYER 1
+		if (!player1->alive){ player1->Update(); }
 	}
 
 	return UPDATE_CONTINUE;

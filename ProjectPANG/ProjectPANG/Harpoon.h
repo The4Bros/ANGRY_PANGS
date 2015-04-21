@@ -24,9 +24,8 @@ public:
 	void Update();
 	void Print();
 
-	void Check_Collision_Harpoon_Balloon();
-	void Check_Collision_Harpoon_Brick();
-	void Check_Collision_Bullet_Balloon();
+	bool Check_Collision_Harpoon_Balloon();
+	bool Check_Collision_Harpoon_Brick();
 
 
 
