@@ -505,6 +505,38 @@
         <Member type="Method">public bool CleanUp()</Member>
         <Modifier>None</Modifier>
       </Entity>
+      <Entity type="Class">
+        <Name>Particles</Name>
+        <Access>Public</Access>
+        <Location left="998" top="400" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public Application app</Member>
+        <Member type="Field">public bool alive</Member>
+        <Member type="Field">public SDL_Rect rect</Member>
+        <Member type="Field">public SDL_Rect source_rect</Member>
+        <Member type="Field">public int quantity</Member>
+        <Member type="Method">public void Update()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ModuleAudio</Name>
+        <Access>Public</Access>
+        <Location left="1214" top="1224" />
+        <Size width="162" height="247" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">Mix_music music</Member>
+        <Member type="Field">DoubleNodedList&lt;Mix_Chunk&gt; fx</Member>
+        <Member type="Method">public bool Init()</Member>
+        <Member type="Method">public update_status PreUpdate()</Member>
+        <Member type="Method">public update_status Update()</Member>
+        <Member type="Method">public update_status PostUpdate()</Member>
+        <Member type="Method">public bool CleanUp()</Member>
+        <Member type="Method">public bool PlayMusic(char path, float fade_time)</Member>
+        <Member type="Method">public int LoadFx(char path)</Member>
+        <Member type="Method">public bool PlayFx(int fx, int repeat)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
     </Entities>
     <Relationships />
   </ProjectItem>
