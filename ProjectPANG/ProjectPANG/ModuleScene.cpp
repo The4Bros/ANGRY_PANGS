@@ -25,13 +25,13 @@ bool ModuleScene::Init()
 
 	background_rect = { 0, 0, SCREEN_WIDTH * app->windowModule->scale, (SCREEN_HEIGHT - 32) * app->windowModule->scale };
 
+	app->audioModule->PlayMusic(app->audioModule->music_paths[(app->stage - 1) / 3]);
+
 	return true;
 }
 
 update_status ModuleScene::PreUpdate()
 {
-	
-
 	if (app->inputModule->key[SDL_SCANCODE_5] == 1)
 	{
 		if (!insert_coin_pressed){ app->Add_Coin(); insert_coin_pressed = true; }

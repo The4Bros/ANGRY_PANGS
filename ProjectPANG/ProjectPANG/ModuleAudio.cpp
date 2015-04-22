@@ -16,9 +16,19 @@ bool ModuleAudio::Init()
 
 	if (Mix_OpenAudio(44100, AUDIO_U8 /*MIX_DEFAULT_FORMAT*/, 2, 2048) == -1){ return false; } // Initialize SDL_mixer
 
+	music_paths[0] = "music/01a - Mt. Fuji (Arcade).wav";
+	music_paths[1] = "music/02 - Mt. Keirin (Arcade).wav";
+	music_paths[2] = "music/03 - Emerald Temple (Arcade).wav";
+	music_paths[3] = "music/04 - Angkor Wat (Arcade).wav";
+	music_paths[4] = "music/05 - Australia (Arcade).wav";
+	music_paths[5] = "music/06 - Taj Mahal (Arcade).wav";
+	music_paths[6] = "music/07 - Leningrad (Arcade).wav";
+	music_paths[7] = "music/08 - Paris (Arcade).wav";
+	music_paths[8] = "music/09 - London (Arcade).wav";
+	music_paths[9] = "music/10 - Barcelona (Arcade).wav";
 
-
-
+	balloon_pop = LoadFx("music/bolapeta.wav");
+	insert_coin = LoadFx("music/coin.wav");
 
 
 
@@ -36,7 +46,7 @@ bool ModuleAudio::CleanUp()
 
 	for (DoubleNode<Mix_Chunk*>* item = fx.getStart(); item != NULL; item = item->next){ Mix_FreeChunk(item->data); }
 
-	fx.clear();
+	//fx.clear();
 	Mix_CloseAudio();
 
 	while (Mix_Init(0)){ Mix_Quit(); } //each call to Mix_Init may set different flags

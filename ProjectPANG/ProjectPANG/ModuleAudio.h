@@ -17,6 +17,12 @@ private:
 	DoubleNodedList<Mix_Chunk*>	fx;
 
 public:
+
+	const char* music_paths[17];
+
+	unsigned int balloon_pop;
+	unsigned int insert_coin;
+
 	ModuleAudio(Application* app);
 	bool Init();
 	update_status PreUpdate();
