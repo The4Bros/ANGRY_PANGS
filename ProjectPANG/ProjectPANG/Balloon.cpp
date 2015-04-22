@@ -200,13 +200,14 @@ void Balloon::Print()
 
 void Balloon::Hit()
 {
+	app->entityManagerModule->particles->push_back(new Particles(app, app->entityManagerModule->particles->Count(), int(type), rect.x, rect.y));
+
 	if (type < 9)
 	{
 		Reduce_Balloon_Size();
 		rect.x -= rect.w / 4;
 		if (state_balloon_H == BALLOON_RIGHT) state_balloon_H = BALLOON_LEFT;
-		app->entityManagerModule->balloons->push_back(new Balloon(app, app->entityManagerModule->balloons->Count(), ((rect.x + (rect.w / 2)) / app->windowModule->scale), (rect.y / app->windowModule->scale), type, 2));
-		app->entityManagerModule->particles->push_back(new Particles(app, 0, rect.x, rect.y));
+		app->entityManagerModule->balloons->push_back(new Balloon(app, app->entityManagerModule->balloons->Count(), ((rect.x + (rect.w / 2)) / app->windowModule->scale), (rect.y / app->windowModule->scale), int(type), 2));
 	}
 	else
 	{
