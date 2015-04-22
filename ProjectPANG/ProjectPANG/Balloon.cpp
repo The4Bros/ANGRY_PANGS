@@ -105,10 +105,10 @@ Balloon::Balloon(Application* app, int position_in_list, int x, int y, int type,
 void Balloon::Update()
 {
 
-
+	
 	if (type < RED_3){ Size1_Check_Collision_Balloon_Players(); }
 	else{ Size4_Check_Collision_Balloon_Players(); }
-
+	Check_Collision_Balloon_Bricks();
 	//														-- VERTICAL --	
 
 	switch (state_balloon_V)
@@ -150,8 +150,6 @@ void Balloon::Update()
 		else
 		{
 			state_balloon_V = BALLOON_UP;
-
-			// Jump height for each balloon
 
 			if (type < 3) gravity = 12;
 			else if (type < 6) gravity = 11;
@@ -446,7 +444,7 @@ void Balloon::Check_Collision_Balloon_Bricks()
 		if (rect.x  < tmp_rect.x + tmp_rect.w
 			&& rect.x + rect.w > tmp_rect.x
 			&& rect.y < tmp_rect.y + tmp_rect.h
-			&& rect.y + rect.h > tmp_rect.y)
+			&& rect.y + rect.h > tmp_rect.y )
 		{
 			//Closest point to brick
 			int closest_x, closest_y;
@@ -471,10 +469,15 @@ void Balloon::Check_Collision_Balloon_Bricks()
 						if (rect.y + (rect.h / 2) - tmp_rect.y + (tmp_rect.h / 2) > tmp_rect.x + (tmp_rect.w / 2) - rect.x + (rect.w / 2))
 						{
 							//horizontal collision -> balloon moves left---------------------------
+							state_balloon_H = BALLOON_LEFT;
 						}
 						else
 						{
 							//vertical collision -> balloon moves down -----------------------------
+							state_balloon_V = BALLOON_DOWN;
+						
+							gravity = 12;
+							ticks = 1;
 						}
 					}
 					else // brick bellow
@@ -482,10 +485,19 @@ void Balloon::Check_Collision_Balloon_Bricks()
 						if (tmp_rect.y + (tmp_rect.h / 2) - rect.y + (rect.h / 2) > tmp_rect.x + (tmp_rect.w / 2) - rect.x + (rect.w / 2))
 						{
 							//horizontal collision -> balloon moves left-----------------------------
+							state_balloon_H = BALLOON_LEFT;
 						}
 						else
 						{
 							//vertical collision -> balloon moves up -----------------------------
+							state_balloon_V = BALLOON_UP;
+							
+							if (type < 3) gravity = 12;
+							else if (type < 6) gravity = 11;
+							else if (type < 9) gravity = 9;
+							else gravity = 7;
+
+							ticks = 1;
 						}
 					}
 				}
@@ -496,10 +508,15 @@ void Balloon::Check_Collision_Balloon_Bricks()
 						if (rect.y + (rect.h / 2) - tmp_rect.y + (tmp_rect.h / 2) > rect.x + (rect.w / 2) - tmp_rect.x + (tmp_rect.w / 2))
 						{
 							//horizontal collision -> balloon moves right-----------------------------
+							state_balloon_H = BALLOON_RIGHT;
 						}
 						else
 						{
 							//vertical collision -> balloon moves down -----------------------------
+							state_balloon_V = BALLOON_DOWN;
+							
+							gravity = 12;
+							ticks = 1;
 						}
 					}
 					else // brick bellow
@@ -507,10 +524,19 @@ void Balloon::Check_Collision_Balloon_Bricks()
 						if (tmp_rect.y + (tmp_rect.h / 2) - rect.y + (rect.h / 2) > rect.x + (rect.w / 2) - tmp_rect.x + (tmp_rect.w / 2))
 						{
 							//horizontal collision -> balloon moves right-----------------------------
+							state_balloon_H = BALLOON_RIGHT;
 						}
 						else
 						{
 							//vertical collision -> balloon moves up -----------------------------
+							state_balloon_V = BALLOON_UP;
+					
+							if (type < 3) gravity = 12;
+							else if (type < 6) gravity = 11;
+							else if (type < 9) gravity = 9;
+							else gravity = 7;
+
+							ticks = 1;
 						}
 					}
 				}
