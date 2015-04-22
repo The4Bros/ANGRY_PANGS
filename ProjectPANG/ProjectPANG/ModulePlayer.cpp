@@ -10,8 +10,7 @@ ModulePlayer::ModulePlayer(Application* app) : Module(app)
 
 bool ModulePlayer::Init()
 {
-	player1 = new Player(app, true);
-	if (player1 == NULL) { return false; }
+	if (player1 == NULL) { player1 = new Player(app, true); }
 	return true;
 }
 
