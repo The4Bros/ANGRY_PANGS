@@ -28,11 +28,13 @@ Balloon::Balloon(Application* app, int position_in_list, int x, int y, int type,
 	if (direction == 2)
 	{
 		state_balloon_H = BALLOON_RIGHT;
+		gravity = 4;
 	
 	}
 	if (direction == 3)
 	{
 		state_balloon_H = BALLOON_LEFT;
+		gravity = 4;
 	
 	}
 	//---
@@ -220,7 +222,8 @@ void Balloon::Restart_Movement_Balloons_hit()
 {
 	
 	state_balloon_V = BALLOON_UP;
-	gravity = 0;
+	gravity = 4;
+	ticks = 1;
 }
 
 void Balloon::Reduce_Balloon_Size()
