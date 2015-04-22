@@ -25,7 +25,12 @@ void Brick::Hit()
 {
 	if (type < 16)
 	{
-		alive = false;
+		for (int i = position_in_list + 1; i < app->entityManagerModule->bricks->Count(); i++)
+		{
+			(*app->entityManagerModule->bricks->at(i))->position_in_list--;
+		}
+		app->entityManagerModule->bricks->Delete_Element_At(position_in_list);
+
 		//app->entityManagerModule->particles->push_back(new Particles( app, app->entityManagerModule->particles->Count(), type, rect.x, rect.y));
 	}
 }

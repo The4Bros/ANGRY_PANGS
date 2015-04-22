@@ -15,9 +15,6 @@ Balloon::Balloon(Application* app, int position_in_list, int x, int y, int type,
 	this->app = app;
 	this->position_in_list = position_in_list;
 
-	
-
-	Restart_Movement_Balloons_hit();
 	if (direction == 0)
 	{
 		state_balloon_H = BALLOON_RIGHT;
@@ -288,11 +285,33 @@ void Balloon::Reset(int position_in_list, int x, int y, int type, int direction)
 	ticks = 2;
 	this->position_in_list = position_in_list;
 
-	this->app = app;
-	rect = { x*app->windowModule->scale, y*app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
-
 	state_balloon_H = BALLOON_RIGHT;
 	state_balloon_V = BALLOON_DOWN;
+
+	if (direction == 0)
+	{
+		state_balloon_H = BALLOON_RIGHT;
+		state_balloon_V = BALLOON_DOWN;
+	}
+	if (direction == 1)
+	{
+		state_balloon_H = BALLOON_LEFT;
+		state_balloon_V = BALLOON_DOWN;
+	}
+	if (direction == 2)
+	{
+		state_balloon_H = BALLOON_RIGHT;
+
+	}
+	if (direction == 3)
+	{
+		state_balloon_H = BALLOON_LEFT;
+
+	}
+	//---
+
+
+
 
 	switch (type)
 	{
@@ -300,47 +319,47 @@ void Balloon::Reset(int position_in_list, int x, int y, int type, int direction)
 		this->type = RED_1;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 		break;
-	case 2:
+	case 1:
 		this->type = BLUE_1;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 		break;
-	case 3:
+	case 2:
 		this->type = GREEN_1;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 		break;
-	case 4:
+	case 3:
 		this->type = RED_2;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 32 * app->windowModule->scale, 26 * app->windowModule->scale };
 		break;
-	case 5:
+	case 4:
 		this->type = BLUE_2;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 32 * app->windowModule->scale, 26 * app->windowModule->scale };
 		break;
-	case 6:
+	case 5:
 		this->type = GREEN_2;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 32 * app->windowModule->scale, 26 * app->windowModule->scale };
 		break;
-	case 7:
+	case 6:
 		this->type = RED_3;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 16 * app->windowModule->scale, 14 * app->windowModule->scale };
 		break;
-	case 8:
+	case 7:
 		this->type = BLUE_3;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 16 * app->windowModule->scale, 14 * app->windowModule->scale };
 		break;
-	case 9:
+	case 8:
 		this->type = GREEN_3;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 16 * app->windowModule->scale, 14 * app->windowModule->scale };
 		break;
-	case 10:
+	case 9:
 		this->type = RED_4;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 8 * app->windowModule->scale, 7 * app->windowModule->scale };
 		break;
-	case 11:
+	case 10:
 		this->type = BLUE_4;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 8 * app->windowModule->scale, 7 * app->windowModule->scale };
 		break;
-	case 12:
+	case 11:
 		this->type = GREEN_4;
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 8 * app->windowModule->scale, 7 * app->windowModule->scale };
 		break;
