@@ -15,6 +15,12 @@ public:
 	TTF_Font* font;
 	SDL_Color color;
 	char Num_string[100];
+
+	SDL_Surface* surfaceMessage;
+	SDL_Texture* Message;
+	SDL_Rect Message_rect;
+
+
 	ModuleFontManager(Application* app);
 	bool Init();
 	update_status PreUpdate();

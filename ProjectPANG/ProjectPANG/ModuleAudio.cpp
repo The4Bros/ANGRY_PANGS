@@ -51,7 +51,7 @@ bool ModuleAudio::CleanUp()
 
 	for (DoubleNode<Mix_Chunk*>* item = fx.getStart(); item != NULL; item = item->next){ Mix_FreeChunk(item->data); }
 
-	//fx.clear();
+	fx.clear();
 	Mix_CloseAudio();
 
 	while (Mix_Init(0)){ Mix_Quit(); } //each call to Mix_Init may set different flags

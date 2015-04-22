@@ -86,7 +86,7 @@ void Particles::Update()
 		}
 		else
 		{
-			for (int i = position_in_list + 1; i < app->entityManagerModule->particles->Count(); i++)
+			for (unsigned int i = position_in_list + 1; i < app->entityManagerModule->particles->Count(); i++)
 			{
 				(*app->entityManagerModule->particles->at(i))->position_in_list--;
 			}
@@ -100,10 +100,10 @@ void Particles::Print()
 {
 	if (source_index < 58)
 	{
-		app->renderModule->Print(app->texturesModule->particles_sprite, app->entityManagerModule->particles_source_rect[source_index], &rect);
+		app->renderModule->Print(app->texturesModule->particles_sprite, &app->entityManagerModule->particles_source_rect[source_index], &rect);
 	}
 	else
 	{
-		app->renderModule->Print(app->texturesModule->bricks_sprite, app->entityManagerModule->particles_source_rect[source_index], &rect);
+		app->renderModule->Print(app->texturesModule->bricks_sprite, &app->entityManagerModule->particles_source_rect[source_index], &rect);
 	}
 }

@@ -15,20 +15,20 @@ bool ModuleTitle::Init()
 	rect = { 0, 0, 384 * app->windowModule->scale, 240 * app->windowModule->scale };
 	insert_coin_rect = { 100 * app->windowModule->scale, 200 * app->windowModule->scale, 177 * app->windowModule->scale, 15 * app->windowModule->scale };
 
-	for (int i = 0; i < 4; i++){ source_rect[i] = new SDL_Rect({ i * 384, 0, 384, 240 }); }
-	source_rect[4] = new SDL_Rect({ 1536, 0, 176, 15 });
+	for (int i = 0; i < 4; i++){ source_rect[i] = { i * 384, 0, 384, 240 }; }
+	source_rect[4] = { 1536, 0, 176, 15 };
 
 	balloon_rects[0] = { 384*app->windowModule->scale, 0, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 	balloon_rects[1] = { 0, 0, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 	balloon_rects[2] = { 384*app->windowModule->scale, 0, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 	balloon_rects[3] = { 0, 0, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
-	balloon_source_rect = new SDL_Rect({ 0, 0, 48, 40 });
+	balloon_source_rect = { 0, 0, 48, 40 };
 
 	balloon_split[0] = { 72 * app->windowModule->scale, 37 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 	balloon_split[1] = { 131 * app->windowModule->scale, 52 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 	balloon_split[2] = { 193 * app->windowModule->scale, 28 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 	balloon_split[3] = { 232 * app->windowModule->scale, 49 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
-	for (int i = 0; i < 4; i++){ balloon_split_source_rect[i] = new SDL_Rect({ (i * 48)+1536, 167, 48, 40 }); }
+	for (int i = 0; i < 4; i++){ balloon_split_source_rect[i] = { (i * 48)+1536, 167, 48, 40 }; }
 
 	insert_coin_pressed = false;
 
@@ -44,9 +44,9 @@ update_status ModuleTitle::PreUpdate()
 update_status ModuleTitle::Update()
 {	
 	//Print inital screens
-	if (ticks < 30){ app->renderModule->Print(app->texturesModule->title_sprite, source_rect[0], &rect); }
-	else if (ticks < 60){ app->renderModule->Print(app->texturesModule->title_sprite, source_rect[1], &rect); }
-	else if (app->current_time < 3){ app->renderModule->Print(app->texturesModule->title_sprite, source_rect[2], &rect); }
+	if (ticks < 30){ app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[0], &rect); }
+	else if (ticks < 60){ app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[1], &rect); }
+	else if (app->current_time < 3){ app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[2], &rect); }
 	else if (app->current_time > 15){ return CHANGE_TO_TUTORIAL; }
 	else if (app->coins == 0)
 	{
@@ -59,8 +59,8 @@ update_status ModuleTitle::Update()
 		// insert coin 
 		else
 		{	
-			app->renderModule->Print(app->texturesModule->title_sprite, source_rect[3], &rect);
-			if (ticks % 60 < 30) { app->renderModule->Print(app->texturesModule->title_sprite, source_rect[4], &insert_coin_rect); }
+			app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[3], &rect);
+			if (ticks % 60 < 30) { app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[4], &insert_coin_rect); }
 
 		}
 	}
@@ -91,11 +91,11 @@ update_status ModuleTitle::Update()
 		else { insert_coin_pressed = false; }
 	}
 
+	ticks++;
+
 	return UPDATE_CONTINUE;
 	
 }
-	
-update_status ModuleTitle::PostUpdate(){ ticks++; return UPDATE_CONTINUE; }
 
 bool ModuleTitle::CleanUp(){ return true; }
 
@@ -173,6 +173,6 @@ void ModuleTitle::Update_Balloons()//Balls title animation
 
 	for (unsigned int i = 0; i < 4; i++){ if (balloon_rects[i].y > 208 * app->windowModule->scale){ dir[i] = -1; aux[i] = -0.8; } }
 
-	for (unsigned int i = 0; i < 4; i++){ app->renderModule->Print(app->texturesModule->balls_sprite, balloon_source_rect, &balloon_rects[i]);  }
+	for (unsigned int i = 0; i < 4; i++){ app->renderModule->Print(app->texturesModule->balls_sprite, &balloon_source_rect, &balloon_rects[i]);  }
 
 }

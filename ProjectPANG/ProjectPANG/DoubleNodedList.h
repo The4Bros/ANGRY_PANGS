@@ -8,6 +8,12 @@ template <class DoubleNodeDataTYPE>struct DoubleNode
 	DoubleNode* previous;
 	DoubleNode* next;
 
+	inline DoubleNode()
+	{
+		data = NULL;
+		next = previous = NULL;
+	}
+
 	inline DoubleNode(const DoubleNodeDataTYPE& item)
 	{
 		data = item;
@@ -37,8 +43,10 @@ public:
 
 	void push(const QueueTYPE& data)
 	{
-		DoubleNode<QueueTYPE>* node = NULL;
-		node = new DoubleNode<QueueTYPE>(data);
+		DoubleNode<QueueTYPE>* node;
+		node = new DoubleNode<QueueTYPE>();
+		node->data = data;
+
 		if (init == NULL)
 		{
 			last = init = node;
@@ -54,32 +62,56 @@ public:
 
 	void clear()
 	{
-		while (init != NULL)
+		DoubleNode<QueueTYPE>* p_data;
+		DoubleNode<QueueTYPE>* p_next;
+		p_data = init;
+
+		while (p_data != NULL)
 		{
-			delete init->data;
-			init = init->next;
+			p_next = p_data->next;
+			delete p_data;
+			p_data = p_next;
 		}
-		last = NULL;
+
+		init = last = NULL;
 		num_elements = 0;
 	}
 
-	void ReduceTo(const int quantity)
+	void ReduceTo(const unsigned int quantity)
 	{
-		last = init;
-		num_elements = quantity;
-		for (unsigned int i = 1; i < num_elements; i++){ last = last->next; }
-		last->next = NULL;
+		if (quantity == 0) { clear(); }
+
+		else if (quantity < num_elements)
+		{
+			DoubleNode<QueueTYPE>* p_data;
+			DoubleNode<QueueTYPE>* p_next;
+			p_data = init;
+
+			for (unsigned int i = 0; i < quantity; i++){ p_data = p_data->next; }
+
+			while (p_data != NULL)
+			{
+				p_next = p_data->next;
+				delete p_data;
+				p_data = p_next;
+			}
+
+			last = init;
+			for (unsigned int i = 1; i < quantity; i++){ last = last->next; }
+			last->next = NULL;
+			num_elements = quantity;
+		}
 	}
 	
 	bool at(unsigned int index, QueueTYPE& data) const
 	{
-		DoubleNode<QueueTYPE>* p_data = init;
+		DoubleNode<QueueTYPE>* tmp = init;
 
-		for (unsigned int i = 0; i < index && p_data != NULL; ++i) { p_data = p_data->next; }
+		for (unsigned int i = 0; i < index && tmp != NULL; ++i) { tmp = tmp->next; }
 
-		if (p_data != NULL)
+		if (tmp != NULL)
 		{
-			data = p_data->data;
+			data = tmp->data;
 			return true;
 		}
 

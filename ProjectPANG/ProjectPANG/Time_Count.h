@@ -11,7 +11,7 @@ public:
 	Application* app;
 
 	SDL_Rect rect[4];
-	SDL_Rect* source_rect[11];
+	SDL_Rect source_rect[11];
 	int source_index[3];
 
 	int current_time;

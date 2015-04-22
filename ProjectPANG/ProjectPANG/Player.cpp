@@ -15,8 +15,8 @@ Player::Player(Application* app, bool player1)
 	current_stair = NULL;
 
 
-	harpoon[0] = new Harpoon(app);
-	harpoon[1] = new Harpoon(app);
+	harpoon1 = new Harpoon(app);
+	harpoon2 = new Harpoon(app);
 
 	rect = { 8 * app->windowModule->scale, 168 * app->windowModule->scale, 32 * app->windowModule->scale, 32 * app->windowModule->scale };
 
@@ -24,10 +24,10 @@ Player::Player(Application* app, bool player1)
 	{
 		for (int i = 0; i < 23; i++)
 		{
-			source_rect[i] = new SDL_Rect({ i * 32, 0, 32, 32 });
+			source_rect[i] = { i * 32, 0, 32, 32 };
 		}
-		source_rect[23] = new SDL_Rect({ 736, 0, 51, 32 });
-		source_rect[24] = new SDL_Rect({ 787, 0, 51, 32 });
+		source_rect[23] = { 736, 0, 51, 32 };
+		source_rect[24] = { 787, 0, 51, 32 };
 
 		if (app->sceneModule != NULL) // Scene initalized
 		{
@@ -39,10 +39,10 @@ Player::Player(Application* app, bool player1)
 	{
 		for (int i = 0; i < 23; i++)
 		{
-			source_rect[i] = new SDL_Rect({ i * 32, 32, 32, 32 });
+			source_rect[i] = { i * 32, 32, 32, 32 };
 		}
-		source_rect[23] = new SDL_Rect({ 736, 32, 51, 32 });
-		source_rect[24] = new SDL_Rect({ 787, 32, 51, 32 });
+		source_rect[23] = { 736, 32, 51, 32 };
+		source_rect[24] = { 787, 32, 51, 32 };
 		
 		// update position
 		if (app->sceneModule != NULL) // Scene initalized
@@ -215,7 +215,7 @@ void Player::Shoot()
 	switch (current_weapon)
 	{
 	case WEAPON_DOUBLE_HARPOON:
-		if (!harpoon[1]->alive)
+		if (!harpoon2->alive)
 		{
 			shoot_update_counter = 0;
 
@@ -223,7 +223,7 @@ void Player::Shoot()
 			{
 				source_index = 18;
 				update_counter = 0;
-				harpoon[1]->Shoot_Harpoon(rect.y, rect.x + (14 * app->windowModule->scale));
+				harpoon2->Shoot_Harpoon(rect.y, rect.x + (14 * app->windowModule->scale));
 				app->entityManagerModule->particles->push_back(new Particles(app, app->entityManagerModule->particles->Count(), 13, rect.x + (10 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale)));
 				state = SHOOT_RIGHT;
 			}
@@ -231,19 +231,19 @@ void Player::Shoot()
 			{
 				source_index = 20;
 				update_counter = 0;
-				harpoon[1]->Shoot_Harpoon(rect.y, rect.x + (10 * app->windowModule->scale));
+				harpoon2->Shoot_Harpoon(rect.y, rect.x + (10 * app->windowModule->scale));
 				app->entityManagerModule->particles->push_back(new Particles(app, app->entityManagerModule->particles->Count(), 13, rect.x + (6 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale)));
 				state = SHOOT_LEFT;
 			}
 
 			else // on stairs
 			{
-				harpoon[1]->Shoot_Harpoon(rect.y, rect.x + (12 * app->windowModule->scale));
+				harpoon2->Shoot_Harpoon(rect.y, rect.x + (12 * app->windowModule->scale));
 				app->entityManagerModule->particles->push_back(new Particles(app, app->entityManagerModule->particles->Count(), 13, rect.x + (8 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale)));
 			}
 		}
 
-		else if (!harpoon[0]->alive)
+		else if (!harpoon1->alive)
 		{
 			shoot_update_counter = 0;
 
@@ -251,7 +251,7 @@ void Player::Shoot()
 			{
 				source_index = 18;
 				update_counter = 0;
-				harpoon[0]->Shoot_Harpoon(rect.y, rect.x + (14 * app->windowModule->scale));
+				harpoon1->Shoot_Harpoon(rect.y, rect.x + (14 * app->windowModule->scale));
 				app->entityManagerModule->particles->push_back(new Particles(app, app->entityManagerModule->particles->Count(), 13, rect.x + (10 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale)));
 				state = SHOOT_RIGHT;
 			}
@@ -259,21 +259,21 @@ void Player::Shoot()
 			{
 				source_index = 20;
 				update_counter = 0;
-				harpoon[0]->Shoot_Harpoon(rect.y, rect.x + (10 * app->windowModule->scale));
+				harpoon1->Shoot_Harpoon(rect.y, rect.x + (10 * app->windowModule->scale));
 				app->entityManagerModule->particles->push_back(new Particles(app, app->entityManagerModule->particles->Count(), 13, rect.x + (6 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale)));
 				state = SHOOT_LEFT;
 			}
 
 			else // on stairs
 			{
-				harpoon[0]->Shoot_Harpoon(rect.y, rect.x + (12 * app->windowModule->scale));
+				harpoon1->Shoot_Harpoon(rect.y, rect.x + (12 * app->windowModule->scale));
 				app->entityManagerModule->particles->push_back(new Particles(app, app->entityManagerModule->particles->Count(), 13, rect.x + (8 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale)));
 			}
 		}
 		break;
 
 	case WEAPON_HARPOON:
-		if (!harpoon[0]->alive)
+		if (!harpoon1->alive)
 		{
 			shoot_update_counter = 0;
 
@@ -281,7 +281,7 @@ void Player::Shoot()
 			{
 				source_index = 18;
 				update_counter = 0;
-				harpoon[0]->Shoot_Harpoon(rect.y, rect.x + (14 * app->windowModule->scale));
+				harpoon1->Shoot_Harpoon(rect.y, rect.x + (14 * app->windowModule->scale));
 				app->entityManagerModule->particles->push_back(new Particles(app, app->entityManagerModule->particles->Count(), 13, rect.x + (10 * app->windowModule->scale), rect.y - (8 * app->windowModule->scale)));
 				state = SHOOT_RIGHT;
 			}
@@ -289,21 +289,21 @@ void Player::Shoot()
 			{
 				source_index = 20;
 				update_counter = 0;
-				harpoon[0]->Shoot_Harpoon(rect.y, rect.x + (10 * app->windowModule->scale));
+				harpoon1->Shoot_Harpoon(rect.y, rect.x + (10 * app->windowModule->scale));
 				app->entityManagerModule->particles->push_back(new Particles(app, app->entityManagerModule->particles->Count(), 13, rect.x + (6 * app->windowModule->scale), rect.y - (8 * app->windowModule->scale)));
 				state = SHOOT_LEFT;
 			}
 
 			else // on stairs
 			{
-				harpoon[0]->Shoot_Harpoon(rect.y, rect.x + (12 * app->windowModule->scale));
+				harpoon1->Shoot_Harpoon(rect.y, rect.x + (12 * app->windowModule->scale));
 				app->entityManagerModule->particles->push_back(new Particles(app, app->entityManagerModule->particles->Count(), 13, rect.x + (8 * app->windowModule->scale), rect.y - (8 * app->windowModule->scale)));
 			}
 		}
 		break;
 
 	case WEAPON_GRAPPLE:
-		if (!harpoon[0]->alive)
+		if (!harpoon1->alive)
 		{
 			shoot_update_counter = 0;
 
@@ -311,18 +311,18 @@ void Player::Shoot()
 			{
 				source_index = 18;
 				update_counter = 0;
-				harpoon[0]->Shoot_Grapple(rect.y + (2 * app->windowModule->scale), rect.x + (14 * app->windowModule->scale));
+				harpoon1->Shoot_Grapple(rect.y + (2 * app->windowModule->scale), rect.x + (14 * app->windowModule->scale));
 				state = SHOOT_RIGHT;
 			}
 			else if (state == LEFT || source_index == 19) // leaning right
 			{
 				source_index = 20;
 				update_counter = 0;
-				harpoon[0]->Shoot_Grapple(rect.y + (2 * app->windowModule->scale), rect.x + (10 * app->windowModule->scale));
+				harpoon1->Shoot_Grapple(rect.y + (2 * app->windowModule->scale), rect.x + (10 * app->windowModule->scale));
 				state = SHOOT_LEFT;
 			}
 
-			else { harpoon[0]->Shoot_Grapple(rect.y + (2 * app->windowModule->scale), rect.x + (12 * app->windowModule->scale)); } // on stairs
+			else { harpoon1->Shoot_Grapple(rect.y + (2 * app->windowModule->scale), rect.x + (12 * app->windowModule->scale)); } // on stairs
 		}
 		break;
 
@@ -531,8 +531,8 @@ void Player::Update()
 		if (shoot_update_counter < 10){ shoot_update_counter++; }
 		else { shoot_key_pressed = false; shoot_update_counter = 0; }
 
-		if (harpoon[1]->alive){ harpoon[1]->Update(); }
-		if (harpoon[0]->alive){ harpoon[0]->Update(); }
+		if (harpoon2->alive){ harpoon2->Update(); }
+		if (harpoon1->alive){ harpoon1->Update(); }
 
 		//-------------------------------------------------------
 		// shotgun update
@@ -551,8 +551,8 @@ void Player::Reset(unsigned int x, unsigned int y)
 	rect.x = x * app->windowModule->scale;
 	rect.y = y * app->windowModule->scale;
 
-	harpoon[0]->alive = false;
-	harpoon[1]->alive = false;
+	harpoon1->alive = false;
+	harpoon2->alive = false;
 
 	shielded = false;
 	current_stair = NULL;

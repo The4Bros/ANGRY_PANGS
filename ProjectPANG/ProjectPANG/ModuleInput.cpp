@@ -38,7 +38,7 @@ update_status ModuleInput::PostUpdate(){ return UPDATE_CONTINUE; }
 
 bool ModuleInput::CleanUp()
 {
-	delete[] mainEvent;
+	delete mainEvent;
 	//delete key;
 	return true;
 }

@@ -41,7 +41,6 @@ bool Application::Init()
 	modules_Queue.push(audioModule);
 	modules_Queue.push(fontManagerModule);
 
-
 	item = modules_Queue.getStart();
 	while (item != NULL)
 	{
@@ -99,15 +98,15 @@ bool Application::CleanUp()
 {
 	modules_Queue.ReduceTo(6);
 
-	if (playerModule != NULL){        if (playerModule->CleanUp() == false) {        return false; } }
+	if (playerModule != NULL)       { if (playerModule->CleanUp() == false)        { return false; } }
 	if (entityManagerModule != NULL){ if (entityManagerModule->CleanUp() == false) { return false; } }
-	if (sceneModule != NULL){         if (sceneModule->CleanUp() == false) {         return false; } }
-	if (titleModule != NULL){         if (titleModule->CleanUp() == false) {         return false; } }
-	if (tutorialModule != NULL){      if (tutorialModule->CleanUp() == false) {      return false; } }
-	if (chooseCityModule != NULL){    if (chooseCityModule->CleanUp() == false) {    return false; } }
-	if (planeModule != NULL){         if (planeModule->CleanUp() == false) {         return false; } }
-	if (creditsModule != NULL){       if (creditsModule->CleanUp() == false) {       return false; } }
-	if (highscoreModule != NULL){     if (highscoreModule->CleanUp() == false) {     return false; } }
+	if (sceneModule != NULL)        { if (sceneModule->CleanUp() == false)         { return false; } }
+	if (titleModule != NULL)        { if (titleModule->CleanUp() == false)         { return false; } }
+	if (tutorialModule != NULL)     { if (tutorialModule->CleanUp() == false)      { return false; } }
+	if (chooseCityModule != NULL)   { if (chooseCityModule->CleanUp() == false)    { return false; } }
+	if (planeModule != NULL)        { if (planeModule->CleanUp() == false)         { return false; } }
+	if (creditsModule != NULL)      { if (creditsModule->CleanUp() == false)       { return false; } }
+	if (highscoreModule != NULL)    { if (highscoreModule->CleanUp() == false)     { return false; } }
 
 	item = modules_Queue.getLast();
 	while (item != NULL)
@@ -124,13 +123,6 @@ bool Application::ChangeTo(update_status new_state)
 {
 	// Clear Unnecessary Modules
 	modules_Queue.ReduceTo(6);
-
-	if (titleModule != NULL) { delete titleModule; titleModule = NULL; }
-	if (tutorialModule != NULL) { delete tutorialModule; tutorialModule = NULL; }
-	if (chooseCityModule != NULL) { delete chooseCityModule; chooseCityModule = NULL; }
-	if (planeModule != NULL) { delete planeModule; planeModule = NULL; }
-	if (creditsModule != NULL) { delete creditsModule; creditsModule = NULL; }
-	if (highscoreModule != NULL) { delete highscoreModule; highscoreModule = NULL; }
 
 	switch (new_state)
 	{
@@ -160,26 +152,18 @@ bool Application::ChangeTo(update_status new_state)
 
 	case CHANGE_TO_PLAY:
 
-		if (playerModule == NULL)
-		{
-			playerModule = new ModulePlayer(this);
-		}
+		playerModule = new ModulePlayer(this);
 		if (playerModule->Init() == false) { return false; }
 		modules_Queue.push(playerModule);
 
-		if (entityManagerModule == NULL)
-		{
-			entityManagerModule = new ModuleEntityManager(this);
-		}
+		entityManagerModule = new ModuleEntityManager(this);
 		if (entityManagerModule->Init() == false) { return false; }
 		modules_Queue.push(entityManagerModule);
 
-		if (sceneModule == NULL)
-		{
-			sceneModule = new ModuleScene(this);
-		}
+		sceneModule = new ModuleScene(this);
 		if (sceneModule->Init() == false) { return false; }
 		modules_Queue.push(sceneModule);
+
 		break;
 
 	case CHANGE_TO_MAP_PLANE:

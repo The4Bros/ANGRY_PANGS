@@ -3,6 +3,7 @@
 #include "Harpoon.h"
 #include "Stair.h"
 
+
 #ifndef __Player_H__
 #define __Player_H__
 
@@ -39,10 +40,13 @@ public:
 	Application* app;
 
 	SDL_Rect rect;
-	SDL_Rect* source_rect[25];
-	int source_index, player_gravity,ticks;
+	SDL_Rect source_rect[25];
+	int source_index;
+	int player_gravity;
+	int ticks;
 
-	Harpoon* harpoon[2];
+	Harpoon* harpoon1;
+	Harpoon* harpoon2;
 	Weapon current_weapon;
 
 	unsigned int score, lives, update_counter, shoot_update_counter, stair_update_counter;

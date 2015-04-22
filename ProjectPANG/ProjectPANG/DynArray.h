@@ -30,20 +30,6 @@ public:
 	~DynArray(){ delete[] data; }
 
 
-	// Operators []
-	DynArrayTYPE& operator[](unsigned int index)
-	{
-		if (index >= num_elements) { return NULL; }
-		return data[index];
-	}
-
-	const DynArrayTYPE& operator[](unsigned int index) const
-	{
-		if (index >= num_elements) { return NULL; }
-		return data[index];
-	}
-
-
 	// Data Management
 	void push_back(const DynArrayTYPE& element)
 	{

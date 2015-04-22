@@ -2,11 +2,8 @@
 #include "Application.h"
 #include "Particles.h"
 
-
 #ifndef _BRICK_H_
 #define _BRICK_H_
-
-
 
 class Brick
 {
@@ -14,7 +11,6 @@ class Brick
 		Application* app;
 
 		SDL_Rect rect;
-		bool alive;
 		unsigned int type;
 		int position_in_list;
 

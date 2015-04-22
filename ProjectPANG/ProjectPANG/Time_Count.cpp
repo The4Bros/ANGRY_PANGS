@@ -11,8 +11,8 @@ Time_Count::Time_Count(Application* app)
 	rect[2] = { 362 * app->windowModule->scale, 9 * app->windowModule->scale, 13 * app->windowModule->scale, 13 * app->windowModule->scale };
 	rect[3] = { 271 * app->windowModule->scale, 9 * app->windowModule->scale, 62 * app->windowModule->scale, 13 * app->windowModule->scale };
 
-	for (int i = 0; i < 10; i ++){ source_rect[i] = new SDL_Rect({62 + (i * 13), 0, 13, 13}); }
-	source_rect[10] = new SDL_Rect({0, 0, 62, 13});
+	for (int i = 0; i < 10; i ++){ source_rect[i] = {62 + (i * 13), 0, 13, 13}; }
+	source_rect[10] = {0, 0, 62, 13};
 
 	Update_Source_Index();
 }
@@ -44,8 +44,8 @@ void Time_Count::Reset(int seconds)
 
 void Time_Count::Print_Timer()
 {
-	app->renderModule->Print(app->texturesModule->timer_sprite, source_rect[10], &rect[3]);
-	app->renderModule->Print(app->texturesModule->timer_sprite, source_rect[source_index[0]], &rect[0]);
-	app->renderModule->Print(app->texturesModule->timer_sprite, source_rect[source_index[1]], &rect[1]);
-	app->renderModule->Print(app->texturesModule->timer_sprite, source_rect[source_index[2]], &rect[2]);
+	app->renderModule->Print(app->texturesModule->timer_sprite, &source_rect[10], &rect[3]);
+	app->renderModule->Print(app->texturesModule->timer_sprite, &source_rect[source_index[0]], &rect[0]);
+	app->renderModule->Print(app->texturesModule->timer_sprite, &source_rect[source_index[1]], &rect[1]);
+	app->renderModule->Print(app->texturesModule->timer_sprite, &source_rect[source_index[2]], &rect[2]);
 }

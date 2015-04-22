@@ -6,6 +6,7 @@
 #ifndef __Balloon_H__
 #define __Balloon_H__
 
+
 enum BALL_TYPE
 {
 	RED_1,
@@ -60,7 +61,7 @@ public:
 	BALLOON_STATE_HORIZONTAL state_balloon_H;
 	SDL_Rect rect;
 	
-	Balloon(Application* app, int position_in_list, int x, int y, int type, int direction);
+	Balloon(Application* app, unsigned int position_in_list, int x, int y, int type, int direction);
 	~Balloon(){}
 
 	void Update();
@@ -69,7 +70,7 @@ public:
 	// particles->PushBack(x, y, type);
 	void Reduce_Balloon_Size();
 	void Restart_Movement_Balloons_hit();
-	void Reset(int position_in_list, int x, int y, int type, int direction);
+	void Reset(unsigned int position_in_list, int x, int y, int type, int direction);
 
 	void Size1_Check_Collision_Balloon_Players();
 	void Size4_Check_Collision_Balloon_Players();

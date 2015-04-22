@@ -4,17 +4,14 @@ ModuleScene::ModuleScene(Application* app) : Module(app)
 {
 	time_count = NULL;
 
-	ready_source_rect = NULL;
-	game_over_source_rect = NULL;
-
 	pause_pressed = false;
 	stage_cleared = false;
+
+	time_count = new Time_Count(app);
 }
 
 bool ModuleScene::Init()
 {
-	time_count = new Time_Count(app);
-
 	game_state = READY;
 	update_counter = 0;
 
@@ -96,8 +93,8 @@ update_status ModuleScene::Update()
 		break;
 
 	case READY:
-		if (update_counter < 30){ app->renderModule->Print(app->texturesModule->ready, ready_source_rect, &ready_rect); }
-		else if (update_counter % 30 > 15){ app->renderModule->Print(app->texturesModule->ready, ready_source_rect, &ready_rect); }
+		if (update_counter < 30){ app->renderModule->Print(app->texturesModule->ready, &ready_source_rect, &ready_rect); }
+		else if (update_counter % 30 > 15){ app->renderModule->Print(app->texturesModule->ready, &ready_source_rect, &ready_rect); }
 
 		if (update_counter > 120){ game_state = PLAYING; update_counter = 0; }
 		else { update_counter++; }
@@ -109,7 +106,7 @@ update_status ModuleScene::Update()
 		break;
 
 	case GAME_OVER:
-		app->renderModule->Print(app->texturesModule->ready, game_over_source_rect, &game_over_rect);
+		app->renderModule->Print(app->texturesModule->ready, &game_over_source_rect, &game_over_rect);
 
 		if (update_counter > 240){ return CHANGE_TO_TITLE; }
 		else { update_counter++; }
@@ -117,7 +114,7 @@ update_status ModuleScene::Update()
 		break;
 
 	case PAUSED:
-		app->renderModule->Print(app->texturesModule->ready, game_over_source_rect, &game_over_rect);
+		app->renderModule->Print(app->texturesModule->ready, &game_over_source_rect, &game_over_rect);
 
 		if (app->inputModule->key[SDL_SCANCODE_P] == 1)
 		{
@@ -130,9 +127,13 @@ update_status ModuleScene::Update()
 
 	return UPDATE_CONTINUE;
 }
-update_status ModuleScene::PostUpdate(){ return UPDATE_CONTINUE; }
 
-bool ModuleScene::CleanUp(){ return true; }
+bool ModuleScene::CleanUp()
+{
+	delete[] time_count;
+
+	return true;
+}
 
 
 
@@ -150,7 +151,7 @@ void ModuleScene::Print_All_Objects()
 
 
 	// PRINT BACKGROUND
-	app->renderModule->Print(app->texturesModule->background_sprite, background_source_rect, &background_rect);
+	app->renderModule->Print(app->texturesModule->background_sprite, &background_source_rect, &background_rect);
 
 	// PRINT TIMER
 	time_count->Print_Timer();
@@ -170,13 +171,13 @@ void ModuleScene::Print_All_Objects()
 
 	// PRINT HARPOONS
 
-	if (app->playerModule->player1->harpoon[0]->alive) { app->playerModule->player1->harpoon[0]->Print(); }
-	if (app->playerModule->player1->harpoon[1]->alive) { app->playerModule->player1->harpoon[1]->Print(); }
+	if (app->playerModule->player1->harpoon1->alive) { app->playerModule->player1->harpoon1->Print(); }
+	if (app->playerModule->player1->harpoon2->alive) { app->playerModule->player1->harpoon2->Print(); }
 
 	if (app->playerModule->player2 != NULL)
 	{
-		if (app->playerModule->player2->harpoon[0]->alive) { app->playerModule->player2->harpoon[0]->Print(); }
-		if (app->playerModule->player2->harpoon[1]->alive) { app->playerModule->player2->harpoon[1]->Print(); }
+		if (app->playerModule->player2->harpoon1->alive) { app->playerModule->player2->harpoon1->Print(); }
+		if (app->playerModule->player2->harpoon2->alive) { app->playerModule->player2->harpoon2->Print(); }
 	}
 
 	// PRINT BULLETS
@@ -184,11 +185,11 @@ void ModuleScene::Print_All_Objects()
 
 
 	// PRINT PLAYERS
-	app->renderModule->Print(app->texturesModule->players_sprite, app->playerModule->player1->source_rect[app->playerModule->player1->source_index], &app->playerModule->player1->rect);
+	app->renderModule->Print(app->texturesModule->players_sprite, &app->playerModule->player1->source_rect[app->playerModule->player1->source_index], &app->playerModule->player1->rect);
 
 	if (app->playerModule->player2 != NULL)
 	{
-		app->renderModule->Print(app->texturesModule->players_sprite, app->playerModule->player2->source_rect[app->playerModule->player2->source_index], &app->playerModule->player2->rect);
+		app->renderModule->Print(app->texturesModule->players_sprite, &app->playerModule->player2->source_rect[app->playerModule->player2->source_index], &app->playerModule->player2->rect);
 	}
 
 
@@ -209,7 +210,7 @@ void ModuleScene::Print_All_Objects()
 
 void ModuleScene::reset_stage()
 {
-	int i;
+	unsigned int i;
 
 	game_state = READY;
 
@@ -427,8 +428,7 @@ bool ModuleScene::load_stage(int stage)
 	parser(line);
 	fclose(level_file);
 
-	if (background_source_rect != NULL){ delete background_source_rect; background_source_rect = NULL; }
-	background_source_rect = new SDL_Rect({ ((current_stage - 1) % 3) * 384, ((current_stage - 1) / 3) * 208, 384, 208 });
+	background_source_rect = { ((current_stage - 1) % 3) * 384, ((current_stage - 1) / 3) * 208, 384, 208 };
 
 	reset_stage();
 

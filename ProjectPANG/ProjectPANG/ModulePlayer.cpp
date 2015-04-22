@@ -83,7 +83,13 @@ update_status ModulePlayer::Update()
 
 update_status ModulePlayer::PostUpdate(){ return UPDATE_CONTINUE; }
 
-bool ModulePlayer::CleanUp(){ return true; }
+bool ModulePlayer::CleanUp()
+{
+	//if (player1 != NULL) { delete player1; }
+	//if (player2 != NULL) { delete player2; }
+
+	return true;
+}
 
 
 

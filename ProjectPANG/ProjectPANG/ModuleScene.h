@@ -4,11 +4,10 @@
 #include "Balloon.h"
 #include "Stair.h"
 #include "Brick.h"
+#include "Time_Count.h"
 
 #ifndef __ModuleScene_H__
 #define __ModuleScene_H__
-
-#include "Time_Count.h"
 
 struct Hexa_Struct // Balloons and Enemies
 {
@@ -68,10 +67,10 @@ public:
 	bool pause_pressed, stage_cleared;
 
 	SDL_Rect ready_rect;
-	SDL_Rect* ready_source_rect;
+	SDL_Rect ready_source_rect;
 
 	SDL_Rect game_over_rect;
-	SDL_Rect* game_over_source_rect;
+	SDL_Rect game_over_source_rect;
 
 	bool insert_coin_pressed;
 
@@ -79,13 +78,12 @@ public:
 	Stage_Arrangement stage_arrangement;
 
 	SDL_Rect background_rect;
-	SDL_Rect* background_source_rect;
+	SDL_Rect background_source_rect;
 
 	ModuleScene(Application* app);
 	bool Init();
 	update_status PreUpdate();
 	update_status Update();
-	update_status PostUpdate();
 	bool CleanUp();
 
 	void Print_All_Objects();

@@ -1,49 +1,41 @@
 #include "Module.h"
 #include "Globals.h"
 #include "Application.h"
-
-#ifndef __ModuleEntityManager_H__
-#define __ModuleEntityManager_H__
-
-
 #include "Balloon.h"
 #include "Stair.h"
 #include "Brick.h"
 #include "Particles.h"
 
+#ifndef __ModuleEntityManager_H__
+#define __ModuleEntityManager_H__
+
 
 class ModuleEntityManager : public Module{
 public:
 
-	SDL_Rect* harpoon_source_rect[25];
+	SDL_Rect harpoon_source_rect[25];
 
 	DynArray<Brick*>* bricks;
-	SDL_Rect* source_brick_rect[18];
-	Brick* tmp_brick;
+	SDL_Rect source_brick_rect[18];
 
 	DynArray<Stair*>* stairs;
-	SDL_Rect* source_stair_rect;
-	Stair* tmp_stair;
+	SDL_Rect source_stair_rect;
 
 	DynArray<Balloon*>* balloons;
-	SDL_Rect* source_balloon_rect[12];
+	SDL_Rect source_balloon_rect[12];
 	unsigned int balloon_speed;
-	Balloon* tmp_balloon;
-
 
 	//DynArray<Enemy*>* enemies;
-	SDL_Rect* source_enemy_rect[74];
-	
+	SDL_Rect source_enemy_rect[74];
 
 	DynArray<Particles*>* particles;
-	SDL_Rect* particles_source_rect[4];
-	Particles* tmp_particle;
+	SDL_Rect particles_source_rect[4];
+
 
 	ModuleEntityManager(Application* app);
 	bool Init();
 	update_status PreUpdate();
 	update_status Update();
-	update_status PostUpdate();
 	bool CleanUp();
 };
 
