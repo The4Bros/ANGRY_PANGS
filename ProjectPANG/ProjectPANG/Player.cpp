@@ -390,6 +390,7 @@ void Player::Hit(SDL_Rect* killer)
 		shoot_update_counter = 0;
 		state = HIT;
 		app->sceneModule->game_state = PLAYER_KILLED;
+		app->sceneModule->update_counter = 0;
 
 		//app->sceneModule->reset_stage();
 	}

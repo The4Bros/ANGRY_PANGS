@@ -53,10 +53,10 @@ bool ModuleEntityManager::Init()
 		source_brick_rect[i + 6] = new SDL_Rect({ 0, 24 + (i * 8), 24, 8 });
 		source_brick_rect[i + 9] = new SDL_Rect({ 0, i * 8, 32, 8 });
 	}
-	source_brick_rect[12] = new SDL_Rect({ 0, 72, 32, 8 });
-	source_brick_rect[13] = new SDL_Rect({ 40, 72, 32, 8 });
-	source_brick_rect[14] = new SDL_Rect({ 80, 72, 16, 8 });
-	source_brick_rect[15] = new SDL_Rect({ 80, 88, 24, 8 });
+	source_brick_rect[12] = new SDL_Rect({ 0, 72, 8, 32 });
+	source_brick_rect[13] = new SDL_Rect({ 40, 72, 8, 32 });
+	source_brick_rect[14] = new SDL_Rect({ 80, 72, 8, 16 });
+	source_brick_rect[15] = new SDL_Rect({ 80, 88, 8, 24 });
 
 	
 

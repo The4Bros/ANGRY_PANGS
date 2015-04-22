@@ -50,9 +50,6 @@ update_status ModuleScene::Update()
 	switch (game_state)
 	{
 	case PLAYING:
-		//TIMER MANAGED
-		if (difftime(time(NULL), time_count->timer) >= 1 && game_state == PLAYING) { time_count->Update(); }
-
 		// PAUSE MANAGED
 		if (app->inputModule->key[SDL_SCANCODE_P] == 1)
 		{
@@ -70,12 +67,22 @@ update_status ModuleScene::Update()
 			}
 			update_counter++;
 		}
-		else if (app->entityManagerModule->balloons->empty())
+		else
 		{
-			stage_cleared = true;
-			update_counter = 0;
-		}
+			//TIMER MANAGED
+			if (difftime(time(NULL), time_count->timer) >= 1 && game_state == PLAYING) { time_count->Update(); }
 
+			if (app->entityManagerModule->balloons->empty())
+			{
+				stage_cleared = true;
+				update_counter = 0;
+			}
+		}
+		break;
+
+	case PLAYER_KILLED:
+		if (update_counter > 600){ update_counter = 0; reset_stage(); }
+		else { update_counter++; }
 		break;
 
 	case READY:
