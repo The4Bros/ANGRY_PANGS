@@ -518,9 +518,9 @@ void Balloon::Check_Collision_Balloon_Bricks()
 							//vertical collision -> balloon moves up -----------------------------
 							state_balloon_V = BALLOON_UP;
 							
-							if (type < 3) gravity = 7;
+							if (type < 3) gravity = 6;
 							else if (type < 6) gravity = 5;
-							else if (type < 9) gravity = 3;
+							else if (type < 9) gravity = 4;
 							else gravity = 2;
 
 							ticks = 1;
@@ -561,9 +561,9 @@ void Balloon::Check_Collision_Balloon_Bricks()
 							//vertical collision -> balloon moves up -----------------------------
 							state_balloon_V = BALLOON_UP;
 					
-							if (type < 3) gravity = 7;
+							if (type < 3) gravity = 6;
 							else if (type < 6) gravity = 5;
-							else if (type < 9) gravity = 3;
+							else if (type < 9) gravity = 4;
 							else gravity = 2;
 
 							ticks = 1;
