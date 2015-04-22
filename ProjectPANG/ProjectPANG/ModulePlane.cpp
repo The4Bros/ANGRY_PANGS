@@ -12,7 +12,7 @@ bool ModulePlane::Init()
 update_status ModulePlane::PreUpdate(){ return UPDATE_CONTINUE; }
 update_status ModulePlane::Update()
 {
-	if (ticks > 120){ return CHANGE_TO_PLAY; }
+	if (ticks > 180){ return CHANGE_TO_PLAY; }
 
 	ticks++;
 
