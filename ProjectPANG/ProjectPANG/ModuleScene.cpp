@@ -245,7 +245,7 @@ void ModuleScene::reset_stage()
 	}
 	else { app->entityManagerModule->bricks->Reduce_To(0); }
 	
-
+	app->entityManagerModule->particles->clear();
 
 
 	// STAIRS____________________________________________________________________________________________________________________________
