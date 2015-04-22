@@ -150,7 +150,7 @@ void Balloon::Update()
 		{
 			state_balloon_V = BALLOON_UP;
 
-			if (type < 3) gravity = 12;
+			if (type < 3) gravity = 13;
 			else if (type < 6) gravity = 11;
 			else if (type < 9) gravity = 9;
 			else gravity = 7;
