@@ -18,7 +18,7 @@ private:
 
 public:
 
-	const char* music_paths[17];
+	const char* music_paths[19];
 
 	unsigned int balloon_pop;
 	unsigned int insert_coin;

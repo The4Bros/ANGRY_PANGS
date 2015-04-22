@@ -6,6 +6,9 @@ bool ModulePlane::Init()
 	// if (app->stage % 3 == 1){}  plane
 	background_rect = { 0, 0, SCREEN_WIDTH * app->windowModule->scale, SCREEN_HEIGHT * app->windowModule->scale };
 	source_rect = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+
+	app->audioModule->PlayMusic(app->audioModule->music_paths[17]);
+
 	ticks = 0;
 	return true;
 }

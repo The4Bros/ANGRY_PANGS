@@ -32,6 +32,8 @@ bool ModuleTitle::Init()
 
 	insert_coin_pressed = false;
 
+	app->audioModule->PlayMusic(app->audioModule->music_paths[18]);
+
 	return true;
 }
 
@@ -79,7 +81,12 @@ update_status ModuleTitle::Update()
 	{
 		if (app->inputModule->key[SDL_SCANCODE_5] == 1)
 		{
-			if (!insert_coin_pressed){ app->Add_Coin(); insert_coin_pressed = true; }
+			if (!insert_coin_pressed)
+			{
+				app->Add_Coin();
+				insert_coin_pressed = true;
+				app->audioModule->PlayFx(app->audioModule->insert_coin);
+			}
 		}
 		else { insert_coin_pressed = false; }
 	}

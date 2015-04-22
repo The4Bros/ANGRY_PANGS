@@ -4,6 +4,7 @@ Player::Player(Application* app, bool player1)
 {
 	this->app = app;
 	
+	lives = 3;
 	shielded = false;
 	state = STILL;
 	shoot_key_pressed = false;

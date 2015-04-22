@@ -63,6 +63,7 @@ update_status ModuleScene::Update()
 			if (update_counter > 180)
 			{
 				app->stage++;
+				stage_cleared = false;
 				return CHANGE_TO_MAP_PLANE;
 			}
 			update_counter++;
@@ -81,7 +82,16 @@ update_status ModuleScene::Update()
 		break;
 
 	case PLAYER_KILLED:
-		if (update_counter > 600){ update_counter = 0; reset_stage(); }
+		if (update_counter > 600)
+		{
+			if (app->playerModule->player1->lives > 0)
+			{
+				app->playerModule->player1->lives--;
+				update_counter = 0;
+				reset_stage();
+			}
+			else{ return CHANGE_TO_TITLE; }
+		}
 		else { update_counter++; }
 		break;
 
@@ -133,7 +143,10 @@ void ModuleScene::Print_All_Objects()
 
 	// PRINT SCORES
 	app->fontManagerModule->Write_On_Screen("Player-1", 8 * app->windowModule->scale, 209 * app->windowModule->scale, 8 * app->windowModule->scale);
-	app->fontManagerModule->Write_On_Screen(app->coins, 8 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale);
+	app->fontManagerModule->Write_On_Screen("lives:", 8 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale);
+	app->fontManagerModule->Write_On_Screen(app->playerModule->player1->lives, 64 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale);
+
+	app->fontManagerModule->Write_On_Screen(app->coins, 360 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale);
 
 
 	// PRINT BACKGROUND

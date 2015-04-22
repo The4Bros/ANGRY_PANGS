@@ -27,9 +27,14 @@ bool ModuleAudio::Init()
 	music_paths[8] = "music/09 - London (Arcade).wav";
 	music_paths[9] = "music/10 - Barcelona (Arcade).wav";
 
+	music_paths[17] = "music/Finivell1.wav";
+	music_paths[18] = "music/UN - Unused #1 (Arcade).wav";
+	
+
+
 	balloon_pop = LoadFx("music/bolapeta.wav");
 	insert_coin = LoadFx("music/coin.wav");
-
+	//player_hit = LoadFx("music/coin.wav");
 
 
 
