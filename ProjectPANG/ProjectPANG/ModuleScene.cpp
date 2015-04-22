@@ -82,7 +82,7 @@ update_status ModuleScene::Update()
 		break;
 
 	case PLAYER_KILLED:
-		if (update_counter > 600)
+		if (update_counter > 300)
 		{
 			if (app->playerModule->player1->lives > 0)
 			{
