@@ -549,6 +549,9 @@ void Player::Reset(unsigned int x, unsigned int y)
 	rect.x = x * app->windowModule->scale;
 	rect.y = y * app->windowModule->scale;
 
+	harpoon[0]->alive = false;
+	harpoon[1]->alive = false;
+
 	shielded = false;
 	current_stair = NULL;
 	state = STILL;
