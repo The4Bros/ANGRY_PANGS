@@ -381,7 +381,7 @@ void Player::Hit(SDL_Rect* killer)
 		}
 
 		ticks = 0;
-		player_gravity = 10;
+		player_gravity = 13;
 
 
 		alive = false;
@@ -414,7 +414,7 @@ void Player::Update()
 					rect.x -= 2;
 					rect.y = rect.y - player_gravity;
 					ticks--;
-					if (ticks % 8 == 0) player_gravity--;
+					if (ticks % 3 == 0) player_gravity--;
 					if (rect.x < 8 * app->windowModule->scale)hit_State = HIT_RIGHT_UP;
 					/*
 					height = rect.y;
@@ -439,8 +439,8 @@ void Player::Update()
 					rect.x -= 2;
 					rect.y = rect.y + player_gravity;
 					ticks--;
-					if (ticks % 8 == 0) player_gravity++;
-					if (rect.x< 8 * app->windowModule->scale)hit_State = HIT_RIGHT_DOWN;
+					if (ticks % 3 == 0) player_gravity++;
+					if (rect.x < 8 * app->windowModule->scale)hit_State = HIT_RIGHT_DOWN;
 					/*height = rect.y;
 					update_counter = 0;
 					hit_State = HIT_LEFT_UP;*/
@@ -461,7 +461,7 @@ void Player::Update()
 					rect.x += 2;
 					rect.y = rect.y - player_gravity;
 					ticks--;
-					if (ticks % 8 == 0) player_gravity--;
+					if (ticks % 3 == 0) player_gravity--;
 					if (rect.x - rect.w > 376 * app->windowModule->scale)hit_State = HIT_LEFT_UP;
 					//hit_State = HIT_LEFT_UP;
 				}
@@ -482,10 +482,10 @@ void Player::Update()
 				if (rect.y + rect.h < 199 * app->windowModule->scale)
 				{
 
-					rect.x -= 2;
+					rect.x += 2;
 					rect.y = rect.y + player_gravity;
 					ticks--;
-					if (ticks % 8 == 0) player_gravity++;
+					if (ticks % 3 == 0) player_gravity++;
 					if (rect.x + rect.w > 376 * app->windowModule->scale)hit_State = HIT_LEFT_DOWN;
 					//height = rect.y;
 					//hit_State = HIT_LEFT_UP;
