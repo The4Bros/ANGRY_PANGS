@@ -8,9 +8,9 @@
 
 Balloon::Balloon(Application* app, int position_in_list, int x, int y, int type, int direction)
 {
-	gravity = 2;
+	gravity = 0;
 	horizontal_speed = 2;
-	ticks = 2;
+	ticks = 1;
 
 	this->app = app;
 	this->position_in_list = position_in_list;
@@ -220,7 +220,7 @@ void Balloon::Restart_Movement_Balloons_hit()
 {
 	
 	state_balloon_V = BALLOON_UP;
-	gravity = 1;
+	gravity = 0;
 }
 
 void Balloon::Reduce_Balloon_Size()
@@ -280,9 +280,9 @@ void Balloon::Reduce_Balloon_Size()
 
 void Balloon::Reset(int position_in_list, int x, int y, int type, int direction)
 {
-	gravity = 2;
+	gravity = 0;
 	horizontal_speed = 2;
-	ticks = 2;
+	ticks = 1;
 	this->position_in_list = position_in_list;
 
 	state_balloon_H = BALLOON_RIGHT;
@@ -515,10 +515,10 @@ void Balloon::Check_Collision_Balloon_Bricks()
 							//vertical collision -> balloon moves up -----------------------------
 							state_balloon_V = BALLOON_UP;
 							
-							if (type < 3) gravity = 12;
-							else if (type < 6) gravity = 11;
-							else if (type < 9) gravity = 9;
-							else gravity = 7;
+							if (type < 3) gravity = 7;
+							else if (type < 6) gravity = 5;
+							else if (type < 9) gravity = 3;
+							else gravity = 2;
 
 							ticks = 1;
 							return;
@@ -540,7 +540,7 @@ void Balloon::Check_Collision_Balloon_Bricks()
 							//vertical collision -> balloon moves down -----------------------------
 							state_balloon_V = BALLOON_DOWN;
 							
-							gravity = 12;
+							gravity = 3;
 							ticks = 1;
 							return;
 						}
@@ -558,10 +558,10 @@ void Balloon::Check_Collision_Balloon_Bricks()
 							//vertical collision -> balloon moves up -----------------------------
 							state_balloon_V = BALLOON_UP;
 					
-							if (type < 3) gravity = 12;
-							else if (type < 6) gravity = 11;
-							else if (type < 9) gravity = 9;
-							else gravity = 7;
+							if (type < 3) gravity = 7;
+							else if (type < 6) gravity = 5;
+							else if (type < 9) gravity = 3;
+							else gravity = 2;
 
 							ticks = 1;
 							return;
