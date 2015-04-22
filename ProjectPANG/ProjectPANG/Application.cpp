@@ -163,22 +163,22 @@ bool Application::ChangeTo(update_status new_state)
 		if (playerModule == NULL)
 		{
 			playerModule = new ModulePlayer(this);
-			if (playerModule->Init() == false) { return false; }
 		}
+		if (playerModule->Init() == false) { return false; }
 		modules_Queue.push(playerModule);
 
 		if (entityManagerModule == NULL)
 		{
 			entityManagerModule = new ModuleEntityManager(this);
-			if (entityManagerModule->Init() == false) { return false; }
 		}
+		if (entityManagerModule->Init() == false) { return false; }
 		modules_Queue.push(entityManagerModule);
 
 		if (sceneModule == NULL)
 		{
 			sceneModule = new ModuleScene(this);
-			if (sceneModule->Init() == false) { return false; }
 		}
+		if (sceneModule->Init() == false) { return false; }
 		modules_Queue.push(sceneModule);
 		break;
 

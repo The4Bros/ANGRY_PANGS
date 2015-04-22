@@ -45,11 +45,6 @@ public:
 	update_status Update();
 	update_status PostUpdate();
 	bool CleanUp();
-
-	// Collisions
-	bool Collision(SDL_Rect* rect_1, SDL_Rect* rect_2);
-
-	void Collision_Balloon_Players(SDL_Rect* balloon_rect);
 };
 
 #endif

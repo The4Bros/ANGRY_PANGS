@@ -223,6 +223,7 @@ void Player::Shoot()
 				source_index = 18;
 				update_counter = 0;
 				harpoon[1]->Shoot_Harpoon(rect.y, rect.x + (14 * app->windowModule->scale));
+				app->entityManagerModule->particles->push_back(new Particles(app, app->entityManagerModule->particles->Count(), 13, rect.x + (10 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale)));
 				state = SHOOT_RIGHT;
 			}
 			else if (state == LEFT || source_index == 19) // leaning right
@@ -230,10 +231,15 @@ void Player::Shoot()
 				source_index = 20;
 				update_counter = 0;
 				harpoon[1]->Shoot_Harpoon(rect.y, rect.x + (10 * app->windowModule->scale));
+				app->entityManagerModule->particles->push_back(new Particles(app, app->entityManagerModule->particles->Count(), 13, rect.x + (6 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale)));
 				state = SHOOT_LEFT;
 			}
 
-			else { harpoon[1]->Shoot_Harpoon(rect.y, rect.x + (12 * app->windowModule->scale)); } // on stairs
+			else // on stairs
+			{
+				harpoon[1]->Shoot_Harpoon(rect.y, rect.x + (12 * app->windowModule->scale));
+				app->entityManagerModule->particles->push_back(new Particles(app, app->entityManagerModule->particles->Count(), 13, rect.x + (8 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale)));
+			}
 		}
 
 		else if (!harpoon[0]->alive)
@@ -245,6 +251,7 @@ void Player::Shoot()
 				source_index = 18;
 				update_counter = 0;
 				harpoon[0]->Shoot_Harpoon(rect.y, rect.x + (14 * app->windowModule->scale));
+				app->entityManagerModule->particles->push_back(new Particles(app, app->entityManagerModule->particles->Count(), 13, rect.x + (10 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale)));
 				state = SHOOT_RIGHT;
 			}
 			else if (state == LEFT || source_index == 19) // leaning right
@@ -252,10 +259,15 @@ void Player::Shoot()
 				source_index = 20;
 				update_counter = 0;
 				harpoon[0]->Shoot_Harpoon(rect.y, rect.x + (10 * app->windowModule->scale));
+				app->entityManagerModule->particles->push_back(new Particles(app, app->entityManagerModule->particles->Count(), 13, rect.x + (6 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale)));
 				state = SHOOT_LEFT;
 			}
 
-			else { harpoon[0]->Shoot_Harpoon(rect.y, rect.x + (12 * app->windowModule->scale)); } // on stairs
+			else // on stairs
+			{
+				harpoon[0]->Shoot_Harpoon(rect.y, rect.x + (12 * app->windowModule->scale));
+				app->entityManagerModule->particles->push_back(new Particles(app, app->entityManagerModule->particles->Count(), 13, rect.x + (8 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale)));
+			}
 		}
 		break;
 
@@ -269,6 +281,7 @@ void Player::Shoot()
 				source_index = 18;
 				update_counter = 0;
 				harpoon[0]->Shoot_Harpoon(rect.y, rect.x + (14 * app->windowModule->scale));
+				app->entityManagerModule->particles->push_back(new Particles(app, app->entityManagerModule->particles->Count(), 13, rect.x + (10 * app->windowModule->scale), rect.y - (8 * app->windowModule->scale)));
 				state = SHOOT_RIGHT;
 			}
 			else if (state == LEFT || source_index == 19) // leaning right
@@ -276,10 +289,15 @@ void Player::Shoot()
 				source_index = 20;
 				update_counter = 0;
 				harpoon[0]->Shoot_Harpoon(rect.y, rect.x + (10 * app->windowModule->scale));
+				app->entityManagerModule->particles->push_back(new Particles(app, app->entityManagerModule->particles->Count(), 13, rect.x + (6 * app->windowModule->scale), rect.y - (8 * app->windowModule->scale)));
 				state = SHOOT_LEFT;
 			}
 
-			else { harpoon[0]->Shoot_Harpoon(rect.y, rect.x + (12 * app->windowModule->scale)); } // on stairs
+			else // on stairs
+			{
+				harpoon[0]->Shoot_Harpoon(rect.y, rect.x + (12 * app->windowModule->scale));
+				app->entityManagerModule->particles->push_back(new Particles(app, app->entityManagerModule->particles->Count(), 13, rect.x + (8 * app->windowModule->scale), rect.y - (8 * app->windowModule->scale)));
+			}
 		}
 		break;
 

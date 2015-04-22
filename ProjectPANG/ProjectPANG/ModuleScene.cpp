@@ -8,6 +8,7 @@ ModuleScene::ModuleScene(Application* app) : Module(app)
 	game_over_source_rect = NULL;
 
 	pause_pressed = false;
+	stage_cleared = false;
 }
 
 bool ModuleScene::Init()
@@ -59,17 +60,22 @@ update_status ModuleScene::Update()
 		}
 		else{ pause_pressed = false; }
 
-		// STAGE END MANAGED
-		if (app->entityManagerModule->balloons->empty())
+		// STAGE CLEARED MANAGED
+		if (stage_cleared)
 		{
-			game_state = NEXT_STAGE_LAPSE;
+			if (update_counter > 180)
+			{
+				app->stage++;
+				return CHANGE_TO_MAP_PLANE;
+			}
+			update_counter++;
+		}
+		else if (app->entityManagerModule->balloons->empty())
+		{
+			stage_cleared = true;
 			update_counter = 0;
 		}
 
-		break;
-	case NEXT_STAGE_LAPSE:
-		if (update_counter > 120){ return CHANGE_TO_MAP_PLANE; }
-		update_counter++;
 		break;
 
 	case READY:

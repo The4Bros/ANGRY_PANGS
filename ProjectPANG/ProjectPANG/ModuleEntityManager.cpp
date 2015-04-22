@@ -114,6 +114,7 @@ bool ModuleEntityManager::Init()
 		}
 	}
 	for (int i = 0; i < 5; i++){ particles_source_rect[i + 48] = new SDL_Rect({ i * 28, 93, 28, 26 }); }
+	for (int i = 0; i < 4; i++){ particles_source_rect[i + 52] = new SDL_Rect({ i * 15, 119, 15, 15 }); }
 
 	return true;
 }
@@ -144,23 +145,4 @@ update_status ModuleEntityManager::PostUpdate(){ return UPDATE_CONTINUE; }
 
 bool ModuleEntityManager::CleanUp(){ return true; }
 
-
-
-bool ModuleEntityManager::Collision(SDL_Rect* rect_1, SDL_Rect* rect_2)
-{
-	if (rect_1->x + rect_1->w >= rect_2->x) // rect_1 right
-	{
-		if (rect_2->x + rect_2->w >= rect_1->x) // rect_1 left
-		{
-			if (rect_1->y <= rect_2->y + rect_2->h) // rect_1 up
-			{
-				if (rect_1->y + rect_1->h >= rect_2->y) // rect_1 down
-				{
-					return true;
-				}
-			}
-		}
-	}
-	return false;
-}
 

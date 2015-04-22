@@ -25,6 +25,7 @@ public:
 	SDL_Texture* scores_sprite;
 	SDL_Texture* timer_sprite;
 	SDL_Texture* title_sprite;
+	SDL_Texture* level_complete;
 
 	ModuleTextures(Application* app);
 	bool Init();

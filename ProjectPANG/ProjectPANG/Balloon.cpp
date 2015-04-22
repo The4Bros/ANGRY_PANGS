@@ -471,6 +471,7 @@ void Balloon::Check_Collision_Balloon_Bricks()
 						{
 							//horizontal collision -> balloon moves left---------------------------
 							state_balloon_H = BALLOON_LEFT;
+							return;
 						}
 						else
 						{
@@ -479,6 +480,7 @@ void Balloon::Check_Collision_Balloon_Bricks()
 						
 							gravity = 12;
 							ticks = 1;
+							return;
 						}
 					}
 					else // brick bellow
@@ -487,6 +489,7 @@ void Balloon::Check_Collision_Balloon_Bricks()
 						{
 							//horizontal collision -> balloon moves left-----------------------------
 							state_balloon_H = BALLOON_LEFT;
+							return;
 						}
 						else
 						{
@@ -499,6 +502,7 @@ void Balloon::Check_Collision_Balloon_Bricks()
 							else gravity = 7;
 
 							ticks = 1;
+							return;
 						}
 					}
 				}
@@ -510,6 +514,7 @@ void Balloon::Check_Collision_Balloon_Bricks()
 						{
 							//horizontal collision -> balloon moves right-----------------------------
 							state_balloon_H = BALLOON_RIGHT;
+							return;
 						}
 						else
 						{
@@ -518,6 +523,7 @@ void Balloon::Check_Collision_Balloon_Bricks()
 							
 							gravity = 12;
 							ticks = 1;
+							return;
 						}
 					}
 					else // brick bellow
@@ -526,6 +532,7 @@ void Balloon::Check_Collision_Balloon_Bricks()
 						{
 							//horizontal collision -> balloon moves right-----------------------------
 							state_balloon_H = BALLOON_RIGHT;
+							return;
 						}
 						else
 						{
@@ -538,11 +545,10 @@ void Balloon::Check_Collision_Balloon_Bricks()
 							else gravity = 7;
 
 							ticks = 1;
+							return;
 						}
 					}
 				}
-
-				return;
 			}
 		}
 	}

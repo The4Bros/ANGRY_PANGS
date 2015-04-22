@@ -64,6 +64,10 @@ Particles::Particles(Application* app, int position_in_list, unsigned int type, 
 		source_index = 48;
 		rect = { x, y - app->windowModule->scale, 28 * app->windowModule->scale, 26 * app->windowModule->scale };
 		break;
+	case 13:
+		source_index = 52;
+		rect = { x, y - app->windowModule->scale, 15 * app->windowModule->scale, 15 * app->windowModule->scale };
+		break;
 	}
 }
 

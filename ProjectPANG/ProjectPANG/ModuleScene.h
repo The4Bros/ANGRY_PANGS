@@ -46,7 +46,6 @@ enum Game_State
 {
 	PLAYING,
 	PLAYER_KILLED,
-	NEXT_STAGE_LAPSE,
 	READY,
 	COUNTDOWN,
 	GAME_OVER,
@@ -66,7 +65,7 @@ public:
 
 	Game_State game_state;
 	unsigned int update_counter;
-	bool pause_pressed;
+	bool pause_pressed, stage_cleared;
 
 	SDL_Rect ready_rect;
 	SDL_Rect* ready_source_rect;

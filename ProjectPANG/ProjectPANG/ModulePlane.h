@@ -8,6 +8,12 @@
 
 class ModulePlane : public Module{
 public:
+
+	SDL_Rect background_rect;
+	SDL_Rect source_rect;
+
+	unsigned int ticks;
+
 	ModulePlane(Application* app);
 	bool Init();
 	update_status PreUpdate();
