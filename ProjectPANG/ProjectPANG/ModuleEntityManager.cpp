@@ -113,7 +113,7 @@ bool ModuleEntityManager::Init()
 			particles_source_rect[i + 36 + (i2 * 4)] = new SDL_Rect({ i * 8 + (i2 * 192), 85, 8, 8 });
 		}
 	}
-	for (int i = 0; i < 4; i++){ particles_source_rect[i + 48] = new SDL_Rect({ i * 28, 93, 28, 26 }); }
+	for (int i = 0; i < 5; i++){ particles_source_rect[i + 48] = new SDL_Rect({ i * 28, 93, 28, 26 }); }
 
 	return true;
 }

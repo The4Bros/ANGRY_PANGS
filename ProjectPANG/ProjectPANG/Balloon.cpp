@@ -406,10 +406,10 @@ void Balloon::Size1_Check_Collision_Balloon_Players()
 
 void Balloon::Size4_Check_Collision_Balloon_Players()
 {
-	if (rect.x < app->playerModule->player1->rect.x + (app->playerModule->player1->rect.w / 4)
-		&& rect.x + rect.w > app->playerModule->player1->rect.x + (3 * app->playerModule->player1->rect.w / 4)
-		&& rect.y < app->playerModule->player1->rect.y + (app->playerModule->player1->rect.h / 4)
-		&& rect.h + rect.y > app->playerModule->player1->rect.y + (3 * app->playerModule->player1->rect.h / 4))
+	if (rect.x < app->playerModule->player1->rect.x + app->playerModule->player1->rect.w - (8 * app->windowModule->scale)
+		&& rect.x + rect.w > app->playerModule->player1->rect.x + (8 * app->windowModule->scale)
+		&& rect.y < app->playerModule->player1->rect.y + app->playerModule->player1->rect.h - (8 * app->windowModule->scale)
+		&& rect.y + rect.h > app->playerModule->player1->rect.y + (8 * app->windowModule->scale))
 	{
 		app->playerModule->player1->Hit(&rect); // true if player1 got hit
 		return; // no need to check player2 if player1 got hit
@@ -417,10 +417,10 @@ void Balloon::Size4_Check_Collision_Balloon_Players()
 
 	if (app->playerModule->player2 != NULL)
 	{
-		if (rect.x < app->playerModule->player2->rect.x + (app->playerModule->player2->rect.w / 4)
-			&& rect.x + rect.w > app->playerModule->player2->rect.x + (3 * app->playerModule->player2->rect.w / 4)
-			&& rect.y < app->playerModule->player2->rect.y + (app->playerModule->player2->rect.h / 4)
-			&& rect.h + rect.y > app->playerModule->player2->rect.y + (3 * app->playerModule->player2->rect.h / 4))
+		if (rect.x < app->playerModule->player2->rect.x + app->playerModule->player2->rect.w - (8 * app->windowModule->scale)
+			&& rect.x + rect.w > app->playerModule->player2->rect.x + (8 * app->windowModule->scale)
+			&& rect.y < app->playerModule->player2->rect.y + app->playerModule->player2->rect.h - (8 * app->windowModule->scale)
+			&& rect.y + rect.h > app->playerModule->player2->rect.y + (8 * app->windowModule->scale))
 		{
 			app->playerModule->player2->Hit(&rect); // true if player2 got hit
 		}
