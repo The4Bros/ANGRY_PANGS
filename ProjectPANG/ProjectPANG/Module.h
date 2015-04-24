@@ -15,4 +15,5 @@ public:
 	virtual update_status Update(){ return UPDATE_CONTINUE; }
 	virtual update_status PostUpdate(){ return UPDATE_CONTINUE; }
 	virtual bool CleanUp(){ return true; }
+
 };

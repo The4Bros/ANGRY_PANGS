@@ -1,17 +1,12 @@
 #include "ModuleScene.h"
 
-ModuleScene::ModuleScene(Application* app) : Module(app)
-{
-	time_count = NULL;
-
-	pause_pressed = false;
-	stage_cleared = false;
-
-	time_count = new Time_Count(app);
-}
+ModuleScene::ModuleScene(Application* app) : Module(app), time_count(NULL), pause_pressed(false), stage_cleared(false) {}
 
 bool ModuleScene::Init()
 {
+	if (time_count == NULL){ time_count = new Time_Count(app); }
+	time_count->Reset(100);
+
 	game_state = READY;
 	update_counter = 0;
 
@@ -22,7 +17,7 @@ bool ModuleScene::Init()
 
 	background_rect = { 0, 0, SCREEN_WIDTH * app->windowModule->scale, (SCREEN_HEIGHT - 32) * app->windowModule->scale };
 
-	app->audioModule->PlayMusic(app->audioModule->music_paths[(app->stage - 1) / 3]);
+	app->audioModule->PlayMusic((app->stage - 1) / 3);
 
 	return true;
 }
@@ -264,7 +259,7 @@ void ModuleScene::reset_stage()
 			app->entityManagerModule->bricks->Reduce_To(i);
 		}
 	}
-	else { app->entityManagerModule->bricks->Reduce_To(0); }
+	else { app->entityManagerModule->bricks->clear(); }
 	
 	app->entityManagerModule->particles->clear();
 
@@ -309,7 +304,7 @@ void ModuleScene::reset_stage()
 			app->entityManagerModule->stairs->Reduce_To(i);
 		}
 	}
-	else { app->entityManagerModule->stairs->Reduce_To(0); }
+	else { app->entityManagerModule->stairs->clear(); }
 
 	// BALLOONS____________________________________________________________________________________________________________________________
 
@@ -355,7 +350,7 @@ void ModuleScene::reset_stage()
 			app->entityManagerModule->balloons->Reduce_To(i);
 		}
 	}
-	else { app->entityManagerModule->balloons->Reduce_To(0); }
+	else { app->entityManagerModule->balloons->clear(); }
 
 
 	/*
@@ -407,7 +402,7 @@ void ModuleScene::reset_stage()
 			app->entityManagerModule->enemies->Reduce_To(i);
 		}
 	}
-	else { app->entityManagerModule->enemies->Reduce_To(0); }*/
+	else { app->entityManagerModule->enemies->clear(); }*/
 }
 
 

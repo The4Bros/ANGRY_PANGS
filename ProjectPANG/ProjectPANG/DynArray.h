@@ -24,8 +24,8 @@ private:
 	}
 
 public:
-	DynArray() : capacity(0), num_elements(0), data(NULL) { Alloc(BLOCK_SIZE); }
-	DynArray(unsigned int capacity) : capacity(0), num_elements(0), data(NULL) { Alloc(capacity); }
+	DynArray() : num_elements(0), data(NULL) { Alloc(BLOCK_SIZE); }
+	DynArray(unsigned int capacity) : num_elements(0), data(NULL) { Alloc(capacity); }
 
 	~DynArray(){ delete[] data; }
 

@@ -1,32 +1,11 @@
 #pragma once
+
 #include "Application.h"
 
-Application::Application()
-{
-	returnValue = UPDATE_CONTINUE;
-
-	windowModule = NULL;
-	renderModule = NULL;
-	inputModule = NULL;
-	texturesModule = NULL;
-	audioModule = NULL;
-	fontManagerModule = NULL;
-
-	playerModule = NULL;
-	entityManagerModule = NULL;
-	sceneModule = NULL;
-	titleModule = NULL;
-	tutorialModule = NULL;
-	chooseCityModule = NULL;
-	planeModule = NULL;
-	creditsModule = NULL;
-	highscoreModule = NULL;
-
-}
+Application::Application() {}
 
 bool Application::Init()
 {
-
 	windowModule = new ModuleWindow(this);
 	renderModule = new ModuleRender(this);
 	inputModule = new ModuleInput(this);
@@ -41,18 +20,37 @@ bool Application::Init()
 	modules_Queue.push(audioModule);
 	modules_Queue.push(fontManagerModule);
 
-	item = modules_Queue.getStart();
+	playerModule = new ModulePlayer(this);
+	entityManagerModule = new ModuleEntityManager(this);
+	sceneModule = new ModuleScene(this);
+	titleModule = new ModuleTitle(this);
+	tutorialModule = new ModuleTutorial(this);
+	chooseCityModule = new ModuleChooseCity(this);
+	planeModule = new ModulePlane(this);
+	creditsModule = new ModuleCredits(this);
+	highscoreModule = new ModuleHighscore(this);
+
+	playerModule_Node = new DoubleNode<Module*>(playerModule);
+	entityManagerModule_Node = new DoubleNode<Module*>(entityManagerModule);
+	sceneModule_Node = new DoubleNode<Module*>(sceneModule);
+	titleModule_Node = new DoubleNode<Module*>(titleModule);
+	tutorialModule_Node = new DoubleNode<Module*>(tutorialModule);
+	chooseCityModule_Node = new DoubleNode<Module*>(chooseCityModule);
+	planeModule_Node = new DoubleNode<Module*>(planeModule);
+	creditsModule_Node = new DoubleNode<Module*>(creditsModule);
+	highscoreModule_Node = new DoubleNode<Module*>(highscoreModule);
+
+	DoubleNode<Module*>* item = modules_Queue.getStart();
 	while (item != NULL)
 	{
 		if (!item->data->Init()){ return false; }
 		item = item->next;
 	}
 
-	current_time = 0;
-	time(&timer);
-
 	coins = 0;
 	stage = 1;
+	current_time = 0;
+	time(&timer);
 
 	return true;
 }
@@ -65,9 +63,17 @@ Application::~Application()
 update_status Application::Update()
 {
 	// UPDATE TIME COUNTER
-	if (difftime(time(NULL), timer) > 1){ current_time++; time(&timer); }
+	if (difftime(time(NULL), timer) > 1)
+	{
+		if (current_time < 65535){ current_time++; } // Maximum unsigned int value
+		else { current_time = 0; }
 
-	item = modules_Queue.getStart(); // ------------PreUpdate------------
+		time(&timer);
+	}
+
+	update_status returnValue;
+
+	DoubleNode<Module*>* item = modules_Queue.getStart(); // ------------PreUpdate------------
 	while (item != NULL)
 	{
 		returnValue = item->data->PreUpdate();
@@ -98,17 +104,17 @@ bool Application::CleanUp()
 {
 	modules_Queue.ReduceTo(6);
 
-	if (playerModule != NULL)       { if (playerModule->CleanUp() == false)        { return false; } }
-	if (entityManagerModule != NULL){ if (entityManagerModule->CleanUp() == false) { return false; } }
-	if (sceneModule != NULL)        { if (sceneModule->CleanUp() == false)         { return false; } }
-	if (titleModule != NULL)        { if (titleModule->CleanUp() == false)         { return false; } }
-	if (tutorialModule != NULL)     { if (tutorialModule->CleanUp() == false)      { return false; } }
-	if (chooseCityModule != NULL)   { if (chooseCityModule->CleanUp() == false)    { return false; } }
-	if (planeModule != NULL)        { if (planeModule->CleanUp() == false)         { return false; } }
-	if (creditsModule != NULL)      { if (creditsModule->CleanUp() == false)       { return false; } }
-	if (highscoreModule != NULL)    { if (highscoreModule->CleanUp() == false)     { return false; } }
+	if (!playerModule->CleanUp())        { return false; } delete playerModule_Node;
+	if (!entityManagerModule->CleanUp()) { return false; } delete entityManagerModule_Node;
+	if (!sceneModule->CleanUp())         { return false; } delete sceneModule_Node;
+	if (!titleModule->CleanUp())         { return false; } delete titleModule_Node;
+	if (!tutorialModule->CleanUp())      { return false; } delete tutorialModule_Node;
+	if (!chooseCityModule->CleanUp())    { return false; } delete chooseCityModule_Node;
+	if (!planeModule->CleanUp())         { return false; } delete planeModule_Node;
+	if (!creditsModule->CleanUp())       { return false; } delete creditsModule_Node;
+	if (!highscoreModule->CleanUp())     { return false; } delete highscoreModule_Node;
 
-	item = modules_Queue.getLast();
+	DoubleNode<Module*>* item = modules_Queue.getLast();
 	while (item != NULL)
 	{
 		if (!item->data->CleanUp()){ return false; }
@@ -127,75 +133,51 @@ bool Application::ChangeTo(update_status new_state)
 	switch (new_state)
 	{
 	case CHANGE_TO_TITLE:
-
-		titleModule = new ModuleTitle(this);
 		if (titleModule->Init() == false) { return false; }
-
-		modules_Queue.push(titleModule);
+		modules_Queue.push(titleModule_Node);
 		break;
 
 	case CHANGE_TO_TUTORIAL:
-
-		tutorialModule = new ModuleTutorial(this);
 		if (tutorialModule->Init() == false) { return false; }
-
-		modules_Queue.push(tutorialModule);
+		modules_Queue.push(tutorialModule_Node);
 		break;
 
 	case CHANGE_TO_CHOOSE_CITY:
-
-		chooseCityModule = new ModuleChooseCity(this);
 		if (chooseCityModule->Init() == false) { return false; }
-
-		modules_Queue.push(chooseCityModule);
+		modules_Queue.push(chooseCityModule_Node);
 		break;
 
 	case CHANGE_TO_PLAY:
-
-		playerModule = new ModulePlayer(this);
 		if (playerModule->Init() == false) { return false; }
-		modules_Queue.push(playerModule);
-
-		entityManagerModule = new ModuleEntityManager(this);
 		if (entityManagerModule->Init() == false) { return false; }
-		modules_Queue.push(entityManagerModule);
-
-		sceneModule = new ModuleScene(this);
 		if (sceneModule->Init() == false) { return false; }
-		modules_Queue.push(sceneModule);
+
+		modules_Queue.push(playerModule_Node);
+		modules_Queue.push(entityManagerModule_Node);
+		modules_Queue.push(sceneModule_Node);
 
 		break;
 
 	case CHANGE_TO_MAP_PLANE:
-
-		planeModule = new ModulePlane(this);
 		if (planeModule->Init() == false) { return false; }
-
-		modules_Queue.push(planeModule);
+		modules_Queue.push(planeModule_Node);
 		break;
 
 	case CHANGE_TO_CREDITS:
-
-		creditsModule = new ModuleCredits(this);
 		if (creditsModule->Init() == false) { return false; }
-
-		modules_Queue.push(creditsModule);
+		modules_Queue.push(creditsModule_Node);
 		break;
 
 	case CHANGE_TO_HIGHSCORE:
-
-		highscoreModule = new ModuleHighscore(this);
 		if (highscoreModule->Init() == false) { return false; }
-
-		modules_Queue.push(highscoreModule);
+		modules_Queue.push(highscoreModule_Node);
 		break;
-
 	}
 	
 	return true;
 }
 
-void  Application::Reset_Time()
+void Application::Reset_Time()
 {
 	current_time = 0;
 }
@@ -211,3 +193,29 @@ bool Application::Lose_Coin()
 	return false;
 }
 
+
+
+
+
+
+
+
+/*
+ModuleWindow windowModule_tmp(this);
+windowModule = &windowModule_tmp;
+
+ModuleRender renderModule_tmp(this);
+renderModule = &renderModule_tmp;
+
+ModuleInput inputModule_tmp(this);
+inputModule = &inputModule_tmp;
+
+ModuleTextures texturesModule_tmp(this);
+texturesModule = &texturesModule_tmp;
+
+ModuleAudio audioModule_tmp(this);
+audioModule = &audioModule_tmp;
+
+ModuleFontManager fontManagerModule_tmp(this);
+fontManagerModule = &fontManagerModule_tmp;
+*/

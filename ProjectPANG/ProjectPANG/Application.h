@@ -26,12 +26,10 @@ class Application
 {
 private:
 	DoubleNodedList<Module*> modules_Queue;
-	DoubleNode<Module*>* item;
-	update_status returnValue;
 
 public:
 
-	int current_time;
+	unsigned int current_time;
 	time_t	timer;
 
 	unsigned int coins, stage;
@@ -48,13 +46,23 @@ public:
 	ModulePlayer* playerModule;
 	ModuleEntityManager* entityManagerModule;
 	ModuleScene* sceneModule;
-
 	ModuleTitle* titleModule;
 	ModuleTutorial* tutorialModule;
 	ModuleChooseCity* chooseCityModule;
 	ModulePlane* planeModule;
 	ModuleCredits* creditsModule;
 	ModuleHighscore* highscoreModule;
+
+	// Other Module nodes
+	DoubleNode<Module*>* playerModule_Node;
+	DoubleNode<Module*>* entityManagerModule_Node;
+	DoubleNode<Module*>* sceneModule_Node;
+	DoubleNode<Module*>* titleModule_Node;
+	DoubleNode<Module*>* tutorialModule_Node;
+	DoubleNode<Module*>* chooseCityModule_Node;
+	DoubleNode<Module*>* planeModule_Node;
+	DoubleNode<Module*>* creditsModule_Node;
+	DoubleNode<Module*>* highscoreModule_Node;
 
 	Application();
 	~Application();

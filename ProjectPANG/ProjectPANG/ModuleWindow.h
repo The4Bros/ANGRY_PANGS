@@ -14,10 +14,8 @@ public:
 	int scale;
 
 	ModuleWindow(Application* app);
+	ModuleWindow(const ModuleWindow& window);
 	bool Init();
-	update_status PreUpdate();
-	update_status Update();
-	update_status PostUpdate();
 	bool CleanUp();
 };
 

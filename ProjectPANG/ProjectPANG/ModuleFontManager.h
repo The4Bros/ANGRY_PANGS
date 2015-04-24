@@ -11,21 +11,20 @@
 
 
 class ModuleFontManager : public Module{
-public:
+private:
+
 	TTF_Font* font;
-	SDL_Color color;
-	char Num_string[100];
+	SDL_Color white_color;
 
 	SDL_Surface* surfaceMessage;
 	SDL_Texture* Message;
 	SDL_Rect Message_rect;
 
+public:
 
 	ModuleFontManager(Application* app);
+	ModuleFontManager(const ModuleFontManager& fontManager);
 	bool Init();
-	update_status PreUpdate();
-	update_status Update();
-	update_status PostUpdate();
 	bool CleanUp();
 
 	void Write_On_Screen(unsigned int value, unsigned int x, unsigned int y, unsigned int size);

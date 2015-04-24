@@ -8,19 +8,12 @@ template <class DoubleNodeDataTYPE>struct DoubleNode
 	DoubleNode* previous;
 	DoubleNode* next;
 
-	inline DoubleNode()
-	{
-		data = NULL;
-		next = previous = NULL;
-	}
+	inline DoubleNode() : data(NULL), next(NULL), previous(NULL) {}
+	inline DoubleNode(const DoubleNodeDataTYPE& item) : data(item), next(NULL), previous(NULL) {}
+	inline DoubleNode(const DoubleNode& node) : data(node.item), next(node.next), previous(node.previous) {}
+	void operator = (const DoubleNodeDataTYPE& item) { data = item; }
 
-	inline DoubleNode(const DoubleNodeDataTYPE& item)
-	{
-		data = item;
-		next = previous = NULL;
-	}
-
-	~DoubleNode(){}
+	~DoubleNode(){ delete data; }
 };
 
 template <class QueueTYPE> class DoubleNodedList
@@ -43,9 +36,10 @@ public:
 
 	void push(const QueueTYPE& data)
 	{
-		DoubleNode<QueueTYPE>* node;
-		node = new DoubleNode<QueueTYPE>();
-		node->data = data;
+		//DoubleNode<QueueTYPE> tmp(data);
+		//DoubleNode<QueueTYPE>* node = &tmp;
+
+		DoubleNode<QueueTYPE>* node = new DoubleNode<QueueTYPE>(data);
 
 		if (init == NULL)
 		{
@@ -60,24 +54,57 @@ public:
 		num_elements++;
 	}
 
-	void clear()
+	void push(DoubleNode<QueueTYPE>* node)
 	{
-		DoubleNode<QueueTYPE>* p_data;
-		DoubleNode<QueueTYPE>* p_next;
-		p_data = init;
+		node->next = NULL;
 
-		while (p_data != NULL)
+		if (init == NULL)
 		{
-			p_next = p_data->next;
-			delete p_data;
-			p_data = p_next;
+			node->previous = NULL;
+			last = init = node;
+		}
+		else
+		{
+			node->previous = last;
+			last->next = node;
+			last = node;
 		}
 
-		init = last = NULL;
-		num_elements = 0;
+		num_elements++;
+	}
+
+	void clear()
+	{
+		if (init == NULL)
+		{
+			DoubleNode<QueueTYPE>* p_data;
+			DoubleNode<QueueTYPE>* p_next;
+			p_data = init;
+
+			while (p_data != NULL)
+			{
+				p_next = p_data->next;
+				delete p_data;
+				p_data = p_next;
+			}
+
+			init = last = NULL;
+			num_elements = 0;
+		}
 	}
 
 	void ReduceTo(const unsigned int quantity)
+	{
+		if (quantity < num_elements)
+		{
+			last = init;
+			for (unsigned int i = 1; i < quantity; i++){ last = last->next; }
+			last->next = NULL;
+			num_elements = quantity;
+		}
+	}
+
+	void ClearTo(const unsigned int quantity)
 	{
 		if (quantity == 0) { clear(); }
 

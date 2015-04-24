@@ -14,9 +14,9 @@ public:
 	SDL_Renderer* renderer;
 
 	ModuleRender(Application* app);
+	ModuleRender(const ModuleRender& render);
 	bool Init();
 	update_status PreUpdate();
-	update_status Update();
 	update_status PostUpdate();
 	bool CleanUp();
 

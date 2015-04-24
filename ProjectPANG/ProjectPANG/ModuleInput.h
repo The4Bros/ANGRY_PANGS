@@ -9,15 +9,12 @@ class ModuleInput : public Module{
 
 public:
 
-	SDL_Event* mainEvent;
+	SDL_Event mainEvent;
 	const Uint8* key;
 
 	ModuleInput(Application* app);
-	bool Init();
+	ModuleInput(const ModuleInput& input);
 	update_status PreUpdate();
-	update_status Update();
-	update_status PostUpdate();
-	bool CleanUp();
 };
 
 #endif

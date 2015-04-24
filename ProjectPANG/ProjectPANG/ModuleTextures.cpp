@@ -1,7 +1,5 @@
-#include "ModuleTextures.h"
 
-#include "SDL_image/include/SDL_image.h"
-#pragma comment( lib, "SDL_image/libx86/SDL2_image.lib" )
+#include "ModuleTextures.h"
 
 ModuleTextures::ModuleTextures(Application* app) : Module(app)
 {
@@ -21,6 +19,26 @@ ModuleTextures::ModuleTextures(Application* app) : Module(app)
 	title_sprite = NULL;
 
 }
+
+ModuleTextures::ModuleTextures(const ModuleTextures& textureModule) : Module(textureModule.app)
+{
+	background_sprite = NULL;
+	balls_sprite = NULL;
+	bricks_sprite = NULL;
+	enemies_sprite = NULL;
+	harpoons_sprite = NULL;
+	instructions_sprite = NULL;
+	map_countdown_sprite = NULL;
+	map_sprite = NULL;
+	particles_sprite = NULL;
+	players_sprite = NULL;
+	ready = NULL;
+	scores_sprite = NULL;
+	timer_sprite = NULL;
+	title_sprite = NULL;
+
+}
+
 bool ModuleTextures::Init()
 {
 	background_sprite = IMG_LoadTexture(app->renderModule->renderer, "images/Backgrounds.png");
@@ -68,7 +86,24 @@ bool ModuleTextures::Init()
 
 	return true;
 }
-update_status ModuleTextures::PreUpdate(){ return UPDATE_CONTINUE; }
-update_status ModuleTextures::Update(){ return UPDATE_CONTINUE; }
-update_status ModuleTextures::PostUpdate(){ return UPDATE_CONTINUE; }
-bool ModuleTextures::CleanUp(){ return true; }
+
+bool ModuleTextures::CleanUp()
+{
+	SDL_DestroyTexture(background_sprite);
+	SDL_DestroyTexture(balls_sprite);
+	SDL_DestroyTexture(bricks_sprite);
+	SDL_DestroyTexture(enemies_sprite);
+	SDL_DestroyTexture(harpoons_sprite);
+	SDL_DestroyTexture(instructions_sprite);
+	SDL_DestroyTexture(map_countdown_sprite);
+	SDL_DestroyTexture(map_sprite);
+	SDL_DestroyTexture(particles_sprite);
+	SDL_DestroyTexture(players_sprite);
+	SDL_DestroyTexture(ready);
+	SDL_DestroyTexture(scores_sprite);
+	SDL_DestroyTexture(timer_sprite);
+	SDL_DestroyTexture(title_sprite);
+	SDL_DestroyTexture(level_complete);
+
+	return true;
+}

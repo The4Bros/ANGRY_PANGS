@@ -32,7 +32,7 @@ bool ModuleTitle::Init()
 
 	insert_coin_pressed = false;
 
-	app->audioModule->PlayMusic(app->audioModule->music_paths[18]);
+	app->audioModule->PlayMusic(18);
 
 	return true;
 }
@@ -85,7 +85,7 @@ update_status ModuleTitle::Update()
 			{
 				app->Add_Coin();
 				insert_coin_pressed = true;
-				app->audioModule->PlayFx(app->audioModule->insert_coin);
+				app->audioModule->PlayFx(COIN);
 			}
 		}
 		else { insert_coin_pressed = false; }

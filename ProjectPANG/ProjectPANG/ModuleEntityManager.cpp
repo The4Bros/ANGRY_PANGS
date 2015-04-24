@@ -1,41 +1,39 @@
 #include "ModuleEntityManager.h"
 
-ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
-{
-	bricks = new DynArray<Brick*>();
-	stairs = new DynArray<Stair*>();
-	balloons = new DynArray<Balloon*>();
-	particles = new DynArray<Particles*>();
-}
+ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app), bricks(NULL), stairs(NULL), balloons(NULL), particles(NULL) {}
 bool ModuleEntityManager::Init()
 {
-	// HARPOONS
+	if (bricks == NULL)   {    bricks = new DynArray<Brick*>(0);     }
+	if (stairs == NULL)   {    stairs = new DynArray<Stair*>(0);     }
+	if (balloons == NULL) {  balloons = new DynArray<Balloon*>();   }
+	if (particles == NULL){ particles = new DynArray<Particles*>(0); }
 
-	// BODIES
+	
+
+	// HARPOON BODIES
 	for (int i = 0; i < 8; i++)
 	{
 		harpoon_source_rect[i + 8] = { 0, 0, 7, (i + 1) * 2 };
 		harpoon_source_rect[i] = { 7, 0, 7, (i + 1) * 2 };
 	}
 
-	// HEADS
+	// HARPOON HEADS
 	harpoon_source_rect[16] = { 14, 0, 9, 9 };
 	harpoon_source_rect[17] = { 22, 0, 9, 9 };
 
-	// GRAPPLE HEADS
+	// HARPOON GRAPPLE HEADS
 	harpoon_source_rect[18] = { 14, 9, 9, 6 };
 	harpoon_source_rect[19] = { 22, 9, 9, 6 };
 
-	// GRAPPLED HEADS
+	// HARPOON GRAPPLED HEADS
 	harpoon_source_rect[20] = { 31, 0, 9, 4 };
 	harpoon_source_rect[21] = { 31, 4, 9, 4 };
 	harpoon_source_rect[22] = { 31, 8, 9, 4 };
 
-	// GRAPPLED BODIES
+	// HARPOON GRAPPLED BODIES
 	harpoon_source_rect[23] = { 31, 13, 3, 2 };
 	harpoon_source_rect[24] = { 34, 13, 3, 2 };
 	harpoon_source_rect[25] = { 37, 13, 3, 2 };
-
 
 	// BRICKS
 	for (int i = 0; i < 3; i++)
@@ -53,7 +51,6 @@ bool ModuleEntityManager::Init()
 
 	// STAIRS
 	source_stair_rect = { 0, 104, 24, 8 };
-
 
 	// BALLOONS
 	source_balloon_rect[0] = { 0, 0, 48, 40 };

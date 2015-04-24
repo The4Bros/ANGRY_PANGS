@@ -2,11 +2,11 @@
 #include "Globals.h"
 #include "Application.h"
 
-#include "SDL_image/include/SDL_image.h"
-#pragma comment( lib, "SDL_image/libx86/SDL2_image.lib" )
-
 #ifndef __ModuleTextures_H__
 #define __ModuleTextures_H__
+
+#include "SDL_image/include/SDL_image.h"
+#pragma comment( lib, "SDL_image/libx86/SDL2_image.lib" )
 
 class ModuleTextures : public Module{
 public:
@@ -28,10 +28,8 @@ public:
 	SDL_Texture* level_complete;
 
 	ModuleTextures(Application* app);
+	ModuleTextures(const ModuleTextures& textureModule);
 	bool Init();
-	update_status PreUpdate();
-	update_status Update();
-	update_status PostUpdate();
 	bool CleanUp();
 };
 

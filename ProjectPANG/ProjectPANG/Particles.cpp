@@ -7,7 +7,7 @@ Particles::Particles(Application* app, int position_in_list, unsigned int type, 
 
 	update_counter = 0;
 
-	if (type < 12){ app->audioModule->PlayFx(app->audioModule->balloon_pop); }
+	if (type < 12){ app->audioModule->PlayFx(BALLOON_POP); }
 
 	if (type == 12){ quantity = 4; } // enemy hit
 	else { quantity = 3; }
