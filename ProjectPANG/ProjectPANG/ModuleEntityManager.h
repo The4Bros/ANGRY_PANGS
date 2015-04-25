@@ -26,10 +26,10 @@ public:
 	unsigned int balloon_speed;
 
 	//DynArray<Enemy*>* enemies;
-	SDL_Rect source_enemy_rect[74];
+	SDL_Rect source_enemy_rect[200];
 
 	DynArray<Particles*>* particles;
-	SDL_Rect particles_source_rect[4];
+	SDL_Rect particles_source_rect[200];
 
 
 	ModuleEntityManager(Application* app);
