@@ -61,6 +61,10 @@ public:
 		if (index < num_elements)
 		{
 			num_elements--;
+
+			delete data[index];
+			data[index] = NULL;
+
 			for (unsigned int i = index; i < num_elements; i++)
 			{
 				data[i] = data[i + 1];

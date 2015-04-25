@@ -104,7 +104,7 @@ bool Application::CleanUp()
 {
 	modules_Queue.ReduceTo(6);
 
-	if (!playerModule->CleanUp())        { return false; } delete playerModule_Node;
+	if (!playerModule->CleanUp())        { return false; } delete playerModule_Node; // deleting the containing node deletes its data
 	if (!entityManagerModule->CleanUp()) { return false; } delete entityManagerModule_Node;
 	if (!sceneModule->CleanUp())         { return false; } delete sceneModule_Node;
 	if (!titleModule->CleanUp())         { return false; } delete titleModule_Node;
@@ -148,9 +148,9 @@ bool Application::ChangeTo(update_status new_state)
 		break;
 
 	case CHANGE_TO_PLAY:
-		if (playerModule->Init() == false) { return false; }
+		if (playerModule->Init() == false)        { return false; }
 		if (entityManagerModule->Init() == false) { return false; }
-		if (sceneModule->Init() == false) { return false; }
+		if (sceneModule->Init() == false)         { return false; }
 
 		modules_Queue.push(playerModule_Node);
 		modules_Queue.push(entityManagerModule_Node);

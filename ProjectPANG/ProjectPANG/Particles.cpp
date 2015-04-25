@@ -1,12 +1,10 @@
 # include "Particles.h"
 
-Particles::Particles(Application* app, int position_in_list, unsigned int type, int x, int y)
+Particles::Particles(Application* app, int position_in_list, unsigned int type, int x, int y) :
+		app(app),
+		position_in_list(position_in_list),
+		update_counter(0)
 {
-	this->app = app;
-	this->position_in_list = position_in_list;
-
-	update_counter = 0;
-
 	if (type < 12){ app->audioModule->PlayFx(BALLOON_POP); }
 
 	if (type == 12){ quantity = 4; } // enemy hit

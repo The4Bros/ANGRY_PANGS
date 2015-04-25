@@ -10,11 +10,11 @@ class Stair
 public:
 	Application* app;
 
-	SDL_Rect rect;
 	DynArray<SDL_Rect>* rects;
+	SDL_Rect rect;
 
 	Stair(Application* app, unsigned int x, unsigned int y, unsigned int size);
-	~Stair(){}
+	~Stair();
 
 	void Print();
 

@@ -1,12 +1,13 @@
 #include "ModuleEntityManager.h"
 
 ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app), bricks(NULL), stairs(NULL), balloons(NULL), particles(NULL) {}
+
 bool ModuleEntityManager::Init()
 {
-	if (bricks == NULL)   {    bricks = new DynArray<Brick*>(0);     }
-	if (stairs == NULL)   {    stairs = new DynArray<Stair*>(0);     }
-	if (balloons == NULL) {  balloons = new DynArray<Balloon*>();   }
-	if (particles == NULL){ particles = new DynArray<Particles*>(0); }
+	if (bricks == NULL)   {    bricks = new DynArray<Brick*>();     }
+	if (stairs == NULL)   {    stairs = new DynArray<Stair*>();     }
+	if (balloons == NULL) {  balloons = new DynArray<Balloon*>();    }
+	if (particles == NULL){ particles = new DynArray<Particles*>(); }
 
 	
 

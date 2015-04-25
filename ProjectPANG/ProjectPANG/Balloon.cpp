@@ -7,36 +7,17 @@
 // 2 -> new right
 // 3 -> new left
 
-Balloon::Balloon(Application* app, unsigned int position_in_list, int x, int y, int type, int direction)
+Balloon::Balloon(Application* app, unsigned int position_in_list, int x, int y, int type, int direction) :
+		app(app),
+		position_in_list(position_in_list),
+		horizontal_speed(2),
+		ticks(1)
 {
-	this->app = app;
-	this->position_in_list = position_in_list;
-	horizontal_speed = 2;
-	ticks = 1;
+	if (direction < 2){ state_balloon_V = BALLOON_DOWN; }
+	else{ state_balloon_V = BALLOON_UP; }
+	if (direction % 2 == 0){ state_balloon_H = BALLOON_RIGHT; }
+	else{ state_balloon_H = BALLOON_LEFT; }
 
-	switch (direction)
-	{
-		case 0:
-			state_balloon_H = BALLOON_RIGHT;
-			state_balloon_V = BALLOON_DOWN;
-			gravity = 0;
-			break;
-		case 1:
-			state_balloon_H = BALLOON_LEFT;
-			state_balloon_V = BALLOON_DOWN;
-			gravity = 0;
-			break;
-		case 2:
-			state_balloon_H = BALLOON_RIGHT;
-			state_balloon_V = BALLOON_UP;
-			gravity = 4;
-			break;
-		case 3:
-			state_balloon_H = BALLOON_LEFT;
-			state_balloon_V = BALLOON_UP;
-			gravity = 4;
-			break;
-	}
 
 	switch (type)
 	{
@@ -282,30 +263,10 @@ void Balloon::Reset(unsigned int position_in_list, int x, int y, int type, int d
 	ticks = 1;
 	this->position_in_list = position_in_list;
 
-	switch (direction)
-	{
-	case 0:
-		state_balloon_H = BALLOON_RIGHT;
-		state_balloon_V = BALLOON_DOWN;
-		gravity = 0;
-		break;
-	case 1:
-		state_balloon_H = BALLOON_LEFT;
-		state_balloon_V = BALLOON_DOWN;
-		gravity = 0;
-		break;
-	case 2:
-		state_balloon_H = BALLOON_RIGHT;
-		state_balloon_V = BALLOON_UP;
-		gravity = 4;
-		break;
-	case 3:
-		state_balloon_H = BALLOON_LEFT;
-		state_balloon_V = BALLOON_UP;
-		gravity = 4;
-		break;
-	}
-
+	if (direction < 2){ state_balloon_V = BALLOON_DOWN; }
+	else{ state_balloon_V = BALLOON_UP; }
+	if (direction % 2 == 0){ state_balloon_H = BALLOON_RIGHT; }
+	else{ state_balloon_H = BALLOON_LEFT; }
 
 	switch (type)
 	{

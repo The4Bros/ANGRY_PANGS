@@ -52,6 +52,15 @@ Player::Player(Application* app, bool player1)
 	}
 }
 
+
+Player::~Player()
+{
+	delete harpoon1;
+	delete harpoon2;
+}
+
+
+
 void Player::LeftTrigger()
 {
 	if (state == LEFT)

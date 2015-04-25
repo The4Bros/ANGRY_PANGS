@@ -33,19 +33,20 @@ bool ModuleAudio::Init()
 	music_paths[18] = "music/UN - Unused #1 (Arcade).wav";
 
 	Mix_Chunk* chunk = NULL;
-	chunk = Mix_LoadWAV("music/bolapeta.wav"); if (chunk == NULL) { return false; } fx[0] = *chunk;
-	chunk = Mix_LoadWAV("music/coin.wav");     if (chunk == NULL) { return false; } fx[1] = *chunk;
+	chunk = Mix_LoadWAV("music/bolapeta.wav"); if (chunk == NULL) { return false; }   fx[0] = *chunk; // BALLOON_POP
+	chunk = Mix_LoadWAV("music/coin.wav");     if (chunk == NULL) { return false; }   fx[1] = *chunk; // COIN
 
 	return true;
 }
 
 bool ModuleAudio::CleanUp()
 {
-	if (music != NULL){ Mix_FreeMusic(music); }
+	if (music != NULL){ Mix_FreeMusic(music); } // free music
 
-	for (unsigned int i = 0; i < 2; i++){ Mix_FreeChunk(&fx[i]); }
+	for (unsigned int i = 0; i < 2; i++){ Mix_FreeChunk(&fx[i]); } // free chuncks
 
-	Mix_CloseAudio();
+	Mix_CloseAudio(); // close audio subsystem
+
 	while (Mix_Init(0)){ Mix_Quit(); } //each call to Mix_Init may set different flags
 		
 	return true;
@@ -53,15 +54,12 @@ bool ModuleAudio::CleanUp()
 
 bool ModuleAudio::PlayMusic(const unsigned int position)
 {
-	if (music != NULL)
-	{
-		Mix_FreeMusic(music);
-	}
+	if (music != NULL){ Mix_FreeMusic(music); } // free previous music
 
-	music = Mix_LoadMUS(music_paths[position]);
+	music = Mix_LoadMUS(music_paths[position]); // load new music
 	if (music == NULL){ return false; }
 
-	if (Mix_PlayMusic(music, -1) < 0){ return false; }
+	if (Mix_PlayMusic(music, -1) < 0){ return false; } // check if music is played
 
 	return true;
 }

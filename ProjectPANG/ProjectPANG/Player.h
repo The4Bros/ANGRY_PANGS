@@ -59,7 +59,7 @@ public:
 	Stair* current_stair;
 
 	Player(Application* app, bool player1);
-	~Player(){}
+	~Player();
 
 	void LeftTrigger();
 	void RightTrigger();

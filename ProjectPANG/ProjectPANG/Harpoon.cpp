@@ -1,17 +1,12 @@
 #include "Harpoon.h"
 
 
-Harpoon::Harpoon(Application* app)
-{
-	this->app = app;
-
-	update_counter = 0;
-	alive = false;
-
-	head_rect = { 0, 0, 9 * app->windowModule->scale, 9 * app->windowModule->scale };
-	body_rect = { 0, 0, 7 * app->windowModule->scale, 30 * app->windowModule->scale };
-
-}
+Harpoon::Harpoon(Application* app) :
+		app(app),
+		update_counter(0),
+		alive(false),
+		head_rect({ 0, 0, 9 * app->windowModule->scale, 9 * app->windowModule->scale }),
+		body_rect({ 0, 0, 7 * app->windowModule->scale, 30 * app->windowModule->scale }) {}
 
 void Harpoon::Shoot_Harpoon(unsigned int y, unsigned int x)
 {
