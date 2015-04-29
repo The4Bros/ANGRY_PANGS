@@ -65,7 +65,7 @@ update_status ModuleScene::Update()
 			//TIMER MANAGED
 			if (difftime(time(NULL), time_count->timer) >= 1 && game_state == PLAYING) { time_count->Update(); }
 
-			if (app->entityManagerModule->balloons->empty())
+			if (app->entityManagerModule->balloons.empty())
 			{
 				stage_cleared = true;
 				update_counter = 0;
@@ -152,15 +152,15 @@ void ModuleScene::Print_All_Objects()
 	time_count->Print_Timer();
 
 	// PRINT STAIRS
-	for (unsigned int i = 0; i < app->entityManagerModule->stairs->Count(); i++)
+	for (unsigned int i = 0; i < app->entityManagerModule->stairs.Count(); i++)
 	{
-		(*app->entityManagerModule->stairs->at(i))->Print();
+		(*app->entityManagerModule->stairs.at(i))->Print();
 	}
 
 	// PRINT BRICKS
-	for (unsigned int i = 0; i < app->entityManagerModule->bricks->Count(); i++)
+	for (unsigned int i = 0; i < app->entityManagerModule->bricks.Count(); i++)
 	{
-		(*app->entityManagerModule->bricks->at(i))->Print();
+		(*app->entityManagerModule->bricks.at(i))->Print();
 	}
 
 
@@ -190,15 +190,15 @@ void ModuleScene::Print_All_Objects()
 
 	// PRINT BALLS
 
-	for (unsigned int i = 0; i < app->entityManagerModule->balloons->Count(); i++)
+	for (unsigned int i = 0; i < app->entityManagerModule->balloons.Count(); i++)
 	{
-		(*app->entityManagerModule->balloons->at(i))->Print();
+		(*app->entityManagerModule->balloons.at(i))->Print();
 	}
 
 	// PRINT PARTICLES
-	for (unsigned int i = 0; i < app->entityManagerModule->particles->Count(); i++)
+	for (unsigned int i = 0; i < app->entityManagerModule->particles.Count(); i++)
 	{
-		(*app->entityManagerModule->particles->at(i))->Print();
+		(*app->entityManagerModule->particles.at(i))->Print();
 	}
 }
 
@@ -208,6 +208,8 @@ void ModuleScene::reset_stage()
 	unsigned int i;
 
 	game_state = READY;
+
+	app->entityManagerModule->particles.clear();
 
 	// TIME COUNT
 	time_count->Reset(stage_arrangement.time_limit);
@@ -223,11 +225,11 @@ void ModuleScene::reset_stage()
 	{
 		i = 0;
 
-		if (stage_arrangement.bricks.Count() > app->entityManagerModule->bricks->Count()) // needs more bricks
+		if (stage_arrangement.bricks.Count() > app->entityManagerModule->bricks.Count()) // needs more bricks
 		{
-			while (i < app->entityManagerModule->bricks->Count())
+			while (i < app->entityManagerModule->bricks.Count())
 			{
-				(*app->entityManagerModule->bricks->at(i))->Reset(
+				(*app->entityManagerModule->bricks.at(i))->Reset(
 					i,
 					(*stage_arrangement.bricks.at(i)).x,
 					(*stage_arrangement.bricks.at(i)).y,
@@ -236,7 +238,7 @@ void ModuleScene::reset_stage()
 			}
 			while (i < stage_arrangement.bricks.Count())
 			{
-				app->entityManagerModule->bricks->push_back(new Brick(
+				app->entityManagerModule->bricks.push_back(new Brick(
 					app, i,
 					(*stage_arrangement.bricks.at(i)).x,
 					(*stage_arrangement.bricks.at(i)).y,
@@ -248,7 +250,7 @@ void ModuleScene::reset_stage()
 		{
 			while (i < stage_arrangement.bricks.Count())
 			{
-				(*app->entityManagerModule->bricks->at(i))->Reset(
+				(*app->entityManagerModule->bricks.at(i))->Reset(
 					i,
 					(*stage_arrangement.bricks.at(i)).x,
 					(*stage_arrangement.bricks.at(i)).y,
@@ -256,13 +258,10 @@ void ModuleScene::reset_stage()
 				i++;
 			}
 
-			app->entityManagerModule->bricks->Reduce_To(i);
+			app->entityManagerModule->bricks.Reduce_To(i);
 		}
 	}
-	else { app->entityManagerModule->bricks->clear(); }
-	
-	app->entityManagerModule->particles->clear();
-
+	else { app->entityManagerModule->bricks.clear(); }
 
 	// STAIRS____________________________________________________________________________________________________________________________
 
@@ -270,11 +269,11 @@ void ModuleScene::reset_stage()
 	{
 		i = 0;
 
-		if (stage_arrangement.stairs.Count() > app->entityManagerModule->stairs->Count()) // needs more bricks
+		if (stage_arrangement.stairs.Count() > app->entityManagerModule->stairs.Count()) // needs more bricks
 		{
-			while (i < app->entityManagerModule->stairs->Count())
+			while (i < app->entityManagerModule->stairs.Count())
 			{
-				(*app->entityManagerModule->stairs->at(i))->Reset(
+				(*app->entityManagerModule->stairs.at(i))->Reset(
 					(*stage_arrangement.stairs.at(i)).x,
 					(*stage_arrangement.stairs.at(i)).y,
 					(*stage_arrangement.stairs.at(i)).type);
@@ -282,7 +281,7 @@ void ModuleScene::reset_stage()
 			}
 			while (i < stage_arrangement.stairs.Count())
 			{
-				app->entityManagerModule->stairs->push_back(new Stair(
+				app->entityManagerModule->stairs.push_back(new Stair(
 					app,
 					(*stage_arrangement.stairs.at(i)).x,
 					(*stage_arrangement.stairs.at(i)).y,
@@ -294,17 +293,17 @@ void ModuleScene::reset_stage()
 		{
 			while (i < stage_arrangement.stairs.Count())
 			{
-				(*app->entityManagerModule->stairs->at(i))->Reset(
+				(*app->entityManagerModule->stairs.at(i))->Reset(
 					(*stage_arrangement.stairs.at(i)).x,
 					(*stage_arrangement.stairs.at(i)).y,
 					(*stage_arrangement.stairs.at(i)).type);
 				i++;
 			}
 
-			app->entityManagerModule->stairs->Reduce_To(i);
+			app->entityManagerModule->stairs.Reduce_To(i);
 		}
 	}
-	else { app->entityManagerModule->stairs->clear(); }
+	else { app->entityManagerModule->stairs.clear(); }
 
 	// BALLOONS____________________________________________________________________________________________________________________________
 
@@ -312,11 +311,11 @@ void ModuleScene::reset_stage()
 	{
 		i = 0;
 
-		if (stage_arrangement.balloons.Count() > app->entityManagerModule->balloons->Count()) // needs more bricks
+		if (stage_arrangement.balloons.Count() > app->entityManagerModule->balloons.Count()) // needs more bricks
 		{
-			while (i < app->entityManagerModule->balloons->Count())
+			while (i < app->entityManagerModule->balloons.Count())
 			{
-				(*app->entityManagerModule->balloons->at(i))->Reset(
+				(*app->entityManagerModule->balloons.at(i))->Reset(
 					i,
 					(*stage_arrangement.balloons.at(i)).x,
 					(*stage_arrangement.balloons.at(i)).y,
@@ -326,7 +325,7 @@ void ModuleScene::reset_stage()
 			}
 			while (i < stage_arrangement.balloons.Count())
 			{
-				app->entityManagerModule->balloons->push_back(new Balloon(
+				app->entityManagerModule->balloons.push_back(new Balloon(
 					app, i,
 					(*stage_arrangement.balloons.at(i)).x,
 					(*stage_arrangement.balloons.at(i)).y,
@@ -339,7 +338,7 @@ void ModuleScene::reset_stage()
 		{
 			while (i < stage_arrangement.balloons.Count())
 			{
-				(*app->entityManagerModule->balloons->at(i))->Reset(
+				(*app->entityManagerModule->balloons.at(i))->Reset(
 					i,
 					(*stage_arrangement.balloons.at(i)).x,
 					(*stage_arrangement.balloons.at(i)).y,
@@ -347,10 +346,10 @@ void ModuleScene::reset_stage()
 					(*stage_arrangement.balloons.at(i)).aux1);
 				i++;
 			}
-			app->entityManagerModule->balloons->Reduce_To(i);
+			app->entityManagerModule->balloons.Reduce_To(i);
 		}
 	}
-	else { app->entityManagerModule->balloons->clear(); }
+	else { app->entityManagerModule->balloons.clear(); }
 
 
 	/*

@@ -58,7 +58,7 @@
     <Filter Include="Archivos de código fuente\Application\Game\Modules">
       <UniqueIdentifier>{9fa3963e-536e-41d2-8ef9-ffae4fc01959}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de código fuente\Application\Game\Modules\Objects">
+    <Filter Include="Archivos de código fuente\Application\Game\Objects">
       <UniqueIdentifier>{05b88821-64c4-4d0d-a9ae-fa89ff151700}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -118,25 +118,25 @@
       <Filter>Archivos de código fuente\Application\Game\Modules</Filter>
     </ClCompile>
     <ClCompile Include="Time_Count.cpp">
-      <Filter>Archivos de código fuente\Application\Game\Modules\Objects</Filter>
+      <Filter>Archivos de código fuente\Application\Game\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Harpoon.cpp">
-      <Filter>Archivos de código fuente\Application\Game\Modules\Objects</Filter>
+      <Filter>Archivos de código fuente\Application\Game\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Archivos de código fuente\Application\Game\Modules\Objects</Filter>
+      <Filter>Archivos de código fuente\Application\Game\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Particles.cpp">
-      <Filter>Archivos de código fuente\Application\Game\Modules\Objects</Filter>
+      <Filter>Archivos de código fuente\Application\Game\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Balloon.cpp">
-      <Filter>Archivos de código fuente\Application\Game\Modules\Objects</Filter>
+      <Filter>Archivos de código fuente\Application\Game\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Stair.cpp">
-      <Filter>Archivos de código fuente\Application\Game\Modules\Objects</Filter>
+      <Filter>Archivos de código fuente\Application\Game\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Brick.cpp">
-      <Filter>Archivos de código fuente\Application\Game\Modules\Objects</Filter>
+      <Filter>Archivos de código fuente\Application\Game\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

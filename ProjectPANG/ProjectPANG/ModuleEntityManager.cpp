@@ -1,16 +1,9 @@
 #include "ModuleEntityManager.h"
 
-ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app), bricks(NULL), stairs(NULL), balloons(NULL), particles(NULL) {}
+ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app){}
 
 bool ModuleEntityManager::Init()
 {
-	if (bricks == NULL)   {    bricks = new DynArray<Brick*>();     }
-	if (stairs == NULL)   {    stairs = new DynArray<Stair*>();     }
-	if (balloons == NULL) {  balloons = new DynArray<Balloon*>();    }
-	if (particles == NULL){ particles = new DynArray<Particles*>(); }
-
-	
-
 	// HARPOON BODIES
 	for (int i = 0; i < 8; i++)
 	{
@@ -106,8 +99,8 @@ update_status ModuleEntityManager::Update()
 {
 	if (app->sceneModule->game_state == PLAYING)
 	{
-		for (unsigned int i = 0; i < balloons->Count(); i++){ (*balloons->at(i))->Update(); }
-		for (unsigned int i = 0; i < particles->Count(); i++){ (*particles->at(i))->Update(); }
+		for (unsigned int i = 0; i < balloons.Count(); i++){ (*balloons.at(i))->Update(); }
+		for (unsigned int i = 0; i < particles.Count(); i++){ (*particles.at(i))->Update(); }
 	}
 
 	return UPDATE_CONTINUE;
@@ -117,11 +110,6 @@ update_status ModuleEntityManager::Update()
 
 bool ModuleEntityManager::CleanUp()
 {
-	if (balloons != NULL)  { delete balloons;  }
-	if (stairs != NULL)    { delete stairs;    }
-	if (bricks != NULL)    { delete bricks;    }
-	if (particles != NULL) { delete particles; }
-
 	return true;
 }
 

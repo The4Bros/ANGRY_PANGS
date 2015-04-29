@@ -16,8 +16,7 @@ private:
 	TTF_Font* font;
 	SDL_Color white_color;
 
-	SDL_Surface* surfaceMessage;
-	SDL_Texture* Message;
+	
 	SDL_Rect Message_rect;
 
 public:

@@ -84,11 +84,11 @@ void Particles::Update()
 		}
 		else
 		{
-			for (unsigned int i = position_in_list + 1; i < app->entityManagerModule->particles->Count(); i++)
+			for (unsigned int i = position_in_list + 1; i < app->entityManagerModule->particles.Count(); i++)
 			{
-				(*app->entityManagerModule->particles->at(i))->position_in_list--;
+				(*app->entityManagerModule->particles.at(i))->position_in_list--;
 			}
-			app->entityManagerModule->particles->Delete_Element_At(position_in_list);
+			app->entityManagerModule->particles.Delete_Element_At(position_in_list);
 		}
 	}
 	else{ update_counter++; }
