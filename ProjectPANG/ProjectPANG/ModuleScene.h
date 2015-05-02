@@ -87,6 +87,9 @@ public:
 	update_status Update();
 	bool CleanUp();
 
+	void Pause_Scene();
+	bool Resume_Scene();
+
 	void Print_All_Objects();
 	void reset_stage();
 	bool load_stage(int stage);

@@ -21,6 +21,7 @@ public:
 	bool CleanUp();
 
 	void Print(SDL_Texture* texture, const SDL_Rect* source_rect, const SDL_Rect* rect);
+	void Fade_Screen();
 };
 
 #endif

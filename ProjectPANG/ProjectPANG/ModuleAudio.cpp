@@ -1,7 +1,7 @@
 
 #include "ModuleAudio.h"
 
-ModuleAudio::ModuleAudio(Application* app) : Module(app), music(NULL) {}
+ModuleAudio::ModuleAudio(Application* app) : Module(app), music(NULL), music_playing(0) {}
 
 ModuleAudio::ModuleAudio(const ModuleAudio& audio) : Module(audio.app), music(NULL) {}
 
@@ -61,8 +61,28 @@ bool ModuleAudio::PlayMusic(const unsigned int position)
 
 	if (Mix_PlayMusic(music, -1) < 0){ return false; } // check if music is played
 
+	music_playing = position; // save music playing
+
 	return true;
 }
+
+bool ModuleAudio::PlayMusic()
+{
+	if (music != NULL){ Mix_FreeMusic(music); } // free previous music if any was still playing
+
+	music = Mix_LoadMUS(music_paths[music_playing]); // load previous music
+	if (music == NULL){ return false; }
+
+	if (Mix_PlayMusic(music, -1) < 0){ return false; } // check if music is played
+
+	return true;
+}
+
+void ModuleAudio::PauseMusic()
+{
+	if (music != NULL){ Mix_FreeMusic(music); } // free previous music
+}
+
 
 void ModuleAudio::PlayFx(fx_sound id, int repeat)
 {

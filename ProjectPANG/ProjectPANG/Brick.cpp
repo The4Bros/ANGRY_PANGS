@@ -65,18 +65,15 @@ void Brick::Reset(int position_in_list, unsigned int x, unsigned int y, unsigned
 		rect = { x * app->windowModule->scale, y * app->windowModule->scale,
 			8 * ((type / 3) + 1) * app->windowModule->scale, 8 * app->windowModule->scale };
 	}
+	else if (type < 14)
+	{
+		rect = { x * app->windowModule->scale, y * app->windowModule->scale,
+			8 * app->windowModule->scale, 32 * app->windowModule->scale };
+	}
 	else
 	{
 		switch (type)
 		{
-		case 12:
-			rect = { x * app->windowModule->scale, y * app->windowModule->scale,
-				8 * app->windowModule->scale, 32 * app->windowModule->scale };
-			break;
-		case 13:
-			rect = { x * app->windowModule->scale, y * app->windowModule->scale,
-				8 * app->windowModule->scale, 32 * app->windowModule->scale };
-			break;
 		case 14:
 			rect = { x * app->windowModule->scale, y * app->windowModule->scale,
 				8 * app->windowModule->scale, 16 * app->windowModule->scale };

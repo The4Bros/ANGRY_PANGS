@@ -45,7 +45,7 @@ update_status ModuleScene::Update()
 		// PAUSE MANAGED
 		if (app->inputModule->key[SDL_SCANCODE_P] == 1)
 		{
-			if (!pause_pressed){ game_state = PAUSED; pause_pressed = true; }
+			if (!pause_pressed){ Pause_Scene(); }
 		}
 		else{ pause_pressed = false; }
 
@@ -111,9 +111,15 @@ update_status ModuleScene::Update()
 	case PAUSED:
 		app->renderModule->Print(app->texturesModule->ready, &game_over_source_rect, &game_over_rect);
 
+		// darken screen
+		app->renderModule->Fade_Screen();
+
 		if (app->inputModule->key[SDL_SCANCODE_P] == 1)
 		{
-			if (!pause_pressed){ game_state = PLAYING; pause_pressed = true; }
+			if (!pause_pressed)
+			{
+				if (!Resume_Scene()){ return UPDATE_ERROR; }
+			}
 		}
 		else{ pause_pressed = false; }
 
@@ -125,10 +131,30 @@ update_status ModuleScene::Update()
 
 bool ModuleScene::CleanUp()
 {
-	delete[] time_count;
+	delete time_count;
 
 	return true;
 }
+
+void ModuleScene::Pause_Scene()
+{
+	app->audioModule->PauseMusic();
+
+	game_state = PAUSED;
+	pause_pressed = true;
+}
+
+bool ModuleScene::Resume_Scene()
+{
+	if (!app->audioModule->PlayMusic()){ return false; }
+
+	game_state = PLAYING;
+	pause_pressed = true;
+
+	return true;
+}
+
+
 
 
 
@@ -240,9 +266,9 @@ void ModuleScene::reset_stage()
 			{
 				app->entityManagerModule->bricks.push_back(new Brick(
 					app, i,
-					(*stage_arrangement.bricks.at(i)).x,
-					(*stage_arrangement.bricks.at(i)).y,
-					(*stage_arrangement.bricks.at(i)).type));
+					stage_arrangement.bricks.at(i)->x,
+					stage_arrangement.bricks.at(i)->y,
+					stage_arrangement.bricks.at(i)->type));
 				i++;
 			}
 		}

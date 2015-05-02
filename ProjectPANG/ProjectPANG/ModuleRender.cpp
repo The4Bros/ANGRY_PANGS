@@ -36,6 +36,12 @@ void ModuleRender::Print(SDL_Texture* texture, const SDL_Rect* source_rect, cons
 	SDL_RenderCopy(renderer, texture, source_rect, rect);
 }
 
+void ModuleRender::Fade_Screen()
+{
+	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 100);
 
+	SDL_RenderFillRect(renderer, &app->sceneModule->background_rect);
+}
 
 

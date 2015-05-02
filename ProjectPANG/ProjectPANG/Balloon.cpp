@@ -15,6 +15,7 @@ Balloon::Balloon(Application* app, unsigned int position_in_list, int x, int y, 
 {
 	if (direction < 2){ state_balloon_V = BALLOON_DOWN; }
 	else{ state_balloon_V = BALLOON_UP; }
+
 	if (direction % 2 == 0){ state_balloon_H = BALLOON_RIGHT; }
 	else{ state_balloon_H = BALLOON_LEFT; }
 
