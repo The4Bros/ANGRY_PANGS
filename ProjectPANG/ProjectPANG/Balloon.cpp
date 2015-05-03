@@ -2,7 +2,7 @@
 
 //direction odd-> left
 //direction pair->
-//0 -> start right
+// 0 -> start right
 // 1 -> start left
 // 2 -> new right
 // 3 -> new left
@@ -72,17 +72,12 @@ Balloon::Balloon(Application* app, unsigned int position_in_list, int x, int y, 
 		break;
 	}
 
-
-
-
 }
 
 
 
 void Balloon::Update()
 {
-
-	
 	if (type < RED_3){ Size1_Check_Collision_Balloon_Players(); }
 	else{ Size4_Check_Collision_Balloon_Players(); }
 	Check_Collision_Balloon_Bricks();

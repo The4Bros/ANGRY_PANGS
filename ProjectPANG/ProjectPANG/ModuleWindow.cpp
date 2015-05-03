@@ -24,7 +24,7 @@ bool ModuleWindow::Init()
 	// increase scale with 80px margin on each side
 	while (SCREEN_WIDTH * (scale + 1) + 160 < mode.w && SCREEN_HEIGHT * (scale + 1) + 160 < mode.h){ scale++; }
 	
-	scale = 3;
+	//scale = 3;
 
 
 	// manage window flags

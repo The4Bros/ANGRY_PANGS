@@ -146,7 +146,7 @@ void ModuleScene::Pause_Scene()
 
 bool ModuleScene::Resume_Scene()
 {
-	if (!app->audioModule->PlayMusic()){ return false; }
+	app->audioModule->ResumeMusic();
 
 	game_state = PLAYING;
 	pause_pressed = true;

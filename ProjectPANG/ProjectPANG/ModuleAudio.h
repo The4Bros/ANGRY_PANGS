@@ -20,7 +20,6 @@ private:
 
 	Mix_Music* music;
 	Mix_Chunk fx[2];
-	unsigned int music_playing;
 
 public:
 
@@ -31,8 +30,8 @@ public:
 	bool Init();
 	bool CleanUp();
 
-	bool PlayMusic(); // Resume music
 	bool PlayMusic(const unsigned int position); // Play indicated music
+	void ResumeMusic(); // Resume music
 	void PauseMusic(); // Pause (free) music
 	void PlayFx(fx_sound fx, int repeat = 0); // Play a previously loaded WAV
 };
