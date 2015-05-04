@@ -9,8 +9,20 @@
 class ModulePlane : public Module{
 public:
 
+	// background
 	SDL_Rect background_rect;
-	SDL_Rect source_rect;
+	SDL_Rect background_source_rect;
+
+	// city rects
+	SDL_Rect city_rect[17];
+	SDL_Rect city_source_rect[2];
+
+	// plane rects
+	SDL_Rect plane_rect;
+	SDL_Rect plane_source_rect[6];
+
+	// izquierda+arriba y derecha
+
 
 	unsigned int ticks;
 

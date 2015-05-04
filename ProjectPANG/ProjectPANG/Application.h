@@ -46,6 +46,7 @@ public:
 	ModulePlayer* playerModule;
 	ModuleEntityManager* entityManagerModule;
 	ModuleScene* sceneModule;
+
 	ModuleTitle* titleModule;
 	ModuleTutorial* tutorialModule;
 	ModuleChooseCity* chooseCityModule;
