@@ -144,14 +144,14 @@ void Balloon::Update()
 
 		if (rect.x > 8 * app->windowModule->scale) rect.x -= horizontal_speed;
 		else state_balloon_H = BALLOON_RIGHT;
-
 		break;
+
 	case BALLOON_RIGHT:
 
 		if (rect.x + rect.w < 376 * app->windowModule->scale) rect.x += horizontal_speed;
 		else state_balloon_H = BALLOON_LEFT;
-
 		break;
+
 	default:
 		break;
 	}
@@ -162,6 +162,9 @@ void Balloon::Update()
 
 void Balloon::Print()
 {
+	//rect.x = int(//positionX);
+
+
 	app->renderModule->Print(app->texturesModule->balls_sprite, &app->entityManagerModule->source_balloon_rect[int(type)], &rect);
 }
 
