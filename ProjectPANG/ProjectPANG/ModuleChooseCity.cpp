@@ -69,6 +69,7 @@ update_status ModuleChooseCity::Update()
 	if (app->inputModule->key[SDL_SCANCODE_E] == 1)
 	{
 		//if (!pause_pressed){ Pause_Scene(); }
+		return CHANGE_TO_PLAY;
 	}
 
 
