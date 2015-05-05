@@ -2,25 +2,53 @@
 
 ModuleChooseCity::ModuleChooseCity(Application* app) : Module(app)
 {
-	// number countdown
-	countdown_rect = { 200 * app->windowModule->scale, 40 * app->windowModule->scale, 24 * app->windowModule->scale, 31 * app->windowModule->scale };
+	// background
+	background_source_rect = { 0, 0, SCREEN_WIDTH, 208 };
 
+	// number countdown
 	for (unsigned int i = 0; i < 10; i++)
 	{
 		countdown_source_rect[i] = { (i * 24), 0, 24, 31 };
 	}
 
 	// selection squares
-	selection_rect[0]  = { 340 * app->windowModule->scale,  68 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
-	selection_rect[1]  = { 300 * app->windowModule->scale,  68 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
-	selection_rect[2]  = { 284 * app->windowModule->scale, 100 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
-	selection_rect[3]  = { 300 * app->windowModule->scale, 100 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
-	selection_rect[4]  = { 328 * app->windowModule->scale, 160 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
-	selection_rect[5]  = { 264 * app->windowModule->scale,  96 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
-	selection_rect[6]  = { 204 * app->windowModule->scale,  36 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
-	selection_rect[7]  = { 172 * app->windowModule->scale,  44 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
-	selection_rect[8]  = { 148 * app->windowModule->scale,  36 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
-	selection_rect[9]  = { 128 * app->windowModule->scale,  64 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
+	selection_source_rect[0] = { 184, 208, 16, 16 };
+	selection_source_rect[1] = { 200, 208, 16, 16 };
+
+	// forward return controls
+	controls_source_rect = { 0, 208, 184, 45 };
+
+	selection_index = 0;
+	selection_source_index = 0;
+
+	update_counter = 0;
+
+	current_number = 9;
+	seconds = 0;
+
+	a_pressed = d_pressed = false;
+}
+
+bool ModuleChooseCity::Init()
+{
+	// if (app->stage % 3 == 1){}  plane
+	// background
+	background_rect = { 0, 0, SCREEN_WIDTH * app->windowModule->scale, 208 * app->windowModule->scale };
+
+	// number countdown
+	countdown_rect = { 255 * app->windowModule->scale, 20 * app->windowModule->scale, 24 * app->windowModule->scale, 31 * app->windowModule->scale };
+
+	// selection squares
+	selection_rect[0] =  { 340 * app->windowModule->scale,  68 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
+	selection_rect[1] =  { 300 * app->windowModule->scale,  68 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
+	selection_rect[2] =  { 284 * app->windowModule->scale, 100 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
+	selection_rect[3] =  { 300 * app->windowModule->scale, 100 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
+	selection_rect[4] =  { 328 * app->windowModule->scale, 160 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
+	selection_rect[5] =  { 264 * app->windowModule->scale,  96 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
+	selection_rect[6] =  { 204 * app->windowModule->scale,  36 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
+	selection_rect[7] =  { 172 * app->windowModule->scale,  44 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
+	selection_rect[8] =  { 148 * app->windowModule->scale,  36 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
+	selection_rect[9] =  { 128 * app->windowModule->scale,  64 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
 	selection_rect[10] = { 176 * app->windowModule->scale,  64 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
 	selection_rect[11] = { 200 * app->windowModule->scale,  80 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
 	selection_rect[12] = { 200 * app->windowModule->scale, 120 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
@@ -29,27 +57,19 @@ ModuleChooseCity::ModuleChooseCity(Application* app) : Module(app)
 	selection_rect[15] = {  84 * app->windowModule->scale, 188 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
 	selection_rect[16] = {   8 * app->windowModule->scale, 152 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
 
-	selection_source_rect[0] = { 184, 208, 16, 16 };
-	selection_source_rect[1] = { 200, 208, 16, 16 };
-
 	// forward return controls
-	controls_rect = { 40 * app->windowModule->scale, 208 * app->windowModule->scale, 184 * app->windowModule->scale, 45 * app->windowModule->scale };
-	controls_source_rect = { 0, 208, 184, 45 };
+	controls_rect = { 80 * app->windowModule->scale, 163 * app->windowModule->scale, 184 * app->windowModule->scale, 45 * app->windowModule->scale };
+
 
 	selection_index = 0;
 	selection_source_index = 0;
-	current_number = 9;
-	seconds = 0;
-}
 
-bool ModuleChooseCity::Init()
-{
-	selection_index = 0;
-	selection_source_index = 0;
+	update_counter = 0;
+
 	current_number = 9;
 	seconds = app->current_time;
 
-
+	a_pressed = d_pressed = false;
 
 
 	return true;
@@ -66,14 +86,46 @@ update_status ModuleChooseCity::Update()
 		else{ return CHANGE_TO_PLAY;}
 	}
 
+
+
 	if (app->inputModule->key[SDL_SCANCODE_E] == 1)
 	{
 		//if (!pause_pressed){ Pause_Scene(); }
 		return CHANGE_TO_PLAY;
 	}
 
+	// LEFT TRIGGER
+	if (app->inputModule->key[SDL_SCANCODE_A] == 1)
+	{
+		if (!a_pressed)
+		{
+			if (selection_index < 16)
+			{
+				selection_index++;
+			}
 
-	app->renderModule->Print(app->texturesModule->map_sprite, &app->planeModule->background_source_rect, &app->planeModule->background_rect); // print map
+			a_pressed = true;
+		}
+	}
+	else { a_pressed = false; }
+
+	// RIGHT TRIGGER
+	if (app->inputModule->key[SDL_SCANCODE_D] == 1)
+	{
+		if (!d_pressed)
+		{
+			if (selection_index != 0)
+			{
+				selection_index--;
+			}
+
+			d_pressed = true;
+		}
+	}
+	else { d_pressed = false; }
+
+
+	app->renderModule->Print(app->texturesModule->map_sprite, &background_source_rect, &background_rect); // print map
 	app->renderModule->Print(app->texturesModule->map_countdown_sprite, &countdown_source_rect[current_number], &countdown_rect); // print countdown numbers
 	app->renderModule->Print(app->texturesModule->map_sprite, &controls_source_rect, &controls_rect); // print controls
 	app->renderModule->Print(app->texturesModule->map_sprite, &selection_source_rect[selection_source_index], &selection_rect[selection_index]); // print selection square

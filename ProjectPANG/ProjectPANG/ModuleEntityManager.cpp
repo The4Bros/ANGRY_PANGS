@@ -91,6 +91,10 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	for (int i = 0; i < 4; i++){ particles_source_rect[i + 52] = { i * 15, 119, 15, 15 }; }
 
 
+
+
+
+
 	stop_time = slow_time = false;
 	stop_time_counter = slow_time_counter = 0;
 }

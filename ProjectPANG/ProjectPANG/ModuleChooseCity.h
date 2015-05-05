@@ -9,6 +9,10 @@
 class ModuleChooseCity : public Module{
 public:
 
+	// background
+	SDL_Rect background_rect;
+	SDL_Rect background_source_rect;
+
 	// number countdown
 	SDL_Rect countdown_rect;
 	SDL_Rect countdown_source_rect[10];
@@ -23,7 +27,11 @@ public:
 	SDL_Rect controls_rect;
 	SDL_Rect controls_source_rect;
 
-	unsigned int ticks, seconds;
+	unsigned int ticks, seconds, update_counter;
+
+	bool a_pressed, d_pressed;
+
+
 
 	ModuleChooseCity(Application* app);
 	bool Init();

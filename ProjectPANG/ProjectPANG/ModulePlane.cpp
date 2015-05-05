@@ -2,9 +2,8 @@
 
 ModulePlane::ModulePlane(Application* app) : Module(app)
 {
-	// if (app->stage % 3 == 1){}  plane
-	background_rect = { 0, 0, SCREEN_WIDTH * app->windowModule->scale, SCREEN_HEIGHT * app->windowModule->scale };
-	background_source_rect = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+	// background
+	background_source_rect = { 0, 0, SCREEN_WIDTH, 208 };
 
 	// city rects
 	city_rect[0] =  { 344 * app->windowModule->scale,  72 * app->windowModule->scale, 8 * app->windowModule->scale, 8 * app->windowModule->scale };
@@ -38,6 +37,10 @@ ModulePlane::ModulePlane(Application* app) : Module(app)
 
 bool ModulePlane::Init()
 {
+	// background
+	background_rect = { 0, 0, SCREEN_WIDTH * app->windowModule->scale, SCREEN_HEIGHT * app->windowModule->scale };
+	
+
 	app->audioModule->PlayMusic(17);
 
 	plane_rect = app->chooseCityModule->selection_rect[(app->stage - 1) / 3];

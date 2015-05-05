@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
 		case MAIN_START:            //------------------START-----------------
 			LOG("Starting Application:");
 			if (!app.Init()){ state = MAIN_ERROR; }
-			else { state = MAIN_UPDATE; update_state = CHANGE_TO_TITLE; }
+			else { state = MAIN_UPDATE; update_state = CHANGE_TO_CHOOSE_CITY; }
 			break;
 		
 		case MAIN_FINISH:            //------------------FINISH-----------------
