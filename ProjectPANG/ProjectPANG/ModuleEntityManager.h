@@ -23,7 +23,7 @@ public:
 
 	DynArray<Balloon*> balloons;
 	SDL_Rect source_balloon_rect[12];
-	unsigned int balloon_speed;
+	float balloon_speed;
 
 	//DynArray<Enemy*>* enemies;
 	SDL_Rect source_enemy_rect[200];

@@ -10,13 +10,20 @@
 Balloon::Balloon(Application* app, unsigned int position_in_list, int x, int y, int type, int direction) :
 		app(app),
 		position_in_list(position_in_list),
-		horizontal_speed(2),
 		ticks(1)
 {
 	if (direction < 2){ state_balloon_V = BALLOON_DOWN; gravity = 0; }
-	else{ state_balloon_V = BALLOON_UP; }
+	else
+	{
+		state_balloon_V = BALLOON_UP;
 
-	if (direction % 2 == 0){ state_balloon_H = BALLOON_RIGHT; gravity = 4; }
+		if (type < 3) gravity = 2.17 * app->windowModule->scale_f * app->entityManagerModule->balloon_speed;
+		else if (type < 6) gravity = 1.84 * app->windowModule->scale_f * app->entityManagerModule->balloon_speed;
+		else if (type < 9) gravity = 1.5 * app->windowModule->scale_f * app->entityManagerModule->balloon_speed;
+		else gravity = 1.17 * app->windowModule->scale_f * app->entityManagerModule->balloon_speed;
+	}
+
+	if (direction % 2 == 0){ state_balloon_H = BALLOON_RIGHT; }
 	else{ state_balloon_H = BALLOON_LEFT; }
 
 
@@ -72,9 +79,11 @@ Balloon::Balloon(Application* app, unsigned int position_in_list, int x, int y, 
 		break;
 	}
 
+	position_X = (float) rect.x;
+	position_Y = (float) rect.y;
+
+
 }
-
-
 
 void Balloon::Update()
 {
@@ -87,17 +96,16 @@ void Balloon::Update()
 	{
 	case BALLOON_UP:
 
-		if ((rect.y > 8 * app->windowModule->scale) && gravity != 0)
+		if ((rect.y > 8 * app->windowModule->scale) && gravity >= 0)
 		{
-			rect.y = rect.y - gravity;
-			ticks--;
+			position_Y -= gravity;
 
-			if (ticks % 5 == 0) gravity--;
+			ticks--;
+			gravity -= 0.035 * app->windowModule->scale_f * app->entityManagerModule->balloon_speed;
 
 		}
 		else
 		{
-			//Hit();
 			state_balloon_V = BALLOON_DOWN;
 
 			gravity = 0;
@@ -109,25 +117,20 @@ void Balloon::Update()
 
 		if (rect.y + rect.h < 199 * app->windowModule->scale)
 		{
-			rect.y = rect.y + gravity;
+			position_Y += gravity;
 			
 			ticks++;
-			gravity += 0.1;
-			if (ticks % 5 == 0)
-			{
-				gravity++;
-			}
-
+			gravity += 0.035 * app->windowModule->scale_f * app->entityManagerModule->balloon_speed;
 
 		}
 		else
 		{
 			state_balloon_V = BALLOON_UP;
 
-			if (type < 3) gravity = 5*app->windowModule->scale;
-			else if (type < 6) gravity = 4 * app->windowModule->scale;
-			else if (type < 9) gravity = 3 * app->windowModule->scale;
-			else gravity = 2 * app->windowModule->scale;
+			if (type < 3) gravity = 2.17 * app->windowModule->scale_f * app->entityManagerModule->balloon_speed;
+			else if (type < 6) gravity = 1.84 * app->windowModule->scale_f * app->entityManagerModule->balloon_speed;
+			else if (type < 9) gravity = 1.5 * app->windowModule->scale_f * app->entityManagerModule->balloon_speed;
+			else gravity = 1.17 * app->windowModule->scale_f * app->entityManagerModule->balloon_speed;
 
 			ticks = 1;
 		}
@@ -143,13 +146,13 @@ void Balloon::Update()
 	{
 	case BALLOON_LEFT:
 
-		if (rect.x > 8 * app->windowModule->scale) rect.x -= horizontal_speed;
+		if (rect.x > 8 * app->windowModule->scale) { position_X -= 0.4 * app->windowModule->scale_f * app->entityManagerModule->balloon_speed; }
 		else state_balloon_H = BALLOON_RIGHT;
 		break;
 
 	case BALLOON_RIGHT:
 
-		if (rect.x + rect.w < 376 * app->windowModule->scale) rect.x += horizontal_speed;
+		if (rect.x + rect.w < 376 * app->windowModule->scale) { position_X += 0.4 * (app->windowModule->scale_f * app->entityManagerModule->balloon_speed); }
 		else state_balloon_H = BALLOON_LEFT;
 		break;
 
@@ -157,15 +160,17 @@ void Balloon::Update()
 		break;
 	}
 
+
+	rect.y = (int) (position_Y + 0.5);
+	rect.x = (int) (position_X + 0.5);
+
+
 }
 
 
 
 void Balloon::Print()
 {
-	//rect.y = int(//positionY);
-
-
 	app->renderModule->Print(app->texturesModule->balls_sprite, &app->entityManagerModule->source_balloon_rect[int(type)], &rect);
 }
 
@@ -265,8 +270,17 @@ void Balloon::Reset(unsigned int position_in_list, int x, int y, int type, int d
 	ticks = 1;
 	this->position_in_list = position_in_list;
 
-	if (direction < 2){ state_balloon_V = BALLOON_DOWN; }
-	else{ state_balloon_V = BALLOON_UP; }
+	if (direction < 2){ state_balloon_V = BALLOON_DOWN; gravity = 0; }
+	else
+	{
+		state_balloon_V = BALLOON_UP;
+
+		if (type < 3) gravity = 2.17 * app->windowModule->scale_f * app->entityManagerModule->balloon_speed;
+		else if (type < 6) gravity = 1.84 * app->windowModule->scale_f * app->entityManagerModule->balloon_speed;
+		else if (type < 9) gravity = 1.5 * app->windowModule->scale_f * app->entityManagerModule->balloon_speed;
+		else gravity = 1.17 * app->windowModule->scale_f * app->entityManagerModule->balloon_speed;
+	}
+
 	if (direction % 2 == 0){ state_balloon_H = BALLOON_RIGHT; }
 	else{ state_balloon_H = BALLOON_LEFT; }
 
@@ -321,6 +335,10 @@ void Balloon::Reset(unsigned int position_in_list, int x, int y, int type, int d
 		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 8 * app->windowModule->scale, 7 * app->windowModule->scale };
 		break;
 	}
+
+	position_X = (float)rect.x;
+	position_Y = (float)rect.y;
+
 }
 
 

@@ -93,7 +93,7 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 
 
 
-
+	balloon_speed = 2.0f;
 
 	stop_time = slow_time = false;
 	stop_time_counter = slow_time_counter = 0;
@@ -103,6 +103,7 @@ bool ModuleEntityManager::Init()
 {
 	stop_time = slow_time = false;
 	stop_time_counter = slow_time_counter = 0;
+	balloon_speed = 2.0f;
 
 	return true;
 }

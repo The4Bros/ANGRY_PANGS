@@ -26,21 +26,16 @@ enum BALL_TYPE
 	GREEN_4
 };
 
-
 enum BALLOON_STATE_VERTICAL
 {
 	BALLOON_UP,
 	BALLOON_DOWN
-
-
 };
 
 enum BALLOON_STATE_HORIZONTAL
 {
 	BALLOON_LEFT,
 	BALLOON_RIGHT
-
-
 };
 
 class Balloon
@@ -50,9 +45,12 @@ public:
 	Application* app;
 
 	int position_in_list;
+
 	float gravity;
-	int horizontal_speed;
+	float position_X, position_Y;
+
 	int ticks;
+
 	bool change_movement_V;// true if the ball has to change its direction, change it on Hit()
 	bool change_movement_H;
 
@@ -67,7 +65,6 @@ public:
 	void Update();
 	void Print();
 	void Hit();
-	// particles->PushBack(x, y, type);
 	void Reduce_Balloon_Size();
 	void Restart_Movement_Balloons_hit();
 	void Reset(unsigned int position_in_list, int x, int y, int type, int direction);

@@ -12,6 +12,7 @@ public:
 
 	SDL_Window* window;
 	int scale;
+	float scale_f;
 
 	ModuleWindow(Application* app);
 	ModuleWindow(const ModuleWindow& window);
