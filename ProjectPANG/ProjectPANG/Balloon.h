@@ -50,7 +50,7 @@ public:
 	Application* app;
 
 	int position_in_list;
-	int gravity;
+	float gravity;
 	int horizontal_speed;
 	int ticks;
 	bool change_movement_V;// true if the ball has to change its direction, change it on Hit()

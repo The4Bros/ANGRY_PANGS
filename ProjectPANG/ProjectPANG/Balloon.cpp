@@ -110,8 +110,9 @@ void Balloon::Update()
 		if (rect.y + rect.h < 199 * app->windowModule->scale)
 		{
 			rect.y = rect.y + gravity;
-
+			
 			ticks++;
+			gravity += 0.1;
 			if (ticks % 5 == 0)
 			{
 				gravity++;
@@ -123,10 +124,10 @@ void Balloon::Update()
 		{
 			state_balloon_V = BALLOON_UP;
 
-			if (type < 3) gravity = 13;
-			else if (type < 6) gravity = 11;
-			else if (type < 9) gravity = 9;
-			else gravity = 7;
+			if (type < 3) gravity = 5*app->windowModule->scale;
+			else if (type < 6) gravity = 4 * app->windowModule->scale;
+			else if (type < 9) gravity = 3 * app->windowModule->scale;
+			else gravity = 2 * app->windowModule->scale;
 
 			ticks = 1;
 		}
@@ -162,7 +163,7 @@ void Balloon::Update()
 
 void Balloon::Print()
 {
-	//rect.x = int(//positionX);
+	//rect.y = int(//positionY);
 
 
 	app->renderModule->Print(app->texturesModule->balls_sprite, &app->entityManagerModule->source_balloon_rect[int(type)], &rect);
