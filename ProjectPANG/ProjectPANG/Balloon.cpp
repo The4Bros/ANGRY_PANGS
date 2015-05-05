@@ -13,10 +13,10 @@ Balloon::Balloon(Application* app, unsigned int position_in_list, int x, int y, 
 		horizontal_speed(2),
 		ticks(1)
 {
-	if (direction < 2){ state_balloon_V = BALLOON_DOWN; }
+	if (direction < 2){ state_balloon_V = BALLOON_DOWN; gravity = 0; }
 	else{ state_balloon_V = BALLOON_UP; }
 
-	if (direction % 2 == 0){ state_balloon_H = BALLOON_RIGHT; }
+	if (direction % 2 == 0){ state_balloon_H = BALLOON_RIGHT; gravity = 4; }
 	else{ state_balloon_H = BALLOON_LEFT; }
 
 
