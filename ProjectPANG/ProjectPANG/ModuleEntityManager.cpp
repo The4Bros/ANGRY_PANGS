@@ -1,8 +1,6 @@
 #include "ModuleEntityManager.h"
 
-ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app){}
-
-bool ModuleEntityManager::Init()
+ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 {
 	// HARPOON BODIES
 	for (int i = 0; i < 8; i++)
@@ -62,7 +60,7 @@ bool ModuleEntityManager::Init()
 	source_balloon_rect[9] = { 96, 80, 8, 7 };
 	source_balloon_rect[10] = { 104, 80, 8, 7 };
 	source_balloon_rect[11] = { 96, 87, 8, 7 };
-	
+
 
 
 	// ENEMIES
@@ -92,14 +90,41 @@ bool ModuleEntityManager::Init()
 	for (int i = 0; i < 5; i++){ particles_source_rect[i + 48] = { i * 28, 93, 28, 26 }; }
 	for (int i = 0; i < 4; i++){ particles_source_rect[i + 52] = { i * 15, 119, 15, 15 }; }
 
+
+	stop_time = slow_time = false;
+	stop_time_counter = slow_time_counter = 0;
+}
+
+bool ModuleEntityManager::Init()
+{
+	stop_time = slow_time = false;
+	stop_time_counter = slow_time_counter = 0;
+
 	return true;
 }
-update_status ModuleEntityManager::PreUpdate(){ return UPDATE_CONTINUE; }
+
 update_status ModuleEntityManager::Update()
 {
+	if (slow_time)
+	{
+		if (slow_time_counter < 300){ slow_time_counter++; }
+		else{ balloon_speed = 2; slow_time = false; }
+	}
+
 	if (app->sceneModule->game_state == PLAYING)
 	{
-		for (unsigned int i = 0; i < balloons.Count(); i++){ (*balloons.at(i))->Update(); }
+		// BALLOONS
+		if (!stop_time)
+		{
+			for (unsigned int i = 0; i < balloons.Count(); i++){ (*balloons.at(i))->Update(); }
+		}
+		else
+		{
+			if (stop_time_counter < 300){ stop_time_counter++; }
+			else{ stop_time = false; }
+		}
+
+		// PARTICLES
 		for (unsigned int i = 0; i < particles.Count(); i++){ (*particles.at(i))->Update(); }
 	}
 
@@ -114,3 +139,15 @@ bool ModuleEntityManager::CleanUp()
 }
 
 
+void ModuleEntityManager::StopTime()
+{
+	stop_time_counter = 0;
+	stop_time = true;
+}
+
+void ModuleEntityManager::SlowTime()
+{
+	balloon_speed = 1;
+	slow_time_counter = 0;
+	slow_time = true;
+}

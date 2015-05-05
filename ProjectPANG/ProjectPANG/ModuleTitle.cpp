@@ -1,6 +1,7 @@
 #include "ModuleTitle.h"
 
 ModuleTitle::ModuleTitle(Application* app) : Module(app){}
+
 bool ModuleTitle::Init()
 {	
 	gravity[0] = 5;
@@ -37,10 +38,6 @@ bool ModuleTitle::Init()
 	return true;
 }
 
-update_status ModuleTitle::PreUpdate()
-{
-	return UPDATE_CONTINUE;
-}
 update_status ModuleTitle::Update()
 {	
 	//Print inital screens
@@ -73,7 +70,7 @@ update_status ModuleTitle::Update()
 
 		if (app->inputModule->key[SDL_SCANCODE_1] == 1)
 		{
-			return CHANGE_TO_PLAY;
+			return CHANGE_TO_CHOOSE_CITY;
 		}
 	}
 	

@@ -39,6 +39,7 @@ ModuleChooseCity::ModuleChooseCity(Application* app) : Module(app)
 	selection_index = 0;
 	selection_source_index = 0;
 	current_number = 9;
+	seconds = 0;
 }
 
 bool ModuleChooseCity::Init()
@@ -46,7 +47,7 @@ bool ModuleChooseCity::Init()
 	selection_index = 0;
 	selection_source_index = 0;
 	current_number = 9;
-	
+	seconds = app->current_time;
 
 
 
@@ -59,15 +60,26 @@ bool ModuleChooseCity::Init()
 
 update_status ModuleChooseCity::Update()
 {
-	app->renderModule->Print(app->texturesModule->map_sprite, &app->planeModule->background_rect, &app->planeModule->background_source_rect); // print map
+	if (seconds != app->current_time) // handle countdown numbers
+	{
+		if (current_number > 0){ current_number--; seconds = app->current_time; }
+		else{ return CHANGE_TO_PLAY;}
+	}
+
+	if (app->inputModule->key[SDL_SCANCODE_E] == 1)
+	{
+		//if (!pause_pressed){ Pause_Scene(); }
+	}
+
+
+	app->renderModule->Print(app->texturesModule->map_sprite, &app->planeModule->background_source_rect, &app->planeModule->background_rect); // print map
 	app->renderModule->Print(app->texturesModule->map_countdown_sprite, &countdown_source_rect[current_number], &countdown_rect); // print countdown numbers
 	app->renderModule->Print(app->texturesModule->map_sprite, &controls_source_rect, &controls_rect); // print controls
-
 	app->renderModule->Print(app->texturesModule->map_sprite, &selection_source_rect[selection_source_index], &selection_rect[selection_index]); // print selection square
 
 	ticks++;
 
-	return CHANGE_TO_PLAY;
+	return UPDATE_CONTINUE;
 }
 
 

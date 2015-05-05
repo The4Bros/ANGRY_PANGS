@@ -31,12 +31,16 @@ public:
 	DynArray<Particles*> particles;
 	SDL_Rect particles_source_rect[200];
 
+	bool stop_time, slow_time;
+	unsigned int stop_time_counter, slow_time_counter;
 
 	ModuleEntityManager(Application* app);
 	bool Init();
-	update_status PreUpdate();
 	update_status Update();
 	bool CleanUp();
+
+	void StopTime();
+	void SlowTime();
 };
 
 #endif

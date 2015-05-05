@@ -26,7 +26,6 @@ public:
 
 	ModuleTitle(Application* app);
 	bool Init();
-	update_status PreUpdate();
 	update_status Update();
 	bool CleanUp();
 
