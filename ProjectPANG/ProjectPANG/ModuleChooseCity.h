@@ -27,11 +27,10 @@ public:
 	SDL_Rect controls_rect;
 	SDL_Rect controls_source_rect;
 
-	unsigned int ticks, seconds, update_counter;
-
+	// izquierda+arriba y derecha
 	bool a_pressed, d_pressed;
 
-
+	unsigned int ticks, update_counter;
 
 	ModuleChooseCity(Application* app);
 	bool Init();

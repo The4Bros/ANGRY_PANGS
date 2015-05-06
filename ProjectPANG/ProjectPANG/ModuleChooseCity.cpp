@@ -24,14 +24,15 @@ ModuleChooseCity::ModuleChooseCity(Application* app) : Module(app)
 	update_counter = 0;
 
 	current_number = 9;
-	seconds = 0;
+	ticks = 0;
 
 	a_pressed = d_pressed = false;
 }
 
 bool ModuleChooseCity::Init()
 {
-	// if (app->stage % 3 == 1){}  plane
+	app->audioModule->PlayMusic(10);
+
 	// background
 	background_rect = { 0, 0, SCREEN_WIDTH * app->windowModule->scale, 208 * app->windowModule->scale };
 
@@ -67,7 +68,7 @@ bool ModuleChooseCity::Init()
 	update_counter = 0;
 
 	current_number = 9;
-	seconds = app->current_time;
+	ticks = 1;
 
 	a_pressed = d_pressed = false;
 
@@ -81,9 +82,9 @@ bool ModuleChooseCity::Init()
 update_status ModuleChooseCity::Update()
 {
 	// handle countdown numbers
-	if (seconds != app->current_time)
+	if (ticks % 60 == 0)
 	{
-		if (current_number > 0){ current_number--; seconds = app->current_time; }
+		if (current_number > 0){ current_number--; }
 		else{ return CHANGE_TO_PLAY;}
 	}
 

@@ -15,9 +15,9 @@
 #include "ModuleEntityManager.h"
 #include "ModuleScene.h"
 #include "ModuleTitle.h"
-#include "ModuleTutorial.h"
 #include "ModuleChooseCity.h"
 #include "ModulePlane.h"
+#include "ModuleStageEnd.h"
 #include "ModuleCredits.h"
 #include "ModuleHighscore.h"
 
@@ -48,9 +48,9 @@ public:
 	ModuleScene* sceneModule;
 
 	ModuleTitle* titleModule;
-	ModuleTutorial* tutorialModule;
 	ModuleChooseCity* chooseCityModule;
 	ModulePlane* planeModule;
+	ModuleStageEnd* stageEndModule;
 	ModuleCredits* creditsModule;
 	ModuleHighscore* highscoreModule;
 
@@ -59,9 +59,9 @@ public:
 	DoubleNode<Module*>* entityManagerModule_Node;
 	DoubleNode<Module*>* sceneModule_Node;
 	DoubleNode<Module*>* titleModule_Node;
-	DoubleNode<Module*>* tutorialModule_Node;
 	DoubleNode<Module*>* chooseCityModule_Node;
 	DoubleNode<Module*>* planeModule_Node;
+	DoubleNode<Module*>* stageEndModule_Node;
 	DoubleNode<Module*>* creditsModule_Node;
 	DoubleNode<Module*>* highscoreModule_Node;
 

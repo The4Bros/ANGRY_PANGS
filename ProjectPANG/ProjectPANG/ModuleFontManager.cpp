@@ -20,12 +20,7 @@ void ModuleFontManager::Write_On_Screen(unsigned int value, unsigned int x, unsi
 {
 	// convert number to string
 	char tmp[20];
-
-	//strcpy_s(tmp, 20, NumberToString(value));
-
 	sprintf_s(tmp, 20, "%d", value);
-
-
 
 	// call Write on Screen with new string
 	Write_On_Screen(tmp, x, y, size, text_color);

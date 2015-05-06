@@ -105,9 +105,6 @@
     <ClCompile Include="ModulePlane.cpp">
       <Filter>Archivos de código fuente\Application\Other Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleTutorial.cpp">
-      <Filter>Archivos de código fuente\Application\Other Modules</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleEntityManager.cpp">
       <Filter>Archivos de código fuente\Application\Game\Modules</Filter>
     </ClCompile>
@@ -137,6 +134,9 @@
     </ClCompile>
     <ClCompile Include="Brick.cpp">
       <Filter>Archivos de código fuente\Application\Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleStageEnd.cpp">
+      <Filter>Archivos de código fuente\Application\Other Modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -168,9 +168,6 @@
       <Filter>Archivos de encabezado\Application</Filter>
     </ClInclude>
     <ClInclude Include="ModuleTitle.h">
-      <Filter>Archivos de encabezado\Application\Other Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleTutorial.h">
       <Filter>Archivos de encabezado\Application\Other Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModulePlane.h">
@@ -220,6 +217,9 @@
     </ClInclude>
     <ClInclude Include="DoubleNodedList.h">
       <Filter>Archivos de encabezado\Other Resources\TDA%27s</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleStageEnd.h">
+      <Filter>Archivos de encabezado\Application\Other Modules</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

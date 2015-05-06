@@ -20,16 +20,17 @@ public:
 	// plane rects
 	SDL_Rect plane_rect;
 	SDL_Rect plane_source_rect[6];
+	unsigned int plance_source_index;
 
-	// izquierda+arriba y derecha
-
+	unsigned int travel_index;
 
 	unsigned int ticks;
 
 	ModulePlane(Application* app);
 	bool Init();
 	update_status Update();
-	bool CleanUp();
+
+	void UpdatePlane();
 };
 
 #endif

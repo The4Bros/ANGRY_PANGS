@@ -24,9 +24,9 @@ bool Application::Init()
 	entityManagerModule = new ModuleEntityManager(this);
 	sceneModule = new ModuleScene(this);
 	titleModule = new ModuleTitle(this);
-	tutorialModule = new ModuleTutorial(this);
 	chooseCityModule = new ModuleChooseCity(this);
 	planeModule = new ModulePlane(this);
+	stageEndModule = new ModuleStageEnd(this);
 	creditsModule = new ModuleCredits(this);
 	highscoreModule = new ModuleHighscore(this);
 
@@ -34,9 +34,9 @@ bool Application::Init()
 	entityManagerModule_Node = new DoubleNode<Module*>(entityManagerModule);
 	sceneModule_Node = new DoubleNode<Module*>(sceneModule);
 	titleModule_Node = new DoubleNode<Module*>(titleModule);
-	tutorialModule_Node = new DoubleNode<Module*>(tutorialModule);
 	chooseCityModule_Node = new DoubleNode<Module*>(chooseCityModule);
 	planeModule_Node = new DoubleNode<Module*>(planeModule);
+	stageEndModule_Node = new DoubleNode<Module*>(stageEndModule);
 	creditsModule_Node = new DoubleNode<Module*>(creditsModule);
 	highscoreModule_Node = new DoubleNode<Module*>(highscoreModule);
 
@@ -108,9 +108,9 @@ bool Application::CleanUp()
 	if (!entityManagerModule->CleanUp()) { return false; } delete entityManagerModule_Node;
 	if (!sceneModule->CleanUp())         { return false; } delete sceneModule_Node;
 	if (!titleModule->CleanUp())         { return false; } delete titleModule_Node;
-	if (!tutorialModule->CleanUp())      { return false; } delete tutorialModule_Node;
 	if (!chooseCityModule->CleanUp())    { return false; } delete chooseCityModule_Node;
 	if (!planeModule->CleanUp())         { return false; } delete planeModule_Node;
+	if (!stageEndModule->CleanUp())      { return false; } delete stageEndModule_Node;
 	if (!creditsModule->CleanUp())       { return false; } delete creditsModule_Node;
 	if (!highscoreModule->CleanUp())     { return false; } delete highscoreModule_Node;
 
@@ -137,11 +137,6 @@ bool Application::ChangeTo(update_status new_state)
 		modules_Queue.push(titleModule_Node);
 		break;
 
-	case CHANGE_TO_TUTORIAL:
-		if (tutorialModule->Init() == false) { return false; }
-		modules_Queue.push(tutorialModule_Node);
-		break;
-
 	case CHANGE_TO_CHOOSE_CITY:
 		if (chooseCityModule->Init() == false) { return false; }
 		modules_Queue.push(chooseCityModule_Node);
@@ -161,6 +156,11 @@ bool Application::ChangeTo(update_status new_state)
 	case CHANGE_TO_MAP_PLANE:
 		if (planeModule->Init() == false) { return false; }
 		modules_Queue.push(planeModule_Node);
+		break;
+
+	case CHANGE_TO_STAGE_END:
+		if (stageEndModule->Init() == false) { return false; }
+		modules_Queue.push(stageEndModule_Node);
 		break;
 
 	case CHANGE_TO_CREDITS:
@@ -184,7 +184,7 @@ void Application::Reset_Time()
 
 void Application::Add_Coin()
 {
-	if (coins < 9) { coins++; }
+	if (coins < 9) { coins++; audioModule->PlayFx(COIN); }
 }
 
 bool Application::Lose_Coin()

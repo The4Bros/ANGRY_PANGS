@@ -34,16 +34,34 @@ ModulePlane::ModulePlane(Application* app) : Module(app)
 
 }
 
-
 bool ModulePlane::Init()
 {
 	// background
-	background_rect = { 0, 0, SCREEN_WIDTH * app->windowModule->scale, SCREEN_HEIGHT * app->windowModule->scale };
-	
+	background_rect = { 0, 0, SCREEN_WIDTH * app->windowModule->scale, 208 * app->windowModule->scale };
 
-	app->audioModule->PlayMusic(17);
+	travel_index = (app->stage / 3) - 1;
 	
-	plane_rect = app->chooseCityModule->selection_rect[(app->stage - 1) / 3];
+	plane_rect = app->chooseCityModule->selection_rect[travel_index];
+
+	switch (travel_index)
+	{
+	case 0:  plance_source_index = 4; break;
+	case 1:  plance_source_index = 0; break;
+	case 2:  plance_source_index = 3; break;
+	case 3:  plance_source_index = 1; break;
+	case 4:  plance_source_index = 2; break;
+	case 5:  plance_source_index = 2; break;
+	case 6:  plance_source_index = 0; break;
+	case 7:  plance_source_index = 2; break;
+	case 8:  plance_source_index = 0; break;
+	case 9:  plance_source_index = 3; break;
+	case 10: plance_source_index = 1; break;
+	case 11: plance_source_index = 5; break;
+	case 12: plance_source_index = 2; break;
+	case 13: plance_source_index = 0; break;
+	case 14: plance_source_index = 1; break;
+	case 15: plance_source_index = 2; break;
+	}
 
 	ticks = 0;
 	return true;
@@ -53,14 +71,87 @@ update_status ModulePlane::Update()
 {
 	if (ticks > 180){ return CHANGE_TO_PLAY; }
 
+	if (ticks == 130){ app->audioModule->StopMusic(); }
+
+	//if (ticks < 150){ UpdatePlane(); }
+
+	// print map
+	app->renderModule->Print(app->texturesModule->map_sprite, &background_source_rect, &background_rect);
+
+	// print visited cities
+	for (unsigned int i = 0; i <= travel_index; i++)
+	{
+		app->renderModule->Print(app->texturesModule->map_sprite, &city_source_rect[1], &city_rect[i]);
+	}
+
+	// intermitent print destination city
+	if (ticks % 40 < 20)
+	{
+		app->renderModule->Print(app->texturesModule->map_sprite, &city_source_rect[0], &city_rect[travel_index + 1]);
+	}
+
+	// print plane
+	app->renderModule->Print(app->texturesModule->map_sprite, &plane_source_rect[plance_source_index], &plane_rect);
+
 	ticks++;
-
-	
-	app->fontManagerModule->Write_On_Screen(ticks, 8 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
-	app->renderModule->Print(app->texturesModule->level_complete, &background_source_rect, &background_rect);
-
 
 	return UPDATE_CONTINUE;
 }
 
-bool ModulePlane::CleanUp(){ return true; }
+void ModulePlane::UpdatePlane()
+{
+	switch (travel_index)
+	{
+	case 0:
+		plance_source_index = 4;
+		break;
+	case 1:
+		plance_source_index = 0;
+		break;
+	case 2:
+		plance_source_index = 3;
+		break;
+	case 3:
+		plance_source_index = 1;
+		break;
+	case 4:
+		plance_source_index = 2;
+		break;
+	case 5:
+		plance_source_index = 2;
+		break;
+	case 6:
+		plance_source_index = 0;
+		break;
+	case 7:
+		plance_source_index = 2;
+		break;
+	case 8:
+		plance_source_index = 0;
+		break;
+	case 9:
+		plance_source_index = 3;
+		break;
+	case 10:
+		plance_source_index = 1;
+		break;
+	case 11:
+		plance_source_index = 5;
+		break;
+	case 12:
+		plance_source_index = 2;
+		break;
+	case 13:
+		plance_source_index = 0;
+		break;
+	case 14:
+		plance_source_index = 1;
+		break;
+	case 15:
+		plance_source_index = 2;
+		break;
+	}
+}
+
+
+

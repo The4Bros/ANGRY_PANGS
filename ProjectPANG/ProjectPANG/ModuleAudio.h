@@ -31,9 +31,11 @@ public:
 	bool CleanUp();
 
 	bool PlayMusic(const unsigned int position); // Play indicated music
+	void PlayFx(fx_sound fx, int repeat = 0); // Play a previously loaded WAV
+	
 	void ResumeMusic(); // Resume music
 	void PauseMusic(); // Pause (free) music
-	void PlayFx(fx_sound fx, int repeat = 0); // Play a previously loaded WAV
+	void StopMusic(); // Stop music
 };
 
 #endif

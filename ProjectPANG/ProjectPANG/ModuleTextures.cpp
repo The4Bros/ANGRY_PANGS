@@ -20,25 +20,6 @@ ModuleTextures::ModuleTextures(Application* app) : Module(app)
 
 }
 
-ModuleTextures::ModuleTextures(const ModuleTextures& textureModule) : Module(textureModule.app)
-{
-	background_sprite = NULL;
-	balls_sprite = NULL;
-	bricks_sprite = NULL;
-	enemies_sprite = NULL;
-	harpoons_sprite = NULL;
-	instructions_sprite = NULL;
-	map_countdown_sprite = NULL;
-	map_sprite = NULL;
-	particles_sprite = NULL;
-	players_sprite = NULL;
-	ready = NULL;
-	scores_sprite = NULL;
-	timer_sprite = NULL;
-	title_sprite = NULL;
-
-}
-
 bool ModuleTextures::Init()
 {
 	background_sprite = IMG_LoadTexture(app->renderModule->renderer, "images/Backgrounds.png");

@@ -28,7 +28,6 @@ public:
 	SDL_Texture* level_complete;
 
 	ModuleTextures(Application* app);
-	ModuleTextures(const ModuleTextures& textureModule);
 	bool Init();
 	bool CleanUp();
 };

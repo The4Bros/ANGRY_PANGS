@@ -1,6 +1,12 @@
 #include "ModuleScene.h"
 
-ModuleScene::ModuleScene(Application* app) : Module(app), time_count(NULL), pause_pressed(false), stage_cleared(false) {}
+ModuleScene::ModuleScene(Application* app) : Module(app),
+time_count(NULL),
+pause_pressed(false),
+stage_cleared(false)
+{
+
+}
 
 bool ModuleScene::Init()
 {
@@ -37,6 +43,7 @@ update_status ModuleScene::PreUpdate()
 }
 update_status ModuleScene::Update()
 {
+	// PRINT ALL OBJECTS ON SCREEN
 	Print_All_Objects();
 
 	switch (game_state)
@@ -56,7 +63,7 @@ update_status ModuleScene::Update()
 			{
 				app->stage++;
 				stage_cleared = false;
-				return CHANGE_TO_MAP_PLANE;
+				return CHANGE_TO_STAGE_END;
 			}
 			update_counter++;
 		}
@@ -65,6 +72,7 @@ update_status ModuleScene::Update()
 			//TIMER MANAGED
 			if (difftime(time(NULL), time_count->timer) >= 1 && game_state == PLAYING) { time_count->Update(); }
 
+			// CHECK IF STAGE CLEARED
 			if (app->entityManagerModule->balloons.empty())
 			{
 				stage_cleared = true;

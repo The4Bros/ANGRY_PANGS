@@ -1,35 +1,40 @@
 #include "ModuleTitle.h"
 
-ModuleTitle::ModuleTitle(Application* app) : Module(app){}
+ModuleTitle::ModuleTitle(Application* app) : Module(app)
+{
+	for (int i = 0; i < 4; i++){ source_rect[i] = { i * 384, 0, 384, 240 }; }
+	source_rect[4] = { 1536, 0, 176, 15 };
+
+	balloon_source_rect = { 0, 0, 48, 40 };
+
+	for (int i = 0; i < 4; i++){ balloon_split_source_rect[i] = { (i * 48) + 1536, 167, 48, 40 }; }
+
+	insert_coin_pressed = false;
+}
 
 bool ModuleTitle::Init()
 {	
+	app->current_time = 0;
+	ticks = 0;
+
+	for (int i = 0; i < 4; i++){ dir[i] = 1; aux[i] = 1; }
 	gravity[0] = 5;
 	gravity[1] = 30;
 	gravity[2] = 10;
 	gravity[3] = 10;
-	app->current_time = 0;
-	ticks = 0;
-	for (int i = 0; i < 4; i++){ dir[i] = 1; aux[i] = 1; }
-	
 	
 	rect = { 0, 0, 384 * app->windowModule->scale, 240 * app->windowModule->scale };
 	insert_coin_rect = { 100 * app->windowModule->scale, 200 * app->windowModule->scale, 177 * app->windowModule->scale, 15 * app->windowModule->scale };
-
-	for (int i = 0; i < 4; i++){ source_rect[i] = { i * 384, 0, 384, 240 }; }
-	source_rect[4] = { 1536, 0, 176, 15 };
 
 	balloon_rects[0] = { 384*app->windowModule->scale, 0, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 	balloon_rects[1] = { 0, 0, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 	balloon_rects[2] = { 384*app->windowModule->scale, 0, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 	balloon_rects[3] = { 0, 0, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
-	balloon_source_rect = { 0, 0, 48, 40 };
 
-	balloon_split[0] = { 72 * app->windowModule->scale, 37 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
+	balloon_split[0] = {  72 * app->windowModule->scale, 37 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 	balloon_split[1] = { 131 * app->windowModule->scale, 52 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 	balloon_split[2] = { 193 * app->windowModule->scale, 28 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 	balloon_split[3] = { 232 * app->windowModule->scale, 49 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
-	for (int i = 0; i < 4; i++){ balloon_split_source_rect[i] = { (i * 48)+1536, 167, 48, 40 }; }
 
 	insert_coin_pressed = false;
 
@@ -40,55 +45,65 @@ bool ModuleTitle::Init()
 
 update_status ModuleTitle::Update()
 {	
-	//Print inital screens
-	if (ticks < 30){ app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[0], &rect); }
-	else if (ticks < 60){ app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[1], &rect); }
-	else if (app->current_time < 3){ app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[2], &rect); }
-	else if (app->current_time > 15){ return CHANGE_TO_TUTORIAL; }
-	else if (app->coins == 0)
+	// Inital screens
+	if (ticks < 30)      { app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[0], &rect); }
+	else if (ticks < 60) { app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[1], &rect); }
+	else if (ticks < 180){ app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[2], &rect); }
+
+	// Begginning animation:
+	else if (ticks < 480){ Update_Balloons(); }
+
+	// Title
+	else if(ticks < 510)
 	{
-		//begginning animation:
-		if (app->current_time < 5)
-		{
-
-			Update_Balloons();
-		}
-		// insert coin 
-		else
-		{	
-			app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[3], &rect);
-			if (ticks % 60 < 30) { app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[4], &insert_coin_rect); }
-
-		}
-	}
-	else
-	{
-		app->fontManagerModule->Write_On_Screen("Push start button", 140 * app->windowModule->scale, 100 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
-		app->fontManagerModule->Write_On_Screen("1 or 2 players",    150 * app->windowModule->scale, 120 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
-		app->fontManagerModule->Write_On_Screen("Credits:",          250 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
-		app->fontManagerModule->Write_On_Screen(app->coins,          320 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
-
-		if (app->inputModule->key[SDL_SCANCODE_1] == 1)
-		{
-			return CHANGE_TO_CHOOSE_CITY;
-		}
+		app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[3], &rect);
+		if (ticks % 60 < 30) { app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[4], &insert_coin_rect); }
 	}
 	
-	if (app->current_time > 5)
+	else
 	{
+		if (ticks == 840) { app->audioModule->StopMusic(); }
+
+		// Check for Coins
 		if (app->inputModule->key[SDL_SCANCODE_5] == 1)
 		{
 			if (!insert_coin_pressed)
 			{
 				app->Add_Coin();
+				app->audioModule->StopMusic();
 				insert_coin_pressed = true;
-				app->audioModule->PlayFx(COIN);
 			}
 		}
 		else { insert_coin_pressed = false; }
+
+		// Title
+		if (app->coins == 0)
+		{
+			if (ticks > 7200) { return CHANGE_TO_TITLE; }
+			else
+			{
+				app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[3], &rect);
+				if (ticks % 60 < 30) { app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[4], &insert_coin_rect); }
+			}
+		}
+
+		// Ask 1 or 2 Players
+		else
+		{
+			app->fontManagerModule->Write_On_Screen("Push start button", 140 * app->windowModule->scale, 100 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+			app->fontManagerModule->Write_On_Screen("1 or 2 players", 150 * app->windowModule->scale, 120 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+			app->fontManagerModule->Write_On_Screen("Credits:", 250 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+			app->fontManagerModule->Write_On_Screen(app->coins, 320 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+
+			if (app->inputModule->key[SDL_SCANCODE_1] == 1)
+			{
+				return CHANGE_TO_CHOOSE_CITY;
+			}
+		}
 	}
 
-	ticks++;
+	if (ticks < 65535){ ticks++; }
+	else{ ticks = 420; }
 
 	return UPDATE_CONTINUE;
 	

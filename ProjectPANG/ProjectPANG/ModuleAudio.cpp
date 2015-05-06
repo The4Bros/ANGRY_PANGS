@@ -16,16 +16,17 @@ bool ModuleAudio::Init()
 
 	if (Mix_OpenAudio(44100, AUDIO_U8 /*MIX_DEFAULT_FORMAT*/, 2, 2048) == -1){ return false; } // Initialize SDL_mixer
 
-	music_paths[0] = "music/01a - Mt. Fuji (Arcade).wav";
-	music_paths[1] = "music/02 - Mt. Keirin (Arcade).wav";
-	music_paths[2] = "music/03 - Emerald Temple (Arcade).wav";
-	music_paths[3] = "music/04 - Angkor Wat (Arcade).wav";
-	music_paths[4] = "music/05 - Australia (Arcade).wav";
-	music_paths[5] = "music/06 - Taj Mahal (Arcade).wav";
-	music_paths[6] = "music/07 - Leningrad (Arcade).wav";
-	music_paths[7] = "music/08 - Paris (Arcade).wav";
-	music_paths[8] = "music/09 - London (Arcade).wav";
-	music_paths[9] = "music/10 - Barcelona (Arcade).wav";
+	music_paths[0]  = "music/01a - Mt. Fuji (Arcade).wav";
+	music_paths[1]  = "music/02 - Mt. Keirin (Arcade).wav";
+	music_paths[2]  = "music/03 - Emerald Temple (Arcade).wav";
+	music_paths[3]  = "music/04 - Angkor Wat (Arcade).wav";
+	music_paths[4]  = "music/05 - Australia (Arcade).wav";
+	music_paths[5]  = "music/06 - Taj Mahal (Arcade).wav";
+	music_paths[6]  = "music/07 - Leningrad (Arcade).wav";
+	music_paths[7]  = "music/08 - Paris (Arcade).wav";
+	music_paths[8]  = "music/09 - London (Arcade).wav";
+	music_paths[9]  = "music/10 - Barcelona (Arcade).wav";
+	music_paths[10] = "music/countdown.wav";
 
 	music_paths[17] = "music/Finivell1.wav";
 	music_paths[18] = "music/UN - Unused #1 (Arcade).wav";
@@ -62,6 +63,11 @@ bool ModuleAudio::PlayMusic(const unsigned int position)
 	return true;
 }
 
+void ModuleAudio::PlayFx(fx_sound id, int repeat)
+{
+	Mix_PlayChannel(-1, &fx[int(id)], repeat);
+}
+
 void ModuleAudio::ResumeMusic()
 {
 	Mix_ResumeMusic();
@@ -72,7 +78,11 @@ void ModuleAudio::PauseMusic()
 	Mix_PauseMusic();
 }
 
-void ModuleAudio::PlayFx(fx_sound id, int repeat)
+void ModuleAudio::StopMusic()
 {
-	Mix_PlayChannel(-1, &fx[int(id)], repeat);
+	if (music != NULL) // free previous music
+	{
+		Mix_FreeMusic(music);
+		music = NULL;
+	} 
 }
