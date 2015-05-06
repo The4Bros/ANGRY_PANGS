@@ -9,28 +9,29 @@
 #ifndef __ModuleFontManager_H__
 #define __ModuleFontManager_H__
 
+enum Text_Color
+{
+	WHITE,
+	YELLOW
+};
+
 
 class ModuleFontManager : public Module{
 private:
 
 	TTF_Font* font;
-	SDL_Color white_color;
-	SDL_Color yellow_color;
+	SDL_Color color[2];
 	
 	SDL_Rect Message_rect;
 
 public:
 
 	ModuleFontManager(Application* app);
-	ModuleFontManager(const ModuleFontManager& fontManager);
 	bool Init();
 	bool CleanUp();
 
-	void Write_On_Screen(unsigned int value, unsigned int x, unsigned int y, unsigned int size, int color);
-	void Write_On_Screen(char* string, unsigned int x, unsigned int y, unsigned int size, int color);
-
-	char* NumberToString(int Number);
-
+	void Write_On_Screen(unsigned int value, unsigned int x, unsigned int y, unsigned int size, Text_Color text_color);
+	void Write_On_Screen(char* string, unsigned int x, unsigned int y, unsigned int size, Text_Color text_color);
 };
 
 #endif

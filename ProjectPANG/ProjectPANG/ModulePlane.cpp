@@ -56,7 +56,7 @@ update_status ModulePlane::Update()
 	ticks++;
 
 	
-	app->fontManagerModule->Write_On_Screen(ticks, 8 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, 0);
+	app->fontManagerModule->Write_On_Screen(ticks, 8 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->renderModule->Print(app->texturesModule->level_complete, &background_source_rect, &background_rect);
 
 

@@ -164,19 +164,19 @@ void ModuleScene::Print_All_Objects()
 
 
 	// PRINT TEXT & SCORES
-	app->fontManagerModule->Write_On_Screen("Player-1", 17 * app->windowModule->scale, 208 * app->windowModule->scale, 8 * app->windowModule->scale,0);
-	app->fontManagerModule->Write_On_Screen("Player-2", 270 * app->windowModule->scale, 208 * app->windowModule->scale, 8 * app->windowModule->scale, 0);
-	app->fontManagerModule->Write_On_Screen("lives:", 16 * app->windowModule->scale, 222 * app->windowModule->scale, 8 * app->windowModule->scale,0);
-	app->fontManagerModule->Write_On_Screen("0", 104 * app->windowModule->scale, 214 * app->windowModule->scale, 8 * app->windowModule->scale, 0);
-	app->fontManagerModule->Write_On_Screen(app->playerModule->player1->lives, 64 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale,0);
-	app->fontManagerModule->Write_On_Screen("mt.fuji", 160 * app->windowModule->scale, 208 * app->windowModule->scale, 8 * app->windowModule->scale, 0);
-	app->fontManagerModule->Write_On_Screen(app->stage, 160 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, 0);
-	app->fontManagerModule->Write_On_Screen("~", 167 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, 0);
-	app->fontManagerModule->Write_On_Screen(app->stage, 174 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, 0);
-	app->fontManagerModule->Write_On_Screen("stage", 185 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, 0);
-	app->fontManagerModule->Write_On_Screen("HI:", 160 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, 0);
-	app->fontManagerModule->Write_On_Screen(10000, 185 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, 0);
-	app->fontManagerModule->Write_On_Screen(app->coins, 360 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale,0);
+	app->fontManagerModule->Write_On_Screen("Player-1",                        17 * app->windowModule->scale, 208 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen("Player-2",                       270 * app->windowModule->scale, 208 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen("lives:",                          16 * app->windowModule->scale, 222 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen("0",                              104 * app->windowModule->scale, 214 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen(app->playerModule->player1->lives, 64 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen("mt.fuji",                        160 * app->windowModule->scale, 208 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen(app->stage,                       160 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen("~",                              167 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen(app->stage,                       174 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen("stage",                          185 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen("HI:",                            160 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen(10000,                            185 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen(app->coins,                       360 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 
 
 	// PRINT BACKGROUND

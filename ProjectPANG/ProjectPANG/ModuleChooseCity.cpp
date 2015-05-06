@@ -58,7 +58,7 @@ bool ModuleChooseCity::Init()
 	selection_rect[16] = {   8 * app->windowModule->scale, 152 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
 
 	// forward return controls
-	controls_rect = { 80 * app->windowModule->scale, 163 * app->windowModule->scale, 184 * app->windowModule->scale, 45 * app->windowModule->scale };
+	controls_rect = { 100 * app->windowModule->scale, 163 * app->windowModule->scale, 184 * app->windowModule->scale, 45 * app->windowModule->scale };
 
 
 	selection_index = 0;
@@ -80,14 +80,15 @@ bool ModuleChooseCity::Init()
 
 update_status ModuleChooseCity::Update()
 {
-	if (seconds != app->current_time) // handle countdown numbers
+	// handle countdown numbers
+	if (seconds != app->current_time)
 	{
 		if (current_number > 0){ current_number--; seconds = app->current_time; }
 		else{ return CHANGE_TO_PLAY;}
 	}
 
 
-
+	// E shortcut
 	if (app->inputModule->key[SDL_SCANCODE_E] == 1)
 	{
 		//if (!pause_pressed){ Pause_Scene(); }
@@ -124,14 +125,16 @@ update_status ModuleChooseCity::Update()
 	}
 	else { d_pressed = false; }
 
-	app->fontManagerModule->Write_On_Screen("choose a city to start.", 9 * app->windowModule->scale, 214 * app->windowModule->scale, 7 * app->windowModule->scale, 0);
-	app->fontManagerModule->Write_On_Screen("use arrows to choose.", 9 * app->windowModule->scale, 222 * app->windowModule->scale, 7 * app->windowModule->scale, 0);
-	app->fontManagerModule->Write_On_Screen("press button to finalize choice.", 9 * app->windowModule->scale, 230 * app->windowModule->scale, 7 * app->windowModule->scale, 0);
-	app->fontManagerModule->Write_On_Screen("stage name", 295 * app->windowModule->scale, 207 * app->windowModule->scale, 7 * app->windowModule->scale, 1);
-	app->fontManagerModule->Write_On_Screen("stage", 280 * app->windowModule->scale, 230 * app->windowModule->scale, 7 * app->windowModule->scale, 1);
-	app->fontManagerModule->Write_On_Screen(app->stage, 344 * app->windowModule->scale, 230 * app->windowModule->scale, 7 * app->windowModule->scale, 1);
-	app->fontManagerModule->Write_On_Screen("~", 352 * app->windowModule->scale, 230 * app->windowModule->scale, 7 * app->windowModule->scale, 1);
-	app->fontManagerModule->Write_On_Screen(app->stage, 358 * app->windowModule->scale, 230 * app->windowModule->scale, 7 * app->windowModule->scale, 1);
+	app->fontManagerModule->Write_On_Screen("choose a city to start.",          9 * app->windowModule->scale, 214 * app->windowModule->scale, 7 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen("use arrows to choose.",            9 * app->windowModule->scale, 222 * app->windowModule->scale, 7 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen("press button to finalize choice.", 9 * app->windowModule->scale, 230 * app->windowModule->scale, 7 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen("stage name",                     295 * app->windowModule->scale, 207 * app->windowModule->scale, 7 * app->windowModule->scale, YELLOW);
+	app->fontManagerModule->Write_On_Screen("stage",                          280 * app->windowModule->scale, 230 * app->windowModule->scale, 7 * app->windowModule->scale, YELLOW);
+	app->fontManagerModule->Write_On_Screen(app->stage,                       344 * app->windowModule->scale, 230 * app->windowModule->scale, 7 * app->windowModule->scale, YELLOW);
+	app->fontManagerModule->Write_On_Screen("~",                              352 * app->windowModule->scale, 230 * app->windowModule->scale, 7 * app->windowModule->scale, YELLOW);
+	app->fontManagerModule->Write_On_Screen(app->stage,                       358 * app->windowModule->scale, 230 * app->windowModule->scale, 7 * app->windowModule->scale, YELLOW);
+
+
 	app->renderModule->Print(app->texturesModule->map_sprite, &background_source_rect, &background_rect); // print map
 	app->renderModule->Print(app->texturesModule->map_countdown_sprite, &countdown_source_rect[current_number], &countdown_rect); // print countdown numbers
 	app->renderModule->Print(app->texturesModule->map_sprite, &controls_source_rect, &controls_rect); // print controls
