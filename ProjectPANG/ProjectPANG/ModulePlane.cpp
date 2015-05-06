@@ -42,7 +42,7 @@ bool ModulePlane::Init()
 	
 
 	app->audioModule->PlayMusic(17);
-
+	
 	plane_rect = app->chooseCityModule->selection_rect[(app->stage - 1) / 3];
 
 	ticks = 0;
@@ -55,10 +55,10 @@ update_status ModulePlane::Update()
 
 	ticks++;
 
+	
+	app->fontManagerModule->Write_On_Screen(ticks, 8 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, 0);
 	app->renderModule->Print(app->texturesModule->level_complete, &background_source_rect, &background_rect);
 
-	app->fontManagerModule->Write_On_Screen("Player-1", 8 * app->windowModule->scale, 209 * app->windowModule->scale, 8 * app->windowModule->scale);
-	app->fontManagerModule->Write_On_Screen(ticks, 8 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale);
 
 	return UPDATE_CONTINUE;
 }

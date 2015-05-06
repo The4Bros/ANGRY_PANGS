@@ -124,7 +124,14 @@ update_status ModuleChooseCity::Update()
 	}
 	else { d_pressed = false; }
 
-
+	app->fontManagerModule->Write_On_Screen("choose a city to start.", 9 * app->windowModule->scale, 214 * app->windowModule->scale, 7 * app->windowModule->scale, 0);
+	app->fontManagerModule->Write_On_Screen("use arrows to choose.", 9 * app->windowModule->scale, 222 * app->windowModule->scale, 7 * app->windowModule->scale, 0);
+	app->fontManagerModule->Write_On_Screen("press button to finalize choice.", 9 * app->windowModule->scale, 230 * app->windowModule->scale, 7 * app->windowModule->scale, 0);
+	app->fontManagerModule->Write_On_Screen("stage name", 295 * app->windowModule->scale, 207 * app->windowModule->scale, 7 * app->windowModule->scale, 1);
+	app->fontManagerModule->Write_On_Screen("stage", 280 * app->windowModule->scale, 230 * app->windowModule->scale, 7 * app->windowModule->scale, 1);
+	app->fontManagerModule->Write_On_Screen(app->stage, 344 * app->windowModule->scale, 230 * app->windowModule->scale, 7 * app->windowModule->scale, 1);
+	app->fontManagerModule->Write_On_Screen("~", 352 * app->windowModule->scale, 230 * app->windowModule->scale, 7 * app->windowModule->scale, 1);
+	app->fontManagerModule->Write_On_Screen(app->stage, 358 * app->windowModule->scale, 230 * app->windowModule->scale, 7 * app->windowModule->scale, 1);
 	app->renderModule->Print(app->texturesModule->map_sprite, &background_source_rect, &background_rect); // print map
 	app->renderModule->Print(app->texturesModule->map_countdown_sprite, &countdown_source_rect[current_number], &countdown_rect); // print countdown numbers
 	app->renderModule->Print(app->texturesModule->map_sprite, &controls_source_rect, &controls_rect); // print controls

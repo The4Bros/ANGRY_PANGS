@@ -15,7 +15,7 @@ private:
 
 	TTF_Font* font;
 	SDL_Color white_color;
-
+	SDL_Color yellow_color;
 	
 	SDL_Rect Message_rect;
 
@@ -26,8 +26,8 @@ public:
 	bool Init();
 	bool CleanUp();
 
-	void Write_On_Screen(unsigned int value, unsigned int x, unsigned int y, unsigned int size);
-	void Write_On_Screen(char* string, unsigned int x, unsigned int y, unsigned int size);
+	void Write_On_Screen(unsigned int value, unsigned int x, unsigned int y, unsigned int size, int color);
+	void Write_On_Screen(char* string, unsigned int x, unsigned int y, unsigned int size, int color);
 
 	char* NumberToString(int Number);
 
