@@ -33,6 +33,7 @@ public:
 	DoubleNode<QueueTYPE>* getStart(){ return init; }
 	DoubleNode<QueueTYPE>* getLast(){ return last; }
 	unsigned int Count(){ return num_elements; }
+	bool empty(){ return num_elements == 0; }
 
 	void push(const QueueTYPE& data)
 	{

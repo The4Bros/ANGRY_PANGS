@@ -7,9 +7,9 @@
 // 2 -> new right
 // 3 -> new left
 
-Balloon::Balloon(Application* app, unsigned int position_in_list, int x, int y, int type, int direction) :
+Balloon::Balloon(Application* app, int x, int y, int type, int direction) :
 		app(app),
-		position_in_list(position_in_list),
+		alive(true),
 		ticks(1)
 {
 	if (direction < 2){ state_balloon_V = BALLOON_DOWN; gravity = 0; }
@@ -178,7 +178,7 @@ void Balloon::Print()
 
 void Balloon::Hit()
 {
-	app->entityManagerModule->particles.push_back(new Particles(app, app->entityManagerModule->particles.Count(), int(type), rect.x, rect.y));
+	app->entityManagerModule->particles.push(new Particles(app, int(type), rect.x, rect.y));
 
 	if (type < 9)
 	{
@@ -186,18 +186,11 @@ void Balloon::Hit()
 		rect.x -= rect.w / 4;
 		if (state_balloon_H == BALLOON_RIGHT) state_balloon_H = BALLOON_LEFT;
 
-		app->entityManagerModule->balloons.push_back(new Balloon(app, app->entityManagerModule->balloons.Count(), (rect.x + (rect.w / 2)) / app->windowModule->scale, rect.y / app->windowModule->scale, int(type), 2));
+		app->entityManagerModule->balloons.push(new Balloon(app, (rect.x + (rect.w / 2)) / app->windowModule->scale, rect.y / app->windowModule->scale, int(type), 2));
 
 		Restart_Movement_Balloons_hit();
 	}
-	else
-	{
-		for (unsigned int i = position_in_list + 1; i < app->entityManagerModule->balloons.Count(); i++)
-		{
-			(*app->entityManagerModule->balloons.at(i))->position_in_list--;
-		}
-		app->entityManagerModule->balloons.Delete_Element_At(position_in_list);
-	}
+	else { alive = false; }
 }
 
 void Balloon::Restart_Movement_Balloons_hit()
@@ -262,82 +255,6 @@ void Balloon::Reduce_Balloon_Size()
 		rect.h = 7 * app->windowModule->scale;
 		break;
 	}
-}
-
-
-
-
-void Balloon::Reset(unsigned int position_in_list, int x, int y, int type, int direction)
-{
-	ticks = 1;
-	this->position_in_list = position_in_list;
-
-	if (direction < 2){ state_balloon_V = BALLOON_DOWN; gravity = 0; }
-	else
-	{
-		state_balloon_V = BALLOON_UP;
-	    gravity = 0.8f * app->windowModule->scale_f * app->entityManagerModule->balloon_speed;
-		
-	}
-
-	if (direction % 2 == 0){ state_balloon_H = BALLOON_RIGHT; }
-	else{ state_balloon_H = BALLOON_LEFT; }
-
-	switch (type)
-	{
-	case 0:
-		this->type = RED_1;
-		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
-		break;
-	case 1:
-		this->type = BLUE_1;
-		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
-		break;
-	case 2:
-		this->type = GREEN_1;
-		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
-		break;
-	case 3:
-		this->type = RED_2;
-		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 32 * app->windowModule->scale, 26 * app->windowModule->scale };
-		break;
-	case 4:
-		this->type = BLUE_2;
-		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 32 * app->windowModule->scale, 26 * app->windowModule->scale };
-		break;
-	case 5:
-		this->type = GREEN_2;
-		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 32 * app->windowModule->scale, 26 * app->windowModule->scale };
-		break;
-	case 6:
-		this->type = RED_3;
-		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 16 * app->windowModule->scale, 14 * app->windowModule->scale };
-		break;
-	case 7:
-		this->type = BLUE_3;
-		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 16 * app->windowModule->scale, 14 * app->windowModule->scale };
-		break;
-	case 8:
-		this->type = GREEN_3;
-		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 16 * app->windowModule->scale, 14 * app->windowModule->scale };
-		break;
-	case 9:
-		this->type = RED_4;
-		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 8 * app->windowModule->scale, 7 * app->windowModule->scale };
-		break;
-	case 10:
-		this->type = BLUE_4;
-		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 8 * app->windowModule->scale, 7 * app->windowModule->scale };
-		break;
-	case 11:
-		this->type = GREEN_4;
-		rect = { x*app->windowModule->scale, y*app->windowModule->scale, 8 * app->windowModule->scale, 7 * app->windowModule->scale };
-		break;
-	}
-
-	position_X = (float)rect.x;
-	position_Y = (float)rect.y;
-
 }
 
 
@@ -409,19 +326,14 @@ void Balloon::Size4_Check_Collision_Balloon_Players()
 }
 
 
-
-
-
-
-
-
 void Balloon::Check_Collision_Balloon_Bricks()
 {
 	SDL_Rect tmp_rect;
 
-	for (unsigned int i = 0; i < app->entityManagerModule->bricks.Count(); i++)
+	DoubleNode<Brick*>* tmp_brick = app->entityManagerModule->bricks.getStart();
+	for (; tmp_brick != NULL; tmp_brick = tmp_brick->next)
 	{
-		tmp_rect = (*app->entityManagerModule->bricks.at(i))->rect;
+		tmp_rect = tmp_brick->data->rect;
 
 		//Closest point to brick
 		int closest_x, closest_y;

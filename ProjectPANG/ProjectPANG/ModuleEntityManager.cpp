@@ -110,18 +110,24 @@ bool ModuleEntityManager::Init()
 
 update_status ModuleEntityManager::Update()
 {
-	if (slow_time)
-	{
-		if (slow_time_counter < 300){ slow_time_counter++; }
-		else{ balloon_speed = 2; slow_time = false; }
-	}
-
 	if (app->sceneModule->game_state == PLAYING)
 	{
-		// BALLOONS
+		// Slow Time Power Up
+		if (slow_time)
+		{
+			if (slow_time_counter < 300){ slow_time_counter++; }
+			else{ balloon_speed = 2; slow_time = false; }
+		}
+
+		// Stop Time Power Up
 		if (!stop_time)
 		{
-			for (unsigned int i = 0; i < balloons.Count(); i++){ (*balloons.at(i))->Update(); }
+			// BALLOONS Update
+			DoubleNode<Balloon*>* tmp_balloon = balloons.getStart();
+			for (; tmp_balloon != NULL; tmp_balloon = tmp_balloon->next)
+			{
+				if (tmp_balloon->data->alive){ tmp_balloon->data->Update(); }
+			}
 		}
 		else
 		{
@@ -129,8 +135,13 @@ update_status ModuleEntityManager::Update()
 			else{ stop_time = false; }
 		}
 
-		// PARTICLES
-		for (unsigned int i = 0; i < particles.Count(); i++){ (*particles.at(i))->Update(); }
+		// PARTICLES Update
+		DoubleNode<Particles*>* tmp_particle = particles.getStart();
+		for (; tmp_particle != NULL; tmp_particle = tmp_particle->next)
+		{
+			if (tmp_particle->data->alive){ tmp_particle->data->Update(); }
+		}
+
 	}
 
 	return UPDATE_CONTINUE;

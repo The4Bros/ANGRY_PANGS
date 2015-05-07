@@ -154,9 +154,10 @@ bool Harpoon::Check_Collision_Harpoon_Balloon()
 {
 	SDL_Rect tmp_rect;
 
-	for (unsigned int i = 0; i < app->entityManagerModule->balloons.Count(); i++)
+	DoubleNode<Balloon*>* tmp_balloon = app->entityManagerModule->balloons.getStart();
+	for (; tmp_balloon != NULL; tmp_balloon = tmp_balloon->next)
 	{
-		tmp_rect = (*app->entityManagerModule->balloons.at(i))->rect;
+		tmp_rect = tmp_balloon->data->rect;
 
 		if (tmp_rect.x <= head_rect.x + head_rect.w
 			&& tmp_rect.x + tmp_rect.w >= head_rect.x
@@ -179,7 +180,7 @@ bool Harpoon::Check_Collision_Harpoon_Balloon()
 				> ((closest_x - (tmp_rect.x + (tmp_rect.w / 2))) * (closest_x - (tmp_rect.x + (tmp_rect.w / 2))))
 				+ ((closest_y - (tmp_rect.y + (tmp_rect.h / 2))) * (closest_y - (tmp_rect.y + (tmp_rect.h / 2)))))
 			{
-				(*app->entityManagerModule->balloons.at(i))->Hit();
+				tmp_balloon->data->Hit();
 				return true;
 			}
 		}
@@ -191,16 +192,17 @@ bool Harpoon::Check_Collision_Harpoon_Brick()
 {
 	SDL_Rect tmp_rect;
 
-	for (unsigned int i = 0; i < app->entityManagerModule->bricks.Count(); i++)
+	DoubleNode<Brick*>* tmp_brick = app->entityManagerModule->bricks.getStart();
+	for (; tmp_brick != NULL; tmp_brick = tmp_brick->next)
 	{
-		tmp_rect = (*app->entityManagerModule->bricks.at(i))->rect;
+		tmp_rect = tmp_brick->data->rect;
 
 		if (head_rect.x + head_rect.w >= tmp_rect.x // brick left
 			&& tmp_rect.x + tmp_rect.w >= head_rect.x // brick right
 			&& tmp_rect.y + tmp_rect.h >= head_rect.y // brick up
 			&& head_rect.y + head_rect.h + body_rect.h >= tmp_rect.y) // brick down
 		{
-			(*app->entityManagerModule->bricks.at(i))->Hit();
+			tmp_brick->data->Hit();
 			return true;
 		}
 	}
