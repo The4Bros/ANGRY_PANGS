@@ -263,7 +263,7 @@ void ModuleScene::reset_stage()
 	// BRICKS____________________________________________________________________________________________________________________________
 
 	app->entityManagerModule->bricks.ClearAll();
-	for (i = 0; i < app->entityManagerModule->bricks.Count(); i++)
+	for (i = 0; i < stage_arrangement.bricks.Count(); i++)
 	{
 		app->entityManagerModule->bricks.push_back(new Brick(
 			app, i,
@@ -276,7 +276,7 @@ void ModuleScene::reset_stage()
 	// STAIRS____________________________________________________________________________________________________________________________
 
 	app->entityManagerModule->stairs.ClearAll();
-	for (i = 0; i < app->entityManagerModule->stairs.Count(); i++)
+	for (i = 0; i < stage_arrangement.stairs.Count(); i++)
 	{
 		app->entityManagerModule->stairs.push_back(new Stair(
 			app,
@@ -289,7 +289,7 @@ void ModuleScene::reset_stage()
 	// BALLOONS____________________________________________________________________________________________________________________________
 
 	app->entityManagerModule->balloons.ClearAll();
-	for (i = 0; i < app->entityManagerModule->balloons.Count(); i++)
+	for (i = 0; i < stage_arrangement.balloons.Count(); i++)
 	{
 		app->entityManagerModule->balloons.push_back(new Balloon(
 			app, i,

@@ -15,7 +15,7 @@ public:
 	int position_in_list;
 	unsigned int quantity, update_counter, source_index;
 
-	Particles(Application* app, int position_in_list, unsigned int type, int x, int y);
+	Particles(Application* app, int position_in_list, unsigned int type, unsigned int x, unsigned int y);
 	~Particles(){}
 
 	void Update();

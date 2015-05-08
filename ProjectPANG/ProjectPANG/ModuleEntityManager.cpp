@@ -90,11 +90,11 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 
 
 	// ENEMIES
-	for (int i = 0; i < 16; i++){ source_enemy_rect[i] = { i * 32, 0, 32, 32 }; }
-	for (int i = 0; i < 10; i++){ source_enemy_rect[i + 16] = { i * 32,  32, 32, 32 }; }
-	for (int i = 0; i < 22; i++){ source_enemy_rect[i + 26] = { i * 32,  64, 32, 32 }; }
-	for (int i = 0; i < 11; i++){ source_enemy_rect[i + 48] = { i * 32,  96, 32, 32 }; }
-	for (int i = 0; i < 13; i++){ source_enemy_rect[i + 59] = { i * 32, 128, 32, 32 }; }
+	for (i = 0; i < 16; i++){ source_enemy_rect[i] = { i * 32, 0, 32, 32 }; }
+	for (i = 0; i < 10; i++){ source_enemy_rect[i + 16] = { i * 32,  32, 32, 32 }; }
+	for (i = 0; i < 22; i++){ source_enemy_rect[i + 26] = { i * 32,  64, 32, 32 }; }
+	for (i = 0; i < 11; i++){ source_enemy_rect[i + 48] = { i * 32,  96, 32, 32 }; }
+	for (i = 0; i < 13; i++){ source_enemy_rect[i + 59] = { i * 32, 128, 32, 32 }; }
 	source_enemy_rect[72] = { 416, 128, 36, 24 };
 	source_enemy_rect[73] = { 452, 182, 36, 24 };
 	
@@ -136,6 +136,12 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 
 bool ModuleEntityManager::Init()
 {
+	bricks.Init();
+	stairs.Init();
+	balloons.Init();
+	//enemies.Init();
+	particles.Init();
+
 	stop_time = slow_time = false;
 	stop_time_counter = slow_time_counter = 0;
 	balloon_speed = 2.0f;

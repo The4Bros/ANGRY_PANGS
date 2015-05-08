@@ -24,7 +24,7 @@ private:
 	}
 
 public:
-	DynArray() : num_elements(0)/*, data(NULL)*/ { data = NULL; Alloc(BLOCK_SIZE); }
+	DynArray() : num_elements(0), data(NULL) { Alloc(BLOCK_SIZE); }
 	DynArray(unsigned int capacity) : num_elements(0), data(NULL) { Alloc(capacity); }
 
 	~DynArray(){ delete[] data; }
@@ -90,6 +90,7 @@ public:
 	}
 
 	// Utils
+	void Init(){ num_elements = 0; data = NULL; Alloc(BLOCK_SIZE); }
 	unsigned int size() const { return capacity; }
  	unsigned int Count() const { return num_elements; }
 	bool empty(){ return num_elements == 0; }

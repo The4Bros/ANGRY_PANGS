@@ -8,7 +8,7 @@
 */
 
 
-Particles::Particles(Application* app, int position_in_list, unsigned int type, int x, int y) :
+Particles::Particles(Application* app, int position_in_list, unsigned int type, unsigned int x, unsigned int y) :
 		app(app),
 		position_in_list(position_in_list),
 		update_counter(0)

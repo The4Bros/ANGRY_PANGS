@@ -46,8 +46,9 @@ bool ModuleAudio::CleanUp()
 
 	Mix_CloseAudio(); // close audio subsystem
 
-	while (Mix_Init(0)){ Mix_Quit(); } //each call to Mix_Init may set different flags
-		
+	//while (Mix_Init(0)){ Mix_Quit(); } //each call to Mix_Init may set different flags
+	Mix_Quit();
+
 	return true;
 }
 
