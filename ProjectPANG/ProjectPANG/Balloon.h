@@ -44,8 +44,12 @@ public:
 
 	Application* app;
 
+	int position_in_list;
+
 	float gravity;
 	float position_X, position_Y;
+
+	int ticks;
 
 	bool change_movement_V;// true if the ball has to change its direction, change it on Hit()
 	bool change_movement_H;
@@ -54,11 +58,8 @@ public:
 	BALLOON_STATE_VERTICAL state_balloon_V;
 	BALLOON_STATE_HORIZONTAL state_balloon_H;
 	SDL_Rect rect;
-
-	int ticks;
-	bool alive;
 	
-	Balloon(Application* app, int x, int y, int type, int direction);
+	Balloon(Application* app, unsigned int position_in_list, int x, int y, int type, int direction);
 	~Balloon(){}
 
 	void Update();
@@ -66,6 +67,7 @@ public:
 	void Hit();
 	void Reduce_Balloon_Size();
 	void Restart_Movement_Balloons_hit();
+	void Reset(unsigned int position_in_list, int x, int y, int type, int direction);
 
 	void Size1_Check_Collision_Balloon_Players();
 	void Size4_Check_Collision_Balloon_Players();
