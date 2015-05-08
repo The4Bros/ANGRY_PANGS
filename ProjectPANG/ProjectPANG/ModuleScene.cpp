@@ -5,7 +5,7 @@ time_count(NULL),
 pause_pressed(false),
 stage_cleared(false)
 {
-
+	
 }
 
 bool ModuleScene::Init()
@@ -260,138 +260,44 @@ void ModuleScene::reset_stage()
 	app->playerModule->player1->Reset(stage_arrangement.player_pos[0], stage_arrangement.player_pos[1]);
 	if (app->playerModule->player2 != NULL){ app->playerModule->player1->Reset(stage_arrangement.player_pos[0], stage_arrangement.player_pos[1]); }
 
-	
 	// BRICKS____________________________________________________________________________________________________________________________
 
-	if (!stage_arrangement.bricks.empty())
+	app->entityManagerModule->bricks.ClearAll();
+	for (i = 0; i < app->entityManagerModule->bricks.Count(); i++)
 	{
-		i = 0;
-
-		if (stage_arrangement.bricks.Count() > app->entityManagerModule->bricks.Count()) // needs more bricks
-		{
-			while (i < app->entityManagerModule->bricks.Count())
-			{
-				(*app->entityManagerModule->bricks.at(i))->Reset(
-					i,
-					(*stage_arrangement.bricks.at(i)).x,
-					(*stage_arrangement.bricks.at(i)).y,
-					(*stage_arrangement.bricks.at(i)).type);
-				i++;
-			}
-			while (i < stage_arrangement.bricks.Count())
-			{
-				app->entityManagerModule->bricks.push_back(new Brick(
-					app, i,
-					stage_arrangement.bricks.at(i)->x,
-					stage_arrangement.bricks.at(i)->y,
-					stage_arrangement.bricks.at(i)->type));
-				i++;
-			}
-		}
-		else
-		{
-			while (i < stage_arrangement.bricks.Count())
-			{
-				(*app->entityManagerModule->bricks.at(i))->Reset(
-					i,
-					(*stage_arrangement.bricks.at(i)).x,
-					(*stage_arrangement.bricks.at(i)).y,
-					(*stage_arrangement.bricks.at(i)).type);
-				i++;
-			}
-
-			app->entityManagerModule->bricks.Reduce_To(i);
-		}
+		app->entityManagerModule->bricks.push_back(new Brick(
+			app, i,
+			stage_arrangement.bricks.at(i)->x,
+			stage_arrangement.bricks.at(i)->y,
+			stage_arrangement.bricks.at(i)->type));
 	}
-	else { app->entityManagerModule->bricks.clear(); }
+
 
 	// STAIRS____________________________________________________________________________________________________________________________
 
-	if (!stage_arrangement.stairs.empty())
+	app->entityManagerModule->stairs.ClearAll();
+	for (i = 0; i < app->entityManagerModule->stairs.Count(); i++)
 	{
-		i = 0;
-
-		if (stage_arrangement.stairs.Count() > app->entityManagerModule->stairs.Count()) // needs more bricks
-		{
-			while (i < app->entityManagerModule->stairs.Count())
-			{
-				(*app->entityManagerModule->stairs.at(i))->Reset(
-					(*stage_arrangement.stairs.at(i)).x,
-					(*stage_arrangement.stairs.at(i)).y,
-					(*stage_arrangement.stairs.at(i)).type);
-				i++;
-			}
-			while (i < stage_arrangement.stairs.Count())
-			{
-				app->entityManagerModule->stairs.push_back(new Stair(
-					app,
-					(*stage_arrangement.stairs.at(i)).x,
-					(*stage_arrangement.stairs.at(i)).y,
-					(*stage_arrangement.stairs.at(i)).type));
-				i++;
-			}
-		}
-		else
-		{
-			while (i < stage_arrangement.stairs.Count())
-			{
-				(*app->entityManagerModule->stairs.at(i))->Reset(
-					(*stage_arrangement.stairs.at(i)).x,
-					(*stage_arrangement.stairs.at(i)).y,
-					(*stage_arrangement.stairs.at(i)).type);
-				i++;
-			}
-
-			app->entityManagerModule->stairs.Reduce_To(i);
-		}
+		app->entityManagerModule->stairs.push_back(new Stair(
+			app,
+			stage_arrangement.stairs.at(i)->x,
+			stage_arrangement.stairs.at(i)->y,
+			stage_arrangement.stairs.at(i)->type));
 	}
-	else { app->entityManagerModule->stairs.clear(); }
+
 
 	// BALLOONS____________________________________________________________________________________________________________________________
 
-	if (!stage_arrangement.balloons.empty())
+	app->entityManagerModule->balloons.ClearAll();
+	for (i = 0; i < app->entityManagerModule->balloons.Count(); i++)
 	{
-		i = 0;
-
-		if (stage_arrangement.balloons.Count() > app->entityManagerModule->balloons.Count()) // needs more bricks
-		{
-			while (i < app->entityManagerModule->balloons.Count())
-			{
-				(*app->entityManagerModule->balloons.at(i))->Reset(
-					i,
-					(*stage_arrangement.balloons.at(i)).x,
-					(*stage_arrangement.balloons.at(i)).y,
-					(*stage_arrangement.balloons.at(i)).type,
-					(*stage_arrangement.balloons.at(i)).aux1);
-				i++;
-			}
-			while (i < stage_arrangement.balloons.Count())
-			{
-				app->entityManagerModule->balloons.push_back(new Balloon(
-					app, i,
-					(*stage_arrangement.balloons.at(i)).x,
-					(*stage_arrangement.balloons.at(i)).y,
-					(*stage_arrangement.balloons.at(i)).type,
-					(*stage_arrangement.balloons.at(i)).aux1));
-				i++;
-			}
-		}
-		else
-		{
-			while (i < stage_arrangement.balloons.Count())
-			{
-				(*app->entityManagerModule->balloons.at(i))->Reset(
-					i,
-					(*stage_arrangement.balloons.at(i)).x,
-					(*stage_arrangement.balloons.at(i)).y,
-					(*stage_arrangement.balloons.at(i)).type,
-					(*stage_arrangement.balloons.at(i)).aux1);
-				i++;
-			}
-			app->entityManagerModule->balloons.Reduce_To(i);
-		}
+		app->entityManagerModule->balloons.push_back(new Balloon(
+			app, i,
+			(*stage_arrangement.balloons.at(i)).x,
+			(*stage_arrangement.balloons.at(i)).y,
+			(*stage_arrangement.balloons.at(i)).type,
+			(*stage_arrangement.balloons.at(i)).aux1));
 	}
-	else { app->entityManagerModule->balloons.clear(); }
 
 
 	/*

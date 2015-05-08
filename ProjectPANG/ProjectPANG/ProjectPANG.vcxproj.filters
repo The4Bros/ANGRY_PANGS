@@ -99,9 +99,6 @@
     <ClCompile Include="ModuleCredits.cpp">
       <Filter>Archivos de código fuente\Application\Other Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleHighscore.cpp">
-      <Filter>Archivos de código fuente\Application\Other Modules</Filter>
-    </ClCompile>
     <ClCompile Include="ModulePlane.cpp">
       <Filter>Archivos de código fuente\Application\Other Modules</Filter>
     </ClCompile>
@@ -113,9 +110,6 @@
     </ClCompile>
     <ClCompile Include="ModuleScene.cpp">
       <Filter>Archivos de código fuente\Application\Game\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="Time_Count.cpp">
-      <Filter>Archivos de código fuente\Application\Game\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Harpoon.cpp">
       <Filter>Archivos de código fuente\Application\Game\Objects</Filter>
@@ -136,6 +130,12 @@
       <Filter>Archivos de código fuente\Application\Game\Objects</Filter>
     </ClCompile>
     <ClCompile Include="ModuleStageEnd.cpp">
+      <Filter>Archivos de código fuente\Application\Other Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Time_Count.cpp">
+      <Filter>Archivos de código fuente\Application\Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleHighscore.cpp">
       <Filter>Archivos de código fuente\Application\Other Modules</Filter>
     </ClCompile>
   </ItemGroup>

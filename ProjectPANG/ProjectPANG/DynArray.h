@@ -81,6 +81,16 @@ public:
 		}
 	}
 
+	void ClearAll()
+	{
+		num_elements = 0;
+		if (data != NULL)
+		{
+			delete[] data;
+			data = NULL;
+		}
+		Alloc(BLOCK_SIZE);
+	}
 
 	// Utils
 	unsigned int size() const { return capacity; }
