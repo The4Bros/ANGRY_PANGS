@@ -15,20 +15,20 @@ public:
 
 	SDL_Rect harpoon_source_rect[25];
 
-	DoubleNodedList<Brick*> bricks;
+	DynArray<Brick*> bricks;
 	SDL_Rect source_brick_rect[18];
 
-	DoubleNodedList<Stair*> stairs;
+	DynArray<Stair*> stairs;
 	SDL_Rect source_stair_rect;
 
-	DoubleNodedList<Balloon*> balloons;
+	DynArray<Balloon*> balloons;
 	SDL_Rect source_balloon_rect[12];
 	float balloon_speed;
 
-	//DoubleNodedList<Enemy*>* enemies;
+	//DynArray<Enemy*>* enemies;
 	SDL_Rect source_enemy_rect[200];
 
-	DoubleNodedList<Particles*> particles;
+	DynArray<Particles*> particles;
 	SDL_Rect particles_source_rect[200];
 
 	bool stop_time, slow_time;

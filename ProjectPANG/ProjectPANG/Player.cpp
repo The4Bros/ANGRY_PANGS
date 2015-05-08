@@ -233,7 +233,7 @@ void Player::Shoot()
 				source_index = 18;
 				update_counter = 0;
 				harpoon2->Shoot_Harpoon(rect.y, rect.x + (14 * app->windowModule->scale));
-				app->entityManagerModule->particles.push(new Particles(app, 13, rect.x + (10 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale)));
+				app->entityManagerModule->particles.push_back(new Particles(app, app->entityManagerModule->particles.Count(), 13, rect.x + (10 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale)));
 				state = SHOOT_RIGHT;
 			}
 			else if (state == LEFT || source_index == 19) // leaning right
@@ -241,14 +241,14 @@ void Player::Shoot()
 				source_index = 20;
 				update_counter = 0;
 				harpoon2->Shoot_Harpoon(rect.y, rect.x + (10 * app->windowModule->scale));
-				app->entityManagerModule->particles.push(new Particles(app, 13, rect.x + (6 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale)));
+				app->entityManagerModule->particles.push_back(new Particles(app, app->entityManagerModule->particles.Count(), 13, rect.x + (6 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale)));
 				state = SHOOT_LEFT;
 			}
 
 			else // on stairs
 			{
 				harpoon2->Shoot_Harpoon(rect.y, rect.x + (12 * app->windowModule->scale));
-				app->entityManagerModule->particles.push(new Particles(app, 13, rect.x + (8 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale)));
+				app->entityManagerModule->particles.push_back(new Particles(app, app->entityManagerModule->particles.Count(), 13, rect.x + (8 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale)));
 			}
 		}
 
@@ -261,7 +261,7 @@ void Player::Shoot()
 				source_index = 18;
 				update_counter = 0;
 				harpoon1->Shoot_Harpoon(rect.y, rect.x + (14 * app->windowModule->scale));
-				app->entityManagerModule->particles.push(new Particles(app, 13, rect.x + (10 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale)));
+				app->entityManagerModule->particles.push_back(new Particles(app, app->entityManagerModule->particles.Count(), 13, rect.x + (10 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale)));
 				state = SHOOT_RIGHT;
 			}
 			else if (state == LEFT || source_index == 19) // leaning right
@@ -269,14 +269,14 @@ void Player::Shoot()
 				source_index = 20;
 				update_counter = 0;
 				harpoon1->Shoot_Harpoon(rect.y, rect.x + (10 * app->windowModule->scale));
-				app->entityManagerModule->particles.push(new Particles(app, 13, rect.x + (6 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale)));
+				app->entityManagerModule->particles.push_back(new Particles(app, app->entityManagerModule->particles.Count(), 13, rect.x + (6 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale)));
 				state = SHOOT_LEFT;
 			}
 
 			else // on stairs
 			{
 				harpoon1->Shoot_Harpoon(rect.y, rect.x + (12 * app->windowModule->scale));
-				app->entityManagerModule->particles.push(new Particles(app, 13, rect.x + (8 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale)));
+				app->entityManagerModule->particles.push_back(new Particles(app, app->entityManagerModule->particles.Count(), 13, rect.x + (8 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale)));
 			}
 		}
 		break;
@@ -291,7 +291,7 @@ void Player::Shoot()
 				source_index = 18;
 				update_counter = 0;
 				harpoon1->Shoot_Harpoon(rect.y, rect.x + (14 * app->windowModule->scale));
-				app->entityManagerModule->particles.push(new Particles(app, 13, rect.x + (10 * app->windowModule->scale), rect.y - (8 * app->windowModule->scale)));
+				app->entityManagerModule->particles.push_back(new Particles(app, app->entityManagerModule->particles.Count(), 13, rect.x + (10 * app->windowModule->scale), rect.y - (8 * app->windowModule->scale)));
 				state = SHOOT_RIGHT;
 			}
 			else if (state == LEFT || source_index == 19) // leaning right
@@ -299,14 +299,14 @@ void Player::Shoot()
 				source_index = 20;
 				update_counter = 0;
 				harpoon1->Shoot_Harpoon(rect.y, rect.x + (10 * app->windowModule->scale));
-				app->entityManagerModule->particles.push(new Particles(app, 13, rect.x + (6 * app->windowModule->scale), rect.y - (8 * app->windowModule->scale)));
+				app->entityManagerModule->particles.push_back(new Particles(app, app->entityManagerModule->particles.Count(), 13, rect.x + (6 * app->windowModule->scale), rect.y - (8 * app->windowModule->scale)));
 				state = SHOOT_LEFT;
 			}
 
 			else // on stairs
 			{
 				harpoon1->Shoot_Harpoon(rect.y, rect.x + (12 * app->windowModule->scale));
-				app->entityManagerModule->particles.push(new Particles(app, 13, rect.x + (8 * app->windowModule->scale), rect.y - (8 * app->windowModule->scale)));
+				app->entityManagerModule->particles.push_back(new Particles(app, app->entityManagerModule->particles.Count(), 13, rect.x + (8 * app->windowModule->scale), rect.y - (8 * app->windowModule->scale)));
 			}
 		}
 		break;
@@ -579,10 +579,9 @@ bool Player::Check_Collision_Player_Brick_Horizontal()
 {
 	SDL_Rect tmp_rect;
 
-	DoubleNode<Brick*>* tmp_brick = app->entityManagerModule->bricks.getStart();
-	for (; tmp_brick != NULL; tmp_brick = tmp_brick->next)
+	for (unsigned int i = 0; i < app->entityManagerModule->bricks.Count(); i++)
 	{
-		tmp_rect = tmp_brick->data->rect;
+		tmp_rect = (*app->entityManagerModule->bricks.at(i))->rect;
 
 		if (rect.x - app->windowModule->scale < tmp_rect.x + tmp_rect.w
 			&& rect.x + rect.w > tmp_rect.x - app->windowModule->scale
@@ -599,10 +598,9 @@ bool Player::Check_Collision_Player_Verticals()
 {
 	SDL_Rect tmp_rect;
 
-	DoubleNode<Brick*>* tmp_brick = app->entityManagerModule->bricks.getStart();
-	for (; tmp_brick != NULL; tmp_brick = tmp_brick->next)
+	for (unsigned int i = 0; i < app->entityManagerModule->bricks.Count(); i++)
 	{
-		tmp_rect = tmp_brick->data->rect;
+		tmp_rect = (*app->entityManagerModule->bricks.at(i))->rect;
 
 		if (rect.x  < tmp_rect.x + tmp_rect.w
 			&& rect.x + rect.w > tmp_rect.x
@@ -613,10 +611,9 @@ bool Player::Check_Collision_Player_Verticals()
 		}
 	}
 
-	DoubleNode<Stair*>* tmp_stair = app->entityManagerModule->stairs.getStart();
-	for (; tmp_stair != NULL; tmp_stair = tmp_stair->next)
+	for (unsigned int i = 0; i < app->entityManagerModule->stairs.Count(); i++)
 	{
-		tmp_rect = tmp_stair->data->rect;
+		tmp_rect = (*app->entityManagerModule->stairs.at(i))->rect;
 
 		if (rect.x  < tmp_rect.x + tmp_rect.w
 			&& rect.x + rect.w > tmp_rect.x + tmp_rect.w
@@ -633,11 +630,10 @@ bool Player::Check_Collision_Player_Stair()
 {
 	SDL_Rect stair_rect;
 
-	DoubleNode<Stair*>* tmp_stair = app->entityManagerModule->stairs.getStart();
-	for (; tmp_stair != NULL; tmp_stair = tmp_stair->next)
+	for (unsigned int i = 0; i < app->entityManagerModule->stairs.Count(); i++)
 	{
 		// get stair rect
-		stair_rect = tmp_stair->data->rect;
+		stair_rect = (*app->entityManagerModule->stairs.at(i))->rect;
 
 		if (rect.x >stair_rect.x) // player to the right
 		{
@@ -645,7 +641,7 @@ bool Player::Check_Collision_Player_Stair()
 			{
 				if (rect.y + (rect.h / 2) >= stair_rect.y && rect.y + (rect.h / 2) <= stair_rect.y + stair_rect.h) // player close enough to stairs
 				{
-					current_stair = tmp_stair->data;
+					current_stair = *app->entityManagerModule->stairs.at(i);
 					rect.x = current_stair->rect.x - app->windowModule->scale;
 					stair_update_counter = 0;
 					update_counter = 0;
@@ -659,7 +655,7 @@ bool Player::Check_Collision_Player_Stair()
 			{
 				if (rect.y + (rect.h / 2) >= stair_rect.y && rect.y + (rect.h / 2) <= stair_rect.y + stair_rect.h) // player close enough to stairs
 				{
-					current_stair = tmp_stair->data;
+					current_stair = *app->entityManagerModule->stairs.at(i);
 					rect.x = current_stair->rect.x - app->windowModule->scale;
 					stair_update_counter = 0;
 					update_counter = 0;
