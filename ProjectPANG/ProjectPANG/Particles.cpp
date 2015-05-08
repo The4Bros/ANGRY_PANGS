@@ -79,6 +79,33 @@ Particles::Particles(Application* app, int position_in_list, unsigned int type, 
 		//breakeables bricks
 	case 14:
 		source_index = 57;
+		rect = { x, y - app->windowModule->scale, 32 * app->windowModule->scale, 8 * app->windowModule->scale };
+		break;
+	case 15:
+		source_index = 69;
+		rect = { x, y - app->windowModule->scale, 24 * app->windowModule->scale, 8 * app->windowModule->scale };
+		break;
+	case 16:
+		source_index = 81;
+		rect = { x, y - app->windowModule->scale, 16 * app->windowModule->scale, 8 * app->windowModule->scale };
+		break;
+	case 17:
+		source_index = 93;
+		rect = { x, y - app->windowModule->scale, 8 * app->windowModule->scale, 8 * app->windowModule->scale };
+		break;
+		//horizontal particles
+	case 18:
+		source_index = 105;
+		rect = { x, y - app->windowModule->scale, 8 * app->windowModule->scale, 32 * app->windowModule->scale };
+		break;
+	case 19:
+		source_index = 113;
+		rect = { x, y - app->windowModule->scale, 8 * app->windowModule->scale, 16 * app->windowModule->scale };
+		break;
+	case 20:
+		source_index = 117;
+		rect = { x, y - app->windowModule->scale, 8 * app->windowModule->scale, 24 * app->windowModule->scale };
+		break;
 	}
 }
 
