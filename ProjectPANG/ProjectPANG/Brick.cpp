@@ -32,6 +32,23 @@ Brick::Brick(Application* app, int position_in_list, unsigned int x, unsigned in
 			break;
 		}
 	}
+	//unbreakeables bricks
+	if (type > 15 && type < 25)
+	{		
+		rect = { x * app->windowModule->scale, y * app->windowModule->scale,
+			16 * app->windowModule->scale, 8 * app->windowModule->scale };
+	}
+	else if (type > 24 && type < 34)
+	{
+		rect = { x * app->windowModule->scale, y * app->windowModule->scale,
+			8 * app->windowModule->scale, 16 * app->windowModule->scale };
+	}
+	else if (type > 33)
+	{
+		rect = { x * app->windowModule->scale, y * app->windowModule->scale,
+			8 * app->windowModule->scale, 8 * app->windowModule->scale };
+	}
+
 
 }
 
@@ -50,7 +67,7 @@ void Brick::Hit()
 		}
 		app->entityManagerModule->bricks.Delete_Element_At(position_in_list);
 
-		//app->entityManagerModule->particles->push_back(new Particles( app, app->entityManagerModule->particles->Count(), type, rect.x, rect.y));
+		app->entityManagerModule->particles.push_back(new Particles( app, app->entityManagerModule->particles.Count(), type + 14, rect.x, rect.y));
 	}
 }
 

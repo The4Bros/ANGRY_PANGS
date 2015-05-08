@@ -41,6 +41,30 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	source_brick_rect[13] = { 40, 72, 8, 32 };
 	source_brick_rect[14] = { 80, 72, 8, 16 };
 	source_brick_rect[15] = { 80, 88, 8, 24 };
+	// UNBREAKEABLES BRICKS
+	for (i2 = 0; i2 < 3; i2++)
+	{ 
+		for (i = 0; i < 3; i++)
+		{	
+			source_brick_rect[i + 16 + (i2 * 3)] = {80 + ( i * 16 ), 48 + (i2 * 8), 16, 8 };
+		}
+	}
+
+	for (i2 = 0; i2 < 3; i2++)
+	{
+		for (i = 0; i < 3; i++)
+		{
+			source_brick_rect[i + 25 + (i2 * 3)] = { 136 + (i2 * 8), 48 + (i * 16), 8, 16 };
+		}
+	}
+	for (i = 0; i < 3; i++)
+	{
+		source_brick_rect[i + 34] = { 128, 48 + (i * 8), 8, 8 };
+	}
+	for (i = 0; i < 3; i++)
+	{
+		source_brick_rect[i + 37] = { 136 + (i * 8), 96, 8, 8 };
+	}
 
 
 	// STAIRS
