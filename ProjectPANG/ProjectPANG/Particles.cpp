@@ -1,5 +1,13 @@
 # include "Particles.h"
 
+/*
+0 - 11 balloon
+12 enemy hit
+13 shoot
+14 - 29 brick
+*/
+
+
 Particles::Particles(Application* app, unsigned int type, int x, int y) :
 		app(app),
 		alive(false),
@@ -65,9 +73,12 @@ Particles::Particles(Application* app, unsigned int type, int x, int y) :
 		rect = { x, y - app->windowModule->scale, 28 * app->windowModule->scale, 26 * app->windowModule->scale };
 		break;
 	case 13:
-		source_index = 52;
+		source_index = 53;
 		rect = { x, y - app->windowModule->scale, 15 * app->windowModule->scale, 15 * app->windowModule->scale };
 		break;
+		//breakeables bricks
+	case 14:
+		source_index = 57;
 	}
 }
 
@@ -91,7 +102,7 @@ void Particles::Update()
 
 void Particles::Print()
 {
-	if (source_index < 58)
+	if (source_index < 57)
 	{
 		app->renderModule->Print(app->texturesModule->particles_sprite, &app->entityManagerModule->particles_source_rect[source_index], &rect);
 	}

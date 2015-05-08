@@ -2,8 +2,9 @@
 
 ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 {
+	unsigned int i, i2;
 	// HARPOON BODIES
-	for (int i = 0; i < 8; i++)
+	for (i = 0; i < 8; i++)
 	{
 		harpoon_source_rect[i + 8] = { 0, 0, 7, (i + 1) * 2 };
 		harpoon_source_rect[i] = { 7, 0, 7, (i + 1) * 2 };
@@ -28,7 +29,7 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	harpoon_source_rect[25] = { 37, 13, 3, 2 };
 
 	// BRICKS
-	for (int i = 0; i < 3; i++)
+	for (i = 0; i < 3; i++)
 	{
 		source_brick_rect[i] = { 120, 24 + (i * 8), 8, 8 };
 		source_brick_rect[i + 3] = { 0, 48 + (i * 8), 16, 8 };
@@ -77,9 +78,9 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 
 
 	// PARTICLES
-	for (int i2 = 0; i2 < 3; i2++)
+	for (i2 = 0; i2 < 3; i2++)
 	{
-		for (int i = 0; i < 4; i++)
+		for (i = 0; i < 4; i++)
 		{
 			particles_source_rect[i + (i2 * 4)] = { i * 48 + (i2 * 192), 0, 48, 40 };
 			particles_source_rect[i + 12 + (i2 * 4)] = { i * 32 + (i2 * 192), 40, 32, 29 };
@@ -87,10 +88,64 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 			particles_source_rect[i + 36 + (i2 * 4)] = { i * 8 + (i2 * 192), 85, 8, 8 };
 		}
 	}
-	for (int i = 0; i < 5; i++){ particles_source_rect[i + 48] = { i * 28, 93, 28, 26 }; }
-	for (int i = 0; i < 4; i++){ particles_source_rect[i + 52] = { i * 15, 119, 15, 15 }; }
+	for (i = 0; i < 5; i++){ particles_source_rect[i + 48] = { i * 28, 93, 28, 26 }; }
+	for (i = 0; i < 4; i++){ particles_source_rect[i + 52] = { i * 15, 119, 15, 15 }; }
 
+	for (i2 = 0; i2 < 3; i2++)
+	{
+		for (i = 0; i < 4; i++)
+		{
+			particles_source_rect[i + 57 + (i2 * 4)] = { (i + 1) * 32, i2 * 8, 32, 8 };
+		}
+	}
 
+	for (i2 = 0; i2 < 3; i2++)
+	{
+		for (i = 0; i < 4; i++)
+		{
+			particles_source_rect[i + 69 + (i2 * 4)] = { (i + 1) * 24, (i2 + 3) * 8, 24, 8 };
+		}
+	}
+
+	for (i2 = 0; i2 < 3; i2++)
+	{
+		for (i = 0; i < 4; i++)
+		{
+			particles_source_rect[i + 81 + (i2 * 4)] = { (i + 1) * 16, (i2 + 6) * 8, 16, 8 };
+		}
+	}
+
+	for (i2 = 0; i2 < 3; i2++)
+	{
+		for (i = 0; i < 4; i++)
+		{
+			particles_source_rect[i + 93 + (i2 * 4)] = { (i * 8) + 128, (i2 * 8) + 24, 8, 8 };
+		}
+	}
+
+	for (i2 = 0; i2 < 2; i2++)
+	{
+		for (i = 0; i < 4; i++)
+		{
+			particles_source_rect[i + 105 + (i2 * 4)] = { (i + 1) * 8, i2 * 32, 8, 32 };
+		}
+	}
+
+	for (i2 = 0; i2 < 1; i2++)
+	{
+		for (i = 0; i < 4; i++)
+		{
+			particles_source_rect[i + 115 + (i2 * 4)] = { (i + 1) * 8, i2 * 16, 8, 16 };
+		}
+	}
+
+	for (i2 = 0; i2 < 1; i2++)
+	{
+		for (i = 0; i < 4; i++)
+		{
+			particles_source_rect[i + 119 + (i2 * 4)] = { (i + 1) * 8, i2 * 24, 8, 24 };
+		}
+	}
 
 
 	balloon_speed = 2.0f;
