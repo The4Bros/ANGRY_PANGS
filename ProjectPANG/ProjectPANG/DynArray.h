@@ -24,7 +24,7 @@ private:
 	}
 
 public:
-	DynArray() : num_elements(0), data(NULL) { Alloc(BLOCK_SIZE); }
+	DynArray() : num_elements(0)/*, data(NULL)*/ { data = NULL; Alloc(BLOCK_SIZE); }
 	DynArray(unsigned int capacity) : num_elements(0), data(NULL) { Alloc(capacity); }
 
 	~DynArray(){ delete[] data; }
@@ -84,11 +84,8 @@ public:
 	void ClearAll()
 	{
 		num_elements = 0;
-		if (data != NULL)
-		{
-			delete[] data;
-			data = NULL;
-		}
+		delete[] data;
+		data = NULL;
 		Alloc(BLOCK_SIZE);
 	}
 
