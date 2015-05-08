@@ -1,6 +1,7 @@
 #include "Brick.h"
 
 
+
 Brick::Brick(Application* app, int position_in_list, unsigned int x, unsigned int y, unsigned int type)
 {
 	this->app = app;

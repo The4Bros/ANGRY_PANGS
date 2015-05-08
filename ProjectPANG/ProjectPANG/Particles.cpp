@@ -8,9 +8,9 @@
 */
 
 
-Particles::Particles(Application* app, unsigned int type, int x, int y) :
+Particles::Particles(Application* app, int position_in_list, unsigned int type, int x, int y) :
 		app(app),
-		alive(false),
+		position_in_list(position_in_list),
 		update_counter(0)
 {
 	if (type < 12){ app->audioModule->PlayFx(BALLOON_POP); }
@@ -94,7 +94,11 @@ void Particles::Update()
 		}
 		else
 		{
-			alive = false;
+			for (unsigned int i = position_in_list + 1; i < app->entityManagerModule->particles.Count(); i++)
+			{
+				(*app->entityManagerModule->particles.at(i))->position_in_list--;
+			}
+			app->entityManagerModule->particles.Delete_Element_At(position_in_list);
 		}
 	}
 	else{ update_counter++; }
