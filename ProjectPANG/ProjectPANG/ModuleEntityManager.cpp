@@ -97,7 +97,7 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	for (i = 0; i < 5; i++){ particles_source_rect[i + 48] = { i * 28, 93, 28, 26 }; }
 
 	// HARPOON SHOT PARTICLES
-	for (i = 0; i < 4; i++){ particles_source_rect[i + 52] = { i * 15, 119, 15, 15 }; }
+	for (i = 0; i < 4; i++){ particles_source_rect[i + 52] = { (i* 15) + 140, 93, 15, 15 }; }
 
 	// BRICK PARTICLES
 	for (i2 = 0; i2 < 3; i2++){ for (i = 0; i < 4; i++){ particles_source_rect[i +  57 + (i2 * 4)] = { (i + 1) * 32, i2 * 8, 32, 8 }; }}
