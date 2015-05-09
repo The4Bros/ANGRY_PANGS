@@ -5,6 +5,7 @@ ModuleFontManager::ModuleFontManager(Application* app) : Module(app)
 {
 	color[0] = { 255, 255, 255 };
 	color[1] = { 255, 223, 0 };
+	color[2] = { 225, 0, 0 };
 }
 
 bool ModuleFontManager::Init()
