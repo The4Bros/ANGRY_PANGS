@@ -93,6 +93,7 @@
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="Particles.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="Stair.cpp" />
     <ClCompile Include="Time_Count.cpp" />
   </ItemGroup>
@@ -124,6 +125,7 @@
     <ClInclude Include="ModuleScene.h" />
     <ClInclude Include="ModuleTextures.h" />
     <ClInclude Include="ModuleWindow.h" />
+    <ClInclude Include="PowerUp.h" />
     <ClInclude Include="Stair.h" />
     <ClInclude Include="Time_Count.h" />
   </ItemGroup>

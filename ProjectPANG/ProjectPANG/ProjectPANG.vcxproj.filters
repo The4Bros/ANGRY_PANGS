@@ -138,6 +138,9 @@
     <ClCompile Include="ModuleHighscore.cpp">
       <Filter>Archivos de código fuente\Application\Other Modules</Filter>
     </ClCompile>
+    <ClCompile Include="PowerUp.cpp">
+      <Filter>Archivos de código fuente\Application\Game\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -220,6 +223,9 @@
     </ClInclude>
     <ClInclude Include="ModuleStageEnd.h">
       <Filter>Archivos de encabezado\Application\Other Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerUp.h">
+      <Filter>Archivos de encabezado\Application\Game\Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

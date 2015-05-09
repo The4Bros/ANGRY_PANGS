@@ -10,7 +10,6 @@ class Particles
 public:
 	Application* app;
 
-	bool alive;
 	SDL_Rect rect;
 	int position_in_list;
 	unsigned int quantity, update_counter, source_index;

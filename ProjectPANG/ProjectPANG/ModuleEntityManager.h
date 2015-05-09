@@ -5,6 +5,7 @@
 #include "Stair.h"
 #include "Brick.h"
 #include "Particles.h"
+#include "ModuleEntityManager.h"
 
 #ifndef __ModuleEntityManager_H__
 #define __ModuleEntityManager_H__
@@ -30,6 +31,9 @@ public:
 
 	DynArray<Particles*> particles;
 	SDL_Rect particles_source_rect[200];
+
+	DynArray<PowerUp*> powerup;
+	SDL_Rect powerup_source_rect[];
 
 	bool stop_time, slow_time;
 	unsigned int stop_time_counter, slow_time_counter;
