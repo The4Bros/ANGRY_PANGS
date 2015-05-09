@@ -17,15 +17,14 @@ bool ModuleRender::Init()
 	return true;
 }
 
-update_status ModuleRender::PreUpdate()   { SDL_RenderClear(renderer); return UPDATE_CONTINUE; }
-
+update_status ModuleRender::PreUpdate()   {   SDL_RenderClear(renderer); return UPDATE_CONTINUE; }
 update_status ModuleRender::PostUpdate()  { SDL_RenderPresent(renderer); return UPDATE_CONTINUE; }
 
 bool ModuleRender::CleanUp()
 {
 	if (renderer != NULL)
 	{
-		SDL_DestroyRenderer(app->renderModule->renderer);
+		SDL_DestroyRenderer(renderer);
 	}
 	return true;
 }

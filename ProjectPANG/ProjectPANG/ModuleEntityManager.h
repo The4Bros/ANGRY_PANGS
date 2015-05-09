@@ -5,7 +5,7 @@
 #include "Stair.h"
 #include "Brick.h"
 #include "Particles.h"
-#include "ModuleEntityManager.h"
+#include "PowerUp.h"
 
 #ifndef __ModuleEntityManager_H__
 #define __ModuleEntityManager_H__

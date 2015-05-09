@@ -2,9 +2,9 @@
 
 PowerUp::PowerUp(Application* app, int position_in_list, unsigned int type, unsigned int x, unsigned int y) :
 app(app),
-position_in_list(position_in_list),
+position_in_list(position_in_list)
 {
-	source_index
+	source_index = 0;
 }
 
 
@@ -39,7 +39,7 @@ void PowerUp::Update()
 
 void PowerUp::Print()
 {
-	app->renderModule->Print(app->texturesModule->_____, &app->entityManagerModule->powerup_source_rect[source_index], &rect);
+	//app->renderModule->Print(app->texturesModule->_____, &app->entityManagerModule->powerup_source_rect[source_index], &rect);
 }
 
 void PowerUp::Kill()
