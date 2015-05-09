@@ -64,9 +64,9 @@ bool ModuleAudio::PlayMusic(const unsigned int position)
 	return true;
 }
 
-void ModuleAudio::PlayFx(fx_sound id, int repeat)
+void ModuleAudio::PlayFx(fx_sound id)
 {
-	Mix_PlayChannel(-1, &fx[int(id)], repeat);
+	Mix_PlayChannel(-1, &fx[int(id)], 0);
 }
 
 void ModuleAudio::ResumeMusic()

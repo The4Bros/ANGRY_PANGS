@@ -3,25 +3,10 @@
 
 ModuleStageEnd::ModuleStageEnd(Application* app) : Module(app)
 {
-	for (unsigned int i = 0; i < 1; i++)
-	{
-		image_source_rect[0][i] = { i * 141, 0, 141, 94 };
-	}
-
-	for (unsigned int i = 0; i < 1; i++)
-	{
-		image_source_rect[1][i] = { i * 141, 141, 141, 94 };
-	}
-
-	for (unsigned int i = 0; i < 1; i++)
-	{
-		image_source_rect[2][i] = { i * 141, 282, 141, 94 };
-	}
-
-	for (unsigned int i = 0; i < 1; i++)
-	{
-		image_source_rect[3][i] = { i * 141, 463, 141, 94 };
-	}
+	for (unsigned int i = 0; i < 1; i++){ image_source_rect[0][i] = { i * 141,   0, 141, 94 }; }
+	for (unsigned int i = 0; i < 1; i++){ image_source_rect[1][i] = { i * 141, 141, 141, 94 }; }
+	for (unsigned int i = 0; i < 1; i++){ image_source_rect[2][i] = { i * 141, 282, 141, 94 }; }
+	for (unsigned int i = 0; i < 1; i++){ image_source_rect[3][i] = { i * 141, 463, 141, 94 }; }
 
 	max_index[0] = 0;
 	max_index[1] = 0;

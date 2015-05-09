@@ -32,8 +32,8 @@ public:
 	DynArray<Particles*> particles;
 	SDL_Rect particles_source_rect[200];
 
-	DynArray<PowerUp*> powerup;
-	SDL_Rect powerup_source_rect[];
+	DynArray<PowerUp*> powerups;
+	SDL_Rect powerup_source_rect[23];
 
 	bool stop_time, slow_time;
 	unsigned int stop_time_counter, slow_time_counter;

@@ -76,7 +76,7 @@ Particles::Particles(Application* app, int position_in_list, unsigned int type, 
 		source_index = 53;
 		rect = { x, y - app->windowModule->scale, 15 * app->windowModule->scale, 15 * app->windowModule->scale };
 		break;
-		//breakeables bricks
+		// horizontal bricks
 	case 14:
 		source_index = 57;
 		rect = { x, y - app->windowModule->scale, 32 * app->windowModule->scale, 8 * app->windowModule->scale };
@@ -93,7 +93,7 @@ Particles::Particles(Application* app, int position_in_list, unsigned int type, 
 		source_index = 93;
 		rect = { x, y - app->windowModule->scale, 8 * app->windowModule->scale, 8 * app->windowModule->scale };
 		break;
-		//horizontal particles
+		// vertical bricks
 	case 18:
 		source_index = 105;
 		rect = { x, y - app->windowModule->scale, 8 * app->windowModule->scale, 32 * app->windowModule->scale };

@@ -41,31 +41,12 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	source_brick_rect[13] = { 40, 72, 8, 32 };
 	source_brick_rect[14] = { 80, 72, 8, 16 };
 	source_brick_rect[15] = { 80, 88, 8, 24 };
-	// UNBREAKEABLES BRICKS
-	for (i2 = 0; i2 < 3; i2++)
-	{ 
-		for (i = 0; i < 3; i++)
-		{	
-			source_brick_rect[i + 16 + (i2 * 3)] = {80 + ( i * 16 ), 48 + (i2 * 8), 16, 8 };
-		}
-	}
 
-	for (i2 = 0; i2 < 3; i2++)
-	{
-		for (i = 0; i < 3; i++)
-		{
-			source_brick_rect[i + 25 + (i2 * 3)] = { 136 + (i2 * 8), 48 + (i * 16), 8, 16 };
-		}
-	}
-	for (i = 0; i < 3; i++)
-	{
-		source_brick_rect[i + 34] = { 128, 48 + (i * 8), 8, 8 };
-	}
-	for (i = 0; i < 3; i++)
-	{
-		source_brick_rect[i + 37] = { 136 + (i * 8), 96, 8, 8 };
-	}
-
+	// SOLID BRICKS
+	for (i2 = 0; i2 < 3; i2++){ for (i = 0; i < 3; i++){ source_brick_rect[i + 16 + (i2 * 3)] = {80 + ( i * 16 ), 48 + (i2 * 8), 16, 8 }; }}
+	for (i2 = 0; i2 < 3; i2++){ for (i = 0; i < 3; i++){ source_brick_rect[i + 25 + (i2 * 3)] = { 136 + (i2 * 8), 48 + (i * 16), 8, 16 }; }}
+	for (i = 0; i < 3; i++){ source_brick_rect[i + 34] = { 128, 48 + (i * 8), 8, 8 }; }
+	for (i = 0; i < 3; i++){ source_brick_rect[i + 37] = { 136 + (i * 8), 96, 8, 8 }; }
 
 	// STAIRS
 	source_stair_rect = { 0, 104, 24, 8 };
@@ -105,10 +86,10 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	{
 		for (i = 0; i < 4; i++)
 		{
-			particles_source_rect[i + (i2 * 4) +  74] = { i * 48 + (i2 * 192), 0, 48, 40 };
+			particles_source_rect[i + (i2 * 4) +  74] = { i * 48 + (i2 * 192),  0, 48, 40 };
 			particles_source_rect[i + (i2 * 4) +  86] = { i * 32 + (i2 * 192), 40, 32, 29 };
 			particles_source_rect[i + (i2 * 4) + 110] = { i * 16 + (i2 * 192), 69, 16, 16 };
-			particles_source_rect[i + (i2 * 4) + 146] = { i * 8 + (i2 * 192), 85, 8, 8 };
+			particles_source_rect[i + (i2 * 4) + 146] = { i *  8 + (i2 * 192), 85,  8,  8 };
 		}
 	}
 
@@ -127,6 +108,9 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	for (i = 0; i < 4; i++){ particles_source_rect[i + 113 + (i2 * 4)] = { (i + 1) * 8, i2 * 16, 8, 16 }; } 
 	for (i = 0; i < 4; i++){ particles_source_rect[i + 117 + (i2 * 4)] = { (i + 1) * 8, i2 * 24, 8, 24 }; } 
 
+	// POWER UP
+	for (i = 0; i < 15; i++){ powerup_source_rect[i] = { i * 16, 0, 16, 16 }; }
+	for (i = 0; i <  8; i++){ powerup_source_rect[i + 15] = { i * 16, 16, 16, 16 }; }
 
 	balloon_speed = 2.0f;
 
@@ -172,6 +156,9 @@ update_status ModuleEntityManager::Update()
 
 		// PARTICLES
 		for (unsigned int i = 0; i < particles.Count(); i++){ (*particles.at(i))->Update(); }
+
+		// POWERUPS
+		for (unsigned int i = 0; i < powerups.Count(); i++){ (*powerups.at(i))->Update(); }
 	}
 
 	return UPDATE_CONTINUE;
