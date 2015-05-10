@@ -29,10 +29,7 @@ private:
 
 public:
 
-	unsigned int current_time;
-	time_t	timer;
-
-	unsigned int coins, stage;
+	unsigned int coins, stage, city;
 
 	// General Modules
 	ModuleWindow* windowModule;
@@ -73,7 +70,6 @@ public:
 
 	bool ChangeTo(update_status new_state);
 
-	void Reset_Time();
 	void Add_Coin();
 	bool Lose_Coin();
 

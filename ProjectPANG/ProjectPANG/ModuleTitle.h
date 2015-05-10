@@ -8,26 +8,26 @@
 class ModuleTitle : public Module{
 public:
 
-	int gravity[4];
-	int ticks;
-	SDL_Rect rect;
-	SDL_Rect insert_coin_rect;
-	SDL_Rect source_rect[5];
-
-
-	int dir[4];
-	int aux[4];
+	// Ball Animation Resources
+	SDL_Rect balloon_source_rect[5];
 	SDL_Rect balloon_rects[4];
-	SDL_Rect balloon_source_rect;
-	SDL_Rect balloon_split[4];
-	SDL_Rect balloon_split_source_rect[4];
+	int gravity[4];
+	int horizontal_limits[4];
+	unsigned int source_rect_index[4];
+	unsigned int update_counter[4];
+	bool falling[4];
+
+	// Non-Animated Title Resources
+	SDL_Rect rect;
+	SDL_Rect source_rect[5];
+	SDL_Rect insert_coin_rect;
+
 	bool insert_coin_pressed;
-	bool balloons_title_up[4];
+	unsigned int ticks;
 
 	ModuleTitle(Application* app);
 	bool Init();
 	update_status Update();
-	bool CleanUp();
 
 	void Update_Balloons();
 };

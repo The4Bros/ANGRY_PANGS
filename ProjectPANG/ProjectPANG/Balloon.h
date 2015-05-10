@@ -49,10 +49,7 @@ public:
 	float gravity;
 	float position_X, position_Y;
 
-	int ticks;
-
-	bool change_movement_V;// true if the ball has to change its direction, change it on Hit()
-	bool change_movement_H;
+	unsigned int ticks;
 
 	BALL_TYPE type;
 	BALLOON_STATE_VERTICAL state_balloon_V;

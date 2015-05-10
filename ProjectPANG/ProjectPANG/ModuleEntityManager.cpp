@@ -86,10 +86,10 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	{
 		for (i = 0; i < 4; i++)
 		{
-			particles_source_rect[i + (i2 * 4) +  74] = { i * 48 + (i2 * 192),  0, 48, 40 };
-			particles_source_rect[i + (i2 * 4) +  86] = { i * 32 + (i2 * 192), 40, 32, 29 };
-			particles_source_rect[i + (i2 * 4) + 110] = { i * 16 + (i2 * 192), 69, 16, 16 };
-			particles_source_rect[i + (i2 * 4) + 146] = { i *  8 + (i2 * 192), 85,  8,  8 };
+			particles_source_rect[i + (i2 * 4)]      = { i * 48 + (i2 * 192),  0, 48, 40 };
+			particles_source_rect[i + (i2 * 4) + 12] = { i * 32 + (i2 * 192), 40, 32, 29 };
+			particles_source_rect[i + (i2 * 4) + 24] = { i * 16 + (i2 * 192), 69, 16, 16 };
+			particles_source_rect[i + (i2 * 4) + 36] = { i *  8 + (i2 * 192), 85,  8,  8 };
 		}
 	}
 
@@ -97,7 +97,7 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	for (i = 0; i < 5; i++){ particles_source_rect[i + 48] = { i * 28, 93, 28, 26 }; }
 
 	// HARPOON SHOT PARTICLES
-	for (i = 0; i < 4; i++){ particles_source_rect[i + 52] = { (i* 15) + 140, 93, 15, 15 }; }
+	for (i = 0; i < 4; i++){ particles_source_rect[i + 52] = { (i * 15) + 140, 93, 15, 15 }; }
 
 	// BRICK PARTICLES
 	for (i2 = 0; i2 < 3; i2++){ for (i = 0; i < 4; i++){ particles_source_rect[i +  57 + (i2 * 4)] = { (i + 1) * 32, i2 * 8, 32, 8 }; }}

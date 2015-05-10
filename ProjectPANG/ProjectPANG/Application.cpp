@@ -2,7 +2,7 @@
 
 #include "Application.h"
 
-Application::Application() {}
+Application::Application() : coins(0), stage(1), city(1) {}
 
 bool Application::Init()
 {
@@ -49,8 +49,6 @@ bool Application::Init()
 
 	coins = 0;
 	stage = 1;
-	current_time = 0;
-	time(&timer);
 
 	return true;
 }
@@ -62,15 +60,6 @@ Application::~Application()
 
 update_status Application::Update()
 {
-	// UPDATE TIME COUNTER
-	if (difftime(time(NULL), timer) > 1)
-	{
-		if (current_time < 65535){ current_time++; } // Maximum unsigned int value
-		else { current_time = 0; }
-
-		time(&timer);
-	}
-
 	update_status returnValue;
 
 	DoubleNode<Module*>* item = modules_Queue.getStart(); // ------------PreUpdate------------
@@ -177,14 +166,9 @@ bool Application::ChangeTo(update_status new_state)
 	return true;
 }
 
-void Application::Reset_Time()
-{
-	current_time = 0;
-}
-
 void Application::Add_Coin()
 {
-	if (coins < 9) { coins++; audioModule->PlayFx(COIN); }
+	if (coins < 9) { coins++; audioModule->PlayFx(COIN); } // add coin + play fx
 }
 
 bool Application::Lose_Coin()
