@@ -4,7 +4,10 @@ PowerUp::PowerUp(Application* app, int position_in_list, unsigned int type, unsi
 app(app),
 position_in_list(position_in_list)
 {
-	source_index = 0;
+
+	source_index = 2;
+	app->renderModule->Print(app->texturesModule->powerUp_sprite, &app->entityManagerModule->powerup_source_rect[source_index], &rect);
+	
 }
 
 
@@ -39,15 +42,17 @@ void PowerUp::Update()
 
 void PowerUp::Print()
 {
-	//app->renderModule->Print(app->texturesModule->_____, &app->entityManagerModule->powerup_source_rect[source_index], &rect);
+	app->renderModule->Print(app->texturesModule->powerUp_sprite, &app->entityManagerModule->powerup_source_rect[source_index], &rect);
 }
 
 void PowerUp::Kill()
 {
-	switch (source_index)
-	{
 
+	for (unsigned int i = position_in_list + 1; i < app->entityManagerModule->powerups.Count(); i++)
+	{
+		(*app->entityManagerModule->powerups.at(i))->position_in_list--;
 	}
+	app->entityManagerModule->powerups.Delete_Element_At(position_in_list);
 }
 
 

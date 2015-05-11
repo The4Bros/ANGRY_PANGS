@@ -68,6 +68,7 @@ void Brick::Hit()
 			(*app->entityManagerModule->bricks.at(i))->position_in_list--;
 		}
 		app->entityManagerModule->bricks.Delete_Element_At(position_in_list);
+		
 	}
 }
 

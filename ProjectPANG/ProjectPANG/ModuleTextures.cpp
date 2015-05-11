@@ -13,6 +13,7 @@ ModuleTextures::ModuleTextures(Application* app) : Module(app)
 	map_sprite = NULL;
 	particles_sprite = NULL;
 	players_sprite = NULL;
+	powerUp_sprite = NULL;
 	ready = NULL;
 	scores_sprite = NULL;
 	timer_sprite = NULL;
@@ -49,6 +50,9 @@ bool ModuleTextures::Init()
 	players_sprite = IMG_LoadTexture(app->renderModule->renderer, "images/Players.png");
 	if (players_sprite == NULL){ return false; }
 
+	powerUp_sprite = IMG_LoadTexture(app->renderModule->renderer, "images/Power_ups.png");
+	if (powerUp_sprite == NULL){ return false; }
+
 	ready = IMG_LoadTexture(app->renderModule->renderer, "images/Ready.png");
 	if (ready == NULL){ return false; }
 
@@ -70,6 +74,7 @@ bool ModuleTextures::Init()
 
 bool ModuleTextures::CleanUp()
 {
+
 	SDL_DestroyTexture(background_sprite);
 	SDL_DestroyTexture(balls_sprite);
 	SDL_DestroyTexture(bricks_sprite);
@@ -80,6 +85,7 @@ bool ModuleTextures::CleanUp()
 	SDL_DestroyTexture(map_sprite);
 	SDL_DestroyTexture(particles_sprite);
 	SDL_DestroyTexture(players_sprite);
+	SDL_DestroyTexture(powerUp_sprite);
 	SDL_DestroyTexture(ready);
 	SDL_DestroyTexture(scores_sprite);
 	SDL_DestroyTexture(timer_sprite);

@@ -13,6 +13,7 @@ public:
 	
 	SDL_Texture* background_sprite;
 	SDL_Texture* balls_sprite;
+	SDL_Texture* powerUp_sprite;
 	SDL_Texture* bricks_sprite;
 	SDL_Texture* enemies_sprite;
 	SDL_Texture* harpoons_sprite;
