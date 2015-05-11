@@ -12,7 +12,8 @@
 enum Text_Color
 {
 	WHITE,
-	YELLOW
+	YELLOW,
+	RED
 };
 
 
@@ -20,7 +21,7 @@ class ModuleFontManager : public Module{
 private:
 
 	TTF_Font* font;
-	SDL_Color color[2];
+	SDL_Color color[3];
 	
 	SDL_Rect Message_rect;
 	SDL_Surface surfaceMessage;
