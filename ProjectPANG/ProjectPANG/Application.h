@@ -30,6 +30,7 @@ private:
 public:
 
 	unsigned int coins, stage, city;
+	char* city_names[17];
 
 	// General Modules
 	ModuleWindow* windowModule;

@@ -11,19 +11,18 @@ stage_cleared(false)
 bool ModuleScene::Init()
 {
 	if (time_count == NULL){ time_count = new Time_Count(app); }
-	time_count->Reset(100);
 
+	stage_cleared = false;
 	game_state = READY;
 	update_counter = 0;
 
-	load_stage(app->stage);
-
 	ready_rect = { 100, 100, 160 * app->windowModule->scale,  32 * app->windowModule->scale };
 	game_over_rect = { 100, 100, 160 * app->windowModule->scale, 32 * app->windowModule->scale };
-
 	background_rect = { 0, 0, SCREEN_WIDTH * app->windowModule->scale, (SCREEN_HEIGHT - 32) * app->windowModule->scale };
 
 	app->audioModule->PlayMusic((app->stage - 1) / 3);
+
+	load_stage();
 
 	return true;
 }
@@ -169,23 +168,24 @@ bool ModuleScene::Resume_Scene()
 
 void ModuleScene::Print_All_Objects()
 {
-
-
 	// PRINT TEXT & SCORES
 	app->fontManagerModule->Write_On_Screen("Player-1",                        17 * app->windowModule->scale, 208 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen("Player-2",                       270 * app->windowModule->scale, 208 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen("lives:",                          16 * app->windowModule->scale, 222 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen("0",                              104 * app->windowModule->scale, 214 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen(app->playerModule->player1->lives, 64 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
-	app->fontManagerModule->Write_On_Screen("mt.fuji",                        160 * app->windowModule->scale, 208 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
-	app->fontManagerModule->Write_On_Screen(app->stage,                       160 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen(app->city_names[app->city - 1],   160 * app->windowModule->scale, 208 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen("~",                              167 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
-	app->fontManagerModule->Write_On_Screen(app->stage,                       174 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
-	app->fontManagerModule->Write_On_Screen("stage",                          185 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen(app->stage,                       176 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen("HI:",                            160 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen(10000,                            185 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen(app->coins,                       360 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 
+	if (app->city > 9) { app->fontManagerModule->Write_On_Screen(app->city, 152 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE); }
+	else { app->fontManagerModule->Write_On_Screen(app->city, 160 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE); }
+	
+	if (app->stage > 9) { app->fontManagerModule->Write_On_Screen("stage", 195 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE); }
+	else { app->fontManagerModule->Write_On_Screen("stage", 187 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE); }
 
 	// PRINT BACKGROUND
 	app->renderModule->Print(app->texturesModule->background_sprite, &background_source_rect, &background_rect);
@@ -299,69 +299,31 @@ void ModuleScene::reset_stage()
 			(*stage_arrangement.balloons.at(i)).aux1));
 	}
 
-
-	/*
+	
 	// ENEMIES____________________________________________________________________________________________________________________________
-
-	if (!stage_arrangement.enemies.empty())
+	/*
+	app->entityManagerModule->enemies.ClearAll();
+	for (i = 0; i < stage_arrangement.enemies.Count(); i++)
 	{
-		i = 0;
-
-		if (stage_arrangement.enemies.Count() > app->entityManagerModule->enemies->Count()) // needs more bricks
-		{
-			while (i < app->entityManagerModule->enemies->Count())
-			{
-				(*app->entityManagerModule->enemies->at(i))->Reset(
-					(*stage_arrangement.enemies.at(i)).x,
-					(*stage_arrangement.enemies.at(i)).y,
-					(*stage_arrangement.enemies.at(i)).type,
-					(*stage_arrangement.enemies.at(i)).aux1,
-					(*stage_arrangement.enemies.at(i)).aux2,
-					(*stage_arrangement.enemies.at(i)).aux3);
-				i++;
-			}
-			while (i < stage_arrangement.enemies.Count())
-			{
-				app->entityManagerModule->enemies->push_back(new Enemy(
-					app, i,
-					(*stage_arrangement.enemies.at(i)).x,
-					(*stage_arrangement.enemies.at(i)).y,
-					(*stage_arrangement.enemies.at(i)).type
-					(*stage_arrangement.enemies.at(i)).aux1,
-					(*stage_arrangement.enemies.at(i)).aux2,
-					(*stage_arrangement.enemies.at(i)).aux3));
-				i++;
-			}
-		}
-		else
-		{
-			while (i < stage_arrangement.enemies.Count())
-			{
-				(*app->entityManagerModule->enemies->at(i))->Reset(
-					(*stage_arrangement.enemies.at(i)).x,
-					(*stage_arrangement.enemies.at(i)).y,
-					(*stage_arrangement.enemies.at(i)).type,
-					(*stage_arrangement.enemies.at(i)).aux1,
-					(*stage_arrangement.enemies.at(i)).aux2,
-					(*stage_arrangement.enemies.at(i)).aux3);
-				i++;
-			}
-			app->entityManagerModule->enemies->Reduce_To(i);
-		}
-	}
-	else { app->entityManagerModule->enemies->clear(); }*/
+		app->entityManagerModule->enemies->push_back(new Enemy(
+			app, i,
+			(*stage_arrangement.enemies.at(i)).x,
+			(*stage_arrangement.enemies.at(i)).y,
+			(*stage_arrangement.enemies.at(i)).type
+			(*stage_arrangement.enemies.at(i)).aux1,
+			(*stage_arrangement.enemies.at(i)).aux2,
+			(*stage_arrangement.enemies.at(i)).aux3));
+	}*/
 }
 
 
 
-bool ModuleScene::load_stage(int stage)
+bool ModuleScene::load_stage()
 {
 	if (fopen_s(&level_file, "txt files/LevelArrangment.txt", "r") != 0){ return false; }
 
-	current_stage = stage;
-
 	char line[100];
-	for (unsigned int i = 0; i < current_stage; i++)
+	for (unsigned int i = 0; i < app->stage; i++)
 	{
 		fgets(line, 300, level_file);
 		if (line == NULL){ return false; }
@@ -370,7 +332,7 @@ bool ModuleScene::load_stage(int stage)
 	parser(line);
 	fclose(level_file);
 
-	background_source_rect = { ((current_stage - 1) % 3) * 384, ((current_stage - 1) / 3) * 208, 384, 208 };
+	background_source_rect = { ((app->stage - 1) % 3) * 384, ((app->city - 1)) * 208, 384, 208 };
 
 	reset_stage();
 

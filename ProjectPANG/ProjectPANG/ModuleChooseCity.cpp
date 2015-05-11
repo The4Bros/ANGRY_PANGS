@@ -1,15 +1,19 @@
 #include "ModuleChooseCity.h"
 
-ModuleChooseCity::ModuleChooseCity(Application* app) : Module(app)
+ModuleChooseCity::ModuleChooseCity(Application* app) : Module(app),
+selection_index(0),
+selection_source_index(0),
+update_counter(0),
+current_number(9),
+ticks(0),
+a_pressed(false),
+d_pressed(false)
 {
 	// background
 	background_source_rect = { 0, 0, SCREEN_WIDTH, 208 };
 
 	// number countdown
-	for (unsigned int i = 0; i < 10; i++)
-	{
-		countdown_source_rect[i] = { (i * 24), 0, 24, 31 };
-	}
+	for (unsigned int i = 0; i < 10; i++) { countdown_source_rect[i] = { (i * 24), 0, 24, 31 }; }
 
 	// selection squares
 	selection_source_rect[0] = { 184, 208, 16, 16 };
@@ -17,16 +21,6 @@ ModuleChooseCity::ModuleChooseCity(Application* app) : Module(app)
 
 	// forward return controls
 	controls_source_rect = { 0, 208, 184, 45 };
-
-	selection_index = 0;
-	selection_source_index = 0;
-
-	update_counter = 0;
-
-	current_number = 9;
-	ticks = 0;
-
-	a_pressed = d_pressed = false;
 }
 
 bool ModuleChooseCity::Init()
@@ -61,17 +55,12 @@ bool ModuleChooseCity::Init()
 	// forward return controls
 	controls_rect = { 100 * app->windowModule->scale, 163 * app->windowModule->scale, 184 * app->windowModule->scale, 45 * app->windowModule->scale };
 
-
 	selection_index = 0;
 	selection_source_index = 0;
-
 	update_counter = 0;
-
 	current_number = 9;
 	ticks = 1;
-
 	a_pressed = d_pressed = false;
-
 
 	return true;
 }
@@ -89,10 +78,11 @@ update_status ModuleChooseCity::Update()
 	}
 
 
-	// E shortcut
-	if (app->inputModule->key[SDL_SCANCODE_E] == 1)
+	// SPACE TRIGGER
+	if (app->inputModule->key[SDL_SCANCODE_SPACE] == 1)
 	{
-		//if (!pause_pressed){ Pause_Scene(); }
+		app->city = selection_index + 1;
+		app->stage = (selection_index * 3) + 1;
 		return CHANGE_TO_PLAY;
 	}
 

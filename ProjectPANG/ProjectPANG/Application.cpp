@@ -50,6 +50,24 @@ bool Application::Init()
 	coins = 0;
 	stage = 1;
 
+	city_names[0]  = "MT. FUJI";
+	city_names[1]  = "MT. KEIRIN";
+	city_names[2]  = "EMERALD TEMPLE"; // 2 lines
+	city_names[3]  = "ANGKOR WAT";
+	city_names[4]  = "AUSTRALIA";
+	city_names[5]  = "TAJ MAHAL";
+	city_names[6]  = "LENINGRAD";
+	city_names[7]  = "PARIS";
+	city_names[8]  = "LONDON";
+	city_names[9]  = "BARCELONA";
+	city_names[10] = "ATHENS";
+	city_names[11] = "EGYPT";
+	city_names[12] = "KENYA";
+	city_names[13] = "NEW YORK";
+	city_names[14] = "MAYA";
+	city_names[15] = "ANTARTICA";
+	city_names[16] = "EASTER ISLAND"; // 2 lines
+
 	return true;
 }
 
