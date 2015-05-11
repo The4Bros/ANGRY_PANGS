@@ -23,6 +23,14 @@ bool ModuleTitle::Init()
 	rect = { 0, 0, 384 * app->windowModule->scale, 240 * app->windowModule->scale };
 	insert_coin_rect = { 100 * app->windowModule->scale, 200 * app->windowModule->scale, 177 * app->windowModule->scale, 15 * app->windowModule->scale };
 
+	/***************************************************************************************************************************************************
+	****************************************************************************************************************************************************
+	****************************************   AQUI AUSIAS !!!!  ***************************************************************************************
+	****************************************************************************************************************************************************
+	****************************************************************************************************************************************************
+	****************************************************************************************************************************************************
+	**********************     HAS DE CAMBIAR GRAVITY Y LOS RECTS PARA CADA BOLA PARA QUE CUADRE CON EL TITULO     ************************************/
+
 	gravity[0] =  2 * app->windowModule->scale;
 	gravity[1] = 10 * app->windowModule->scale;
 	gravity[2] =  3 * app->windowModule->scale;
@@ -30,8 +38,16 @@ bool ModuleTitle::Init()
 
 	balloon_rects[0] = {  284 * app->windowModule->scale,    0 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 	balloon_rects[1] = {    0 * app->windowModule->scale, -100 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
-	balloon_rects[2] = {  384 * app->windowModule->scale,    0 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
+	balloon_rects[2] = {  284 * app->windowModule->scale,    0 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 	balloon_rects[3] = {    0 * app->windowModule->scale,   40 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
+	
+	/***************************************************************************************************************************************************
+	****************************************************************************************************************************************************
+	****************************************************************************************************************************************************
+	***************************************************************************************************************************************************/
+
+
+
 
 	horizontal_limits[0] =  88 * app->windowModule->scale; //53
 	horizontal_limits[1] = 130 * app->windowModule->scale; //69
@@ -51,23 +67,19 @@ bool ModuleTitle::Init()
 update_status ModuleTitle::Update()
 {	
 	// Inital screens
-	if (ticks < 30)      { app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[0], &rect); }
-	else if (ticks < 60) { app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[1], &rect); }
-	else if (ticks < 180){ app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[2], &rect); }
+	if (ticks < 30)       { app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[0], &rect); }
+	else if (ticks < 60)  { app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[1], &rect); }
+	else if (ticks < 180) { app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[2], &rect); }
 
 	// Begginning animation:
-	else if (ticks < 300){ Update_Balloons(); }
+	else if (ticks < 300) { Update_Balloons(); }
 
 	// Title
-	else if(ticks < 330)
-	{
-		app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[3], &rect);
-		if (ticks % 60 < 30) { app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[4], &insert_coin_rect); }
-	}
+	else if(ticks < 330) { app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[3], &rect); }
 	
 	else
 	{
-		if (ticks == 810) { app->audioModule->StopMusic(); }
+		if (ticks == 740) { app->audioModule->StopMusic(); }
 
 		// Check for Coins
 		if (app->inputModule->key[SDL_SCANCODE_5] == 1)
@@ -100,18 +112,13 @@ update_status ModuleTitle::Update()
 			app->fontManagerModule->Write_On_Screen(         "Credits:", 250 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 			app->fontManagerModule->Write_On_Screen(         app->coins, 320 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 
-			if (app->inputModule->key[SDL_SCANCODE_1] == 1)
-			{
-				return CHANGE_TO_CHOOSE_CITY;
-			}
+			if (app->inputModule->key[SDL_SCANCODE_1] == 1) { return CHANGE_TO_CHOOSE_CITY; }
 		}
 	}
 
-	if (ticks < 65535){ ticks++; }
-	else{ ticks = 420; }
+	ticks++;
 
 	return UPDATE_CONTINUE;
-	
 }
 
 void ModuleTitle::Update_Balloons()
@@ -173,7 +180,7 @@ void ModuleTitle::Update_Balloons()
 		else if (source_rect_index[i] < 6)
 		{
 			// PRINT PARTICLES
-			app->renderModule->Print(app->texturesModule->particles_sprite, &app->entityManagerModule->particles_source_rect[source_rect_index[i] - 1], &balloon_rects[i]);
+			app->renderModule->Print(app->texturesModule->particles_sprite, &app->entityManagerModule->particles_source_rect[source_rect_index[i] - 2], &balloon_rects[i]);
 
 			// UPDATE update_counter
 			if (update_counter[i] > 3)
