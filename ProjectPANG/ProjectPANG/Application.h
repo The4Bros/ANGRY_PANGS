@@ -32,6 +32,8 @@ public:
 	unsigned int coins, stage, city;
 	char* city_names[17];
 
+	bool player_2_enabled;
+
 	// General Modules
 	ModuleWindow* windowModule;
 	ModuleRender* renderModule;
@@ -73,5 +75,7 @@ public:
 
 	void Add_Coin();
 	bool Lose_Coin();
+
+	void EnablePlayer2();
 
 };

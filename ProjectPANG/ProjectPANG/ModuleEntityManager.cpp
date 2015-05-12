@@ -4,6 +4,7 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 {
 	unsigned int i, i2;
 
+	// ----------------------------   HARPOONS   ----------------------------
 	// HARPOON BODIES
 	for (i = 0; i < 8; i++)
 	{
@@ -29,7 +30,8 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	harpoon_source_rect[24] = { 34, 13, 3, 2 };
 	harpoon_source_rect[25] = { 37, 13, 3, 2 };
 
-	// BRICKS
+	// ----------------------------   BRICKS   ----------------------------
+	// GLASS BRICKS
 	for (i = 0; i < 3; i++)
 	{
 		source_brick_rect[i] = { 120, 24 + (i * 8), 8, 8 };
@@ -48,10 +50,12 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	for (i = 0; i < 3; i++){ source_brick_rect[i + 34] = { 128, 48 + (i * 8), 8, 8 }; }
 	for (i = 0; i < 3; i++){ source_brick_rect[i + 37] = { 136 + (i * 8), 96, 8, 8 }; }
 
-	// STAIRS
+
+	// ----------------------------   STAIRS   ----------------------------
 	source_stair_rect = { 0, 104, 24, 8 };
 
-	// BALLOONS
+
+	// ----------------------------   BALLOONS   ----------------------------
 	source_balloon_rect[0] = {  0,  0, 48, 40 };
 	source_balloon_rect[1] = { 48,  0, 48, 40 };
 	source_balloon_rect[2] = {  0, 40, 48, 40 };
@@ -69,18 +73,17 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	source_balloon_rect[11] = {  96, 87, 8, 7 };
 
 
-
-	// ENEMIES
-	for (i = 0; i < 16; i++){ source_enemy_rect[i] = { i * 32, 0, 32, 32 }; }
+	// ----------------------------   ENEMIES   ----------------------------
+	for (i = 0; i < 16; i++){ source_enemy_rect[i]      = { i * 32, 0, 32, 32 }; }
 	for (i = 0; i < 10; i++){ source_enemy_rect[i + 16] = { i * 32,  32, 32, 32 }; }
 	for (i = 0; i < 22; i++){ source_enemy_rect[i + 26] = { i * 32,  64, 32, 32 }; }
 	for (i = 0; i < 11; i++){ source_enemy_rect[i + 48] = { i * 32,  96, 32, 32 }; }
 	for (i = 0; i < 13; i++){ source_enemy_rect[i + 59] = { i * 32, 128, 32, 32 }; }
 	source_enemy_rect[72] = { 416, 128, 36, 24 };
 	source_enemy_rect[73] = { 452, 182, 36, 24 };
-	
 
 
+	// ----------------------------   PARTICLES   ----------------------------
 	// BALL PARTICLES
 	for (i2 = 0; i2 < 3; i2++)
 	{
@@ -108,9 +111,12 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	for (i = 0; i < 4; i++){ particles_source_rect[i + 113 + (i2 * 4)] = { (i + 1) * 8, i2 * 16, 8, 16 }; } 
 	for (i = 0; i < 4; i++){ particles_source_rect[i + 117 + (i2 * 4)] = { (i + 1) * 8, i2 * 24, 8, 24 }; } 
 
-	// POWER UP
+
+	// ----------------------------   POWER UPS   ----------------------------
 	for (i = 0; i < 15; i++){ powerup_source_rect[i] = { i * 16, 0, 16, 16 }; }
 	for (i = 0; i <  8; i++){ powerup_source_rect[i + 15] = { i * 16, 16, 16, 16 }; }
+
+
 
 	balloon_speed = 2.0f;
 
@@ -162,13 +168,6 @@ update_status ModuleEntityManager::Update()
 	}
 
 	return UPDATE_CONTINUE;
-}
-
-
-
-bool ModuleEntityManager::CleanUp()
-{
-	return true;
 }
 
 

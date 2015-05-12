@@ -17,7 +17,7 @@ public:
 	SDL_Rect harpoon_source_rect[25];
 
 	DynArray<Brick*> bricks;
-	SDL_Rect source_brick_rect[18];
+	SDL_Rect source_brick_rect[40];
 
 	DynArray<Stair*> stairs;
 	SDL_Rect source_stair_rect;
@@ -27,7 +27,7 @@ public:
 	float balloon_speed;
 
 	//DynArray<Enemy*>* enemies;
-	SDL_Rect source_enemy_rect[200];
+	SDL_Rect source_enemy_rect[74];
 
 	DynArray<Particles*> particles;
 	SDL_Rect particles_source_rect[200];
@@ -41,7 +41,6 @@ public:
 	ModuleEntityManager(Application* app);
 	bool Init();
 	update_status Update();
-	bool CleanUp();
 
 	void StopTime();
 	void SlowTime();

@@ -39,23 +39,26 @@ class Player
 public:
 	Application* app;
 
+	// Rectangles
 	SDL_Rect rect;
 	SDL_Rect source_rect[25];
-	int source_index;
-	int player_gravity;
-	int ticks;
+	unsigned int source_index;
 
+	// Weapons
 	Harpoon* harpoon1;
 	Harpoon* harpoon2;
 	Weapon current_weapon;
 
-	unsigned int score, lives, update_counter, shoot_update_counter, stair_update_counter;
+	// Player state and update counters
 	PlayerState state;
+	unsigned int score, lives, update_counter, shoot_update_counter, stair_update_counter;
 	bool shoot_key_pressed, shielded, alive;
 
-	int height;
+	// Hit resources
 	Hit_State hit_State;
-
+	unsigned int player_gravity, ticks, height;
+	
+	// Current Stair
 	Stair* current_stair;
 
 	Player(Application* app, bool player1);
@@ -67,10 +70,10 @@ public:
 	void DownTrigger();
 	void Shoot();
 	void Still();
-	void Hit(SDL_Rect* killer);
+	void Hit(const SDL_Rect* killer);
 
 	void Update();
-	void Reset(unsigned int x, unsigned int y);
+	void Reset(const unsigned int x, const unsigned int y);
 
 	bool Check_Collision_Player_Brick_Horizontal();
 	bool Check_Collision_Player_Verticals();

@@ -17,9 +17,9 @@ public:
 
 	ModulePlayer(Application* app);
 	bool Init();
-	update_status PreUpdate();
 	update_status Update();
-	update_status PostUpdate();
 	bool CleanUp();
+
+	void SpawnPlayer2();
 };
 #endif

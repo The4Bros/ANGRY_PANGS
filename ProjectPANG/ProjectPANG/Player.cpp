@@ -1,55 +1,29 @@
 #include "Player.h"
 
-Player::Player(Application* app, bool player1)
+Player::Player(Application* app, bool player1) :
+app(app),
+lives(3),
+source_index(17),
+score(0),
+stair_update_counter(0),
+shielded(false),
+shoot_key_pressed(false),
+state(STILL),
+current_weapon(WEAPON_HARPOON),
+hit_State(HIT_RIGHT_UP),
+current_stair(NULL)
 {
-	this->app = app;
-	
-	lives = 3;
-	shielded = false;
-	state = STILL;
-	shoot_key_pressed = false;
-	current_weapon = WEAPON_DOUBLE_HARPOON;
-	hit_State = HIT_RIGHT_UP;
-	source_index = 17;
-	stair_update_counter = 0;
-	current_stair = NULL;
-
-
 	harpoon1 = new Harpoon(app);
 	harpoon2 = new Harpoon(app);
 
 	rect = { 8 * app->windowModule->scale, 168 * app->windowModule->scale, 32 * app->windowModule->scale, 32 * app->windowModule->scale };
 
-	if (player1)
-	{
-		for (int i = 0; i < 23; i++)
-		{
-			source_rect[i] = { i * 32, 0, 32, 32 };
-		}
-		source_rect[23] = { 736, 0, 51, 32 };
-		source_rect[24] = { 787, 0, 51, 32 };
+	unsigned int y_coor = 0;
+	if (!player1) { y_coor = 32; }
 
-		if (app->sceneModule != NULL) // Scene initalized
-		{
-			Reset(app->sceneModule->stage_arrangement.player_pos[0], app->sceneModule->stage_arrangement.player_pos[1]);
-		}
-	}
-
-	else
-	{
-		for (int i = 0; i < 23; i++)
-		{
-			source_rect[i] = { i * 32, 32, 32, 32 };
-		}
-		source_rect[23] = { 736, 32, 51, 32 };
-		source_rect[24] = { 787, 32, 51, 32 };
-		
-		// update position
-		if (app->sceneModule != NULL) // Scene initalized
-		{
-			Reset(app->sceneModule->stage_arrangement.player_pos[2], app->sceneModule->stage_arrangement.player_pos[3]);
-		}
-	}
+	for (int i = 0; i < 23; i++) { source_rect[i] = { i * 32, y_coor, 32, 32 }; }
+	source_rect[23] = { 736, y_coor, 51, 32 };
+	source_rect[24] = { 787, y_coor, 51, 32 };
 }
 
 
@@ -133,7 +107,7 @@ void Player::UpTrigger()
 {
 	if (current_stair == NULL)
 	{
-		if (stair_update_counter > 30)
+		if (stair_update_counter > 5)
 		{
 			if (Check_Collision_Player_Stair())
 			{
@@ -146,7 +120,7 @@ void Player::UpTrigger()
 	}
 	else
 	{
-		if (rect.y + (16 * app->windowModule->scale) > current_stair->rect.y) // still on stair
+		if (rect.y + rect.h > current_stair->rect.y) // still on stair
 		{
 			rect.y -= app->playerModule->player_speed;
 
@@ -158,7 +132,7 @@ void Player::UpTrigger()
 			}
 		}
 
-		else if (stair_update_counter < 8)
+		else if (stair_update_counter < 10) // showing bun
 		{
 			stair_update_counter++;
 			source_index = 16;
@@ -179,7 +153,7 @@ void Player::DownTrigger()
 {
 	if (current_stair == NULL)
 	{
-		if (stair_update_counter > 30)
+		if (stair_update_counter > 5)
 		{
 			if (rect.y < 168 && Check_Collision_Player_Stair())
 			{
@@ -192,7 +166,7 @@ void Player::DownTrigger()
 	}
 	else
 	{
-		if (rect.y + rect.h < current_stair->rect.y + current_stair->rect.h) // still on stair
+		if (rect.y + rect.h > current_stair->rect.y + current_stair->rect.h) // still on stair
 		{
 			rect.y += app->playerModule->player_speed;
 
@@ -344,7 +318,6 @@ void Player::Shoot()
 
 void Player::Still()
 {
-	if (state == HIT){ return; }
 	if (update_counter > 4)
 	{
 		switch (state)
@@ -369,46 +342,59 @@ void Player::Still()
 	}
 }
 
-void Player::Hit(SDL_Rect* killer)
+void Player::Hit(const SDL_Rect* killer)
 {
-	hit_State = HIT_LEFT_UP;
-	if (shielded){ shielded = false; } // kill shield
+	if (shielded){ shielded = false; return; } // kill shield if shielded
 
+	if (rect.x + (rect.w / 2) <= killer->x + (killer->w / 2))
+	{
+		source_index = 21;
+		hit_State = HIT_LEFT_UP;
+
+	}
 	else
 	{
-
-		if (rect.x + (rect.w / 2) <= killer->x + (killer->w / 2))
-		{
-			source_index = 21;
-			hit_State = HIT_LEFT_UP;
-
-		}
-		else
-		{
-			source_index = 22;
-			hit_State = HIT_RIGHT_UP;
-		}
-
-		ticks = 0;
-		player_gravity = 13;
-
-
-		alive = false;
-
-		height = rect.y;
-		update_counter = 0;
-		shoot_update_counter = 0;
-		state = HIT;
-		app->sceneModule->game_state = PLAYER_KILLED;
-		app->sceneModule->update_counter = 0;
-
-		//app->sceneModule->reset_stage();
+		source_index = 22;
+		hit_State = HIT_RIGHT_UP;
 	}
+
+	alive = false;
+	ticks = 0;
+	player_gravity = 13;
+	height = rect.y;
+	update_counter = 0;
+	shoot_update_counter = 0;
+	state = HIT;
+	app->sceneModule->game_state = PLAYER_KILLED;
+	app->sceneModule->update_counter = 0;
 }
 
 
 void Player::Update()
 {
+	// PLAYER NORMAL___________________________________________________________________________________________________________________
+	if (app->sceneModule->game_state == PLAYING)
+	{
+		// if no floor: make fall
+		if (rect.y < 168 * app->windowModule->scale && state != ON_STAIR) // not on ground nor on stairs
+		{
+			if (!Check_Collision_Player_Verticals()) { rect.y += app->windowModule->scale; } // no bricks nor stairs bellow -> fall
+		}
+
+		update_counter++;
+		if (shoot_update_counter < 10){ shoot_update_counter++; }
+		else { shoot_key_pressed = false; shoot_update_counter = 0; }
+
+		if (harpoon2->alive){ harpoon2->Update(); }
+		if (harpoon1->alive){ harpoon1->Update(); }
+
+		//-------------------------------------------------------
+		// shotgun update
+		//-------------------------------------------------------
+	}
+
+
+
 	// PLAYER HIT___________________________________________________________________________________________________________________
 	if (state == HIT)
 	{
@@ -521,41 +507,10 @@ void Player::Update()
 		return;
 	}
 
-
-
-
-
-
-
-	// PLAYER NORMAL___________________________________________________________________________________________________________________
-	if (app->sceneModule->game_state == PLAYING)
-	{
-		// if no floor: make fall
-		if (rect.y < 168 && state != ON_STAIR) // not on ground
-		{
-			if (!Check_Collision_Player_Verticals()) { rect.y += app->windowModule->scale; } // no bricks bellow, fall
-		}
-
-		update_counter++;
-		if (shoot_update_counter < 10){ shoot_update_counter++; }
-		else { shoot_key_pressed = false; shoot_update_counter = 0; }
-
-		if (harpoon2->alive){ harpoon2->Update(); }
-		if (harpoon1->alive){ harpoon1->Update(); }
-
-		//-------------------------------------------------------
-		// shotgun update
-		//-------------------------------------------------------
-	}
-
-
-
-
-
 }
 
 
-void Player::Reset(unsigned int x, unsigned int y)
+void Player::Reset(const unsigned int x, const unsigned int y)
 {
 	rect.x = x * app->windowModule->scale;
 	rect.y = y * app->windowModule->scale;
@@ -563,14 +518,16 @@ void Player::Reset(unsigned int x, unsigned int y)
 	harpoon1->alive = false;
 	harpoon2->alive = false;
 
-	shielded = false;
-	current_stair = NULL;
-	state = STILL;
-	shoot_key_pressed = false;
-	current_weapon = WEAPON_DOUBLE_HARPOON;
-	hit_State = HIT_RIGHT_UP;
 	source_index = 17;
 	stair_update_counter = 0;
+	shielded = false;
+	shoot_key_pressed = false;
+	state = STILL;
+	current_weapon = WEAPON_HARPOON;
+	hit_State = HIT_RIGHT_UP;
+	current_stair = NULL;
+	
+	
 }
 
 
@@ -583,10 +540,10 @@ bool Player::Check_Collision_Player_Brick_Horizontal()
 	{
 		tmp_rect = (*app->entityManagerModule->bricks.at(i))->rect;
 
-		if (rect.x - app->windowModule->scale < tmp_rect.x + tmp_rect.w
-			&& rect.x + rect.w > tmp_rect.x - app->windowModule->scale
-			&& rect.y < tmp_rect.y + tmp_rect.h
-			&& rect.h + rect.y  > tmp_rect.y + tmp_rect.h)
+		if (rect.x + app->windowModule->scale <= tmp_rect.x + tmp_rect.w
+			&& rect.x + rect.w + app->windowModule->scale >= tmp_rect.x
+			&& rect.y + app->windowModule->scale <= tmp_rect.y + tmp_rect.h
+			&& rect.y + rect.h + app->windowModule->scale >= tmp_rect.y)
 		{
 			return true;
 		}
@@ -602,10 +559,10 @@ bool Player::Check_Collision_Player_Verticals()
 	{
 		tmp_rect = (*app->entityManagerModule->bricks.at(i))->rect;
 
-		if (rect.x  < tmp_rect.x + tmp_rect.w
-			&& rect.x + rect.w > tmp_rect.x
-			&& rect.y - app->windowModule->scale < tmp_rect.y + tmp_rect.h
-			&& rect.y + rect.h + app->windowModule->scale > tmp_rect.y)
+		if (rect.x + app->windowModule->scale <= tmp_rect.x + tmp_rect.w
+			&& rect.x + rect.w + app->windowModule->scale >= tmp_rect.x
+			&& rect.y + app->windowModule->scale <= tmp_rect.y + tmp_rect.h
+			&& rect.y + rect.h + app->windowModule->scale >= tmp_rect.y)
 		{
 			return true;
 		}
@@ -615,10 +572,10 @@ bool Player::Check_Collision_Player_Verticals()
 	{
 		tmp_rect = (*app->entityManagerModule->stairs.at(i))->rect;
 
-		if (rect.x  < tmp_rect.x + tmp_rect.w
-			&& rect.x + rect.w > tmp_rect.x + tmp_rect.w
-			&& rect.y - app->windowModule->scale < tmp_rect.y + tmp_rect.h
-			&& rect.y + rect.h + app->windowModule->scale > tmp_rect.y)
+		if (rect.x + app->windowModule->scale <= tmp_rect.x + tmp_rect.w
+			&& rect.x + rect.w + app->windowModule->scale >= tmp_rect.x
+			&& rect.y + app->windowModule->scale <= tmp_rect.y + tmp_rect.h
+			&& rect.y + rect.h + app->windowModule->scale >= tmp_rect.y)
 		{
 			return true;
 		}
@@ -637,7 +594,7 @@ bool Player::Check_Collision_Player_Stair()
 
 		if (rect.x >stair_rect.x) // player to the right
 		{
-			if (rect.x - stair_rect.x <= 4 * app->windowModule->scale) // player close enough to stairs
+			if (rect.x - stair_rect.x <= 4 * app->windowModule->scale) // player horizontaly close enough to stairs
 			{
 				if (rect.y + (rect.h / 2) >= stair_rect.y && rect.y + (rect.h / 2) <= stair_rect.y + stair_rect.h) // player close enough to stairs
 				{
@@ -651,7 +608,7 @@ bool Player::Check_Collision_Player_Stair()
 		}
 		else // player to the left
 		{
-			if (stair_rect.x - rect.x <= 4 * app->windowModule->scale) // player close enough to stairs
+			if (stair_rect.x - rect.x <= 4 * app->windowModule->scale) // player horizontaly close enough to stairs
 			{
 				if (rect.y + (rect.h / 2) >= stair_rect.y && rect.y + (rect.h / 2) <= stair_rect.y + stair_rect.h) // player close enough to stairs
 				{

@@ -4,9 +4,7 @@ ModuleScene::ModuleScene(Application* app) : Module(app),
 time_count(NULL),
 pause_pressed(false),
 stage_cleared(false)
-{
-	
-}
+{}
 
 bool ModuleScene::Init()
 {
@@ -22,13 +20,14 @@ bool ModuleScene::Init()
 
 	app->audioModule->PlayMusic((app->stage - 1) / 3);
 
-	load_stage();
+	if (!load_stage()){ return false; }
 
 	return true;
 }
 
 update_status ModuleScene::PreUpdate()
 {
+	// ADD Coin
 	if (app->inputModule->key[SDL_SCANCODE_5] == 1)
 	{
 		if (!insert_coin_pressed){ app->Add_Coin(); insert_coin_pressed = true; }
@@ -89,7 +88,7 @@ update_status ModuleScene::Update()
 				update_counter = 0;
 				reset_stage();
 			}
-			else{ return CHANGE_TO_TITLE; }
+			else{ game_state = COUNTDOWN; }
 		}
 		else { update_counter++; }
 		break;
@@ -105,6 +104,10 @@ update_status ModuleScene::Update()
 
 	case COUNTDOWN:
 		// Handle countdown??
+		//------------------
+		//------------------
+		//------------------
+		//------------------
 		break;
 
 	case GAME_OVER:
@@ -162,10 +165,6 @@ bool ModuleScene::Resume_Scene()
 }
 
 
-
-
-
-
 void ModuleScene::Print_All_Objects()
 {
 	// PRINT TEXT & SCORES
@@ -194,54 +193,38 @@ void ModuleScene::Print_All_Objects()
 	time_count->Print_Timer();
 
 	// PRINT STAIRS
-	for (unsigned int i = 0; i < app->entityManagerModule->stairs.Count(); i++)
-	{
-		(*app->entityManagerModule->stairs.at(i))->Print();
-	}
+	for (unsigned int i = 0; i < app->entityManagerModule->stairs.Count(); i++) { (*app->entityManagerModule->stairs.at(i))->Print(); }
 
 	// PRINT BRICKS
-	for (unsigned int i = 0; i < app->entityManagerModule->bricks.Count(); i++)
-	{
-		(*app->entityManagerModule->bricks.at(i))->Print();
-	}
-
+	for (unsigned int i = 0; i < app->entityManagerModule->bricks.Count(); i++) { (*app->entityManagerModule->bricks.at(i))->Print(); }
 
 	// PRINT HARPOONS
 
 	if (app->playerModule->player1->harpoon1->alive) { app->playerModule->player1->harpoon1->Print(); }
 	if (app->playerModule->player1->harpoon2->alive) { app->playerModule->player1->harpoon2->Print(); }
 
-	if (app->playerModule->player2 != NULL)
+	if (app->player_2_enabled)
 	{
 		if (app->playerModule->player2->harpoon1->alive) { app->playerModule->player2->harpoon1->Print(); }
 		if (app->playerModule->player2->harpoon2->alive) { app->playerModule->player2->harpoon2->Print(); }
 	}
 
 	// PRINT BULLETS
-
+	//------------------
+	//------------------
+	//------------------
+	//------------------
 
 
 	// PRINT PLAYERS
 	app->renderModule->Print(app->texturesModule->players_sprite, &app->playerModule->player1->source_rect[app->playerModule->player1->source_index], &app->playerModule->player1->rect);
-
-	if (app->playerModule->player2 != NULL)
-	{
-		app->renderModule->Print(app->texturesModule->players_sprite, &app->playerModule->player2->source_rect[app->playerModule->player2->source_index], &app->playerModule->player2->rect);
-	}
-
+	if (app->player_2_enabled) { app->renderModule->Print(app->texturesModule->players_sprite, &app->playerModule->player2->source_rect[app->playerModule->player2->source_index], &app->playerModule->player2->rect); }
 
 	// PRINT BALLS
-
-	for (unsigned int i = 0; i < app->entityManagerModule->balloons.Count(); i++)
-	{
-		(*app->entityManagerModule->balloons.at(i))->Print();
-	}
+	for (unsigned int i = 0; i < app->entityManagerModule->balloons.Count(); i++) { (*app->entityManagerModule->balloons.at(i))->Print(); }
 
 	// PRINT PARTICLES
-	for (unsigned int i = 0; i < app->entityManagerModule->particles.Count(); i++)
-	{
-		(*app->entityManagerModule->particles.at(i))->Print();
-	}
+	for (unsigned int i = 0; i < app->entityManagerModule->particles.Count(); i++) { (*app->entityManagerModule->particles.at(i))->Print(); }
 }
 
 
@@ -258,7 +241,7 @@ void ModuleScene::reset_stage()
 
 	// PLAYER POS
 	app->playerModule->player1->Reset(stage_arrangement.player_pos[0], stage_arrangement.player_pos[1]);
-	if (app->playerModule->player2 != NULL){ app->playerModule->player1->Reset(stage_arrangement.player_pos[0], stage_arrangement.player_pos[1]); }
+	app->playerModule->player1->Reset(stage_arrangement.player_pos[0], stage_arrangement.player_pos[1]);
 
 	// BRICKS____________________________________________________________________________________________________________________________
 

@@ -2,7 +2,7 @@
 
 #include "Application.h"
 
-Application::Application() : coins(0), stage(1), city(1) {}
+Application::Application() : coins(0), stage(1), city(1), player_2_enabled(false) {}
 
 bool Application::Init()
 {
@@ -186,38 +186,15 @@ bool Application::ChangeTo(update_status new_state)
 
 void Application::Add_Coin()
 {
-	if (coins < 9) { coins++; audioModule->PlayFx(COIN); } // add coin + play fx
+	// add coin + play fx
+	if (coins < 9) { coins++; audioModule->PlayFx(COIN); }
 }
 
 bool Application::Lose_Coin()
 {
+	// return false if no coins left
 	if (coins > 0) { coins--; return true; }
 	return false;
 }
 
-
-
-
-
-
-
-
-/*
-ModuleWindow windowModule_tmp(this);
-windowModule = &windowModule_tmp;
-
-ModuleRender renderModule_tmp(this);
-renderModule = &renderModule_tmp;
-
-ModuleInput inputModule_tmp(this);
-inputModule = &inputModule_tmp;
-
-ModuleTextures texturesModule_tmp(this);
-texturesModule = &texturesModule_tmp;
-
-ModuleAudio audioModule_tmp(this);
-audioModule = &audioModule_tmp;
-
-ModuleFontManager fontManagerModule_tmp(this);
-fontManagerModule = &fontManagerModule_tmp;
-*/
+void Application::EnablePlayer2() { player_2_enabled = true; }
