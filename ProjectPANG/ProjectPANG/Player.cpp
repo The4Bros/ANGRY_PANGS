@@ -21,7 +21,7 @@ current_stair(NULL)
 	unsigned int y_coor = 0;
 	if (!player1) { y_coor = 32; }
 
-	for (int i = 0; i < 23; i++) { source_rect[i] = { i * 32, y_coor, 32, 32 }; }
+	for (unsigned int i = 0; i < 23; i++) { source_rect[i] = { i * 32, y_coor, 32, 32 }; }
 	source_rect[23] = { 736, y_coor, 51, 32 };
 	source_rect[24] = { 787, y_coor, 51, 32 };
 }
@@ -32,7 +32,6 @@ Player::~Player()
 	delete harpoon1;
 	delete harpoon2;
 }
-
 
 
 void Player::LeftTrigger()
