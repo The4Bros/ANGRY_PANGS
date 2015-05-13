@@ -6,7 +6,7 @@ ModulePlayer::ModulePlayer(Application* app) : Module(app), player1(NULL), playe
 bool ModulePlayer::Init()
 {
 	if (player1 == NULL) { player1 = new Player(app, true); }
-	if (player2 == NULL) { player1 = new Player(app, false); }
+	if (player2 == NULL) { player2 = new Player(app, false); }
 	player_speed = app->windowModule->scale;
 	return true;
 }

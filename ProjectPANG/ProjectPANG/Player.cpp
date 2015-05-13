@@ -9,7 +9,7 @@ stair_update_counter(0),
 shielded(false),
 shoot_key_pressed(false),
 state(STILL),
-current_weapon(WEAPON_HARPOON),
+current_weapon(WEAPON_DOUBLE_HARPOON),
 hit_State(HIT_RIGHT_UP),
 current_stair(NULL)
 {

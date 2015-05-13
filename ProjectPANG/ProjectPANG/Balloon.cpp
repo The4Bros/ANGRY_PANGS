@@ -364,7 +364,7 @@ void Balloon::Size1_Check_Collision_Balloon_Players()
 		return; // no need to check player2 if player1 got hit
 	}
 
-	if (app->playerModule->player2 != NULL)
+	if (app->player_2_enabled)
 	{
 		//Closest point to ball
 		int closest_x, closest_y;
@@ -396,7 +396,7 @@ void Balloon::Size4_Check_Collision_Balloon_Players()
 		return; // no need to check player2 if player1 got hit
 	}
 
-	if (app->playerModule->player2 != NULL)
+	if (app->player_2_enabled)
 	{
 		if (rect.x < app->playerModule->player2->rect.x + app->playerModule->player2->rect.w - (8 * app->windowModule->scale)
 			&& rect.x + rect.w > app->playerModule->player2->rect.x + (8 * app->windowModule->scale)
