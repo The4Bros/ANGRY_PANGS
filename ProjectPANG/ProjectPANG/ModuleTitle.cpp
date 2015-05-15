@@ -31,15 +31,15 @@ bool ModuleTitle::Init()
 	****************************************************************************************************************************************************
 	**********************     HAS DE CAMBIAR GRAVITY Y LOS RECTS PARA CADA BOLA PARA QUE CUADRE CON EL TITULO     ************************************/
 
-	gravity[0] =  2 * app->windowModule->scale;
-	gravity[1] = 10 * app->windowModule->scale;
+	gravity[0] =  1 * app->windowModule->scale;
+	gravity[1] = 3 * app->windowModule->scale;
 	gravity[2] =  3 * app->windowModule->scale;
 	gravity[3] =  3 * app->windowModule->scale;
 
-	balloon_rects[0] = {  284 * app->windowModule->scale,    0 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
-	balloon_rects[1] = {    0 * app->windowModule->scale, -100 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
-	balloon_rects[2] = {  284 * app->windowModule->scale,    0 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
-	balloon_rects[3] = {    0 * app->windowModule->scale,   40 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
+	balloon_rects[0] = {  384 * app->windowModule->scale,  0   * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
+	balloon_rects[1] = {    -48* app->windowModule->scale, -48 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
+	balloon_rects[2] = {  384 * app->windowModule->scale,    0 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
+	balloon_rects[3] = {    -48 * app->windowModule->scale,  -48 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 	
 	/***************************************************************************************************************************************************
 	****************************************************************************************************************************************************
@@ -75,7 +75,7 @@ update_status ModuleTitle::Update()
 	else if (ticks < 300) { Update_Balloons(); }
 
 	// Title
-	else if(ticks < 330) { app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[3], &rect); }
+	else if(ticks < 360) { app->renderModule->Print(app->texturesModule->title_sprite, &source_rect[3], &rect); }
 	
 	else
 	{
