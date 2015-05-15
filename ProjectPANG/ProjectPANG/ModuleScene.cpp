@@ -223,6 +223,9 @@ void ModuleScene::Print_All_Objects()
 	// PRINT BALLS
 	for (unsigned int i = 0; i < app->entityManagerModule->balloons.Count(); i++) { (*app->entityManagerModule->balloons.at(i))->Print(); }
 
+	// PRINT POWER UPS
+	for (unsigned int i = 0; i < app->entityManagerModule->powerups.Count(); i++) { (*app->entityManagerModule->powerups.at(i))->Print(); }
+
 	// PRINT PARTICLES
 	for (unsigned int i = 0; i < app->entityManagerModule->particles.Count(); i++) { (*app->entityManagerModule->particles.at(i))->Print(); }
 }

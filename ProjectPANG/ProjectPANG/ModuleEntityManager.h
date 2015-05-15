@@ -35,7 +35,7 @@ public:
 	DynArray<PowerUp*> powerups;
 	SDL_Rect powerup_source_rect[23];
 
-	bool stop_time, slow_time;
+	bool stop_time, slow_time, dynamite;
 	unsigned int stop_time_counter, slow_time_counter;
 
 	ModuleEntityManager(Application* app);
@@ -44,6 +44,8 @@ public:
 
 	void StopTime();
 	void SlowTime();
+	void Dynamite();
+	bool DynamiteUpdate();
 };
 
 #endif

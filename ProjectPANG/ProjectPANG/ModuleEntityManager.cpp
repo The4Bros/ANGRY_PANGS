@@ -126,11 +126,19 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 
 bool ModuleEntityManager::Init()
 {
-	bricks.Init();
-	stairs.Init();
-	balloons.Init();
+	app->entityManagerModule->bricks.ClearAll();
+	app->entityManagerModule->stairs.ClearAll();
+	app->entityManagerModule->balloons.ClearAll();
+	//app->entityManagerModule->enemies.ClearAll();
+	app->entityManagerModule->particles.ClearAll();
+	app->entityManagerModule->powerups.ClearAll();
+
+	//bricks.Init();
+	//stairs.Init();
+	//balloons.Init();
 	//enemies.Init();
-	particles.Init();
+	//particles.Init();
+	//powerups.Init();
 
 	stop_time = slow_time = false;
 	stop_time_counter = slow_time_counter = 0;
@@ -182,4 +190,29 @@ void ModuleEntityManager::SlowTime()
 	balloon_speed = 1;
 	slow_time_counter = 0;
 	slow_time = true;
+}
+
+void ModuleEntityManager::Dynamite()
+{
+	dynamite = true;
+}
+
+bool ModuleEntityManager::DynamiteUpdate()
+{
+	Balloon* tmp_balloon;
+	unsigned int balloon_count = 0;
+	bool return_value = false;
+
+	for (unsigned int i = 0; i < balloons.Count(); i++)
+	{
+		if ((*balloons.at(i))->type < 9) { balloon_count++; }
+	}
+
+	for (unsigned int i = 0; i < balloon_count; i++)
+	{
+		tmp_balloon = *balloons.at(i);
+		if (tmp_balloon->type < 9) { tmp_balloon->Hit(); return_value = true; }
+	}
+
+	return return_value;
 }
