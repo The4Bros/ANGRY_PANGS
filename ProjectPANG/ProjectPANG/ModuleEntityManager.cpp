@@ -116,7 +116,12 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	for (i = 0; i < 15; i++){ powerup_source_rect[i] = { i * 16, 0, 16, 16 }; }
 	for (i = 0; i <  8; i++){ powerup_source_rect[i + 15] = { i * 16, 16, 16, 16 }; }
 
-
+	bricks.Init();
+	stairs.Init();
+	balloons.Init();
+	//enemies.Init();
+	particles.Init();
+	powerups.Init();
 
 	balloon_speed = 2.0f;
 
@@ -132,13 +137,6 @@ bool ModuleEntityManager::Init()
 	//app->entityManagerModule->enemies.ClearAll();
 	app->entityManagerModule->particles.ClearAll();
 	app->entityManagerModule->powerups.ClearAll();
-
-	//bricks.Init();
-	//stairs.Init();
-	//balloons.Init();
-	//enemies.Init();
-	//particles.Init();
-	//powerups.Init();
 
 	stop_time = slow_time = false;
 	stop_time_counter = slow_time_counter = 0;
@@ -177,6 +175,17 @@ update_status ModuleEntityManager::Update()
 
 	return UPDATE_CONTINUE;
 }
+
+bool ModuleEntityManager::CleanUp()
+{
+	app->entityManagerModule->bricks.ClearAll();
+	app->entityManagerModule->stairs.ClearAll();
+	app->entityManagerModule->balloons.ClearAll();
+	//app->entityManagerModule->enemies.ClearAll();
+	app->entityManagerModule->particles.ClearAll();
+	app->entityManagerModule->powerups.ClearAll();
+}
+
 
 
 void ModuleEntityManager::StopTime()
