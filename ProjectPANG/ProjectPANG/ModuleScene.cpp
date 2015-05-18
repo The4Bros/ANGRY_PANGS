@@ -13,8 +13,8 @@ bool ModuleScene::Init()
 	stage_cleared = false;
 	game_state = READY;
 	update_counter = 0;
-
-	ready_rect = { 100, 100, 160 * app->windowModule->scale,  32 * app->windowModule->scale };
+	ready_source_rect = { 0, 0, 54 , 16};
+	ready_rect = { 165 *  app->windowModule->scale, 104  * app->windowModule->scale, 54 * app->windowModule->scale, 16 * app->windowModule->scale };
 	game_over_rect = { 100, 100, 160 * app->windowModule->scale, 32 * app->windowModule->scale };
 	background_rect = { 0, 0, SCREEN_WIDTH * app->windowModule->scale, (SCREEN_HEIGHT - 32) * app->windowModule->scale };
 
