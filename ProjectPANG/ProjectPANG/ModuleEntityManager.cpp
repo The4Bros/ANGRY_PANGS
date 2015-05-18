@@ -184,6 +184,7 @@ bool ModuleEntityManager::CleanUp()
 	//app->entityManagerModule->enemies.ClearAll();
 	app->entityManagerModule->particles.ClearAll();
 	app->entityManagerModule->powerups.ClearAll();
+	return true;
 }
 
 

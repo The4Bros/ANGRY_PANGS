@@ -33,13 +33,13 @@ bool ModuleTitle::Init()
 
 	gravity[0] =  1 * app->windowModule->scale;
 	gravity[1] = 3 * app->windowModule->scale;
-	gravity[2] =  3 * app->windowModule->scale;
-	gravity[3] =  3 * app->windowModule->scale;
+	gravity[2] =  1 * app->windowModule->scale;
+	gravity[3] =  2 * app->windowModule->scale;
 
 	balloon_rects[0] = {  384 * app->windowModule->scale,  0   * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
-	balloon_rects[1] = {    -48* app->windowModule->scale, -48 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
-	balloon_rects[2] = {  384 * app->windowModule->scale,    0 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
-	balloon_rects[3] = {    -48 * app->windowModule->scale,  -48 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
+	balloon_rects[1] = {    -200* app->windowModule->scale, -200 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
+	balloon_rects[2] = {  544 * app->windowModule->scale,    -200 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
+	balloon_rects[3] = {    -200 * app->windowModule->scale,  -500 * app->windowModule->scale, 48 * app->windowModule->scale, 40 * app->windowModule->scale };
 	
 	/***************************************************************************************************************************************************
 	****************************************************************************************************************************************************
@@ -108,7 +108,9 @@ update_status ModuleTitle::Update()
 		else
 		{
 			app->fontManagerModule->Write_On_Screen("Push start button", 140 * app->windowModule->scale, 100 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
-			app->fontManagerModule->Write_On_Screen(   "1 or 2 players", 150 * app->windowModule->scale, 120 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+			if (app->coins == 1){ app->fontManagerModule->Write_On_Screen("1 player", 160 * app->windowModule->scale, 120 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE); }
+			else{ app->fontManagerModule->Write_On_Screen("1 or 2 players", 150 * app->windowModule->scale, 120 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE); }
+			//app->fontManagerModule->Write_On_Screen(   "1 player", 150 * app->windowModule->scale, 120 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 			app->fontManagerModule->Write_On_Screen(         "Credits:", 250 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 			app->fontManagerModule->Write_On_Screen(         app->coins, 320 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 
