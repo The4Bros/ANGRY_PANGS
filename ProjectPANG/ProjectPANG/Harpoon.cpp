@@ -180,6 +180,7 @@ bool Harpoon::Check_Collision_Harpoon_Balloon()
 				+ ((closest_y - (tmp_rect.y + (tmp_rect.h / 2))) * (closest_y - (tmp_rect.y + (tmp_rect.h / 2)))))
 			{
 				(*app->entityManagerModule->balloons.at(i))->Hit();
+				app->playerModule->player1->score += 50;
 				return true;
 			}
 		}
@@ -201,6 +202,7 @@ bool Harpoon::Check_Collision_Harpoon_Brick()
 			&& head_rect.y + head_rect.h + body_rect.h >= tmp_rect.y) // brick down
 		{
 			(*app->entityManagerModule->bricks.at(i))->Hit();
+			app->playerModule->player1->score += 500;
 			return true;
 		}
 	}
