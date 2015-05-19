@@ -19,9 +19,6 @@ class Brick
 
 		void Print();
 		void Hit();
-
-		void Reset(int position_in_list, unsigned int x, unsigned int y, unsigned int type);
-	
 };
 
 

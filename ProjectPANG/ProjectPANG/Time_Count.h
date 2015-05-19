@@ -22,7 +22,7 @@ public:
 
 	void Update();
 	void Update_Source_Index();
-	void Reset(int time);
+	void Reset(unsigned int time);
 	void Print_Timer();
 
 };

@@ -9,7 +9,7 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	for (i = 0; i < 8; i++)
 	{
 		harpoon_source_rect[i + 8] = { 0, 0, 7, (i + 1) * 2 };
-		harpoon_source_rect[i] = { 7, 0, 7, (i + 1) * 2 };
+		harpoon_source_rect[    i] = { 7, 0, 7, (i + 1) * 2 };
 	}
 
 	// HARPOON HEADS
@@ -34,10 +34,10 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	// GLASS BRICKS
 	for (i = 0; i < 3; i++)
 	{
-		source_brick_rect[i] = { 120, 24 + (i * 8), 8, 8 };
-		source_brick_rect[i + 3] = { 0, 48 + (i * 8), 16, 8 };
-		source_brick_rect[i + 6] = { 0, 24 + (i * 8), 24, 8 };
-		source_brick_rect[i + 9] = { 0, i * 8, 32, 8 };
+		source_brick_rect[    i] = { 120, 24 + (i * 8),  8, 8 };
+		source_brick_rect[i + 3] = {   0, 48 + (i * 8), 16, 8 };
+		source_brick_rect[i + 6] = {   0, 24 + (i * 8), 24, 8 };
+		source_brick_rect[i + 9] = {   0,       i * 8 , 32, 8 };
 	}
 	source_brick_rect[12] = {  0, 72, 8, 32 };
 	source_brick_rect[13] = { 40, 72, 8, 32 };
@@ -45,8 +45,8 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	source_brick_rect[15] = { 80, 88, 8, 24 };
 
 	// SOLID BRICKS
-	for (i2 = 0; i2 < 3; i2++){ for (i = 0; i < 3; i++){ source_brick_rect[i + 16 + (i2 * 3)] = {80 + ( i * 16 ), 48 + (i2 * 8), 16, 8 }; }}
-	for (i2 = 0; i2 < 3; i2++){ for (i = 0; i < 3; i++){ source_brick_rect[i + 25 + (i2 * 3)] = { 136 + (i2 * 8), 48 + (i * 16), 8, 16 }; }}
+	for (i2 = 0; i2 < 3; i2++){ for (i = 0; i < 3; i++){ source_brick_rect[i + 16 + (i2 * 3)] = {80 + ( i * 16 ), 48 + (i2 * 8), 16,  8 }; }}
+	for (i2 = 0; i2 < 3; i2++){ for (i = 0; i < 3; i++){ source_brick_rect[i + 25 + (i2 * 3)] = { 136 + (i2 * 8), 48 + (i * 16),  8, 16 }; }}
 	for (i = 0; i < 3; i++){ source_brick_rect[i + 34] = { 128, 48 + (i * 8), 8, 8 }; }
 	for (i = 0; i < 3; i++){ source_brick_rect[i + 37] = { 136 + (i * 8), 96, 8, 8 }; }
 
@@ -74,7 +74,7 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 
 
 	// ----------------------------   ENEMIES   ----------------------------
-	for (i = 0; i < 16; i++){ source_enemy_rect[i]      = { i * 32, 0, 32, 32 }; }
+	for (i = 0; i < 16; i++){ source_enemy_rect[i]      = { i * 32,   0, 32, 32 }; }
 	for (i = 0; i < 10; i++){ source_enemy_rect[i + 16] = { i * 32,  32, 32, 32 }; }
 	for (i = 0; i < 22; i++){ source_enemy_rect[i + 26] = { i * 32,  64, 32, 32 }; }
 	for (i = 0; i < 11; i++){ source_enemy_rect[i + 48] = { i * 32,  96, 32, 32 }; }
@@ -89,7 +89,7 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	{
 		for (i = 0; i < 4; i++)
 		{
-			particles_source_rect[i + (i2 * 4)]      = { i * 48 + (i2 * 192),  0, 48, 40 };
+			particles_source_rect[     i + (i2 * 4)] = { i * 48 + (i2 * 192),  0, 48, 40 };
 			particles_source_rect[i + (i2 * 4) + 12] = { i * 32 + (i2 * 192), 40, 32, 29 };
 			particles_source_rect[i + (i2 * 4) + 24] = { i * 16 + (i2 * 192), 69, 16, 16 };
 			particles_source_rect[i + (i2 * 4) + 36] = { i *  8 + (i2 * 192), 85,  8,  8 };
@@ -113,13 +113,13 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 
 
 	// ----------------------------   POWER UPS   ----------------------------
-	for (i = 0; i < 15; i++){ powerup_source_rect[i] = { i * 16, 0, 16, 16 }; }
+	for (i = 0; i < 15; i++){ powerup_source_rect[     i] = { i * 16,  0, 16, 16 }; }
 	for (i = 0; i <  8; i++){ powerup_source_rect[i + 15] = { i * 16, 16, 16, 16 }; }
 
 	bricks.Init();
 	stairs.Init();
 	balloons.Init();
-	//enemies.Init();
+	enemies.Init();
 	particles.Init();
 	powerups.Init();
 
@@ -134,7 +134,7 @@ bool ModuleEntityManager::Init()
 	app->entityManagerModule->bricks.ClearAll();
 	app->entityManagerModule->stairs.ClearAll();
 	app->entityManagerModule->balloons.ClearAll();
-	//app->entityManagerModule->enemies.ClearAll();
+	app->entityManagerModule->enemies.ClearAll();
 	app->entityManagerModule->particles.ClearAll();
 	app->entityManagerModule->powerups.ClearAll();
 
@@ -166,6 +166,9 @@ update_status ModuleEntityManager::Update()
 			else{ stop_time = false; }
 		}
 
+		// POWERUPS
+		for (unsigned int i = 0; i < enemies.Count(); i++){ (*enemies.at(i))->Update(); }
+
 		// PARTICLES
 		for (unsigned int i = 0; i < particles.Count(); i++){ (*particles.at(i))->Update(); }
 
@@ -184,6 +187,8 @@ bool ModuleEntityManager::CleanUp()
 	//app->entityManagerModule->enemies.ClearAll();
 	app->entityManagerModule->particles.ClearAll();
 	app->entityManagerModule->powerups.ClearAll();
+
+	return true;
 }
 
 

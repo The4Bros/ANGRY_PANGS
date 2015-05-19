@@ -64,7 +64,6 @@ public:
 	void Hit();
 	void Reduce_Balloon_Size();
 	void Restart_Movement_Balloons_hit();
-	void Reset(unsigned int position_in_list, int x, int y, int type, int direction);
 
 	void Size1_Check_Collision_Balloon_Players();
 	void Size4_Check_Collision_Balloon_Players();
