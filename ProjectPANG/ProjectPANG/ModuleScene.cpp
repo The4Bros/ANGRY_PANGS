@@ -170,8 +170,8 @@ void ModuleScene::Print_All_Objects()
 	// PRINT TEXT & SCORES
 	app->fontManagerModule->Write_On_Screen("Player-1",                        17 * app->windowModule->scale, 208 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen("Player-2",                       270 * app->windowModule->scale, 208 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
-	app->fontManagerModule->Write_On_Screen("lives:",                          16 * app->windowModule->scale, 222 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
-	app->fontManagerModule->Write_On_Screen("0",                              104 * app->windowModule->scale, 214 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen("lives:",                          16 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen(app->playerModule->player1->score, 104 * app->windowModule->scale, 214 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen(app->playerModule->player1->lives, 64 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen(app->city_names[app->city - 1],   160 * app->windowModule->scale, 208 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen("~",                              167 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
@@ -186,6 +186,15 @@ void ModuleScene::Print_All_Objects()
 	if (app->stage > 9) { app->fontManagerModule->Write_On_Screen("stage", 195 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE); }
 	else { app->fontManagerModule->Write_On_Screen("stage", 187 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE); }
 
+	if (app->player_2_enabled){
+
+		app->fontManagerModule->Write_On_Screen("lives:", 272 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+		app->fontManagerModule->Write_On_Screen(app->playerModule->player2->score, 360 * app->windowModule->scale, 214 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+		app->fontManagerModule->Write_On_Screen(app->playerModule->player2->lives, 320 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+
+
+
+	}
 	// PRINT BACKGROUND
 	app->renderModule->Print(app->texturesModule->background_sprite, &background_source_rect, &background_rect);
 
