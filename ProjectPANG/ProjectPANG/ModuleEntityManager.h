@@ -2,6 +2,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "Balloon.h"
+#include "Enemy.h"
 #include "Stair.h"
 #include "Brick.h"
 #include "Particles.h"
@@ -26,7 +27,7 @@ public:
 	SDL_Rect source_balloon_rect[12];
 	float balloon_speed;
 
-	//DynArray<Enemy*>* enemies;
+	DynArray<Enemy*> enemies;
 	SDL_Rect source_enemy_rect[74];
 
 	DynArray<Particles*> particles;
