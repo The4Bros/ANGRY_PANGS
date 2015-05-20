@@ -35,7 +35,7 @@ void Time_Count::Update_Source_Index()
 }
 
 
-void Time_Count::Reset(unsigned int seconds)
+void Time_Count::Reset(int seconds)
 {
 	current_time = seconds;
 	time(&timer);

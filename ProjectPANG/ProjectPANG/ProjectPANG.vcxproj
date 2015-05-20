@@ -73,7 +73,6 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Balloon.cpp" />
     <ClCompile Include="Brick.cpp" />
-    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Harpoon.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="main.cpp" />
@@ -105,7 +104,6 @@
     </ClInclude>
     <ClInclude Include="Brick.h" />
     <ClInclude Include="DynArray.h" />
-    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Harpoon.h" />
     <ClInclude Include="ModuleChooseCity.h" />
     <ClInclude Include="ModuleCredits.h" />

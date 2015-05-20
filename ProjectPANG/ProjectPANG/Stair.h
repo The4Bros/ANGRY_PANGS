@@ -17,5 +17,8 @@ public:
 	~Stair();
 
 	void Print();
+
+	void Reset(unsigned int x, unsigned int y, unsigned int size);
+
 };
 #endif
