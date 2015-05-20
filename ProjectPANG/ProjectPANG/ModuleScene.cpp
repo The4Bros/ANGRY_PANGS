@@ -186,7 +186,7 @@ void ModuleScene::Print_All_Objects()
 	if (app->stage > 9) { app->fontManagerModule->Write_On_Screen("stage", 195 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE); }
 	else { app->fontManagerModule->Write_On_Screen("stage", 187 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE); }
 
-	if (app->playerModule->player2->alive){
+	if (app->player_2_enabled){
 
 		app->fontManagerModule->Write_On_Screen("lives:", 272 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 		app->fontManagerModule->Write_On_Screen(app->playerModule->player2->score, 360 * app->windowModule->scale, 214 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);

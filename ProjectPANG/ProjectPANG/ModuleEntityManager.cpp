@@ -113,7 +113,9 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 
 
 	// ----------------------------   POWER UPS   ----------------------------
+	//POWERS
 	for (i = 0; i < 15; i++){ powerup_source_rect[i] = { i * 16, 0, 16, 16 }; }
+	//FRUITS
 	for (i = 0; i <  8; i++){ powerup_source_rect[i + 15] = { i * 16, 16, 16, 16 }; }
 
 	bricks.Init();
