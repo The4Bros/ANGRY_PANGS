@@ -100,7 +100,7 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	for (i = 0; i < 5; i++){ particles_source_rect[i + 48] = { i * 28, 93, 28, 26 }; }
 
 	// HARPOON SHOT PARTICLES
-	for (i = 0; i < 4; i++){ particles_source_rect[i + 52] = { (i * 15) + 140, 93, 15, 15 }; }
+	for (i = 0; i < 4; i++){ particles_source_rect[i + 53] = { (i * 15) + 140, 93, 15, 15 }; }
 
 	// BRICK PARTICLES
 	for (i2 = 0; i2 < 3; i2++){ for (i = 0; i < 4; i++){ particles_source_rect[i +  57 + (i2 * 4)] = { (i + 1) * 32, i2 * 8, 32, 8 }; }}
@@ -108,8 +108,8 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	for (i2 = 0; i2 < 3; i2++){ for (i = 0; i < 4; i++){ particles_source_rect[i +  81 + (i2 * 4)] = { (i + 1) * 16, (i2 + 6) * 8, 16, 8 }; } }
 	for (i2 = 0; i2 < 3; i2++){ for (i = 0; i < 4; i++){ particles_source_rect[i +  93 + (i2 * 4)] = { (i * 8) + 128, (i2 * 8) + 24, 8, 8 }; } }
 	for (i2 = 0; i2 < 2; i2++){ for (i = 0; i < 4; i++){ particles_source_rect[i + 105 + (i2 * 4)] = { (i + 1) * 8, i2 * 32, 8, 32 }; } }
-	for (i = 0; i < 4; i++){ particles_source_rect[i + 113 + (i2 * 4)] = { (i + 1) * 8, i2 * 16, 8, 16 }; } 
-	for (i = 0; i < 4; i++){ particles_source_rect[i + 117 + (i2 * 4)] = { (i + 1) * 8, i2 * 24, 8, 24 }; } 
+	for (i = 0; i < 4; i++){ particles_source_rect[i + 113] = { 88 + (i * 8), 72, 8, 16 }; } 
+	for (i = 0; i < 4; i++){ particles_source_rect[i + 117] = {  8 + (i * 8), 88, 8, 24 }; } 
 
 
 	// ----------------------------   POWER UPS   ----------------------------
@@ -121,7 +121,7 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	bricks.Init();
 	stairs.Init();
 	balloons.Init();
-	//enemies.Init();
+	enemies.Init();
 	particles.Init();
 	powerups.Init();
 
