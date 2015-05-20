@@ -128,7 +128,7 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	balloon_speed = 2.0f;
 
 	stop_time = slow_time = false;
-	stop_time_counter = slow_time_counter = 0;
+	stop_time_counter = slow_time_counter = dynamite_counter = 0;
 }
 
 bool ModuleEntityManager::Init()
@@ -136,12 +136,12 @@ bool ModuleEntityManager::Init()
 	app->entityManagerModule->bricks.ClearAll();
 	app->entityManagerModule->stairs.ClearAll();
 	app->entityManagerModule->balloons.ClearAll();
-	//app->entityManagerModule->enemies.ClearAll();
+	app->entityManagerModule->enemies.ClearAll();
 	app->entityManagerModule->particles.ClearAll();
 	app->entityManagerModule->powerups.ClearAll();
 
 	stop_time = slow_time = false;
-	stop_time_counter = slow_time_counter = 0;
+	stop_time_counter = slow_time_counter = dynamite_counter = 0;
 	balloon_speed = 2.0f;
 
 	return true;
@@ -149,14 +149,26 @@ bool ModuleEntityManager::Init()
 
 update_status ModuleEntityManager::Update()
 {
-	if (slow_time)
-	{
-		if (slow_time_counter < 300){ slow_time_counter++; }
-		else{ balloon_speed = 2; slow_time = false; }
-	}
-
 	if (app->sceneModule->game_state == PLAYING)
 	{
+		// DYNAMITE
+		if (dynamite)
+		{
+			if (dynamite_counter < 60){ dynamite_counter++; }
+			else
+			{
+				dynamite_counter = 0;
+				dynamite = DynamiteUpdate();
+			}
+		}
+
+		//SLOW TIME
+		if (slow_time)
+		{
+			if (slow_time_counter < 300){ slow_time_counter++; }
+			else{ balloon_speed = 2; slow_time = false; }
+		}
+
 		// BALLOONS
 		if (!stop_time)
 		{
@@ -167,6 +179,9 @@ update_status ModuleEntityManager::Update()
 			if (stop_time_counter < 300){ stop_time_counter++; }
 			else{ stop_time = false; }
 		}
+
+		// ENEMIES
+		for (unsigned int i = 0; i < enemies.Count(); i++){ (*enemies.at(i))->Update(); }
 
 		// PARTICLES
 		for (unsigned int i = 0; i < particles.Count(); i++){ (*particles.at(i))->Update(); }
@@ -183,11 +198,12 @@ bool ModuleEntityManager::CleanUp()
 	app->entityManagerModule->bricks.ClearAll();
 	app->entityManagerModule->stairs.ClearAll();
 	app->entityManagerModule->balloons.ClearAll();
-	//app->entityManagerModule->enemies.ClearAll();
+	app->entityManagerModule->enemies.ClearAll();
 	app->entityManagerModule->particles.ClearAll();
 	app->entityManagerModule->powerups.ClearAll();
-}
 
+	return true;
+}
 
 
 void ModuleEntityManager::StopTime()
@@ -206,6 +222,7 @@ void ModuleEntityManager::SlowTime()
 void ModuleEntityManager::Dynamite()
 {
 	dynamite = true;
+	dynamite_counter = 0;
 }
 
 bool ModuleEntityManager::DynamiteUpdate()

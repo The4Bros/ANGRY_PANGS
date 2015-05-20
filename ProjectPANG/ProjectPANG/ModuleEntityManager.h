@@ -37,7 +37,7 @@ public:
 	SDL_Rect powerup_source_rect[23];
 
 	bool stop_time, slow_time, dynamite;
-	unsigned int stop_time_counter, slow_time_counter;
+	unsigned int stop_time_counter, slow_time_counter, dynamite_counter;
 
 	ModuleEntityManager(Application* app);
 	bool Init();
