@@ -109,7 +109,7 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	for (i2 = 0; i2 < 3; i2++){ for (i = 0; i < 4; i++){ particles_source_rect[i +  93 + (i2 * 4)] = { (i * 8) + 128, (i2 * 8) + 24, 8, 8 }; } }
 	for (i2 = 0; i2 < 2; i2++){ for (i = 0; i < 4; i++){ particles_source_rect[i + 105 + (i2 * 4)] = { (i + 1) * 8, i2 * 32, 8, 32 }; } }
 	for (i = 0; i < 4; i++){ particles_source_rect[i + 113] = { 88 + (i * 8), 72, 8, 16 }; } 
-	for (i = 0; i < 4; i++){ particles_source_rect[i + 117] = {  8 + (i * 8), 88, 8, 24 }; } 
+	for (i = 0; i < 4; i++){ particles_source_rect[i + 117] = { 88 + (i * 8), 88, 8, 24 }; } 
 
 
 	// ----------------------------   POWER UPS   ----------------------------
