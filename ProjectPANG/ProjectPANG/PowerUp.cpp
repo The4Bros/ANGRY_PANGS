@@ -1,13 +1,17 @@
 #include "PowerUp.h"
 
-PowerUp::PowerUp(Application* app, int position_in_list, unsigned int type, unsigned int x, unsigned int y) :
-app(app),
-position_in_list(position_in_list)
+PowerUp::PowerUp(Application* app, int position_in_list, unsigned int type, unsigned int x, unsigned int y)
+//app(app),
+//position_in_list(position_in_list)
 {
+	this->app = app; 
+	this->position_in_list = position_in_list;
+	rect.x = x;
+	rect.y = y;
+	source_index = type;
+	Print();
+	power_up_initial_time = app->sceneModule->time_count->current_time;
 
-	source_index = 2;
-	app->renderModule->Print(app->texturesModule->powerUp_sprite, &app->entityManagerModule->powerup_source_rect[source_index], &rect);
-	
 }
 
 
@@ -15,9 +19,9 @@ position_in_list(position_in_list)
 
 
 
-void PowerUp::Update()
+void PowerUp::Update()														 // jordi
 {
-	if (rect.y < 197 * app->windowModule->scale)
+	if (rect.y < 197 * app->windowModule->scale || !Check_Collision_Bricks())
 	{
 		rect.y += app->windowModule->scale;
 		if (Check_Collision_Players())
@@ -25,7 +29,7 @@ void PowerUp::Update()
 			Kill();
 		}
 	}
-	else if (Check_Collision_Harpoons() || Check_Collision_Players() || Check_Collision_Bricks())
+	else if (Check_Collision_Players())
 	{
 		Kill();
 	}
@@ -34,13 +38,15 @@ void PowerUp::Update()
 	{
 		// update source index
 	}
+
+	if (power_up_max_time - power_up_initial_time <= 0)     ;    //blink 
 }
 
 
 
 
 
-void PowerUp::Print()
+void PowerUp::Print() // consultar ruben
 {
 	app->renderModule->Print(app->texturesModule->powerUp_sprite, &app->entityManagerModule->powerup_source_rect[source_index], &rect);
 }
@@ -57,7 +63,7 @@ void PowerUp::Kill()
 
 
 
-bool PowerUp::Check_Collision_Bricks()
+bool PowerUp::Check_Collision_Bricks() // cambiar player por bricks ---------> AUSIAS
 {
 	SDL_Rect tmp_rect;
 
@@ -80,6 +86,8 @@ bool PowerUp::Check_Collision_Bricks()
 
 bool PowerUp::Check_Collision_Players()
 {
+					// -------------------------- COLLISIONS -----------------------------
+
 	if (rect.x < app->playerModule->player1->rect.x + app->playerModule->player1->rect.w - (8 * app->windowModule->scale)
 		&& rect.x + rect.w > app->playerModule->player1->rect.x + (8 * app->windowModule->scale)
 		&& rect.y < app->playerModule->player1->rect.y + app->playerModule->player1->rect.h - (8 * app->windowModule->scale)
@@ -98,9 +106,16 @@ bool PowerUp::Check_Collision_Players()
 			return true;
 		}
 	}
+
+					// -------------------------- COLLISIONS -----------------------------
+
+
+					// --------------------------- Add powerUp to the player ----------------------------  SEBAS
+
+
 }
 
-bool PowerUp::Check_Collision_Harpoons()
+bool PowerUp::Check_Collision_Harpoons() // if type > 15 -->> fruit-->> kill     JORDI
 {
 	if (rect.x < app->playerModule->player1->rect.x + app->playerModule->player1->rect.w - (8 * app->windowModule->scale)
 		&& rect.x + rect.w > app->playerModule->player1->rect.x + (8 * app->windowModule->scale)
@@ -109,4 +124,10 @@ bool PowerUp::Check_Collision_Harpoons()
 	{
 		return true; // no need to check player2 if player1 got hit
 	}
+}
+
+void PowerUp::Blink_PowerUp_Sprite() 
+{
+
+
 }
