@@ -93,7 +93,33 @@ bool PowerUp::Check_Collision_Players()
 		&& rect.y < app->playerModule->player1->rect.y + app->playerModule->player1->rect.h - (8 * app->windowModule->scale)
 		&& rect.y + rect.h > app->playerModule->player1->rect.y + (8 * app->windowModule->scale))
 	{
-		CurrentPowerUP();
+		switch (source_index)
+		{
+		case 0:
+			app->playerModule->player1->current_weapon = WEAPON_DOUBLE_HARPOON;
+			break;
+		case 1:
+			app->playerModule->player1->current_weapon = WEAPON_GRAPPLE;
+			break;
+		case 2:
+			app->playerModule->player1->current_weapon = WEAPON_DOUBLE_HARPOON;
+			break;
+		case 3:
+			app->entityManagerModule->Dynamite();
+			break;
+		case 4:
+			app->playerModule->player1->shielded = true;
+			break;
+		case 5:
+			app->entityManagerModule->SlowTime();
+			break;
+		case 6:
+			app->entityManagerModule->StopTime();
+			break;
+		case 7:
+			app->playerModule->player1->lives++;
+			break;
+		}
 		return true; // no need to check player2 if player1 got hit
 	}
 
@@ -104,7 +130,33 @@ bool PowerUp::Check_Collision_Players()
 			&& rect.y < app->playerModule->player2->rect.y + app->playerModule->player2->rect.h - (8 * app->windowModule->scale)
 			&& rect.y + rect.h > app->playerModule->player2->rect.y + (8 * app->windowModule->scale))
 		{
-			CurrentPowerUP();
+			switch (source_index)
+			{
+			case 0:
+				app->playerModule->player2->current_weapon = WEAPON_DOUBLE_HARPOON;
+				break;
+			case 1:
+				app->playerModule->player2->current_weapon = WEAPON_GRAPPLE;
+				break;
+			case 2:
+				app->playerModule->player2->current_weapon = WEAPON_DOUBLE_HARPOON;
+				break;
+			case 3:
+				app->entityManagerModule->Dynamite();
+				break;
+			case 4:
+				app->playerModule->player2->shielded = true;
+				break;
+			case 5:
+				app->entityManagerModule->SlowTime();
+				break;
+			case 6:
+				app->entityManagerModule->StopTime();
+				break;
+			case 7:
+				app->playerModule->player2->lives++;
+				break;
+			}
 			return true;
 		}
 	}
@@ -130,33 +182,3 @@ void PowerUp::Blink_PowerUp_Sprite()
 
 }
 
-void PowerUp::CurrentPowerUP()
-{
-	switch (source_index)
-	{
-	case 0:
-		app->playerModule->player1->current_weapon = WEAPON_DOUBLE_HARPOON;
-		break;
-	case 1:
-		app->playerModule->player1->current_weapon = WEAPON_GRAPPLE;
-		break;
-	case 2:
-		app->playerModule->player1->current_weapon = WEAPON_DOUBLE_HARPOON;
-		break;
-	case 3:
-		app->entityManagerModule->Dynamite();
-		break;
-	case 4:
-		app->playerModule->player1->shielded = true;
-		break;
-	case 5:
-		app->entityManagerModule->SlowTime();
-		break;
-	case 6:
-		app->entityManagerModule->StopTime();
-		break;
-	case 7:
-		app->playerModule->player1->lives++;
-		break;
-	}
-}
