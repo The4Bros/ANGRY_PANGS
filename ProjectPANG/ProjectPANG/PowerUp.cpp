@@ -71,12 +71,12 @@ bool PowerUp::Check_Collision_Bricks() // cambiar player por bricks ---------> A
 	{
 		tmp_rect = (*app->entityManagerModule->bricks.at(i))->rect;
 
-		if (rect.x < app->playerModule->player1->rect.x + app->playerModule->player1->rect.w - (8 * app->windowModule->scale)
-			&& rect.x + rect.w > app->playerModule->player1->rect.x + (8 * app->windowModule->scale)
-			&& rect.y < app->playerModule->player1->rect.y + app->playerModule->player1->rect.h - (8 * app->windowModule->scale)
-			&& rect.y + rect.h > app->playerModule->player1->rect.y + (8 * app->windowModule->scale))
+		if (rect.x < tmp_rect.x + tmp_rect.w 
+			&& rect.x + rect.w > tmp_rect.x 
+			&& rect.y <  tmp_rect.y + tmp_rect.h
+			&& rect.y + rect.h >  tmp_rect.y )
 		{
-			return true; // no need to check player2 if player1 got hit
+			return true; 
 		}
 	}
 }
