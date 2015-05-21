@@ -34,10 +34,10 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	// GLASS BRICKS
 	for (i = 0; i < 3; i++)
 	{
-		source_brick_rect[i] = { 120, 24 + (i * 8), 8, 8 };
-		source_brick_rect[i + 3] = { 0, 48 + (i * 8), 16, 8 };
-		source_brick_rect[i + 6] = { 0, 24 + (i * 8), 24, 8 };
-		source_brick_rect[i + 9] = { 0, i * 8, 32, 8 };
+		source_brick_rect[i + 9] = { 120, 24 + (i * 8), 8, 8 };
+		source_brick_rect[i + 6] = { 0, 48 + (i * 8), 16, 8 };
+		source_brick_rect[i + 3] = { 0, 24 + (i * 8), 24, 8 };
+		source_brick_rect[i] = { 0, i * 8, 32, 8 };
 	}
 	source_brick_rect[12] = {  0, 72, 8, 32 };
 	source_brick_rect[13] = { 40, 72, 8, 32 };
