@@ -179,7 +179,8 @@ void ModuleScene::Print_All_Objects()
 	app->fontManagerModule->Write_On_Screen("HI:",                            160 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen(10000,                            185 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen(app->coins,                       360 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
-
+	
+	
 	if (app->city > 9) { app->fontManagerModule->Write_On_Screen(app->city, 152 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE); }
 	else { app->fontManagerModule->Write_On_Screen(app->city, 160 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE); }
 	
@@ -191,9 +192,9 @@ void ModuleScene::Print_All_Objects()
 		app->fontManagerModule->Write_On_Screen("lives:", 272 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 		app->fontManagerModule->Write_On_Screen(app->playerModule->player2->score, 360 * app->windowModule->scale, 214 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 		app->fontManagerModule->Write_On_Screen(app->playerModule->player2->lives, 320 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
-
-
-
+	}
+	else{
+		if (time_count->current_time % 2 == 0) { app->fontManagerModule->Write_On_Screen("PUSH BUTTON", 270 * app->windowModule->scale, 224 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE); }
 	}
 	// PRINT BACKGROUND
 	app->renderModule->Print(app->texturesModule->background_sprite, &background_source_rect, &background_rect);
