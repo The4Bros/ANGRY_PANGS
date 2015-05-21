@@ -155,5 +155,8 @@ void PowerUp::CurrentPowerUP()
 	case 6:
 		app->entityManagerModule->StopTime();
 		break;
+	case 7:
+		app->playerModule->player1->lives++;
+		break;
 	}
 }
