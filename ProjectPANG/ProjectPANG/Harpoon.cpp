@@ -22,6 +22,8 @@ void Harpoon::Shoot_Harpoon(unsigned int y, unsigned int x)
 
 void Harpoon::Shoot_Grapple(unsigned int y, unsigned int x)
 {
+	// y + 2
+
 	alive = true;
 	head_rect.x = x;
 	head_rect.y = y;
@@ -37,7 +39,7 @@ void Harpoon::Update()
 {
 	if (Check_Collision_Harpoon_Balloon()){ alive = false; return; }
 
-	if (source_index < 18) // HARPOON
+	if (source_index < 18) // HARPOON _____________________________________________________________________________
 	{
 		if (Check_Collision_Harpoon_Brick())
 		{
@@ -62,7 +64,7 @@ void Harpoon::Update()
 		}
 	}
 
-	else if (source_index < 20) // GRAPPLE
+	else if (source_index < 20) // GRAPPLE _____________________________________________________________________________
 	{
 		if (Check_Collision_Harpoon_Brick())
 		{
@@ -88,7 +90,7 @@ void Harpoon::Update()
 		}
 	}
 
-	else if (app->sceneModule->time_count->current_time <= update_counter - 5) // GRAPPLED
+	else if (app->sceneModule->time_count->current_time <= update_counter - 5) // GRAPPLED _______________________________
 	{
 		if (source_index < 23)
 		{
@@ -111,7 +113,7 @@ void Harpoon::Print()
 
 		if (source_index % 2 == 0)
 		{
-			for (int i = 0; i < body_rect.h / (16 * app->windowModule->scale); i++)
+			for (unsigned int i = 0; i < body_rect.h / (16 * app->windowModule->scale); i++)
 			{
 				app->renderModule->Print(app->texturesModule->harpoons_sprite, &app->entityManagerModule->harpoon_source_rect[7], &tmp);
 				tmp.y += 16 * app->windowModule->scale;
@@ -125,7 +127,7 @@ void Harpoon::Print()
 
 		else
 		{
-			for (int i = 0; i < body_rect.h / 16; i++)
+			for (unsigned int i = 0; i < body_rect.h / 16; i++)
 			{
 				app->renderModule->Print(app->texturesModule->harpoons_sprite, &app->entityManagerModule->harpoon_source_rect[7], &tmp);
 				tmp.y += 2 * app->windowModule->scale;
@@ -139,7 +141,7 @@ void Harpoon::Print()
 	{
 		tmp = { body_rect.x + (3 * app->windowModule->scale), body_rect.y, 3 * app->windowModule->scale, body_rect.h };
 
-		for (int i = 0; tmp.y < body_rect.y + body_rect.h; i++)
+		for (unsigned int i = 0; tmp.y < body_rect.y + body_rect.h; i++)
 		{
 			app->renderModule->Print(app->texturesModule->harpoons_sprite, &app->entityManagerModule->harpoon_source_rect[source_index + 3], &tmp);
 			tmp.y += 2 * app->windowModule->scale;
