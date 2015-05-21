@@ -5,8 +5,8 @@ Harpoon::Harpoon(Application* app) :
 		app(app),
 		update_counter(0),
 		alive(false),
-		head_rect({ 0, 0, 9 * app->windowModule->scale, 9 * app->windowModule->scale }),
-		body_rect({ 0, 0, 7 * app->windowModule->scale, 30 * app->windowModule->scale }) {}
+		head_rect({ 0, 0, 9 * app->windowModule->scale, 0 }),
+		body_rect({ 0, 0, 7 * app->windowModule->scale, 0 }) {}
 
 void Harpoon::Shoot_Harpoon(unsigned int y, unsigned int x)
 {
@@ -14,23 +14,21 @@ void Harpoon::Shoot_Harpoon(unsigned int y, unsigned int x)
 	head_rect.x = x;
 	head_rect.y = y;
 	head_rect.h = 9 * app->windowModule->scale;
-	body_rect.x = x + 1;
+	body_rect.x = x + app->windowModule->scale;
 	body_rect.y = y + (9 * app->windowModule->scale);
-	body_rect.h = 21 * app->windowModule->scale;
+	body_rect.h = 23 * app->windowModule->scale;
 	source_index = 16;
 }
 
 void Harpoon::Shoot_Grapple(unsigned int y, unsigned int x)
 {
-	// y + 2
-
 	alive = true;
 	head_rect.x = x;
 	head_rect.y = y;
 	head_rect.h = 6 * app->windowModule->scale;
-	body_rect.x = x + 1;
+	body_rect.x = x + app->windowModule->scale;
 	body_rect.y = y + (6 * app->windowModule->scale);
-	body_rect.h = 21 * app->windowModule->scale;
+	body_rect.h = 26 * app->windowModule->scale;
 	source_index = 18;
 }
 
@@ -56,7 +54,7 @@ void Harpoon::Update()
 				if (update_counter > 4)
 				{
 					update_counter = 0;
-					//source_index == 16 ? source_index = 17 : source_index = 16; *******************************************************
+					source_index = (source_index == 16 ? 17 : 16);
 				}
 				else{ update_counter++; }
 			}
@@ -82,7 +80,7 @@ void Harpoon::Update()
 				if (update_counter > 4)
 				{
 					update_counter = 0;
-					//source_index == 18 ? source_index = 19 : source_index = 18; ************************************************************
+					source_index = (source_index == 18? 19 : 18);
 				}
 				else{ update_counter++; }
 			}
@@ -90,7 +88,7 @@ void Harpoon::Update()
 		}
 	}
 
-	else if (app->sceneModule->time_count->current_time <= update_counter - 5) // GRAPPLED _______________________________
+	else if (app->sceneModule->time_count->current_time <= update_counter - 4) // GRAPPLED _______________________________
 	{
 		if (source_index < 23)
 		{
@@ -103,17 +101,17 @@ void Harpoon::Update()
 
 void Harpoon::Print()
 {
+	// PRINT HEAD
 	app->renderModule->Print(app->texturesModule->harpoons_sprite, &app->entityManagerModule->harpoon_source_rect[source_index], &head_rect);
 
-	SDL_Rect tmp;
-
+	// PRINT HARPOON/GRAPPLE BODY
 	if (source_index < 20)
 	{
-		tmp = { body_rect.x, body_rect.y, body_rect.w, 16 * app->windowModule->scale };
+		SDL_Rect tmp = { body_rect.x, body_rect.y, body_rect.w, 16 * app->windowModule->scale };
 
 		if (source_index % 2 == 0)
 		{
-			for (unsigned int i = 0; i < body_rect.h / (16 * app->windowModule->scale); i++)
+			while (tmp.y + (16 * app->windowModule->scale) <= body_rect.y + body_rect.h)
 			{
 				app->renderModule->Print(app->texturesModule->harpoons_sprite, &app->entityManagerModule->harpoon_source_rect[7], &tmp);
 				tmp.y += 16 * app->windowModule->scale;
@@ -127,21 +125,24 @@ void Harpoon::Print()
 
 		else
 		{
-			for (unsigned int i = 0; i < body_rect.h / 16; i++)
+			while (tmp.y + (16 * app->windowModule->scale) <= body_rect.y + body_rect.h)
 			{
-				app->renderModule->Print(app->texturesModule->harpoons_sprite, &app->entityManagerModule->harpoon_source_rect[7], &tmp);
-				tmp.y += 2 * app->windowModule->scale;
+				app->renderModule->Print(app->texturesModule->harpoons_sprite, &app->entityManagerModule->harpoon_source_rect[15], &tmp);
+				tmp.y += 16 * app->windowModule->scale;
 			}
-			tmp = {};
-			app->renderModule->Print(app->texturesModule->harpoons_sprite, &app->entityManagerModule->harpoon_source_rect[((body_rect.h / app->windowModule->scale) % 8) + 7], &tmp);
+			if (body_rect.h % (16 * app->windowModule->scale) > 0)
+			{
+				tmp.h = (body_rect.h / app->windowModule->scale) % 16;
+				app->renderModule->Print(app->texturesModule->harpoons_sprite, &app->entityManagerModule->harpoon_source_rect[((body_rect.h / app->windowModule->scale) % 8) + 6], &tmp);
+			}
 		}
 	}
-
+	// PRINT GRAPPLED BODY
 	else
 	{
-		tmp = { body_rect.x + (3 * app->windowModule->scale), body_rect.y, 3 * app->windowModule->scale, body_rect.h };
+		SDL_Rect tmp = { body_rect.x + (3 * app->windowModule->scale), body_rect.y, 3 * app->windowModule->scale, 2 * app->windowModule->scale };
 
-		for (unsigned int i = 0; tmp.y < body_rect.y + body_rect.h; i++)
+		while (tmp.y < body_rect.y + body_rect.h)
 		{
 			app->renderModule->Print(app->texturesModule->harpoons_sprite, &app->entityManagerModule->harpoon_source_rect[source_index + 3], &tmp);
 			tmp.y += 2 * app->windowModule->scale;

@@ -9,14 +9,14 @@ stair_update_counter(0),
 shielded(false),
 shoot_key_pressed(false),
 state(STILL),
-current_weapon(WEAPON_DOUBLE_HARPOON),
+current_weapon(WEAPON_HARPOON),
 hit_State(HIT_RIGHT_UP),
 current_stair(NULL)
 {
 	harpoon1 = new Harpoon(app);
 	harpoon2 = new Harpoon(app);
 
-	rect = { 8 * app->windowModule->scale, 168 * app->windowModule->scale, 32 * app->windowModule->scale, 32 * app->windowModule->scale };
+	rect = { 0, 0, 32 * app->windowModule->scale, 32 * app->windowModule->scale };
 
 	unsigned int y_coor = 0;
 	if (!player1) { y_coor = 32; }
@@ -190,7 +190,6 @@ void Player::DownTrigger()
 
 void Player::Shoot()
 {
-	
 	if (shoot_key_pressed || state == HIT) { return; }
 	shoot_key_pressed = true;
 
@@ -528,7 +527,7 @@ void Player::Reset(const unsigned int x, const unsigned int y)
 	shielded = false;
 	shoot_key_pressed = false;
 	state = STILL;
-	current_weapon = WEAPON_HARPOON;
+	current_weapon = WEAPON_DOUBLE_HARPOON;
 	hit_State = HIT_RIGHT_UP;
 	current_stair = NULL;
 	

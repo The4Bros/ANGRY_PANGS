@@ -195,12 +195,12 @@ update_status ModuleEntityManager::Update()
 
 bool ModuleEntityManager::CleanUp()
 {
-	app->entityManagerModule->bricks.ClearAll();
-	app->entityManagerModule->stairs.ClearAll();
-	app->entityManagerModule->balloons.ClearAll();
-	app->entityManagerModule->enemies.ClearAll();
-	app->entityManagerModule->particles.ClearAll();
-	app->entityManagerModule->powerups.ClearAll();
+	bricks.ClearAll();
+	stairs.ClearAll();
+	balloons.ClearAll();
+	enemies.ClearAll();
+	particles.ClearAll();
+	powerups.ClearAll();
 
 	return true;
 }
