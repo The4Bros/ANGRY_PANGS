@@ -167,12 +167,55 @@ bool PowerUp::Check_Collision_Players()
 
 bool PowerUp::Check_Collision_Harpoons() // if type > 15 -->> fruit-->> kill     JORDI
 {
-	if (rect.x < app->playerModule->player1->rect.x + app->playerModule->player1->rect.w - (8 * app->windowModule->scale)
+	/*if (rect.x < app->playerModule->player1->rect.x + app->playerModule->player1->rect.w - (8 * app->windowModule->scale)
 		&& rect.x + rect.w > app->playerModule->player1->rect.x + (8 * app->windowModule->scale)
 		&& rect.y < app->playerModule->player1->rect.y + app->playerModule->player1->rect.h - (8 * app->windowModule->scale)
 		&& rect.y + rect.h > app->playerModule->player1->rect.y + (8 * app->windowModule->scale))
 	{
 		return true; // no need to check player2 if player1 got hit
+	}*/
+	if (rect.x < app->playerModule->player1->harpoon1->head_rect.x + app->playerModule->player1->harpoon1->head_rect.w - (8 * app->windowModule->scale)
+		&& rect.x + rect.w >app->playerModule->player1->harpoon1->head_rect.x + (8 * app->windowModule->scale)
+		&& rect.y < app->playerModule->player1->harpoon1->head_rect.y + app->playerModule->player1->harpoon1->head_rect.h - (8 * app->windowModule->scale)
+		&& rect.y + rect.h > app->playerModule->player1->harpoon1->head_rect.y + (8 * app->windowModule->scale)
+		&& source_index > 15)
+	{
+		switch (source_index)
+		{
+			//piña
+		case 0:
+			app->playerModule->player1->score + 5000;
+			break;
+			//platano
+		case 1:
+			app->playerModule->player1->score + 2000;
+			break;
+			//sandia
+		case 2:
+			app->playerModule->player1->score + 4000;
+			break;
+			//berenjena
+		case 3:
+			app->playerModule->player1->score + 7000;
+			break;
+			//cereza
+		case 4:
+			app->playerModule->player1->score + 500;
+			break;
+			//naranja
+		case 5:
+			app->playerModule->player1->score + 3000;
+			break;
+			//limon
+		case 6:
+			app->playerModule->player1->score + 1000;
+			break;
+			//uva
+		case 7:
+			app->playerModule->player1->score + 6000;
+			break;
+		}
+		return true;
 	}
 }
 
