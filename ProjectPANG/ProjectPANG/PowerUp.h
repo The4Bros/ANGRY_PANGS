@@ -24,6 +24,7 @@ public:
 	void Print();
 	void Kill();
 	void Blink_PowerUp_Sprite();
+	void CurrentPowerUP();
 
 	bool Check_Collision_Bricks();
 	bool Check_Collision_Players();
