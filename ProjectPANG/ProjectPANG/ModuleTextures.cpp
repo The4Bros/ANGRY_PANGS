@@ -65,7 +65,7 @@ bool ModuleTextures::Init()
 	title_sprite = IMG_LoadTexture(app->renderModule->renderer, "images/Title.png");
 	if (title_sprite == NULL){ return false; }
 
-	level_complete = IMG_LoadTexture(app->renderModule->renderer, "images/SpriteEndStage/Stage1.png");
+	level_complete = IMG_LoadTexture(app->renderModule->renderer, "images/SpriteEndStage/AllFinalStagesOK.png");
 	if (level_complete == NULL){ return false; }
 	
 
