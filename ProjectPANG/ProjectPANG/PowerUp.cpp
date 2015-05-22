@@ -22,30 +22,30 @@ PowerUp::PowerUp(Application* app, int position_in_list, unsigned int type, unsi
 
 
 
-void PowerUp::Update()														 // jordi
+void PowerUp::Update()														
 {
 	if (rect.y < (197-13) * app->windowModule->scale && !Check_Collision_Bricks())
 	{
 		rect.y += app->windowModule->scale;
-		/*
-		if (Check_Collision_Players())
+		
+		if (app->playerModule->player1->Check_Collision_Player_Power_Up() || app->playerModule->player2->Check_Collision_Player_Power_Up())
 		{
 			Kill();
 		}
-		*/
+		
 	}
-	/*
-	else if (Check_Collision_Players())
+	
+	else if (app->playerModule->player1->Check_Collision_Player_Power_Up() || app->playerModule->player2->Check_Collision_Player_Power_Up())
 	{
 		Kill();
 	}
-	*/
+	
 	switch (source_index)
 	{
 		// update source index
 	}
 
-	if (app->sceneModule->time_count->current_time - power_up_initial_time >= 5)    Blink_PowerUp_Sprite();    //blink 
+	//if (app->sceneModule->time_count->current_time - power_up_initial_time >= 5)    Blink_PowerUp_Sprite();    //blink 
 }
 
 
