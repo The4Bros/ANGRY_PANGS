@@ -8,6 +8,7 @@ PowerUp::PowerUp(Application* app, int position_in_list, unsigned int type, unsi
 	this->position_in_list = position_in_list;
 	rect.x = x;
 	rect.y = y;
+	alpha = 0;
 	source_index = type;
 	Print();
 	power_up_initial_time = app->sceneModule->time_count->current_time;
@@ -83,7 +84,19 @@ bool PowerUp::Check_Collision_Bricks() // cambiar player por bricks ---------> A
 
 void PowerUp::Blink_PowerUp_Sprite() 
 {
+	if (app->texturesModule->powerUp_sprite) {
 
+		SDL_SetTextureAlphaMod(app->texturesModule->powerUp_sprite,alpha);  
+	}
+	if (alpha < SDL_ALPHA_OPAQUE) {
+		
+		alpha += 5;
+	}
+	// if alpha is above 255 clamp it
+	if (alpha >= SDL_ALPHA_OPAQUE) {
+		alpha = SDL_ALPHA_OPAQUE;
+		
+	}
 
 }
 

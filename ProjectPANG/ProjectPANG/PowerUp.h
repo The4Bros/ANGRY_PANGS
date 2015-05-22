@@ -8,7 +8,7 @@ class PowerUp
 {
 public:
 	Application* app;
-
+	int alpha;
 	SDL_Rect rect;
 	int position_in_list;
 	int power_up_initial_time;
