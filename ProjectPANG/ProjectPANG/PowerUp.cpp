@@ -8,6 +8,7 @@ PowerUp::PowerUp(Application* app, int position_in_list, unsigned int type, unsi
 	this->position_in_list = position_in_list;
 	rect.x = x;
 	rect.y = y;
+	alpha = 0;
 	source_index = type;
 	Print();
 	power_up_initial_time = app->sceneModule->time_count->current_time;
@@ -21,7 +22,7 @@ PowerUp::PowerUp(Application* app, int position_in_list, unsigned int type, unsi
 
 void PowerUp::Update()														 // jordi
 {
-	if (rect.y < 197 * app->windowModule->scale || !Check_Collision_Bricks())
+	/*if (rect.y < 197 * app->windowModule->scale || !Check_Collision_Bricks())
 	{
 		rect.y += app->windowModule->scale;
 		if (Check_Collision_Players())
@@ -39,7 +40,7 @@ void PowerUp::Update()														 // jordi
 		// update source index
 	}
 
-	if (power_up_max_time - power_up_initial_time <= 0)     ;    //blink 
+	if (power_up_max_time - power_up_initial_time <= 0)     ;    //blink */
 }
 
 
@@ -81,147 +82,21 @@ bool PowerUp::Check_Collision_Bricks() // cambiar player por bricks ---------> A
 	}
 }
 
-
-
-
-bool PowerUp::Check_Collision_Players()
-{
-					// -------------------------- COLLISIONS -----------------------------
-
-	if (rect.x < app->playerModule->player1->rect.x + app->playerModule->player1->rect.w - (8 * app->windowModule->scale)
-		&& rect.x + rect.w > app->playerModule->player1->rect.x + (8 * app->windowModule->scale)
-		&& rect.y < app->playerModule->player1->rect.y + app->playerModule->player1->rect.h - (8 * app->windowModule->scale)
-		&& rect.y + rect.h > app->playerModule->player1->rect.y + (8 * app->windowModule->scale))
-	{
-		switch (source_index)
-		{
-		case 0:
-			app->playerModule->player1->current_weapon = WEAPON_DOUBLE_HARPOON;
-			break;
-		case 1:
-			app->playerModule->player1->current_weapon = WEAPON_GRAPPLE;
-			break;
-		case 2:
-			app->playerModule->player1->current_weapon = WEAPON_DOUBLE_HARPOON;
-			break;
-		case 3:
-			app->entityManagerModule->Dynamite();
-			break;
-		case 4:
-			app->playerModule->player1->shielded = true;
-			break;
-		case 5:
-			app->entityManagerModule->SlowTime();
-			break;
-		case 6:
-			app->entityManagerModule->StopTime();
-			break;
-		case 7:
-			app->playerModule->player1->lives++;
-			break;
-		}
-		return true; // no need to check player2 if player1 got hit
-	}
-
-	if (app->playerModule->player2 != NULL)
-	{
-		if (rect.x < app->playerModule->player2->rect.x + app->playerModule->player2->rect.w - (8 * app->windowModule->scale)
-			&& rect.x + rect.w > app->playerModule->player2->rect.x + (8 * app->windowModule->scale)
-			&& rect.y < app->playerModule->player2->rect.y + app->playerModule->player2->rect.h - (8 * app->windowModule->scale)
-			&& rect.y + rect.h > app->playerModule->player2->rect.y + (8 * app->windowModule->scale))
-		{
-			switch (source_index)
-			{
-			case 0:
-				app->playerModule->player2->current_weapon = WEAPON_DOUBLE_HARPOON;
-				break;
-			case 1:
-				app->playerModule->player2->current_weapon = WEAPON_GRAPPLE;
-				break;
-			case 2:
-				app->playerModule->player2->current_weapon = WEAPON_DOUBLE_HARPOON;
-				break;
-			case 3:
-				app->entityManagerModule->Dynamite();
-				break;
-			case 4:
-				app->playerModule->player2->shielded = true;
-				break;
-			case 5:
-				app->entityManagerModule->SlowTime();
-				break;
-			case 6:
-				app->entityManagerModule->StopTime();
-				break;
-			case 7:
-				app->playerModule->player2->lives++;
-				break;
-			}
-			return true;
-		}
-	}
-
-					// -------------------------- COLLISIONS -----------------------------
-// --------------------------- Add powerUp to the player ---------------------------- done
-}
-
-bool PowerUp::Check_Collision_Harpoons() // if type > 15 -->> fruit-->> kill     JORDI
-{
-	/*if (rect.x < app->playerModule->player1->rect.x + app->playerModule->player1->rect.w - (8 * app->windowModule->scale)
-		&& rect.x + rect.w > app->playerModule->player1->rect.x + (8 * app->windowModule->scale)
-		&& rect.y < app->playerModule->player1->rect.y + app->playerModule->player1->rect.h - (8 * app->windowModule->scale)
-		&& rect.y + rect.h > app->playerModule->player1->rect.y + (8 * app->windowModule->scale))
-	{
-		return true; // no need to check player2 if player1 got hit
-	}*/
-	if (rect.x < app->playerModule->player1->harpoon1->head_rect.x + app->playerModule->player1->harpoon1->head_rect.w - (8 * app->windowModule->scale)
-		&& rect.x + rect.w >app->playerModule->player1->harpoon1->head_rect.x + (8 * app->windowModule->scale)
-		&& rect.y < app->playerModule->player1->harpoon1->head_rect.y + app->playerModule->player1->harpoon1->head_rect.h - (8 * app->windowModule->scale)
-		&& rect.y + rect.h > app->playerModule->player1->harpoon1->head_rect.y + (8 * app->windowModule->scale)
-		&& source_index > 15)
-	{
-		switch (source_index)
-		{
-			//piña
-		case 0:
-			app->playerModule->player1->score + 5000;
-			break;
-			//platano
-		case 1:
-			app->playerModule->player1->score + 2000;
-			break;
-			//sandia
-		case 2:
-			app->playerModule->player1->score + 4000;
-			break;
-			//berenjena
-		case 3:
-			app->playerModule->player1->score + 7000;
-			break;
-			//cereza
-		case 4:
-			app->playerModule->player1->score + 500;
-			break;
-			//naranja
-		case 5:
-			app->playerModule->player1->score + 3000;
-			break;
-			//limon
-		case 6:
-			app->playerModule->player1->score + 1000;
-			break;
-			//uva
-		case 7:
-			app->playerModule->player1->score + 6000;
-			break;
-		}
-		return true;
-	}
-}
-
 void PowerUp::Blink_PowerUp_Sprite() 
 {
+	if (app->texturesModule->powerUp_sprite) {
 
+		SDL_SetTextureAlphaMod(app->texturesModule->powerUp_sprite,alpha);  
+	}
+	if (alpha < SDL_ALPHA_OPAQUE) {
+		
+		alpha += 5;
+	}
+	// if alpha is above 255 clamp it
+	if (alpha >= SDL_ALPHA_OPAQUE) {
+		alpha = SDL_ALPHA_OPAQUE;
+		
+	}
 
 }
 

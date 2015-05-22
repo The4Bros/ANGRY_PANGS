@@ -211,3 +211,55 @@ bool Harpoon::Check_Collision_Harpoon_Brick()
 	}
 	return false;
 }
+
+bool Harpoon::Check_Collision_Harpoon_Power_Up() // if type > 15 -->> fruit-->> kill     
+{
+	SDL_Rect tmp_rect;
+	for (unsigned int i = 0; i < app->entityManagerModule->powerups.Count(); i++)
+	{
+		tmp_rect = (*app->entityManagerModule->powerups.at(i))->rect;
+		if (head_rect.x + head_rect.w >= tmp_rect.x // Fruit left
+			&& tmp_rect.x + tmp_rect.w >= head_rect.x // Fruit right
+			&& tmp_rect.y + tmp_rect.h >= head_rect.y // Fruit up
+			&& head_rect.y + head_rect.h + body_rect.h >= tmp_rect.y //Fruit down
+			&& (*app->entityManagerModule->powerups.at(i))->source_index > 15) // Only Fruit hits w/ harpoon
+		{
+			switch ((*app->entityManagerModule->powerups.at(i))->source_index)
+			{
+				//piña
+			case 0:
+				app->playerModule->player1->score + 5000;
+				break;
+				//platano
+			case 1:
+				app->playerModule->player1->score + 2000;
+				break;
+				//sandia
+			case 2:
+				app->playerModule->player1->score + 4000;
+				break;
+				//berenjena
+			case 3:
+				app->playerModule->player1->score + 7000;
+				break;
+				//cereza
+			case 4:
+				app->playerModule->player1->score + 500;
+				break;
+				//naranja
+			case 5:
+				app->playerModule->player1->score + 3000;
+				break;
+				//limon
+			case 6:
+				app->playerModule->player1->score + 1000;
+				break;
+				//uva
+			case 7:
+				app->playerModule->player1->score + 6000;
+				break;
+			}
+			return true;
+		}
+	}
+}

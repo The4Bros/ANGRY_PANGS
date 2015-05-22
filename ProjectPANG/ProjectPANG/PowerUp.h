@@ -8,7 +8,7 @@ class PowerUp
 {
 public:
 	Application* app;
-
+	int alpha;
 	SDL_Rect rect;
 	int position_in_list;
 	int power_up_initial_time;
@@ -26,9 +26,7 @@ public:
 	void Blink_PowerUp_Sprite();
 
 	bool Check_Collision_Bricks();
-	bool Check_Collision_Players();
-	bool Check_Collision_Harpoons();
-
+	
 };
 
 #endif
