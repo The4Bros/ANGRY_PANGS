@@ -627,3 +627,47 @@ bool Player::Check_Collision_Player_Stair()
 	}
 	return false;
 }
+
+bool Player::Check_Collision_Player_Power_Up()
+{
+	SDL_Rect power_rect;
+	for (unsigned int i = 0; i < app->entityManagerModule->powerups.Count(); i++)
+	{
+		power_rect = (*app->entityManagerModule->powerups.at(i))->rect;
+
+		if (rect.x + app->windowModule->scale <= power_rect.x + power_rect.w
+			&& rect.x + rect.w + app->windowModule->scale >= power_rect.x
+			&& rect.y + app->windowModule->scale <= power_rect.y + power_rect.h
+			&& rect.y + rect.h + app->windowModule->scale >= power_rect.y)
+		{
+			switch ((*app->entityManagerModule->powerups.at(i))->source_index)
+			{
+			case 0:
+				app->playerModule->player1->current_weapon = WEAPON_DOUBLE_HARPOON;
+				break;
+			case 1:
+				app->playerModule->player1->current_weapon = WEAPON_GRAPPLE;
+				break;
+			case 2:
+				app->playerModule->player1->current_weapon = WEAPON_DOUBLE_HARPOON;
+				break;
+			case 3:
+				app->entityManagerModule->Dynamite();
+				break;
+			case 4:
+				app->playerModule->player1->shielded = true;
+				break;
+			case 5:
+				app->entityManagerModule->SlowTime();
+				break;
+			case 6:
+				app->entityManagerModule->StopTime();
+				break;
+			case 7:
+				app->playerModule->player1->lives++;
+				break;
+			}
+			return true;
+		}
+	}
+}

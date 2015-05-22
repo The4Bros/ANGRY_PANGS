@@ -26,9 +26,7 @@ public:
 	void Blink_PowerUp_Sprite();
 
 	bool Check_Collision_Bricks();
-	bool Check_Collision_Players();
 	
-
 };
 
 #endif
