@@ -8,11 +8,13 @@ PowerUp::PowerUp(Application* app, int position_in_list, unsigned int type, unsi
 	this->position_in_list = position_in_list;
 	rect.x = x;
 	rect.y = y;
+	rect.w = 16;
+	rect.h = 16;
 	alpha = 0;
-	source_index = type;
+	this->source_index = type;
 	Print();
 	power_up_initial_time = app->sceneModule->time_count->current_time;
-
+	power_up_max_time = 5;
 }
 
 
@@ -22,25 +24,28 @@ PowerUp::PowerUp(Application* app, int position_in_list, unsigned int type, unsi
 
 void PowerUp::Update()														 // jordi
 {
-	/*if (rect.y < 197 * app->windowModule->scale || !Check_Collision_Bricks())
+	if (rect.y < 197 * app->windowModule->scale || !Check_Collision_Bricks())
 	{
 		rect.y += app->windowModule->scale;
+		/*
 		if (Check_Collision_Players())
 		{
 			Kill();
 		}
+		*/
 	}
+	/*
 	else if (Check_Collision_Players())
 	{
 		Kill();
 	}
-
+	*/
 	switch (source_index)
 	{
 		// update source index
 	}
 
-	if (power_up_max_time - power_up_initial_time <= 0)     ;    //blink */
+	if (power_up_max_time - power_up_initial_time <= 0)    Blink_PowerUp_Sprite();    //blink 
 }
 
 
@@ -84,10 +89,10 @@ bool PowerUp::Check_Collision_Bricks() // cambiar player por bricks ---------> A
 
 void PowerUp::Blink_PowerUp_Sprite() 
 {
-	if (app->texturesModule->powerUp_sprite) {
+	
 
-		SDL_SetTextureAlphaMod(app->texturesModule->powerUp_sprite,alpha);  
-	}
+	SDL_SetTextureAlphaMod(app->texturesModule->powerUp_sprite,alpha);  
+	
 	if (alpha < SDL_ALPHA_OPAQUE) {
 		
 		alpha += 5;

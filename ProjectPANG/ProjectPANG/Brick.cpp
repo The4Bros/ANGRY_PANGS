@@ -59,6 +59,7 @@ void Brick::Print()
 
 void Brick::Hit()
 {
+	app->entityManagerModule->powerups.push_back(new PowerUp(app, app->entityManagerModule->powerups.Count(), rand() % 16, rect.x, rect.y));
 	if (type < 16)
 	{
 		app->entityManagerModule->particles.push_back(new Particles(app, app->entityManagerModule->particles.Count(), type + 14, rect.x, rect.y));
@@ -69,7 +70,6 @@ void Brick::Hit()
 		}
 		app->entityManagerModule->bricks.Delete_Element_At(position_in_list);
 
-		
 	}
 }
 
