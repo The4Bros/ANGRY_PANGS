@@ -140,7 +140,7 @@ void Harpoon::Print()
 	// PRINT GRAPPLED BODY
 	else
 	{
-		SDL_Rect tmp = { body_rect.x + (3 * app->windowModule->scale), body_rect.y, 3 * app->windowModule->scale, 2 * app->windowModule->scale };
+		SDL_Rect tmp = { body_rect.x + (2 * app->windowModule->scale), body_rect.y, 3 * app->windowModule->scale, 2 * app->windowModule->scale };
 
 		while (tmp.y < body_rect.y + body_rect.h)
 		{

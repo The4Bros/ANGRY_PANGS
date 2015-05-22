@@ -18,8 +18,7 @@ current_stair(NULL)
 
 	rect = { 0, 0, 32 * app->windowModule->scale, 32 * app->windowModule->scale };
 
-	unsigned int y_coor = 0;
-	if (!player1) { y_coor = 32; }
+	unsigned int y_coor = (player1? 0 : 32);
 
 	for (unsigned int i = 0; i < 23; i++) { source_rect[i] = { i * 32, y_coor, 32, 32 }; }
 	source_rect[23] = { 736, y_coor, 51, 32 };
@@ -500,13 +499,19 @@ void Player::Update()
 				}
 				break;
 			}
-
-			update_counter++;
-
-
 		}
 
-		else { shoot_update_counter++; }
+		else
+		{
+			shoot_update_counter++;
+
+			if (shoot_update_counter == 30)
+			{
+				rect.x -= 10 * app->windowModule->scale;
+				rect.w = 51 * app->windowModule->scale;
+				source_index += 2;
+			}
+		}
 
 		return;
 	}
@@ -518,6 +523,7 @@ void Player::Reset(const unsigned int x, const unsigned int y)
 {
 	rect.x = x * app->windowModule->scale;
 	rect.y = y * app->windowModule->scale;
+	rect.w = 32 * app->windowModule->scale;
 
 	harpoon1->alive = false;
 	harpoon2->alive = false;
@@ -603,7 +609,7 @@ bool Player::Check_Collision_Player_Stair()
 				if (rect.y + (rect.h / 2) >= stair_rect.y && rect.y + (rect.h / 2) <= stair_rect.y + stair_rect.h) // player close enough to stairs
 				{
 					current_stair = *app->entityManagerModule->stairs.at(i);
-					rect.x = current_stair->rect.x - app->windowModule->scale;
+					rect.x = current_stair->rect.x - (2 * app->windowModule->scale);
 					stair_update_counter = 0;
 					update_counter = 0;
 					return true;
@@ -617,7 +623,7 @@ bool Player::Check_Collision_Player_Stair()
 				if (rect.y + (rect.h / 2) >= stair_rect.y && rect.y + (rect.h / 2) <= stair_rect.y + stair_rect.h) // player close enough to stairs
 				{
 					current_stair = *app->entityManagerModule->stairs.at(i);
-					rect.x = current_stair->rect.x - app->windowModule->scale;
+					rect.x = current_stair->rect.x - (2 * app->windowModule->scale);
 					stair_update_counter = 0;
 					update_counter = 0;
 					return true;

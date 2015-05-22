@@ -43,9 +43,6 @@ void PowerUp::Update()
 }
 
 
-
-
-
 void PowerUp::Print()
 {
 	if (update_counter < 300)
