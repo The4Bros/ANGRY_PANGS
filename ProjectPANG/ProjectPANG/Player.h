@@ -78,7 +78,6 @@ public:
 	bool Check_Collision_Player_Brick_Horizontal();
 	bool Check_Collision_Player_Verticals();
 	bool Check_Collision_Player_Stair();
-	bool Check_Collision_Player_Power_Up();
 
 };
 #endif

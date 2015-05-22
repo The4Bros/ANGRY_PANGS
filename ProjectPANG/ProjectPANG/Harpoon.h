@@ -27,9 +27,6 @@ public:
 
 	bool Check_Collision_Harpoon_Balloon();
 	bool Check_Collision_Harpoon_Brick();
-	bool Check_Collision_Harpoon_Power_Up();
-
-
 
 };
 #endif

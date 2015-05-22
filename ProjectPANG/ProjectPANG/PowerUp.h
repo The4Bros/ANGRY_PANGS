@@ -8,11 +8,9 @@ class PowerUp
 {
 public:
 	Application* app;
-	int alpha;
+
 	SDL_Rect rect;
 	int position_in_list;
-	int power_up_initial_time;
-	int power_up_max_time;
 	bool falling;
 
 	unsigned int quantity, source_index, update_counter;
@@ -23,10 +21,11 @@ public:
 	void Update();
 	void Print();
 	void Kill();
-	void Blink_PowerUp_Sprite();
 
 	bool Check_Collision_Bricks();
-	
+	bool Check_Collision_Player(Player* player);
+	bool Check_Collision_Harpoons(SDL_Rect head_rect);
 };
 
 #endif
+
