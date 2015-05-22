@@ -179,7 +179,12 @@ void Balloon::Print()
 void Balloon::Hit()
 {
 	app->entityManagerModule->particles.push_back(new Particles(app, app->entityManagerModule->particles.Count(), int(type), rect.x, rect.y));
-	app->entityManagerModule->powerups.push_back(new PowerUp(app, app->entityManagerModule->powerups.Count(), rand() % 16, rect.x, rect.y)); // Power Up is created
+
+	if (rand() % 3 == 0)
+	{
+		app->entityManagerModule->powerups.push_back(new PowerUp(app, app->entityManagerModule->powerups.Count(), rand() % 14, rect.x, rect.y)); // Power Up is created
+	}
+	
 	if (type < 9)
 	{
 		Reduce_Balloon_Size();

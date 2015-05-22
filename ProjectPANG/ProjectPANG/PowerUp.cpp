@@ -29,7 +29,7 @@ void PowerUp::Update()
 		}
 	}
 
-	if (rect.y < 184 * app->windowModule->scale && !Check_Collision_Bricks())
+	if (rect.y < 184 * app->windowModule->scale)// && !Check_Collision_Bricks())
 	{
 		rect.y += app->windowModule->scale;
 	}
@@ -100,7 +100,7 @@ bool PowerUp::Check_Collision_Player(Player* player)
 		switch (source_index)
 		{
 		case 0:
-			player->current_weapon = WEAPON_DOUBLE_HARPOON;
+			//player->current_weapon = WEAPON_DOUBLE_HARPOON;
 			break;
 		case 1:
 			player->current_weapon = WEAPON_GRAPPLE;

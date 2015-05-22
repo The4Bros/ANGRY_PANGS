@@ -21,8 +21,8 @@ current_stair(NULL)
 	unsigned int y_coor = (player1? 0 : 32);
 
 	for (unsigned int i = 0; i < 23; i++) { source_rect[i] = { i * 32, y_coor, 32, 32 }; }
-	source_rect[23] = { 736, y_coor, 51, 32 };
-	source_rect[24] = { 787, y_coor, 51, 32 };
+	source_rect[23] = { 736, y_coor, 41, 32 };
+	source_rect[24] = { 777, y_coor, 41, 32 };
 }
 
 
@@ -422,7 +422,7 @@ void Player::Update()
 				else
 				{
 					hit_State = HIT_LEFT_DOWN;
-
+					source_index = 23;
 					player_gravity = 0;
 					ticks = 1;
 					//rect.y = height - ((6 * app->windowModule->scale) + ((update_counter * update_counter) / 9));
@@ -447,6 +447,7 @@ void Player::Update()
 				{
 					hit_State = HIT_LEFT_UP;
 					ticks = 1;
+					source_index = 23;
 					player_gravity=player_gravity-3;
 					//rect.y = height + ((6 * app->windowModule->scale) -  ((update_counter * update_counter) / 9));
 				}
@@ -466,7 +467,7 @@ void Player::Update()
 				else
 				{
 					hit_State = HIT_RIGHT_DOWN;
-
+					source_index = 24;
 					player_gravity = 0;
 					ticks = 1;
 					
@@ -494,6 +495,7 @@ void Player::Update()
 				{
 					hit_State = HIT_RIGHT_UP;
 					ticks = 1;
+					source_index = 24;
 					player_gravity = player_gravity - 3;;
 					//rect.y = height + ((app->windowModule->scale) *  ((update_counter * update_counter) / 10));
 				}
@@ -507,8 +509,8 @@ void Player::Update()
 
 			if (shoot_update_counter == 30)
 			{
-				rect.x -= 10 * app->windowModule->scale;
-				rect.w = 51 * app->windowModule->scale;
+				rect.x -= 5 * app->windowModule->scale;
+				rect.w = 41 * app->windowModule->scale;
 				source_index += 2;
 			}
 		}
@@ -533,11 +535,9 @@ void Player::Reset(const unsigned int x, const unsigned int y)
 	shielded = false;
 	shoot_key_pressed = false;
 	state = STILL;
-	current_weapon = WEAPON_DOUBLE_HARPOON;
+	current_weapon = WEAPON_HARPOON;
 	hit_State = HIT_RIGHT_UP;
 	current_stair = NULL;
-	
-	
 }
 
 
