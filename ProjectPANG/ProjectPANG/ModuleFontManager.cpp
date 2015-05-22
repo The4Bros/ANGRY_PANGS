@@ -20,7 +20,7 @@ bool ModuleFontManager::Init()
 void ModuleFontManager::Write_On_Screen(unsigned int value, unsigned int x, unsigned int y, unsigned int size, Text_Color text_color)
 {
 	// convert number to string
-	char tmp[20];
+	char tmp[24];
 	sprintf_s(tmp, 20, "%d", value);
 
 	// call Write on Screen with new string

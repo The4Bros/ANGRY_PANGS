@@ -41,18 +41,14 @@ update_status ModuleStageEnd::Update()
 {
 	app->audioModule->StopMusic();
 
-	return CHANGE_TO_PLAY;
-
-
-
-
-
 	// -------------------------------------------------------------------------------------------------------------------------------------------
 
 	if (ticks > 180)
 	{
-		if ((app->stage - 1) % 3 == 0) { return CHANGE_TO_PLAY; } // planne module if travelng to new city
-		return CHANGE_TO_MAP_PLANE;
+		return CHANGE_TO_PLAY;
+		/*
+		if (app->stage > 1 && (app->stage - 1) % 3 == 0) { return CHANGE_TO_PLAY; } // planne module if travelng to new city
+		return CHANGE_TO_MAP_PLANE;*/
 	}
 
 	// Update push_button_shown state

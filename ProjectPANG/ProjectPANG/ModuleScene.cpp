@@ -62,6 +62,10 @@ update_status ModuleScene::Update()
 			if (update_counter > 180)
 			{
 				app->stage++;
+				if (app->stage % 3 == 1)
+				{
+					app->city++;
+				}
 				stage_cleared = false;
 				return CHANGE_TO_STAGE_END;
 			}
