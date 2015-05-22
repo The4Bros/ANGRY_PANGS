@@ -80,17 +80,18 @@ update_status ModuleStageEnd::Update()
 		// print: (app->stage - 1) / 10
 	}
 	// print: (app->stage - 1) % 10
-	// print: STAGE
-	// print: TIME BONUS 200 PTS.
+	app->fontManagerModule->Write_On_Screen("stage", 176 * app->windowModule->scale, 144 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen(app->stage, 168 * app->windowModule->scale, 144 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen("TIME BONUS :", 104* app->windowModule->scale, 168 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 
 	if (ticks > 90)
 	{
-		// print: NEXT EXTEND 100000 PTS.
+		app->fontManagerModule->Write_On_Screen("NEXT EXTEND :", 104 * app->windowModule->scale, 184 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	}
 
 	if (push_button_shown)
 	{
-		// print: PUSH BUTTON
+		if (ticks % 60 < 30) { app->fontManagerModule->Write_On_Screen("PUSH BUTTON", 270 * app->windowModule->scale, 224 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE); }
 	}
 
 	ticks++;
