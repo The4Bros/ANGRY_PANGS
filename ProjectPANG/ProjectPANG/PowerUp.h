@@ -15,7 +15,7 @@ public:
 	int power_up_max_time;
 	bool falling;
 
-	unsigned int quantity, source_index;
+	unsigned int quantity, source_index, update_counter;
 
 	PowerUp(Application* app, int position_in_list, unsigned int type, unsigned int x, unsigned int y);
 	~PowerUp(){}

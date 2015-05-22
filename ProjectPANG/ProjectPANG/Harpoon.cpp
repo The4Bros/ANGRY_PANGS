@@ -228,35 +228,35 @@ bool Harpoon::Check_Collision_Harpoon_Power_Up() // if type > 15 -->> fruit-->> 
 			{
 				//piña
 			case 0:
-				app->playerModule->player1->score + 5000;
+				app->playerModule->player1->score += 5000;
 				break;
 				//platano
 			case 1:
-				app->playerModule->player1->score + 2000;
+				app->playerModule->player1->score += 2000;
 				break;
 				//sandia
 			case 2:
-				app->playerModule->player1->score + 4000;
+				app->playerModule->player1->score += 4000;
 				break;
 				//berenjena
 			case 3:
-				app->playerModule->player1->score + 7000;
+				app->playerModule->player1->score += 7000;
 				break;
 				//cereza
 			case 4:
-				app->playerModule->player1->score + 500;
+				app->playerModule->player1->score += 500;
 				break;
 				//naranja
 			case 5:
-				app->playerModule->player1->score + 3000;
+				app->playerModule->player1->score += 3000;
 				break;
 				//limon
 			case 6:
-				app->playerModule->player1->score + 1000;
+				app->playerModule->player1->score += 1000;
 				break;
 				//uva
 			case 7:
-				app->playerModule->player1->score + 6000;
+				app->playerModule->player1->score += 6000;
 				break;
 			}
 			return true;

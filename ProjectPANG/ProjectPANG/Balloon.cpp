@@ -444,7 +444,6 @@ void Balloon::Check_Collision_Balloon_Bricks()
 						}
 					}
 				}
-				return;
 			}
 		}
 	}
