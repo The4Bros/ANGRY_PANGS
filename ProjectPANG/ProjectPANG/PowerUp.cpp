@@ -21,7 +21,7 @@ PowerUp::PowerUp(Application* app, int position_in_list, unsigned int type, unsi
 
 void PowerUp::Update()														 // jordi
 {
-	if (rect.y < 197 * app->windowModule->scale || !Check_Collision_Bricks())
+	/*if (rect.y < 197 * app->windowModule->scale || !Check_Collision_Bricks())
 	{
 		rect.y += app->windowModule->scale;
 		if (Check_Collision_Players())
@@ -39,7 +39,7 @@ void PowerUp::Update()														 // jordi
 		// update source index
 	}
 
-	if (power_up_max_time - power_up_initial_time <= 0)     ;    //blink 
+	if (power_up_max_time - power_up_initial_time <= 0)     ;    //blink */
 }
 
 
