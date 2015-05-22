@@ -14,7 +14,7 @@ PowerUp::PowerUp(Application* app, int position_in_list, unsigned int type, unsi
 	this->source_index = type;
 	Print();
 	power_up_initial_time = app->sceneModule->time_count->current_time;
-	power_up_max_time = power_up_initial_time+5;
+
 }
 
 
@@ -24,7 +24,7 @@ PowerUp::PowerUp(Application* app, int position_in_list, unsigned int type, unsi
 
 void PowerUp::Update()														 // jordi
 {
-	if (rect.y < 197 * app->windowModule->scale || !Check_Collision_Bricks())
+	if (rect.y < (197-13) * app->windowModule->scale && !Check_Collision_Bricks())
 	{
 		rect.y += app->windowModule->scale;
 		/*
@@ -45,7 +45,7 @@ void PowerUp::Update()														 // jordi
 		// update source index
 	}
 
-	if (power_up_max_time - power_up_initial_time <= 0)    Blink_PowerUp_Sprite();    //blink 
+	if (app->sceneModule->time_count->current_time - power_up_initial_time >= 5)    Blink_PowerUp_Sprite();    //blink 
 }
 
 
