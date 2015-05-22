@@ -27,7 +27,7 @@ public:
 
 	bool Check_Collision_Bricks();
 	bool Check_Collision_Players();
-	bool Check_Collision_Harpoons();
+	
 
 };
 
