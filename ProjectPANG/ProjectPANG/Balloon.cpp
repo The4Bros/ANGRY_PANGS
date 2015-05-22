@@ -342,103 +342,110 @@ void Balloon::Check_Collision_Balloon_Bricks()
 	for (unsigned int i = 0; i < app->entityManagerModule->bricks.Count(); i++)
 	{
 		tmp_rect = (*app->entityManagerModule->bricks.at(i))->rect;
-
-		//Closest point to brick
-		int closest_x, closest_y;
-
-		//closest_x offset
-		if (rect.x < tmp_rect.x){ closest_x = tmp_rect.x; }
-		else if (rect.x > tmp_rect.x + tmp_rect.w){ closest_x = tmp_rect.x + tmp_rect.w; }
-		else{ closest_x = rect.x; }
-
-		//closest_y offset
-		if (rect.y < tmp_rect.y){ closest_y = tmp_rect.y; }
-		else if (rect.y > tmp_rect.y + tmp_rect.h){ closest_y = tmp_rect.y + tmp_rect.h; }
-		else{ closest_y = rect.y; }
-
-		//Check distance between points
-		if ((rect.h * rect.h) > ((closest_x - rect.x) * (closest_x - rect.x)) + ((closest_y - rect.y) * (closest_y - rect.y)))
+		
+		if (rect.x < tmp_rect.x + tmp_rect.w
+			&& rect.x + rect.w > tmp_rect.x
+			&& rect.y < tmp_rect.y + tmp_rect.h
+			&& rect.y + rect.h > tmp_rect.y)
 		{
-			if (tmp_rect.x + (tmp_rect.w / 2) > rect.x + (rect.w / 2)) // brick to the right
+			//Closest point to brick
+			int closest_x, closest_y;
+
+			//closest_x offset
+			if (rect.x < tmp_rect.x){ closest_x = tmp_rect.x; }
+			else if (rect.x > tmp_rect.x + tmp_rect.w){ closest_x = tmp_rect.x + tmp_rect.w; }
+			else{ closest_x = rect.x; }
+
+			//closest_y offset
+			if (rect.y < tmp_rect.y){ closest_y = tmp_rect.y; }
+			else if (rect.y > tmp_rect.y + tmp_rect.h){ closest_y = tmp_rect.y + tmp_rect.h; }
+			else{ closest_y = rect.y; }
+
+
+			//Check distance between points
+			if ((rect.h * rect.w) > ((closest_x - rect.x) * (closest_x - rect.x)) + ((closest_y - rect.y) * (closest_y - rect.y)))
 			{
-				if (tmp_rect.y + (tmp_rect.h / 2) < rect.y + (rect.h / 2)) // brick above
+				if (tmp_rect.x + (tmp_rect.w / 2) > rect.x + (rect.w / 2)) // brick to the right
 				{
-					if (rect.y + (rect.h / 2) - tmp_rect.y + (tmp_rect.h / 2) > tmp_rect.x + (tmp_rect.w / 2) - rect.x + (rect.w / 2))
+					if (tmp_rect.y + (tmp_rect.h / 2) < rect.y + (rect.h / 2)) // brick above
 					{
-						//horizontal collision -> balloon moves left---------------------------
-						state_balloon_H = BALLOON_LEFT;
+						if (rect.y + (rect.h / 2) - tmp_rect.y + (tmp_rect.h / 2) > tmp_rect.x + (tmp_rect.w / 2) - rect.x + (rect.w / 2))
+						{
+							//horizontal collision -> balloon moves left---------------------------
+							state_balloon_H = BALLOON_LEFT;
+						}
+						else
+						{
+							//vertical collision -> balloon moves down -----------------------------
+							state_balloon_V = BALLOON_DOWN;
+
+							gravity = 12;
+							ticks = 1;
+
+						}
 					}
-					else
+					else // brick bellow
 					{
-						//vertical collision -> balloon moves down -----------------------------
-						state_balloon_V = BALLOON_DOWN;
+						if (tmp_rect.y + (tmp_rect.h / 2) - rect.y + (rect.h / 2) > tmp_rect.x + (tmp_rect.w / 2) - rect.x + (rect.w / 2))
+						{
+							//horizontal collision -> balloon moves left-----------------------------
+							state_balloon_H = BALLOON_LEFT;
+						}
+						else
+						{
+							//vertical collision -> balloon moves up -----------------------------
+							state_balloon_V = BALLOON_UP;
 
-						gravity = 12;
-						ticks = 1;
+							if (type < 3) gravity = 6;
+							else if (type < 6) gravity = 5;
+							else if (type < 9) gravity = 4;
+							else gravity = 2;
 
+							ticks = 1;
+						}
 					}
 				}
-				else // brick bellow
+				else // brick to the left
 				{
-					if (tmp_rect.y + (tmp_rect.h / 2) - rect.y + (rect.h / 2) > tmp_rect.x + (tmp_rect.w / 2) - rect.x + (rect.w / 2))
+					if (tmp_rect.y + (tmp_rect.h / 2) < rect.y + (rect.h / 2)) // brick above
 					{
-						//horizontal collision -> balloon moves left-----------------------------
-						state_balloon_H = BALLOON_LEFT;
+						if (rect.y + (rect.h / 2) - tmp_rect.y + (tmp_rect.h / 2) > rect.x + (rect.w / 2) - tmp_rect.x + (tmp_rect.w / 2))
+						{
+							//horizontal collision -> balloon moves right-----------------------------
+							state_balloon_H = BALLOON_RIGHT;
+						}
+						else
+						{
+							//vertical collision -> balloon moves down -----------------------------
+							state_balloon_V = BALLOON_DOWN;
+
+							gravity = 3;
+							ticks = 1;
+						}
 					}
-					else
+					else // brick bellow
 					{
-						//vertical collision -> balloon moves up -----------------------------
-						state_balloon_V = BALLOON_UP;
+						if (tmp_rect.y + (tmp_rect.h / 2) - rect.y + (rect.h / 2) > rect.x + (rect.w / 2) - tmp_rect.x + (tmp_rect.w / 2))
+						{
+							//horizontal collision -> balloon moves right-----------------------------
+							state_balloon_H = BALLOON_RIGHT;
+						}
+						else
+						{
+							//vertical collision -> balloon moves up -----------------------------
+							state_balloon_V = BALLOON_UP;
 
-						if (type < 3) gravity = 6;
-						else if (type < 6) gravity = 5;
-						else if (type < 9) gravity = 4;
-						else gravity = 2;
+							if (type < 3) gravity = 6;
+							else if (type < 6) gravity = 5;
+							else if (type < 9) gravity = 4;
+							else gravity = 2;
 
-						ticks = 1;
+							ticks = 1;
+						}
 					}
 				}
+				return;
 			}
-			else // brick to the left
-			{
-				if (tmp_rect.y + (tmp_rect.h / 2) < rect.y + (rect.h / 2)) // brick above
-				{
-					if (rect.y + (rect.h / 2) - tmp_rect.y + (tmp_rect.h / 2) > rect.x + (rect.w / 2) - tmp_rect.x + (tmp_rect.w / 2))
-					{
-						//horizontal collision -> balloon moves right-----------------------------
-						state_balloon_H = BALLOON_RIGHT;
-					}
-					else
-					{
-						//vertical collision -> balloon moves down -----------------------------
-						state_balloon_V = BALLOON_DOWN;
-
-						gravity = 3;
-						ticks = 1;
-					}
-				}
-				else // brick bellow
-				{
-					if (tmp_rect.y + (tmp_rect.h / 2) - rect.y + (rect.h / 2) > rect.x + (rect.w / 2) - tmp_rect.x + (tmp_rect.w / 2))
-					{
-						//horizontal collision -> balloon moves right-----------------------------
-						state_balloon_H = BALLOON_RIGHT;
-					}
-					else
-					{
-						//vertical collision -> balloon moves up -----------------------------
-						state_balloon_V = BALLOON_UP;
-
-						if (type < 3) gravity = 6;
-						else if (type < 6) gravity = 5;
-						else if (type < 9) gravity = 4;
-						else gravity = 2;
-
-						ticks = 1;
-					}
-				}
-			}
-			return;
 		}
 	}
 }
