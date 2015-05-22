@@ -631,15 +631,14 @@ bool Player::Check_Collision_Player_Stair()
 bool Player::Check_Collision_Player_Power_Up()
 {
 	SDL_Rect power_rect;
+	bool collision = false;
 	for (unsigned int i = 0; i < app->entityManagerModule->powerups.Count(); i++)
 	{
 		power_rect = (*app->entityManagerModule->powerups.at(i))->rect;
 
-		if (rect.x + app->windowModule->scale <= power_rect.x + power_rect.w
-			&& rect.x + rect.w + app->windowModule->scale >= power_rect.x
-			&& rect.y + app->windowModule->scale <= power_rect.y + power_rect.h
-			&& rect.y + rect.h + app->windowModule->scale >= power_rect.y)
+		if (rect.x >= power_rect.x)
 		{
+			collision = true;
 			switch ((*app->entityManagerModule->powerups.at(i))->source_index)
 			{
 			case 0:
@@ -667,7 +666,8 @@ bool Player::Check_Collision_Player_Power_Up()
 				app->playerModule->player1->lives++;
 				break;
 			}
-			return true;
+			
 		}
+		return collision;
 	}
 }

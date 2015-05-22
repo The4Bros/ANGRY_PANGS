@@ -36,6 +36,8 @@ update_status ModuleScene::PreUpdate()
 
 	// STAGE CHEAT - 9: RESET STAGE
 	if (app->inputModule->key[SDL_SCANCODE_9] == 1){ reset_stage(); }
+	// STAGE CHEAT - 9: RESET STAGE
+	if (app->inputModule->key[SDL_SCANCODE_8] == 1){ app->entityManagerModule->powerups.push_back(new PowerUp(app, app->entityManagerModule->powerups.Count(), rand() % 16, 150, 40)); }
 
 	return UPDATE_CONTINUE;
 }
