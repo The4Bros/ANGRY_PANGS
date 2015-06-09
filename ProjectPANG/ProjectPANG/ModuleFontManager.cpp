@@ -36,11 +36,12 @@ void ModuleFontManager::Write_On_Screen(char* string, unsigned int x, unsigned i
 	Message_rect = { x , y,  strlen(string) * size, size };
 
 	app->renderModule->Print(Message, NULL, &Message_rect);
+	SDL_DestroyTexture(Message);
 }
 
 bool ModuleFontManager::CleanUp()
 {
-	SDL_DestroyTexture(Message);
+	
 	if (TTF_WasInit()){ TTF_Quit(); }
 	return true;
 }
