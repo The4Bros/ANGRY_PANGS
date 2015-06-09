@@ -66,7 +66,8 @@ public:
 	Game_State game_state;
 	unsigned int update_counter;
 	bool pause_pressed, stage_cleared, insert_coin_pressed;
-
+	SDL_Rect livesrect_player1[5];
+	SDL_Rect livesrect_player2[5];
 	SDL_Rect ready_rect;
 	SDL_Rect ready_source_rect;
 
