@@ -6,7 +6,10 @@ lives(3),
 source_index(17),
 score(0),
 stair_update_counter(0),
+shield_update_counter(0),
+shield_source_index(0),
 shielded(false),
+invincible(false),
 shoot_key_pressed(false),
 state(STILL),
 current_weapon(WEAPON_HARPOON),
@@ -347,7 +350,12 @@ void Player::Still()
 
 void Player::Hit(const SDL_Rect* killer)
 {
-	if (shielded){ shielded = false; return; } // kill shield if shielded
+	if (shielded) // kill shield if shielded
+	{
+		shielded = false;
+		MakeInvincible();
+		return;
+	}
 
 	if (rect.x + (rect.w / 2) <= killer->x + (killer->w / 2))
 	{
@@ -373,6 +381,12 @@ void Player::Hit(const SDL_Rect* killer)
 }
 
 
+void ActivateShield()
+{
+	shielded = true;
+}
+
+
 void Player::Update()
 {
 	// PLAYER NORMAL___________________________________________________________________________________________________________________
@@ -387,6 +401,25 @@ void Player::Update()
 		update_counter++;
 		if (shoot_update_counter < 10){ shoot_update_counter++; }
 		else { shoot_key_pressed = false; shoot_update_counter = 0; }
+		
+		// update shield
+		if(shielded)
+		{
+			if(shield_update_counter > 3)
+			{
+				shield_update_counter = 0;
+				switch (shield_source_index)
+				{
+					case 0: shield_source_index = 1;
+					case 1: shield_source_index = 0;
+				}
+			}
+			else
+			{
+				shield_update_counter++;
+			}
+		}
+		
 
 		if (harpoon2->alive){ harpoon2->Update(); }
 		if (harpoon1->alive){ harpoon1->Update(); }
@@ -521,6 +554,21 @@ void Player::Update()
 }
 
 
+void Print()
+{
+	if(shielded)
+	{
+		SDL_Rect shield_rect = { x - (10 * app->windowModule->scale), y - (10 * app->windowModule->scale), 52 * app->windowModule->scale, 52 * app->windowModule->scale};
+		app->renderModule->Print(app->texturesModule->particles_sprite, &app->entityManagerModule->shield_source_rect[shield_source_index], &shield_rect);	
+	}
+	
+	/*
+		control invincibility
+	*/
+	app->renderModule->Print(app->texturesModule->players_sprite, &source_rect[app->playerModule->player1->source_index], &rect);
+}
+
+
 void Player::Reset(const unsigned int x, const unsigned int y)
 {
 	rect.x = x * app->windowModule->scale;
@@ -532,7 +580,10 @@ void Player::Reset(const unsigned int x, const unsigned int y)
 
 	source_index = 17;
 	stair_update_counter = 0;
+	shield_source_index = 0;
+	shield_update_counter = 0;
 	shielded = false;
+	invincible = false;
 	shoot_key_pressed = false;
 	state = STILL;
 	current_weapon = WEAPON_HARPOON;

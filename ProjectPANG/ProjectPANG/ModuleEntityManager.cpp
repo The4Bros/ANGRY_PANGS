@@ -29,6 +29,17 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	harpoon_source_rect[23] = { 31, 13, 3, 2 };
 	harpoon_source_rect[24] = { 34, 13, 3, 2 };
 	harpoon_source_rect[25] = { 37, 13, 3, 2 };
+	
+	// ----------------------------   SHOTGUN   ----------------------------
+	shotgun_source_rect[0] = { 31, 13, 3, 2 };
+	shotgun_source_rect[1] = { 31, 13, 3, 2 };
+	shotgun_source_rect[2] = { 31, 13, 3, 2 };
+	shotgun_source_rect[3] = { 31, 13, 3, 2 };
+	shotgun_source_rect[4] = { 31, 13, 3, 2 };
+	
+	// ----------------------------   SHIELD   ----------------------------
+	shield_source_rect[0] = { 31, 13, 3, 2 };
+	shield_source_rect[1] = { 31, 13, 3, 2 };
 
 	// ----------------------------   BRICKS   ----------------------------
 	// GLASS BRICKS

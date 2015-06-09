@@ -247,9 +247,9 @@ void ModuleScene::Print_All_Objects()
 
 
 	// PRINT PLAYERS
-	app->renderModule->Print(app->texturesModule->players_sprite, &app->playerModule->player1->source_rect[app->playerModule->player1->source_index], &app->playerModule->player1->rect);
-	if (app->player_2_enabled) { app->renderModule->Print(app->texturesModule->players_sprite, &app->playerModule->player2->source_rect[app->playerModule->player2->source_index], &app->playerModule->player2->rect); }
-
+	app->playerModule->player1->Print();
+	if (app->player_2_enabled){ app->playerModule->player1->Print(); }
+	
 	// PRINT BALLS
 	for (unsigned int i = 0; i < app->entityManagerModule->balloons.Count(); i++) { (*app->entityManagerModule->balloons.at(i))->Print(); }
 

@@ -16,6 +16,8 @@ class ModuleEntityManager : public Module{
 public:
 
 	SDL_Rect harpoon_source_rect[25];
+	SDL_Rect shotgun_source_rect[5];
+	SDL_Rect shield_source_rect[2];
 
 	DynArray<Brick*> bricks;
 	SDL_Rect source_brick_rect[40];
