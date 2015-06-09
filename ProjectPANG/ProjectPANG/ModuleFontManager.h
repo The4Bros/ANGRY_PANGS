@@ -24,7 +24,7 @@ private:
 	SDL_Color color[3];
 	
 	SDL_Rect Message_rect;
-	SDL_Surface surfaceMessage;
+	SDL_Surface* surfaceMessage;
 	SDL_Texture* Message;
 
 public:

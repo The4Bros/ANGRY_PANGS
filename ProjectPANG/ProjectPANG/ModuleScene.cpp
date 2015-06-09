@@ -18,8 +18,14 @@ bool ModuleScene::Init()
 	game_over_rect = { 100, 100, 160 * app->windowModule->scale, 32 * app->windowModule->scale };
 	background_rect = { 0, 0, SCREEN_WIDTH * app->windowModule->scale, (SCREEN_HEIGHT - 32) * app->windowModule->scale };
 
-	app->audioModule->PlayMusic((app->stage - 1) / 3);
-
+	if (app->stage<30)app->audioModule->PlayMusic((app->stage - 1) / 3);
+	else if (app->stage <33)app->audioModule->PlayMusic(3);
+	else if (app->stage <36)app->audioModule->PlayMusic(4);
+	else if (app->stage <39)app->audioModule->PlayMusic(5);
+	else if (app->stage <42)app->audioModule->PlayMusic(2);
+	else if (app->stage <45)app->audioModule->PlayMusic(8);
+	else if (app->stage <48)app->audioModule->PlayMusic(6);
+	else app->audioModule->PlayMusic(9);
 	if (!load_stage()){ return false; }
 
 	return true;
