@@ -82,6 +82,7 @@ public:
 	void ActivateShield();
 	void MakeInvincible();
 
+
 	void Update();
 	void Print();
 	void Reset(const unsigned int x, const unsigned int y);

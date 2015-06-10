@@ -356,6 +356,7 @@ void Player::Hit(const SDL_Rect* killer)
 		MakeInvincible();
 		return;
 	}
+	else if (invincible) return;
 
 	if (rect.x + (rect.w / 2) <= killer->x + (killer->w / 2))
 	{
@@ -381,7 +382,7 @@ void Player::Hit(const SDL_Rect* killer)
 }
 
 
-void ActivateShield()
+void Player::ActivateShield()
 {
 	shielded = true;
 }
@@ -554,18 +555,31 @@ void Player::Update()
 }
 
 
-void Print()
+void Player::Print()
 {
 	if(shielded)
 	{
-		SDL_Rect shield_rect = { x - (10 * app->windowModule->scale), y - (10 * app->windowModule->scale), 52 * app->windowModule->scale, 52 * app->windowModule->scale};
+		SDL_Rect shield_rect = { rect.x - (10 * app->windowModule->scale), rect.y - (10 * app->windowModule->scale), 52 * app->windowModule->scale, 52 * app->windowModule->scale};
 		app->renderModule->Print(app->texturesModule->particles_sprite, &app->entityManagerModule->shield_source_rect[shield_source_index], &shield_rect);	
 	}
 	
 	/*
 		control invincibility
 	*/
-	app->renderModule->Print(app->texturesModule->players_sprite, &source_rect[app->playerModule->player1->source_index], &rect);
+	if (invincible && update_counter < 60)
+	{
+		if (update_counter % 10 < 5 )
+		{
+			app->renderModule->Print(app->texturesModule->players_sprite, &source_rect[app->playerModule->player1->source_index], &rect);
+		}
+		
+	}
+	else {
+			app->renderModule->Print(app->texturesModule->players_sprite, &source_rect[app->playerModule->player1->source_index], &rect);
+			invincible = false;
+		 }
+
+	
 }
 
 
@@ -683,4 +697,12 @@ bool Player::Check_Collision_Player_Stair()
 		}
 	}
 	return false;
+}
+
+void Player::MakeInvincible()
+{
+	invincible = true;
+
+
+
 }
