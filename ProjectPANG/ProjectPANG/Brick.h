@@ -13,8 +13,9 @@ class Brick
 		SDL_Rect rect;
 		unsigned int type;
 		int position_in_list;
+		bool power_up_alive;
 
-		Brick(Application* app, int position_in_list, unsigned int x, unsigned int y, unsigned int type);
+		Brick(Application* app, int position_in_list, unsigned int x, unsigned int y, unsigned int type, unsigned int power_up_alive);
 		~Brick(){}
 
 		void Print();

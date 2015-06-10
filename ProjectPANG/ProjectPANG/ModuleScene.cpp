@@ -285,7 +285,8 @@ void ModuleScene::reset_stage()
 			app, i,
 			stage_arrangement.bricks.at(i)->x,
 			stage_arrangement.bricks.at(i)->y,
-			stage_arrangement.bricks.at(i)->type));
+			stage_arrangement.bricks.at(i)->type, 
+			stage_arrangement.bricks.at(i)->aux1));
 	}
 
 
@@ -385,7 +386,8 @@ void ModuleScene::parser(char *line)
 		{
 			tmp_struct.x = atoi(strtok_s(NULL, ",", &tmp_string));
 			tmp_struct.y = atoi(strtok_s(NULL, ",", &tmp_string));
-			tmp_struct.type = atoi(strtok_s(NULL, ";", &tmp_string));
+			tmp_struct.type = atoi(strtok_s(NULL, ",", &tmp_string));
+			tmp_struct.aux1 = atoi(strtok_s(NULL, ";", &tmp_string));
 
 			stage_arrangement.bricks.push_back(tmp_struct);
 		}

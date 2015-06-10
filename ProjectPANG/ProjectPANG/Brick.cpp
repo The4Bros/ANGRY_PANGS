@@ -2,11 +2,15 @@
 
 
 
-Brick::Brick(Application* app, int position_in_list, unsigned int x, unsigned int y, unsigned int type)
+Brick::Brick(Application* app, int position_in_list, unsigned int x, unsigned int y, unsigned int type, unsigned int power_up_alive)
 {
 	this->app = app;
 	this->position_in_list = position_in_list;
 	this->type = type;
+	if (power_up_alive == 1)
+	{
+		this->power_up_alive = true;
+	}
 
 	if (type < 12)
 	{
@@ -59,7 +63,11 @@ void Brick::Print()
 
 void Brick::Hit()
 {
-	app->entityManagerModule->powerups.push_back(new PowerUp(app, app->entityManagerModule->powerups.Count(), rand() % 16, rect.x, rect.y));
+	if (power_up_alive == true)
+	{
+		app->entityManagerModule->powerups.push_back(new PowerUp(app, app->entityManagerModule->powerups.Count(), rand() % 16, rect.x, rect.y));
+	}
+	
 	if (type < 16)
 	{
 		app->entityManagerModule->particles.push_back(new Particles(app, app->entityManagerModule->particles.Count(), type + 14, rect.x, rect.y));
