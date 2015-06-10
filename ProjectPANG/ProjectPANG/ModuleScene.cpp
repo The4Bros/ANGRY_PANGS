@@ -26,13 +26,13 @@ bool ModuleScene::Init()
 		livesrect_player2[i] = { (272 + 16 * i)* app->windowModule->scale, 224 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
 
 	}
-	if (app->stage<30)app->audioModule->PlayMusic((app->stage - 1) / 3);
-	else if (app->stage <33)app->audioModule->PlayMusic(3);
-	else if (app->stage <36)app->audioModule->PlayMusic(4);
-	else if (app->stage <39)app->audioModule->PlayMusic(5);
-	else if (app->stage <42)app->audioModule->PlayMusic(2);
-	else if (app->stage <45)app->audioModule->PlayMusic(8);
-	else if (app->stage <48)app->audioModule->PlayMusic(6);
+	if (app->stage<31)app->audioModule->PlayMusic((app->stage - 1) / 3);
+	else if (app->stage <34)app->audioModule->PlayMusic(3);
+	else if (app->stage <37)app->audioModule->PlayMusic(4);
+	else if (app->stage <40)app->audioModule->PlayMusic(5);
+	else if (app->stage <43)app->audioModule->PlayMusic(2);
+	else if (app->stage <46)app->audioModule->PlayMusic(8);
+	else if (app->stage <49)app->audioModule->PlayMusic(6);
 	else app->audioModule->PlayMusic(9);
 	if (!load_stage()){ return false; }
 
@@ -52,7 +52,7 @@ update_status ModuleScene::PreUpdate()
 	if (app->inputModule->key[SDL_SCANCODE_9] == 1){ reset_stage(); }
 	// STAGE CHEAT - 9: RESET STAGE
 	if (app->inputModule->key[SDL_SCANCODE_8] == 1){ app->entityManagerModule->powerups.push_back(new PowerUp(app, app->entityManagerModule->powerups.Count(), rand() % 16, 150, 40)); }
-
+	if (app->inputModule->key[SDL_SCANCODE_7] == 1){ stage_cleared=true; }
 	return UPDATE_CONTINUE;
 }
 update_status ModuleScene::Update()
@@ -341,7 +341,7 @@ bool ModuleScene::load_stage()
 {
 	if (fopen_s(&level_file, "txt files/LevelArrangment.txt", "r") != 0){ return false; }
 
-	char line[100];
+	char line[200];
 	for (unsigned int i = 0; i < app->stage; i++)
 	{
 		fgets(line, 300, level_file);
