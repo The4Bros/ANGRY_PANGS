@@ -14,7 +14,8 @@ bool ModuleScene::Init()
 	game_state = READY;
 	update_counter = 0;
 
-	ready_rect = { 100 , 100 , 160 * app->windowModule->scale, 32 * app->windowModule->scale };
+	ready_source_rect = { 0, 0, 54, 16 };
+	ready_rect = { 165 * app->windowModule->scale, 104 * app->windowModule->scale, 54 * app->windowModule->scale, 16 * app->windowModule->scale };
 	game_over_rect = { 100, 100, 160 * app->windowModule->scale, 32 * app->windowModule->scale };
 	background_rect = { 0, 0, SCREEN_WIDTH * app->windowModule->scale, (SCREEN_HEIGHT - 32) * app->windowModule->scale };
 
@@ -195,21 +196,22 @@ void ModuleScene::Print_All_Objects()
 	app->fontManagerModule->Write_On_Screen(app->stage,                       176 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen("HI:",                            160 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen(10000,                            185 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
-	app->fontManagerModule->Write_On_Screen(app->coins,                       360 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
-
-	for (int i = 0; i < app->playerModule->player1->lives; i++){ app->renderModule->Print(app->texturesModule->powerUp_sprite, &app->entityManagerModule->powerup_source_rect[13], &livesrect_player1[i]); }
+	//app->fontManagerModule->Write_On_Screen(app->coins,                       360 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+	//print player 1 lives sprites
+	int j = app->playerModule->player1->lives;
+	if (j > 5){ j = 5; }
+	for (int i = 0; i < j; i++){ app->renderModule->Print(app->texturesModule->powerUp_sprite, &app->entityManagerModule->powerup_source_rect[13], &livesrect_player1[i]); }
 	if (app->playerModule->player1->lives>5){ app->fontManagerModule->Write_On_Screen(app->playerModule->player1->lives, 88 * app->windowModule->scale, 226 * app->windowModule->scale, 12 * app->windowModule->scale, WHITE); }
-
+	//print name of the city
 	if (app->city > 9) { app->fontManagerModule->Write_On_Screen(app->city, 152 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE); }
 	else { app->fontManagerModule->Write_On_Screen(app->city, 160 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE); }
-	
 	if (app->stage > 9) { app->fontManagerModule->Write_On_Screen("stage", 195 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE); }
 	else { app->fontManagerModule->Write_On_Screen("stage", 187 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE); }
-
+	//print player 2 score and lives sprites
 	if (app->player_2_enabled){
 		
-		for (int i = 0; i < app->playerModule->player2->lives; i++){ app->renderModule->Print(app->texturesModule->powerUp_sprite, &app->entityManagerModule->powerup_source_rect[13], &livesrect_player2[i]); }
-		if (app->playerModule->player2->lives>5){ app->fontManagerModule->Write_On_Screen(app->playerModule->player2->lives, 88 * app->windowModule->scale, 222 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE); }
+		for (int i = 0; i < app->playerModule->player2->lives; i++){ app->renderModule->Print(app->texturesModule->powerUp_sprite, &app->entityManagerModule->powerup_source_rect[14], &livesrect_player2[i]); }
+		if (app->playerModule->player2->lives>5){ app->fontManagerModule->Write_On_Screen(app->playerModule->player2->lives, 352 * app->windowModule->scale, 226 * app->windowModule->scale, 12 * app->windowModule->scale, WHITE); }
 		app->fontManagerModule->Write_On_Screen(app->playerModule->player2->score, 360 * app->windowModule->scale, 214 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 		
 	}
