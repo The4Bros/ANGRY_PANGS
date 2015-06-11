@@ -26,8 +26,13 @@ bool ModuleScene::Init()
 		livesrect_player2[i] = { (272 + 16 * i)* app->windowModule->scale, 224 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
 
 	}
+
+	power_up_rect = { 96 * app->windowModule->scale, 224 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
+	power_up_rect2 = { 360 * app->windowModule->scale, 224 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
 	app->stageEndModule->next_extend = 10000;
 	app->stageEndModule->next_extend_counter = 0;
+
+
 	if(app->city < 10){ app->audioModule->PlayMusic(app->city - 1); }
 	else if(app->city < 14){ app->audioModule->PlayMusic(app->city - 8); }
 	else
@@ -200,7 +205,7 @@ void ModuleScene::Print_All_Objects()
 	app->fontManagerModule->Write_On_Screen("Player-2",                       270 * app->windowModule->scale, 208 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen_backwards(app->playerModule->player1->score, 111 * app->windowModule->scale, 216 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen(app->city_names[app->city - 1], (192 - ((strlen(app->city_names[app->city - 1])/2)*8)) * app->windowModule->scale, 208 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
-	app->fontManagerModule->Write_On_Screen("~",                              167 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen("-",                              167 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen(app->stage,                       176 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen("HI:",                            160 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen(10000,                            185 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
@@ -209,7 +214,7 @@ void ModuleScene::Print_All_Objects()
 	int vidas_tmp = app->playerModule->player1->lives;
 	if (vidas_tmp > 5){ vidas_tmp = 5; }
 	for (int i = 0; i < vidas_tmp; i++){ app->renderModule->Print(app->texturesModule->powerUp_sprite, &app->entityManagerModule->powerup_source_rect[13], &livesrect_player1[i]); }
-	if (app->playerModule->player1->lives>5){ app->fontManagerModule->Write_On_Screen(app->playerModule->player1->lives, 88 * app->windowModule->scale, 226 * app->windowModule->scale, 12 * app->windowModule->scale, WHITE); }
+	if (app->playerModule->player1->lives>5){ app->fontManagerModule->Write_On_Screen(app->playerModule->player1->lives, 88 * app->windowModule->scale, 226 * app->windowModule->scale, 10 * app->windowModule->scale, WHITE); }
 	//print name of the city
 	if (app->city > 9) { app->fontManagerModule->Write_On_Screen(app->city, 152 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE); }
 	else { app->fontManagerModule->Write_On_Screen(app->city, 160 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE); }
@@ -219,13 +224,40 @@ void ModuleScene::Print_All_Objects()
 	if (app->player_2_enabled){
 		
 		for (unsigned int i = 0; i < app->playerModule->player2->lives; i++){ app->renderModule->Print(app->texturesModule->powerUp_sprite, &app->entityManagerModule->powerup_source_rect[14], &livesrect_player2[i]); }
-		if (app->playerModule->player2->lives>5){ app->fontManagerModule->Write_On_Screen(app->playerModule->player2->lives, 352 * app->windowModule->scale, 226 * app->windowModule->scale, 12 * app->windowModule->scale, WHITE); }
+		if (app->playerModule->player2->lives>5){ app->fontManagerModule->Write_On_Screen(app->playerModule->player2->lives, 352 * app->windowModule->scale, 226 * app->windowModule->scale, 10 * app->windowModule->scale, WHITE); }
 		app->fontManagerModule->Write_On_Screen_backwards(app->playerModule->player2->score, 360 * app->windowModule->scale, 214 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 		
 	}
 	else{
 		if (time_count->current_time % 2 == 0) { app->fontManagerModule->Write_On_Screen("PUSH BUTTON", 270 * app->windowModule->scale, 224 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE); }
 	}
+	//CURRENT POWER UP
+	//Player1
+	switch (app->playerModule->player1->current_weapon)
+	{
+	
+		case WEAPON_HARPOON:break;
+		case WEAPON_DOUBLE_HARPOON: app->renderModule->Print(app->texturesModule->powerUp_sprite, &app->entityManagerModule->powerup_source_rect[2], &power_up_rect);
+			break;
+		case WEAPON_GRAPPLE:app->renderModule->Print(app->texturesModule->powerUp_sprite, &app->entityManagerModule->powerup_source_rect[1], &power_up_rect);
+			break;
+		case WEAPON_SHOTGUN:app->renderModule->Print(app->texturesModule->powerUp_sprite, &app->entityManagerModule->powerup_source_rect[0], &power_up_rect);
+			break;
+	}
+
+	//Player 2
+	switch (app->playerModule->player2->current_weapon)
+	{
+
+	case WEAPON_HARPOON:break;
+	case WEAPON_DOUBLE_HARPOON: app->renderModule->Print(app->texturesModule->powerUp_sprite, &app->entityManagerModule->powerup_source_rect[2], &power_up_rect2);
+		break;
+	case WEAPON_GRAPPLE:app->renderModule->Print(app->texturesModule->powerUp_sprite, &app->entityManagerModule->powerup_source_rect[1], &power_up_rect2);
+		break;
+	case WEAPON_SHOTGUN:app->renderModule->Print(app->texturesModule->powerUp_sprite, &app->entityManagerModule->powerup_source_rect[0], &power_up_rect2);
+		break;
+	}
+
 	// PRINT BACKGROUND
 	app->renderModule->Print(app->texturesModule->background_sprite, &background_source_rect, &background_rect);
 

@@ -68,6 +68,7 @@ public:
 	bool pause_pressed, stage_cleared, insert_coin_pressed;
 	SDL_Rect livesrect_player1[5];
 	SDL_Rect livesrect_player2[5];
+
 	SDL_Rect ready_rect;
 	SDL_Rect ready_source_rect;
 
@@ -77,6 +78,8 @@ public:
 	SDL_Rect background_rect;
 	SDL_Rect background_source_rect;
 
+	SDL_Rect power_up_rect;
+	SDL_Rect power_up_rect2;
 	Stage_Arrangement stage_arrangement;
 
 	ModuleScene(Application* app);
