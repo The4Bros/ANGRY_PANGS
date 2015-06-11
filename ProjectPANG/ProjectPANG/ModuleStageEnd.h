@@ -18,10 +18,11 @@ public:
 	SDL_Rect image_source_rect[4][1];
 	unsigned int max_index[4];
 	unsigned int source_index_1, source_index_2;
-
+	unsigned int next_extend;
 	bool push_button_shown;
-
+	void NextExtend();
 	unsigned int ticks;
+	int next_extend_counter;
 
 	ModuleStageEnd(Application* app);
 	bool Init();

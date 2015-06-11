@@ -26,7 +26,7 @@ bool ModuleStageEnd::Init()
 	image_rect = { 118 * app->windowModule->scale, 32 * app->windowModule->scale, 141 * app->windowModule->scale, 94 * app->windowModule->scale };
 
 	ticks = 0;
-
+	
 	// handle source_index_1 algorithm
 	source_index_1 = 0;
 
@@ -34,9 +34,32 @@ bool ModuleStageEnd::Init()
 
 	push_button_shown = true;
 	app->playerModule->player1->score += (app->sceneModule->time_count->current_time)*100;
+
+
+
+
+
 	return true;
 }
+void ModuleStageEnd::NextExtend(){
 
+
+	if (app->playerModule->player1->score >= next_extend){
+
+		app->playerModule->player1->lives++;
+		if ((next_extend_counter % 2) == 0){
+			next_extend = next_extend * 2;
+			next_extend_counter++;
+		}
+		else{
+			next_extend = (next_extend / 2) * 10;
+			next_extend_counter++;
+		}
+	}
+
+
+
+}
 update_status ModuleStageEnd::Update()
 {
 	app->audioModule->StopMusic();
@@ -84,6 +107,8 @@ update_status ModuleStageEnd::Update()
 	if (ticks > 90)
 	{
 		app->fontManagerModule->Write_On_Screen("NEXT EXTEND :", 104 * app->windowModule->scale, 184 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+		app->fontManagerModule->Write_On_Screen_backwards(next_extend, 300 * app->windowModule->scale, 184 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+		app->fontManagerModule->Write_On_Screen("PTS", 300 * app->windowModule->scale, 184 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	}
 
 	if (push_button_shown)

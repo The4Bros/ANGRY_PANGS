@@ -26,7 +26,8 @@ bool ModuleScene::Init()
 		livesrect_player2[i] = { (272 + 16 * i)* app->windowModule->scale, 224 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
 
 	}
-	
+	app->stageEndModule->next_extend = 10000;
+	app->stageEndModule->next_extend_counter = 0;
 	if(app->city < 10){ app->audioModule->PlayMusic(app->city - 1); }
 	else if(app->city < 14){ app->audioModule->PlayMusic(app->city - 8); }
 	else
@@ -64,6 +65,8 @@ update_status ModuleScene::Update()
 {
 	// PRINT ALL OBJECTS ON SCREEN
 	Print_All_Objects();
+
+	app->stageEndModule->NextExtend();
 
 	switch (game_state)
 	{
