@@ -53,7 +53,6 @@ update_status ModuleScene::PreUpdate()
 		if (!insert_coin_pressed){ app->Add_Coin(); insert_coin_pressed = true; }
 	}
 	else { insert_coin_pressed = false; }
-
 	// STAGE CHEAT - 9: RESET STAGE
 	if (app->inputModule->key[SDL_SCANCODE_9] == 1){ reset_stage(); }
 	// STAGE CHEAT - 9: RESET STAGE
@@ -216,7 +215,7 @@ void ModuleScene::Print_All_Objects()
 	//print player 2 score and lives sprites
 	if (app->player_2_enabled){
 		
-		for (int i = 0; i < app->playerModule->player2->lives; i++){ app->renderModule->Print(app->texturesModule->powerUp_sprite, &app->entityManagerModule->powerup_source_rect[14], &livesrect_player2[i]); }
+		for (unsigned int i = 0; i < app->playerModule->player2->lives; i++){ app->renderModule->Print(app->texturesModule->powerUp_sprite, &app->entityManagerModule->powerup_source_rect[14], &livesrect_player2[i]); }
 		if (app->playerModule->player2->lives>5){ app->fontManagerModule->Write_On_Screen(app->playerModule->player2->lives, 352 * app->windowModule->scale, 226 * app->windowModule->scale, 12 * app->windowModule->scale, WHITE); }
 		app->fontManagerModule->Write_On_Screen_backwards(app->playerModule->player2->score, 360 * app->windowModule->scale, 214 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 		
@@ -237,7 +236,6 @@ void ModuleScene::Print_All_Objects()
 	for (unsigned int i = 0; i < app->entityManagerModule->bricks.Count(); i++) { (*app->entityManagerModule->bricks.at(i))->Print(); }
 
 	// PRINT HARPOONS
-
 	if (app->playerModule->player1->harpoon1->alive) { app->playerModule->player1->harpoon1->Print(); }
 	if (app->playerModule->player1->harpoon2->alive) { app->playerModule->player1->harpoon2->Print(); }
 
@@ -353,7 +351,7 @@ bool ModuleScene::load_stage()
 {
 	if (fopen_s(&level_file, "txt files/LevelArrangment.txt", "r") != 0){ return false; }
 
-	char line[200];
+	char line[400];
 	for (unsigned int i = 0; i < app->stage; i++)
 	{
 		fgets(line, 300, level_file);
