@@ -26,14 +26,20 @@ bool ModuleScene::Init()
 		livesrect_player2[i] = { (272 + 16 * i)* app->windowModule->scale, 224 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
 
 	}
-	if (app->stage<31)app->audioModule->PlayMusic((app->stage - 1) / 3);
-	else if (app->stage <34)app->audioModule->PlayMusic(3);
-	else if (app->stage <37)app->audioModule->PlayMusic(4);
-	else if (app->stage <40)app->audioModule->PlayMusic(5);
-	else if (app->stage <43)app->audioModule->PlayMusic(2);
-	else if (app->stage <46)app->audioModule->PlayMusic(8);
-	else if (app->stage <49)app->audioModule->PlayMusic(6);
-	else app->audioModule->PlayMusic(9);
+	
+	if(app->city < 10){ app->audioModule->PlayMusic(app->city - 1); }
+	else if(app->city < 14){ app->audioModule->PlayMusic(app->city - 8); }
+	else
+	{
+		switch (app->city)
+		{
+			case 14: app->audioModule->PlayMusic(2); break;
+			case 15: app->audioModule->PlayMusic(8); break;
+			case 16: app->audioModule->PlayMusic(6); break;
+			case 17: app->audioModule->PlayMusic(9); break;
+		}
+	}
+	
 	if (!load_stage()){ return false; }
 
 	return true;
