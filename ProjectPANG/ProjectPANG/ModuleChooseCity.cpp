@@ -58,7 +58,7 @@ bool ModuleChooseCity::Init()
 	selection_index = 0;
 	selection_source_index = 0;
 	update_counter = 0;
-	current_number = 9;
+	current_number = 10;
 	ticks = 1;
 	a_pressed = d_pressed = false;
 
@@ -77,44 +77,51 @@ update_status ModuleChooseCity::Update()
 		else{ return CHANGE_TO_PLAY;}
 	}
 
-
-	// SPACE TRIGGER
-	if (app->inputModule->key[SDL_SCANCODE_SPACE] == 1)
+	if (ticks < 600)
 	{
-		app->city = selection_index + 1;
-		app->stage = (selection_index * 3) + 1;
-		return CHANGE_TO_PLAY;
-	}
-
-	// LEFT TRIGGER
-	if (app->inputModule->key[SDL_SCANCODE_A] == 1)
-	{
-		if (!a_pressed)
+		// SPACE TRIGGER
+		if (app->inputModule->key[SDL_SCANCODE_SPACE] == 1)
 		{
-			if (selection_index < 16)
-			{
-				selection_index++;
-			}
-
-			a_pressed = true;
+			app->city = selection_index + 1;
+			app->stage = (selection_index * 3) + 1;
+			return CHANGE_TO_PLAY;
 		}
-	}
-	else { a_pressed = false; }
 
-	// RIGHT TRIGGER
-	if (app->inputModule->key[SDL_SCANCODE_D] == 1)
-	{
-		if (!d_pressed)
+		// LEFT TRIGGER
+		if (app->inputModule->key[SDL_SCANCODE_A] == 1)
 		{
-			if (selection_index != 0)
+			if (!a_pressed)
 			{
-				selection_index--;
-			}
+				if (selection_index < 16)
+				{
+					selection_index++;
+				}
 
-			d_pressed = true;
+				a_pressed = true;
+			}
 		}
+		else { a_pressed = false; }
+
+		// RIGHT TRIGGER
+		if (app->inputModule->key[SDL_SCANCODE_D] == 1)
+		{
+			if (!d_pressed)
+			{
+				if (selection_index != 0)
+				{
+					selection_index--;
+				}
+
+				d_pressed = true;
+			}
+		}
+		else { d_pressed = false; }
 	}
-	else { d_pressed = false; }
+	else
+	{
+		if (ticks % 14 > 7) selection_source_index = 1;
+		else selection_source_index = 0;
+	}
 
 	app->fontManagerModule->Write_On_Screen("choose a city to start.",          9 * app->windowModule->scale, 214 * app->windowModule->scale, 7 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen("use arrows to choose.",            9 * app->windowModule->scale, 222 * app->windowModule->scale, 7 * app->windowModule->scale, WHITE);
@@ -127,23 +134,12 @@ update_status ModuleChooseCity::Update()
 
 
 	app->renderModule->Print(app->texturesModule->map_sprite, &background_source_rect, &background_rect); // print map
-	app->renderModule->Print(app->texturesModule->map_countdown_sprite, &countdown_source_rect[current_number], &countdown_rect); // print countdown numbers
 	app->renderModule->Print(app->texturesModule->map_sprite, &controls_source_rect, &controls_rect); // print controls
 	app->renderModule->Print(app->texturesModule->map_sprite, &selection_source_rect[selection_source_index], &selection_rect[selection_index]); // print selection square
-
+	if (current_number > 1) app->renderModule->Print(app->texturesModule->map_countdown_sprite, &countdown_source_rect[current_number - 1], &countdown_rect); // print countdown numbers
+	
 	ticks++;
 
 	return UPDATE_CONTINUE;
 }
 
-
-
-
-bool ModuleChooseCity::CleanUp()
-{
-
-
-
-
-	return true;
-}
