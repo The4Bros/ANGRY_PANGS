@@ -278,9 +278,15 @@ void ModuleScene::reset_stage()
 	app->playerModule->player1->Reset(stage_arrangement.player_pos[0], stage_arrangement.player_pos[1]);
 	app->playerModule->player1->Reset(stage_arrangement.player_pos[0], stage_arrangement.player_pos[1]);
 
+	// POWER UPS_________________________________________________________________________________________________________________________
+
+	app->entityManagerModule->powerups.ClearAll();
+
+
 	// BRICKS____________________________________________________________________________________________________________________________
 
 	app->entityManagerModule->bricks.ClearAll();
+	
 	for (i = 0; i < stage_arrangement.bricks.Count(); i++)
 	{
 		app->entityManagerModule->bricks.push_back(new Brick(
