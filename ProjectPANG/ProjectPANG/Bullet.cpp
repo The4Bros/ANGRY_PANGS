@@ -5,8 +5,8 @@ app(app),
 update_counter(0),
 alive(false)
 {
-	rects[0] = { 0, 0, 0, 0 };
-	rects[1] = { 0, 0, 0, 0 };
+	rects[0] = { 0, 0, 5 * app->windowModule->scale, 9 * app->windowModule->scale };
+	rects[1] = { 0, 0, 5 * app->windowModule->scale, 9 * app->windowModule->scale };
 	rects[2] = { 0, 0, 0, 0 };
 }
 
@@ -24,8 +24,45 @@ void Bullet::Update()
 	}
 	else
 	{
-		rects[0].y -= 2;
-		rects[1].y -= 2;
+		rects[2].y = rects[1].y = rects[0].y -= 3 * app->windowModule->scale;
+
+		update_counter++;
+
+		if (update_counter < 16)
+		{
+			if (update_counter == 3)//0
+			{
+				rects[2].x = rects[0].x -= 3 * app->windowModule->scale;
+				rects[1].x = rects[0].x + 5 * app->windowModule->scale;
+				rects[2].w = 10 * app->windowModule->scale;
+			}
+			else if (update_counter == 7)//2
+			{
+				rects[2].x = rects[0].x -= 1 * app->windowModule->scale;
+				rects[1].x += 1 * app->windowModule->scale;
+				rects[2].w = 12 * app->windowModule->scale;
+			}
+			else if (update_counter == 11)//4
+			{
+				rects[2].x = rects[0].x -= 1 * app->windowModule->scale;
+				rects[1].x += 1 * app->windowModule->scale;
+				rects[2].w = 14 * app->windowModule->scale;
+			}
+			else if (update_counter == 15)//6
+			{
+				rects[2].x = rects[0].x -= 1 * app->windowModule->scale;
+				rects[1].x += 1 * app->windowModule->scale;
+				rects[2].w = 16 * app->windowModule->scale;
+			}
+		}
+		else
+		{
+			if (update_counter % 3 == 0)
+			{
+				if (source_index < 2){ source_index++; }
+				else { source_index = 0; }
+			}
+		}
 	}
 }
 
@@ -40,9 +77,7 @@ void Bullet::Spawn(unsigned int x, unsigned int y)
 	update_counter = 0;
 	alive = true;
 
-	rects[0] = { 0, 0, 0, 0 };
-	rects[1] = { 0, 0, 0, 0 };
-	rects[2] = { 0, 0, 0, 0 };
+	rects[0] = rects[1] = rects[2] = { x, y, 5 * app->windowModule->scale, 9 * app->windowModule->scale };
 }
 
 bool Bullet::CheckCollisionBricks()

@@ -100,7 +100,7 @@ bool PowerUp::Check_Collision_Player(Player* player)
 		switch (source_index)
 		{
 		case 0:
-			//player->current_weapon = WEAPON_DOUBLE_HARPOON;
+			player->current_weapon = WEAPON_SHOTGUN;
 			break;
 		case 1:
 			player->current_weapon = WEAPON_GRAPPLE;

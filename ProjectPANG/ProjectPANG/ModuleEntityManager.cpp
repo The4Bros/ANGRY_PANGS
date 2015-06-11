@@ -110,7 +110,7 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	// ENEMY PARTICLES
 	for (i = 0; i < 5; i++){ particles_source_rect[i + 48] = { i * 28, 93, 28, 26 }; }
 
-	// HARPOON SHOT PARTICLES
+	// SHOT PARTICLES
 	for (i = 0; i < 4; i++){ particles_source_rect[i + 53] = { (i * 15) + 140, 93, 15, 15 }; }
 
 	// BRICK PARTICLES
