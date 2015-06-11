@@ -38,8 +38,8 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	shotgun_source_rect[4] = { 31, 13, 3, 2 };
 	
 	// ----------------------------   SHIELD   ----------------------------
-	shield_source_rect[0] = { 31, 13, 3, 2 };
-	shield_source_rect[1] = { 31, 13, 3, 2 };
+	shield_source_rect[0] = { 275, 93, 32, 39 };
+	shield_source_rect[1] = { 307, 93, 32, 39 };
 
 	// ----------------------------   BRICKS   ----------------------------
 	// GLASS BRICKS
