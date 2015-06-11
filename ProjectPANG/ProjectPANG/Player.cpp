@@ -386,6 +386,7 @@ void Player::Hit(const SDL_Rect* killer)
 void Player::ActivateShield()
 {
 	shielded = true;
+	invincible = false;
 }
 
 
