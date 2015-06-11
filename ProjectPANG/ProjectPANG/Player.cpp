@@ -8,6 +8,7 @@ score(0),
 stair_update_counter(0),
 shield_update_counter(0),
 shield_source_index(0),
+invincibility_counter(0),
 shielded(false),
 invincible(false),
 shoot_key_pressed(false),
@@ -400,6 +401,7 @@ void Player::Update()
 		}
 
 		update_counter++;
+		
 		if (shoot_update_counter < 10){ shoot_update_counter++; }
 		else { shoot_key_pressed = false; shoot_update_counter = 0; }
 		
@@ -566,9 +568,10 @@ void Player::Print()
 	/*
 		control invincibility
 	*/
-	if (invincible && update_counter < 60)
+	if (invincible && invincibility_counter < 180)
 	{
-		if (update_counter % 10 < 5 )
+		invincibility_counter++;
+		if (invincibility_counter % 10 < 5 )
 		{
 			app->renderModule->Print(app->texturesModule->players_sprite, &source_rect[app->playerModule->player1->source_index], &rect);
 		}
@@ -577,6 +580,7 @@ void Player::Print()
 	else {
 			app->renderModule->Print(app->texturesModule->players_sprite, &source_rect[app->playerModule->player1->source_index], &rect);
 			invincible = false;
+			invincibility_counter = 0;
 		 }
 
 	
@@ -596,6 +600,7 @@ void Player::Reset(const unsigned int x, const unsigned int y)
 	stair_update_counter = 0;
 	shield_source_index = 0;
 	shield_update_counter = 0;
+	invincibility_counter = 0;
 	shielded = false;
 	invincible = false;
 	shoot_key_pressed = false;

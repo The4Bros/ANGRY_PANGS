@@ -45,7 +45,7 @@ public:
 	unsigned int source_index, update_counter;
 	
 	// Shield
-	unsigned int shield_source_index, shield_update_counter;
+	unsigned int shield_source_index, shield_update_counter,invincibility_counter;
 	bool shielded, invincible;
 
 	// Weapons
