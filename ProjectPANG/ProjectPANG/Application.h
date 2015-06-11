@@ -75,7 +75,4 @@ public:
 
 	void Add_Coin();
 	bool Lose_Coin();
-
-	void EnablePlayer2();
-
 };

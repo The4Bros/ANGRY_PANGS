@@ -83,6 +83,16 @@ update_status ModuleScene::Update()
 		}
 		else{ pause_pressed = false; }
 
+		if (!app->player_2_enabled)
+		{
+			if (app->inputModule->key[SDL_SCANCODE_Y] == 1)
+			{
+				app->player_2_enabled = true;
+				app->playerModule->player2->MakeInvincible();
+			}
+		}
+
+
 		// STAGE CLEARED MANAGED
 		if (stage_cleared)
 		{

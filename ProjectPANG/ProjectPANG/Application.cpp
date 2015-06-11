@@ -196,5 +196,3 @@ bool Application::Lose_Coin()
 	if (coins > 0) { coins--; return true; }
 	return false;
 }
-
-void Application::EnablePlayer2() { player_2_enabled = true; }

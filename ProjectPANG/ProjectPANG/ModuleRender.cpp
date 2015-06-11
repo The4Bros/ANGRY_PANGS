@@ -3,8 +3,6 @@
 
 ModuleRender::ModuleRender(Application* app) : Module(app), renderer(NULL) {}
 
-ModuleRender::ModuleRender(const ModuleRender& render) : Module(render.app), renderer(render.renderer) {}
-
 bool ModuleRender::Init()
 {
 	Uint32 rendererFlags = NULL;

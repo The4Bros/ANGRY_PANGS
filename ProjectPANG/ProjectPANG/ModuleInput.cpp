@@ -3,8 +3,6 @@
 
 ModuleInput::ModuleInput(Application* app) : Module(app), key(NULL) {}
 
-ModuleInput::ModuleInput(const ModuleInput& input) : Module(input.app), key(input.key) {}
-
 update_status ModuleInput::PreUpdate()
 {
 	SDL_PollEvent(&mainEvent);
