@@ -41,9 +41,6 @@ update_status ModulePlayer::Update()
 			}
 		}
 
-		else if (app->inputModule->key[SDL_SCANCODE_Y] == 1){ app->EnablePlayer2(); }
-
-
 		// PLAYER 1
 		player1->Update();
 
