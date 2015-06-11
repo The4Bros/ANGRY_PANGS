@@ -281,11 +281,8 @@ void ModuleScene::Print_All_Objects()
 	}
 
 	// PRINT BULLETS
-	//------------------
-	//------------------
-	//------------------
-	//------------------
-
+	app->playerModule->player1->PrintBullets();
+	if (app->player_2_enabled) { app->playerModule->player2->PrintBullets(); }
 
 	// PRINT PLAYERS
 	app->playerModule->player1->Print();

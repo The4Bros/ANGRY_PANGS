@@ -87,6 +87,7 @@ public:
 
 	void Update();
 	void Print();
+	void PrintBullets();
 	void Reset(const unsigned int x, const unsigned int y);
 
 	bool Check_Collision_Player_Brick_Horizontal();

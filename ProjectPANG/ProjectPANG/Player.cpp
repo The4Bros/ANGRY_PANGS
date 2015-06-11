@@ -351,10 +351,6 @@ void Player::Shoot()
 				break;
 			}
 		}
-
-		
-		
-
 		break;
 	}
 }
@@ -441,7 +437,7 @@ void Player::Update()
 		update_counter++;
 		
 		if (shoot_update_counter < 10){ shoot_update_counter++; }
-		else { shoot_key_pressed = false; shoot_update_counter = 0; }
+		else if (current_weapon != WEAPON_SHOTGUN) { shoot_key_pressed = false; shoot_update_counter = 0; }
 		
 		// update shield
 		if(shielded)
@@ -460,14 +456,14 @@ void Player::Update()
 				shield_update_counter++;
 			}
 		}
-		
 
 		if (harpoon2->alive){ harpoon2->Update(); }
 		if (harpoon1->alive){ harpoon1->Update(); }
 
-		//-------------------------------------------------------
-		// shotgun update
-		//-------------------------------------------------------
+		for (unsigned int i = 0; i < 15; i++)
+		{
+			if (bullets[i]->alive){ bullets[i]->Update(); }
+		}
 	}
 
 
@@ -602,10 +598,7 @@ void Player::Print()
 		SDL_Rect shield_rect = { rect.x - (10 * app->windowModule->scale), rect.y - (10 * app->windowModule->scale), 52 * app->windowModule->scale, 52 * app->windowModule->scale};
 		app->renderModule->Print(app->texturesModule->particles_sprite, &app->entityManagerModule->shield_source_rect[shield_source_index], &shield_rect);	
 	}
-	
-	/*
-		control invincibility
-	*/
+
 	if (invincible && invincibility_counter < 180)
 	{
 		invincibility_counter++;
@@ -620,8 +613,14 @@ void Player::Print()
 			invincible = false;
 			invincibility_counter = 0;
 		 }
+}
 
-	
+void Player::PrintBullets()
+{
+	for (unsigned int i = 0; i < 15; i++)
+	{
+		if (bullets[i]->alive){ bullets[i]->Print(); }
+	}
 }
 
 
@@ -633,6 +632,8 @@ void Player::Reset(const unsigned int x, const unsigned int y)
 
 	harpoon1->alive = false;
 	harpoon2->alive = false;
+
+	for (unsigned int i = 0; i < 15; i++){ bullets[i]->alive = false; }
 
 	source_index = 17;
 	stair_update_counter = 0;
