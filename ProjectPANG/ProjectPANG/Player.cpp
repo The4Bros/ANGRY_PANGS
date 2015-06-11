@@ -20,6 +20,10 @@ current_stair(NULL)
 	harpoon1 = new Harpoon(app);
 	harpoon2 = new Harpoon(app);
 
+	for (unsigned int i = 0; i < 15; i++){ bullets[i] = new Bullet(app); }
+
+	
+
 	rect = { 0, 0, 32 * app->windowModule->scale, 32 * app->windowModule->scale };
 
 	unsigned int y_coor = (player1? 0 : 32);
@@ -317,7 +321,18 @@ void Player::Shoot()
 		break;
 
 	case WEAPON_SHOTGUN:
-		//--------------------------------------------------------------
+		shoot_update_counter = 0;
+
+		for (unsigned int i = 0; i < 15; i++)
+		{
+			if (!bullets[i]->alive)
+			{
+				bullets[i]->Spawn(rect.x, rect.y);
+				break;
+			}
+		}
+		
+
 		break;
 	}
 }

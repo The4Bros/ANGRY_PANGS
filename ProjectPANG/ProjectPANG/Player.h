@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "Harpoon.h"
 #include "Stair.h"
+#include "Bullet.h"
 
 
 #ifndef __Player_H__
@@ -51,6 +52,7 @@ public:
 	// Weapons
 	Harpoon* harpoon1;
 	Harpoon* harpoon2;
+	Bullet* bullets[15];
 	Weapon current_weapon;
 	unsigned int shoot_update_counter;
 	bool shoot_key_pressed;

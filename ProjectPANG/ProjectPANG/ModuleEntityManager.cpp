@@ -31,15 +31,15 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	harpoon_source_rect[25] = { 37, 13, 3, 2 };
 	
 	// ----------------------------   SHOTGUN   ----------------------------
-	shotgun_source_rect[0] = { 31, 13, 3, 2 };
-	shotgun_source_rect[1] = { 31, 13, 3, 2 };
-	shotgun_source_rect[2] = { 31, 13, 3, 2 };
-	shotgun_source_rect[3] = { 31, 13, 3, 2 };
-	shotgun_source_rect[4] = { 31, 13, 3, 2 };
+	shotgun_source_rect[0] = { 201, 93,  5, 9 };
+	shotgun_source_rect[1] = { 206, 93,  5, 9 };
+	shotgun_source_rect[2] = { 211, 93,  5, 9 };
+	shotgun_source_rect[3] = { 216, 93, 14, 5 };
+	shotgun_source_rect[4] = { 230, 93, 14, 5 };
 	
 	// ----------------------------   SHIELD   ----------------------------
-	shield_source_rect[0] = { 275, 93, 32, 39 };
-	shield_source_rect[1] = { 307, 93, 32, 39 };
+	shield_source_rect[0] = { 244, 93, 32, 39 };
+	shield_source_rect[1] = { 276, 93, 32, 39 };
 
 	// ----------------------------   BRICKS   ----------------------------
 	// GLASS BRICKS
