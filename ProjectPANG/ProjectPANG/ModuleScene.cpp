@@ -191,7 +191,7 @@ void ModuleScene::Print_All_Objects()
 	app->fontManagerModule->Write_On_Screen("Player-1",                        17 * app->windowModule->scale, 208 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen("Player-2",                       270 * app->windowModule->scale, 208 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen(app->playerModule->player1->score, 104 * app->windowModule->scale, 214 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
-	app->fontManagerModule->Write_On_Screen(app->city_names[app->city - 1],   160 * app->windowModule->scale, 208 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen(app->city_names[app->city - 1], (192 - ((strlen(app->city_names[app->city - 1])/2)*8)) * app->windowModule->scale, 208 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen("~",                              167 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen(app->stage,                       176 * app->windowModule->scale, 220 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen("HI:",                            160 * app->windowModule->scale, 230 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
