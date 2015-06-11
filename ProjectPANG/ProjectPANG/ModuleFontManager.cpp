@@ -39,6 +39,27 @@ void ModuleFontManager::Write_On_Screen(char* string, unsigned int x, unsigned i
 	SDL_DestroyTexture(Message);
 }
 
+void ModuleFontManager::Write_On_Screen_backwards(unsigned int value, unsigned int x, unsigned int y, unsigned int size, Text_Color text_color)
+{
+	// convert number to string
+	char tmp[24];
+	sprintf_s(tmp, 20, "%d", value);
+
+	// call Write on Screen with new string
+	Write_On_Screen_backwards(tmp, x, y, size, text_color);
+}
+
+void ModuleFontManager::Write_On_Screen_backwards(char* string, unsigned int x, unsigned int y, unsigned int size, Text_Color text_color)
+{
+	surfaceMessage = TTF_RenderText_Solid(font, string, color[int(text_color)]);
+
+	Message = SDL_CreateTextureFromSurface(app->renderModule->renderer, surfaceMessage);
+	SDL_FreeSurface(surfaceMessage);
+	Message_rect = { x-(strlen(string)*size), y, strlen(string) * size, size };
+
+	app->renderModule->Print(Message, NULL, &Message_rect);
+	SDL_DestroyTexture(Message);
+}
 bool ModuleFontManager::CleanUp()
 {
 	

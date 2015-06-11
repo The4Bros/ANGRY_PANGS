@@ -33,7 +33,7 @@ bool ModuleStageEnd::Init()
 	source_index_2 = 0;
 
 	push_button_shown = true;
-
+	app->playerModule->player1->score += (app->sceneModule->time_count->current_time)*100;
 	return true;
 }
 
@@ -77,9 +77,10 @@ update_status ModuleStageEnd::Update()
 	}
 	// print: (app->stage - 1) % 10
 	app->fontManagerModule->Write_On_Screen("stage", 176 * app->windowModule->scale, 144 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
-	app->fontManagerModule->Write_On_Screen(app->stage, 168 * app->windowModule->scale, 144 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen_backwards(app->stage, 172 * app->windowModule->scale, 144 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	app->fontManagerModule->Write_On_Screen("TIME BONUS :", 104* app->windowModule->scale, 168 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
-
+	app->fontManagerModule->Write_On_Screen_backwards((app->sceneModule->time_count->current_time) * 100, 300 * app->windowModule->scale, 168 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
+	app->fontManagerModule->Write_On_Screen("PTS", 300 * app->windowModule->scale, 168 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 	if (ticks > 90)
 	{
 		app->fontManagerModule->Write_On_Screen("NEXT EXTEND :", 104 * app->windowModule->scale, 184 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);

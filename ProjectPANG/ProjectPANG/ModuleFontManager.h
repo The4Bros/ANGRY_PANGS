@@ -32,9 +32,11 @@ public:
 	ModuleFontManager(Application* app);
 	bool Init();
 	bool CleanUp();
-
+	
 	void Write_On_Screen(unsigned int value, unsigned int x, unsigned int y, unsigned int size, Text_Color text_color);
 	void Write_On_Screen(char* string, unsigned int x, unsigned int y, unsigned int size, Text_Color text_color);
+	void ModuleFontManager::Write_On_Screen_backwards(char* string, unsigned int x, unsigned int y, unsigned int size, Text_Color text_color);
+	void ModuleFontManager::Write_On_Screen_backwards(unsigned int value, unsigned int x, unsigned int y, unsigned int size, Text_Color text_color);
 };
 
 #endif
