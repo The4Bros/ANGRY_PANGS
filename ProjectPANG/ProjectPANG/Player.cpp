@@ -431,7 +431,7 @@ void Player::Update()
 		// if no floor: make fall
 		if (rect.y < 168 * app->windowModule->scale && state != ON_STAIR) // not on ground nor on stairs
 		{
-			if (!Check_Collision_Player_Verticals()) { rect.y += app->windowModule->scale; } // no bricks nor stairs bellow -> fall
+			if (!Check_Collision_Player_Verticals()) { rect.y += 4 * app->windowModule->scale; } // no bricks nor stairs bellow -> fall
 		}
 
 		update_counter++;

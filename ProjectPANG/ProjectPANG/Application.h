@@ -29,7 +29,7 @@ private:
 
 public:
 
-	unsigned int coins, stage, city;
+	int coins, stage, city;
 	char* city_names[17];
 
 	bool player_2_enabled;

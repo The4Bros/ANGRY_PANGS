@@ -100,11 +100,20 @@ update_status ModuleTitle::Update()
 			{
 				app->fontManagerModule->Write_On_Screen("1 or 2 players", 150 * app->windowModule->scale, 120 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 
-				if (app->inputModule->key[SDL_SCANCODE_2] == 1) { app->player_2_enabled = true; return CHANGE_TO_CHOOSE_CITY; }
+				if (app->inputModule->key[SDL_SCANCODE_2] == 1)
+				{
+					app->coins -= 2;
+					app->player_2_enabled = true;
+					return CHANGE_TO_CHOOSE_CITY;
+				}
 			}
 			//app->fontManagerModule->Write_On_Screen(   "1 player", 150 * app->windowModule->scale, 120 * app->windowModule->scale, 8 * app->windowModule->scale, WHITE);
 
-			if (app->inputModule->key[SDL_SCANCODE_1] == 1) { return CHANGE_TO_CHOOSE_CITY; }
+			if (app->inputModule->key[SDL_SCANCODE_1] == 1)
+			{
+				app->coins--;
+				return CHANGE_TO_CHOOSE_CITY;
+			}
 		}
 	}
 

@@ -98,7 +98,6 @@ update_status ModuleScene::Update()
 			}
 		}
 
-
 		// STAGE CLEARED MANAGED
 		if (stage_cleared)
 		{
@@ -161,7 +160,7 @@ update_status ModuleScene::Update()
 					app->playerModule->player1->lives--;
 					reset_stage();
 				}
-				else if (app->coins > 1)
+				else if (app->coins > 0)
 				{
 					app->coins--;
 					app->playerModule->player1->lives = 3;
@@ -181,7 +180,7 @@ update_status ModuleScene::Update()
 				app->playerModule->player2->lives--;
 				reset_stage();
 			}
-			else if (app->coins > 1)
+			else if (app->coins > 0)
 			{
 				app->coins--;
 				app->playerModule->player2->lives = 3;
@@ -213,7 +212,7 @@ update_status ModuleScene::Update()
 		if (update_counter++ % 60 == 0){ countdown_num--; }
 		if (countdown_num == -1){ game_state = GAME_OVER; update_counter = 0; }
 
-		if (app->coins > 0)
+		if (app->coins > -1)
 		{
 			game_state = PLAYING;
 			update_counter = 0;
