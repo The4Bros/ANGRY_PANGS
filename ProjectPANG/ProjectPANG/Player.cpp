@@ -592,12 +592,12 @@ void Player::Print()
 		SDL_Rect shield_rect;
 		switch (state)
 		{
-		case        LEFT: shield_rect = { rect.x - app->windowModule->scale, rect.y - (4 * app->windowModule->scale), 32 * app->windowModule->scale, 39 * app->windowModule->scale }; break;
-		case       RIGHT: shield_rect = { rect.x + (2 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale), 32 * app->windowModule->scale, 39 * app->windowModule->scale }; break;
-		case    ON_STAIR: shield_rect = { rect.x - app->windowModule->scale, rect.y - (4 * app->windowModule->scale), 32 * app->windowModule->scale, 39 * app->windowModule->scale }; break;
+		case        LEFT: shield_rect = { rect.x + (4 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale), 32 * app->windowModule->scale, 39 * app->windowModule->scale }; break;
+		case       RIGHT: shield_rect = { rect.x - (4 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale), 32 * app->windowModule->scale, 39 * app->windowModule->scale }; break;
+		case    ON_STAIR: shield_rect = { rect.x, rect.y - (4 * app->windowModule->scale), 32 * app->windowModule->scale, 39 * app->windowModule->scale }; break;
 		case       STILL: shield_rect = { rect.x - app->windowModule->scale, rect.y - (4 * app->windowModule->scale), 32 * app->windowModule->scale, 39 * app->windowModule->scale }; break;
-		case  SHOOT_LEFT: shield_rect = { rect.x - app->windowModule->scale, rect.y - (4 * app->windowModule->scale), 32 * app->windowModule->scale, 39 * app->windowModule->scale }; break;
-		case SHOOT_RIGHT: shield_rect = { rect.x - app->windowModule->scale, rect.y - (4 * app->windowModule->scale), 32 * app->windowModule->scale, 39 * app->windowModule->scale }; break;
+		case  SHOOT_LEFT: shield_rect = { rect.x - (2 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale), 32 * app->windowModule->scale, 39 * app->windowModule->scale }; break;
+		case SHOOT_RIGHT: shield_rect = { rect.x + (2 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale), 32 * app->windowModule->scale, 39 * app->windowModule->scale }; break;
 		case         HIT: shield_rect = { rect.x - app->windowModule->scale, rect.y - (4 * app->windowModule->scale), 32 * app->windowModule->scale, 39 * app->windowModule->scale }; break;
 		}
 		

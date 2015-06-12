@@ -91,8 +91,9 @@ update_status ModuleScene::Update()
 
 		if (!app->player_2_enabled)
 		{
-			if (app->inputModule->key[SDL_SCANCODE_Y] == 1)
+			if (app->inputModule->key[SDL_SCANCODE_Y] == 1 && app->coins > 1)
 			{
+				app->coins--;
 				app->player_2_enabled = true;
 				app->playerModule->player2->MakeInvincible();
 			}
@@ -481,7 +482,7 @@ bool ModuleScene::load_stage()
 	if (fopen_s(&level_file, "txt files/LevelArrangment.txt", "r") != 0){ return false; }
 
 	char line[400];
-	for (unsigned int i = 0; i < app->stage; i++)
+	for (int i = 0; i < app->stage; i++)
 	{
 		fgets(line, 300, level_file);
 		if (line == NULL){ return false; }
