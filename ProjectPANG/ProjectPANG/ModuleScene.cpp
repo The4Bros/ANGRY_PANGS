@@ -13,18 +13,24 @@ bool ModuleScene::Init()
 	stage_cleared = false;
 	game_state = READY;
 	update_counter = 0;
-
-	ready_source_rect = { 0, 0, 54, 16 };
+	half_time = false;
+	countdown_num = 10;
+	
 	ready_rect = { 165 * app->windowModule->scale, 104 * app->windowModule->scale, 54 * app->windowModule->scale, 16 * app->windowModule->scale };
-	game_over_rect = { 100, 100, 160 * app->windowModule->scale, 32 * app->windowModule->scale };
+	ready_source_rect = { 0, 0, 54, 16 };
+
+	game_over_rect = { 120 * app->windowModule->scale, 104 * app->windowModule->scale, 142 * app->windowModule->scale, 16 * app->windowModule->scale };
+	game_over_source_rect = { 196, 0, 142, 16 };
+
+	time_over_rect = { 120 * app->windowModule->scale, 104 * app->windowModule->scale, 142 * app->windowModule->scale, 16 * app->windowModule->scale };
+	time_over_source_rect = { 54, 0, 142, 16 };
+
 	background_rect = { 0, 0, SCREEN_WIDTH * app->windowModule->scale, (SCREEN_HEIGHT - 32) * app->windowModule->scale };
 
-	for (int i = 0; i < 5; i++){
-
+	for (int i = 0; i < 5; i++)
+	{
 		livesrect_player1[i] = { (8 + 16 * i)* app->windowModule->scale, 224 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
-
 		livesrect_player2[i] = { (272 + 16 * i)* app->windowModule->scale, 224 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
-
 	}
 
 	power_up_rect = { 96 * app->windowModule->scale, 224 * app->windowModule->scale, 16 * app->windowModule->scale, 16 * app->windowModule->scale };
@@ -113,6 +119,26 @@ update_status ModuleScene::Update()
 			//TIMER MANAGED
 			if (difftime(time(NULL), time_count->timer) >= 1 && game_state == PLAYING) { time_count->Update(); }
 
+			//CHECK HALF TIME
+			if (!half_time)
+			{
+				if (time_count->current_time <= stage_arrangement.time_limit / 2)
+				{
+					app->audioModule->PlayMusic(10);
+					half_time = true;
+				}
+			}
+			
+			//CHECK TIME OUT
+			if (time_count->current_time == 0)
+			{
+				app->playerModule->player1->lives--;
+				if (app->player_2_enabled){ app->playerModule->player2->lives--; }
+				update_counter = 0;
+				game_state = TIME_OUT;
+				app->audioModule->StopMusic();
+			}
+
 			// CHECK IF STAGE CLEARED
 			if (app->entityManagerModule->balloons.empty())
 			{
@@ -125,15 +151,53 @@ update_status ModuleScene::Update()
 	case PLAYER_KILLED:
 		if (update_counter > 300)
 		{
-			if (app->playerModule->player1->lives > 0)
+			update_counter = 0;
+			
+			//PLAYER 1 HIT
+			if (app->playerModule->player1->state == HIT)
 			{
-				app->playerModule->player1->lives--;
-				update_counter = 0;
+				if (app->playerModule->player1->lives > 0)
+				{
+					app->playerModule->player1->lives--;
+					reset_stage();
+				}
+				else if (app->coins > 1)
+				{
+					app->coins--;
+					app->playerModule->player1->lives = 3;
+					reset_stage();
+				}
+				else
+				{
+					app->audioModule->StopMusic();
+					game_state = COUNTDOWN;
+					app->coins--;
+				}
+			}
+
+			//PLAYER 2 HIT
+			else if (app->playerModule->player2->lives > 0)
+			{
+				app->playerModule->player2->lives--;
 				reset_stage();
 			}
-			else{ game_state = COUNTDOWN; }
+			else if (app->coins > 1)
+			{
+				app->coins--;
+				app->playerModule->player2->lives = 3;
+				app->player_2_enabled = false;
+				reset_stage();
+			}
+			else
+			{
+				app->audioModule->StopMusic();
+				game_state = COUNTDOWN;
+				app->coins--;
+			}
 		}
+
 		else { update_counter++; }
+
 		break;
 
 	case READY:
@@ -146,11 +210,18 @@ update_status ModuleScene::Update()
 		break;
 
 	case COUNTDOWN:
-		// Handle countdown??
-		//------------------
-		//------------------
-		//------------------
-		//------------------
+		if (update_counter++ % 60 == 0){ countdown_num--; }
+		if (countdown_num == -1){ game_state = GAME_OVER; update_counter = 0; }
+
+		if (app->coins > 0)
+		{
+			game_state = PLAYING;
+			update_counter = 0;
+			app->playerModule->player1->lives = 3;
+			reset_stage();
+		}
+
+		app->fontManagerModule->Write_On_Screen(countdown_num, 88 * app->windowModule->scale, 226 * app->windowModule->scale, 8 * app->windowModule->scale, RED);
 		break;
 
 	case GAME_OVER:
@@ -175,6 +246,20 @@ update_status ModuleScene::Update()
 			}
 		}
 		else{ pause_pressed = false; }
+
+		break;
+	case TIME_OUT:
+		app->renderModule->Print(app->texturesModule->ready, &time_over_source_rect, &time_over_rect);
+
+		if (app->playerModule->player1->lives > 0)
+		{
+			app->playerModule->player1->lives--;
+			reset_stage();
+		}
+		else { app->audioModule->StopMusic(); game_state = COUNTDOWN; }
+
+		if (update_counter > 240){ reset_stage(); }
+		else { update_counter++; }
 
 		break;
 	}
@@ -296,7 +381,7 @@ void ModuleScene::Print_All_Objects()
 
 	// PRINT PLAYERS
 	app->playerModule->player1->Print();
-	if (app->player_2_enabled){ app->playerModule->player1->Print(); }
+	if (app->player_2_enabled){ app->playerModule->player2->Print(); }
 	
 	// PRINT BALLS
 	for (unsigned int i = 0; i < app->entityManagerModule->balloons.Count(); i++) { (*app->entityManagerModule->balloons.at(i))->Print(); }
@@ -314,6 +399,9 @@ void ModuleScene::reset_stage()
 	unsigned int i;
 
 	game_state = READY;
+
+	half_time = false;
+	countdown_num = 10;
 
 	app->entityManagerModule->particles.clear();
 

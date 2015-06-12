@@ -49,8 +49,8 @@ enum Game_State
 	READY,
 	COUNTDOWN,
 	GAME_OVER,
-	PAUSED
-
+	PAUSED,
+	TIME_OUT
 };
 
 
@@ -62,6 +62,8 @@ private:
 public:
 
 	Time_Count* time_count;
+	bool half_time;
+	int countdown_num;
 
 	Game_State game_state;
 	unsigned int update_counter;
@@ -74,6 +76,9 @@ public:
 
 	SDL_Rect game_over_rect;
 	SDL_Rect game_over_source_rect;
+
+	SDL_Rect time_over_rect;
+	SDL_Rect time_over_source_rect;
 
 	SDL_Rect background_rect;
 	SDL_Rect background_source_rect;
