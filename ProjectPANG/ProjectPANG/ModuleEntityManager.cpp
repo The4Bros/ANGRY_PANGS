@@ -34,8 +34,6 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	shotgun_source_rect[0] = { 201, 93,  5, 9 };
 	shotgun_source_rect[1] = { 206, 93,  5, 9 };
 	shotgun_source_rect[2] = { 211, 93,  5, 9 };
-	shotgun_source_rect[3] = { 216, 93, 14, 5 };
-	shotgun_source_rect[4] = { 230, 93, 14, 5 };
 	
 	// ----------------------------   SHIELD   ----------------------------
 	shield_source_rect[0] = { 244, 93, 32, 39 };
@@ -120,7 +118,11 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	for (i2 = 0; i2 < 3; i2++){ for (i = 0; i < 4; i++){ particles_source_rect[i +  93 + (i2 * 4)] = { (i * 8) + 128, (i2 * 8) + 24, 8, 8 }; } }
 	for (i2 = 0; i2 < 2; i2++){ for (i = 0; i < 4; i++){ particles_source_rect[i + 105 + (i2 * 4)] = { (i + 1) * 8, i2 * 32, 8, 32 }; } }
 	for (i = 0; i < 4; i++){ particles_source_rect[i + 113] = { 88 + (i * 8), 72, 8, 16 }; } 
-	for (i = 0; i < 4; i++){ particles_source_rect[i + 117] = { 88 + (i * 8), 88, 8, 24 }; } 
+	for (i = 0; i < 4; i++){ particles_source_rect[i + 117] = { 88 + (i * 8), 88, 8, 24 }; }
+
+	// SHOTGUN PARTICLES
+	particles_source_rect[3] = { 216, 93, 14, 5 };
+	particles_source_rect[4] = { 230, 93, 14, 5 };
 
 
 	// ----------------------------   POWER UPS   ----------------------------

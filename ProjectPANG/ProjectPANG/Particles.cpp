@@ -15,8 +15,7 @@ Particles::Particles(Application* app, int position_in_list, unsigned int type, 
 {
 	if (type < 12){ app->audioModule->PlayFx(BALLOON_POP); }
 
-	if (type == 12){ quantity = 4; } // enemy hit has 5 source_rects
-	else { quantity = 3; }
+	quantity = 3;
 
 	switch (type)
 	{
@@ -71,6 +70,7 @@ Particles::Particles(Application* app, int position_in_list, unsigned int type, 
 	case 12:
 		source_index = 48;
 		rect = { x, y - app->windowModule->scale, 28 * app->windowModule->scale, 26 * app->windowModule->scale };
+		quantity = 4;
 		break;
 	case 13:
 		source_index = 53;
@@ -157,6 +157,11 @@ Particles::Particles(Application* app, int position_in_list, unsigned int type, 
 	case 29:
 		source_index = 117;
 		rect = { x, y - app->windowModule->scale, 8 * app->windowModule->scale, 24 * app->windowModule->scale };
+		break;
+	case 30:
+		source_index = 121;
+		rect = { x, y - app->windowModule->scale, 14 * app->windowModule->scale, 5 * app->windowModule->scale };
+		quantity = 1;
 		break;
 	}
 }

@@ -33,7 +33,7 @@ public:
 	SDL_Rect source_enemy_rect[74];
 
 	DynArray<Particles*> particles;
-	SDL_Rect particles_source_rect[200];
+	SDL_Rect particles_source_rect[122];
 
 	DynArray<PowerUp*> powerups;
 	SDL_Rect powerup_source_rect[23];

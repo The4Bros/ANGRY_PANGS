@@ -15,7 +15,7 @@ void Bullet::Update()
 	if (rects[0].y <= 8 * app->windowModule->scale || CheckCollisionBricks())
 	{
 		// create particles
-		app->entityManagerModule->particles.push_back(new Particles(app, app->entityManagerModule->particles.Count(), 30, rects[0].x, rects[0].y));
+		app->entityManagerModule->particles.push_back(new Particles(app, app->entityManagerModule->particles.Count(), 30, rects[2].x + app->windowModule->scale, rects[0].y));
 		alive = false;
 	}
 	else if (CheckCollisionBalloons())
