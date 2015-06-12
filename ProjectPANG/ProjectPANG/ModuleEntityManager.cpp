@@ -121,8 +121,8 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	for (i = 0; i < 4; i++){ particles_source_rect[i + 117] = { 88 + (i * 8), 88, 8, 24 }; }
 
 	// SHOTGUN PARTICLES
-	particles_source_rect[3] = { 216, 93, 14, 5 };
-	particles_source_rect[4] = { 230, 93, 14, 5 };
+	particles_source_rect[121] = { 216, 93, 14, 5 };
+	particles_source_rect[122] = { 230, 93, 14, 5 };
 
 
 	// ----------------------------   POWER UPS   ----------------------------

@@ -22,8 +22,6 @@ current_stair(NULL)
 
 	for (unsigned int i = 0; i < 15; i++){ bullets[i] = new Bullet(app); }
 
-	
-
 	rect = { 0, 0, 32 * app->windowModule->scale, 32 * app->windowModule->scale };
 
 	unsigned int y_coor = (player1? 0 : 32);
@@ -591,7 +589,18 @@ void Player::Print()
 {
 	if(shielded)
 	{
-		SDL_Rect shield_rect = { rect.x - app->windowModule->scale, rect.y - (4 * app->windowModule->scale), 32 * app->windowModule->scale, 39 * app->windowModule->scale };
+		SDL_Rect shield_rect;
+		switch (state)
+		{
+		case        LEFT: shield_rect = { rect.x - app->windowModule->scale, rect.y - (4 * app->windowModule->scale), 32 * app->windowModule->scale, 39 * app->windowModule->scale }; break;
+		case       RIGHT: shield_rect = { rect.x + (2 * app->windowModule->scale), rect.y - (4 * app->windowModule->scale), 32 * app->windowModule->scale, 39 * app->windowModule->scale }; break;
+		case    ON_STAIR: shield_rect = { rect.x - app->windowModule->scale, rect.y - (4 * app->windowModule->scale), 32 * app->windowModule->scale, 39 * app->windowModule->scale }; break;
+		case       STILL: shield_rect = { rect.x - app->windowModule->scale, rect.y - (4 * app->windowModule->scale), 32 * app->windowModule->scale, 39 * app->windowModule->scale }; break;
+		case  SHOOT_LEFT: shield_rect = { rect.x - app->windowModule->scale, rect.y - (4 * app->windowModule->scale), 32 * app->windowModule->scale, 39 * app->windowModule->scale }; break;
+		case SHOOT_RIGHT: shield_rect = { rect.x - app->windowModule->scale, rect.y - (4 * app->windowModule->scale), 32 * app->windowModule->scale, 39 * app->windowModule->scale }; break;
+		case         HIT: shield_rect = { rect.x - app->windowModule->scale, rect.y - (4 * app->windowModule->scale), 32 * app->windowModule->scale, 39 * app->windowModule->scale }; break;
+		}
+		
 		app->renderModule->Print(app->texturesModule->particles_sprite, &app->entityManagerModule->shield_source_rect[shield_source_index], &shield_rect);	
 	}
 
@@ -600,12 +609,12 @@ void Player::Print()
 		invincibility_counter++;
 		if (invincibility_counter % 10 < 5 )
 		{
-			app->renderModule->Print(app->texturesModule->players_sprite, &source_rect[app->playerModule->player1->source_index], &rect);
+			app->renderModule->Print(app->texturesModule->players_sprite, &source_rect[source_index], &rect);
 		}
 		
 	}
 	else {
-			app->renderModule->Print(app->texturesModule->players_sprite, &source_rect[app->playerModule->player1->source_index], &rect);
+			app->renderModule->Print(app->texturesModule->players_sprite, &source_rect[source_index], &rect);
 			invincible = false;
 			invincibility_counter = 0;
 		 }

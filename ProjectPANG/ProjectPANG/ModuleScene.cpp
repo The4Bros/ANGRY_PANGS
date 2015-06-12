@@ -409,7 +409,7 @@ void ModuleScene::reset_stage()
 
 	// PLAYER POS
 	app->playerModule->player1->Reset(stage_arrangement.player_pos[0], stage_arrangement.player_pos[1]);
-	app->playerModule->player1->Reset(stage_arrangement.player_pos[0], stage_arrangement.player_pos[1]);
+	app->playerModule->player2->Reset(stage_arrangement.player_pos[2], stage_arrangement.player_pos[3]);
 
 	// POWER UPS_________________________________________________________________________________________________________________________
 
