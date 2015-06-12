@@ -58,7 +58,7 @@ ModuleEntityManager::ModuleEntityManager(Application* app) : Module(app)
 	for (i2 = 0; i2 < 3; i2++){ for (i = 0; i < 3; i++){ source_brick_rect[i + 25 + (i2 * 3)] = { 136 + (i2 * 8), 48 + (i * 16), 8, 16 }; }}
 	for (i = 0; i < 3; i++){ source_brick_rect[i + 34] = { 128, 48 + (i * 8), 8, 8 }; }
 	for (i = 0; i < 3; i++){ source_brick_rect[i + 37] = { 136 + (i * 8), 96, 8, 8 }; }
-
+	source_brick_rect[40] = { 128, 72, 8, 32 };
 
 	// ----------------------------   STAIRS   ----------------------------
 	source_stair_rect = { 0, 104, 24, 8 };

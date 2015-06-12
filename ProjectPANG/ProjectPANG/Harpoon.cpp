@@ -199,10 +199,10 @@ bool Harpoon::Check_Collision_Harpoon_Brick()
 	{
 		tmp_rect = (*app->entityManagerModule->bricks.at(i))->rect;
 
-		if (head_rect.x + head_rect.w >= tmp_rect.x // brick left
+		if (head_rect.x + head_rect.w>= tmp_rect.x // brick left
 			&& tmp_rect.x + tmp_rect.w >= head_rect.x // brick right
-			&& tmp_rect.y + tmp_rect.h >= head_rect.y // brick up
-			&& head_rect.y + head_rect.h + body_rect.h >= tmp_rect.y) // brick down
+			&& tmp_rect.y + tmp_rect.h -1>= head_rect.y // brick up
+			&& head_rect.y + head_rect.h + body_rect.h -1>= tmp_rect.y) // brick down
 		{
 			(*app->entityManagerModule->bricks.at(i))->Hit();
 			app->playerModule->player1->score += 500;

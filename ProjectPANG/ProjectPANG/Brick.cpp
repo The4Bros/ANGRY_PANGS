@@ -47,12 +47,17 @@ Brick::Brick(Application* app, int position_in_list, unsigned int x, unsigned in
 		rect = { x * app->windowModule->scale, y * app->windowModule->scale,
 			8 * app->windowModule->scale, 16 * app->windowModule->scale };
 	}
-	else if (type > 33)
+	else if (type > 33 && type < 39)
 	{
 		rect = { x * app->windowModule->scale, y * app->windowModule->scale,
 			8 * app->windowModule->scale, 8 * app->windowModule->scale };
 	}
+	else if (type == 40)
+	{
+		rect = { x * app->windowModule->scale, y * app->windowModule->scale,
+			8 * app->windowModule->scale, 32 * app->windowModule->scale };
 
+	}
 
 }
 

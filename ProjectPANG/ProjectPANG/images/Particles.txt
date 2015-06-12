@@ -5,3 +5,4 @@ Shotsize->(5,9)
 Particles shotgun size->(14,5)
 Shield Sprites--------- a continuacion de los de shotgun
 Size->(32,39)
+brick 128,72 

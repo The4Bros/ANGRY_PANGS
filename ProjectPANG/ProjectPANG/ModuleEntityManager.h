@@ -20,7 +20,7 @@ public:
 	SDL_Rect shield_source_rect[2];
 
 	DynArray<Brick*> bricks;
-	SDL_Rect source_brick_rect[40];
+	SDL_Rect source_brick_rect[41];
 
 	DynArray<Stair*> stairs;
 	SDL_Rect source_stair_rect;
