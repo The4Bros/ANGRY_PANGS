@@ -182,7 +182,7 @@ void Balloon::Hit()
 
 	if (rand() % 3 == 0)
 	{
-		app->entityManagerModule->powerups.push_back(new PowerUp(app, app->entityManagerModule->powerups.Count(), rand() % 14, rect.x, rect.y)); // Power Up is created
+		app->entityManagerModule->powerups.push_back(new PowerUp(app, app->entityManagerModule->powerups.Count(), rand() % 13, rect.x, rect.y)); // Power Up is created
 	}
 	
 	if (type < 9)

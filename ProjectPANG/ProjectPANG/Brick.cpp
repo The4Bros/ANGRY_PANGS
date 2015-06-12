@@ -70,7 +70,7 @@ void Brick::Hit()
 {
 	if (power_up_alive == true)
 	{
-		app->entityManagerModule->powerups.push_back(new PowerUp(app, app->entityManagerModule->powerups.Count(), rand() % 16, rect.x, rect.y));
+		app->entityManagerModule->powerups.push_back(new PowerUp(app, app->entityManagerModule->powerups.Count(), rand() % 13, rect.x, rect.y));
 	}
 	
 	if (type < 16)

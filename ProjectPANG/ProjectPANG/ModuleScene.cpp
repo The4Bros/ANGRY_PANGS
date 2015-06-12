@@ -39,18 +39,6 @@ bool ModuleScene::Init()
 	app->stageEndModule->next_extend_counter = 0;
 
 
-	if(app->city < 10){ app->audioModule->PlayMusic(app->city - 1); }
-	else if(app->city < 14){ app->audioModule->PlayMusic(app->city - 8); }
-	else
-	{
-		switch (app->city)
-		{
-			case 14: app->audioModule->PlayMusic(2); break;
-			case 15: app->audioModule->PlayMusic(8); break;
-			case 16: app->audioModule->PlayMusic(6); break;
-			case 17: app->audioModule->PlayMusic(9); break;
-		}
-	}
 	
 	if (!load_stage()){ return false; }
 
@@ -68,7 +56,7 @@ update_status ModuleScene::PreUpdate()
 	// STAGE CHEAT - 9: RESET STAGE
 	if (app->inputModule->key[SDL_SCANCODE_9] == 1){ reset_stage(); }
 	// STAGE CHEAT - 9: RESET STAGE
-	if (app->inputModule->key[SDL_SCANCODE_8] == 1){ app->entityManagerModule->powerups.push_back(new PowerUp(app, app->entityManagerModule->powerups.Count(), rand() % 16, 150, 40)); }
+	if (app->inputModule->key[SDL_SCANCODE_8] == 1){ app->entityManagerModule->powerups.push_back(new PowerUp(app, app->entityManagerModule->powerups.Count(), rand() % 13, 150, 40)); }
 	if (app->inputModule->key[SDL_SCANCODE_7] == 1){ stage_cleared=true; }
 	return UPDATE_CONTINUE;
 }
@@ -133,7 +121,11 @@ update_status ModuleScene::Update()
 			if (time_count->current_time == 0)
 			{
 				app->playerModule->player1->lives--;
-				if (app->player_2_enabled){ app->playerModule->player2->lives--; }
+				if (app->coins > 0) app->coins--;
+				if (app->player_2_enabled)
+				{ 
+					app->playerModule->player2->lives--; 
+				if (app->coins > 0) app->coins--; }
 				update_counter = 0;
 				game_state = TIME_OUT;
 				app->audioModule->StopMusic();
@@ -251,14 +243,29 @@ update_status ModuleScene::Update()
 	case TIME_OUT:
 		app->renderModule->Print(app->texturesModule->ready, &time_over_source_rect, &time_over_rect);
 
-		if (app->playerModule->player1->lives > 0)
+		if (update_counter > 240)
 		{
-			app->playerModule->player1->lives--;
-			reset_stage();
+			if (app->playerModule->player1->lives > 0)
+			{
+				reset_stage();
+			}
+			else 
+			{ 
+				if (app->coins > 0)
+				{
+					app->coins--;
+					app->playerModule->player1->lives = 3;
+					reset_stage();
+				}
+				else
+				{ 
+					app->audioModule->StopMusic(); 
+					game_state = COUNTDOWN;
+					update_counter = 0;
+				}
+			}
+		
 		}
-		else { app->audioModule->StopMusic(); game_state = COUNTDOWN; }
-
-		if (update_counter > 240){ reset_stage(); }
 		else { update_counter++; }
 
 		break;
@@ -402,8 +409,23 @@ void ModuleScene::reset_stage()
 
 	half_time = false;
 	countdown_num = 10;
+	update_counter = 0;
 
 	app->entityManagerModule->particles.clear();
+
+	// SOUNDTRACK
+	if (app->city < 10){ app->audioModule->PlayMusic(app->city - 1); }
+	else if (app->city < 14){ app->audioModule->PlayMusic(app->city - 8); }
+	else
+	{
+		switch (app->city)
+		{
+		case 14: app->audioModule->PlayMusic(2); break;
+		case 15: app->audioModule->PlayMusic(8); break;
+		case 16: app->audioModule->PlayMusic(6); break;
+		case 17: app->audioModule->PlayMusic(9); break;
+		}
+	}
 
 	// TIME COUNT
 	time_count->Reset(stage_arrangement.time_limit);

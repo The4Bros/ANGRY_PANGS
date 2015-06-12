@@ -50,9 +50,14 @@ void Player::LeftTrigger()
 				update_counter = 0;
 			}
 
-			if (rect.x > 8 * app->windowModule->scale) //&& no collision with brick
+			if (rect.x > 8 * app->windowModule->scale)
 			{
 				rect.x -= 2 * app->playerModule->player_speed;
+
+				if(Check_Collision_Player_Brick_Horizontal()) 
+				{
+					rect.x += 2 * app->playerModule->player_speed;
+				}
 			}
 		}
 
@@ -84,9 +89,14 @@ void Player::RightTrigger()
 			update_counter = 0;
 		}
 
-		if (rect.x < (SCREEN_WIDTH - 40) * app->windowModule->scale) //&& no collision with brick
+		if (rect.x < (SCREEN_WIDTH - 40) * app->windowModule->scale)
 		{
 			rect.x += 2 * app->playerModule->player_speed;
+
+			if (Check_Collision_Player_Brick_Horizontal())
+			{
+				rect.x -= 2 * app->playerModule->player_speed;
+			}
 		}
 
 	}
@@ -664,10 +674,10 @@ bool Player::Check_Collision_Player_Brick_Horizontal()
 	{
 		tmp_rect = (*app->entityManagerModule->bricks.at(i))->rect;
 
-		if (rect.x + app->windowModule->scale <= tmp_rect.x + tmp_rect.w
-			&& rect.x + rect.w + app->windowModule->scale >= tmp_rect.x
-			&& rect.y + app->windowModule->scale <= tmp_rect.y + tmp_rect.h
-			&& rect.y + rect.h + app->windowModule->scale >= tmp_rect.y)
+		if (rect.x  -1<= tmp_rect.x + tmp_rect.w
+			&& rect.x + rect.w -1 >= tmp_rect.x
+			&& rect.y-1 <= tmp_rect.y + tmp_rect.h
+			&& rect.y + rect.h -1 >= tmp_rect.y)
 		{
 			return true;
 		}
