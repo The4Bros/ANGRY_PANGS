@@ -120,19 +120,30 @@ update_status ModuleScene::Update()
 			//CHECK TIME OUT
 			if (time_count->current_time == 0)
 			{
-				app->playerModule->player1->lives--;
-				if (app->coins > 0) app->coins--;
+				if (app->playerModule->player1->lives > 0)
+				{
+					app->playerModule->player1->lives--;
+				}
+				
 				if (app->player_2_enabled)
 				{ 
-					app->playerModule->player2->lives--; 
-				if (app->coins > 0) app->coins--; }
+					if (app->playerModule->player2->lives > 0)
+					{
+						app->playerModule->player2->lives--;
+					}
+					else
+					{
+						app->player_2_enabled = false;
+					}
+				}
+
 				update_counter = 0;
 				game_state = TIME_OUT;
 				app->audioModule->StopMusic();
 			}
 
 			// CHECK IF STAGE CLEARED
-			if (app->entityManagerModule->balloons.empty())
+			else if (app->entityManagerModule->balloons.empty())
 			{
 				stage_cleared = true;
 				update_counter = 0;
@@ -205,7 +216,7 @@ update_status ModuleScene::Update()
 		if (update_counter++ % 60 == 0){ countdown_num--; }
 		if (countdown_num == -1){ game_state = GAME_OVER; update_counter = 0; }
 
-		if (app->coins > -1)
+		if (app->coins > 0)
 		{
 			game_state = PLAYING;
 			update_counter = 0;
