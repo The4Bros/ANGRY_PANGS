@@ -442,14 +442,10 @@ void Player::Update()
 		// update shield
 		if(shielded)
 		{
-			if(shield_update_counter > 3)
+			if(shield_update_counter > 5)
 			{
 				shield_update_counter = 0;
-				switch (shield_source_index)
-				{
-					case 0: shield_source_index = 1;
-					case 1: shield_source_index = 0;
-				}
+				shield_source_index = (shield_source_index == 0? 1 : 0);
 			}
 			else
 			{
@@ -595,7 +591,7 @@ void Player::Print()
 {
 	if(shielded)
 	{
-		SDL_Rect shield_rect = { rect.x - (10 * app->windowModule->scale), rect.y - (10 * app->windowModule->scale), 52 * app->windowModule->scale, 52 * app->windowModule->scale};
+		SDL_Rect shield_rect = { rect.x - app->windowModule->scale, rect.y - (4 * app->windowModule->scale), 32 * app->windowModule->scale, 39 * app->windowModule->scale };
 		app->renderModule->Print(app->texturesModule->particles_sprite, &app->entityManagerModule->shield_source_rect[shield_source_index], &shield_rect);	
 	}
 
